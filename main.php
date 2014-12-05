@@ -14,6 +14,6 @@ $app = new \Slim\Slim(array(
 
 $app->get('/hello/:name', function ($name) {
     echo 'SWAG YOLO' . $name;
-});
+}   );
 
 $app->run();
