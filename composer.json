@@ -1,0 +1,19 @@
+{
+    "name": "sknz/zenetude",
+    "description": "C PLUTO KOULLE LAI AITUD",
+    "minimum-stability": "stable",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "sknz",
+            "email": "florandara@gmail.com"
+        },
+        {
+            "name": "Mickaël Martin Nevot",
+            "email": "mmartin.nevot@gmail.com"
+        }
+    ],
+    "require": {
+        "slim/slim": "2.*"
+    }
+}
