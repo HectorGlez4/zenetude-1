@@ -53,7 +53,7 @@ $app->get('/reminder', function () use ($app) {
             echo $lines[++$i] . '<br/>';
             ++$i;
             ++$i;
-            echo $lines[++$i] . '<br/>';
+            echo $lines[++$i] . '<br />';
             $app->response->write($date . '<br/>');
             $d = date_create_from_format('Ymd', $date);
             echo $d->format('d/m/Y') . '<br/>' . '<br/>';
