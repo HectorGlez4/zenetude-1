@@ -1,4 +1,7 @@
 <?php
+
+ini_set('display_errors', 1);
+
 /**
  * Created by PhpStorm (tu veux une médaille ?).
  * User: sknz
