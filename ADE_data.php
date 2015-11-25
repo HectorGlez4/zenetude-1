@@ -89,8 +89,8 @@
                 else {
                     echo $parameter ."</br>";
                     $full_name = explode(' ', $parameter);
-                    echo strtolower($full_name[0]) . "</br>";
-                    echo strtolower($full_name[1]) . "</br>";
+                    $last_name = strtolower($full_name[0]) . "</br>";
+                    $first_name = strtolower($full_name[1]) . "</br>";
                 }
             }
         }
