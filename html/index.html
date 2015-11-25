@@ -1,0 +1,128 @@
+  <!DOCTYPE html>
+  <html>
+    <head>
+		<!--Import Roboto Font-->
+    	<link href='https://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
+		<!--Import Google Icon Font-->
+		<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<!--Import materialize.css-->
+		<link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>
+		<!--Import style.css-->
+		<link type="text/css" rel="stylesheet" href="../css/style.css"/>
+		<!--Import menu.css-->
+		<link type="text/css" rel="stylesheet" href="../css/menu.css"/>
+
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+
+    <body>
+
+		<nav>
+		  <div class="nav-wrapper">
+		    <a href="index.html" class="brand-logo"><img src="../img/logo.png" alt="logo du site"></a>
+		    <img src="../img/name.png" alt="Zenetude, titre du site">
+		    <div id="hamburger" class="hamburglar is-closed">
+
+			    <div class="burger-icon">
+			      <div class="burger-container">
+			        <span class="burger-bun-top"></span>
+			        <span class="burger-filling"></span>
+			        <span class="burger-bun-bot"></span>
+			      </div>
+			    </div>
+			    
+			    <!-- svg ring containter -->
+			    <div class="burger-ring">
+			      <svg class="svg-ring">
+				      <path class="path" fill="none" stroke="#7BBA42" stroke-miterlimit="10" stroke-width="4" d="M 34 2 C 16.3 2 2 16.3 2 34 s 14.3 32 32 32 s 32 -14.3 32 -32 S 51.7 2 34 2" />
+			      </svg>
+			    </div>
+			    <!-- the masked path that animates the fill to the ring -->
+			    
+			 		<svg width="0" height="0">
+			       <mask id="mask">
+			    <path xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#ff0000" stroke-miterlimit="10" stroke-width="4" d="M 34 2 c 11.6 0 21.8 6.2 27.4 15.5 c 2.9 4.8 5 16.5 -9.4 16.5 h -4" />
+			       </mask>
+			     </svg>
+			    <div class="path-burger">
+			      <div class="animate-path">
+			        <div class="path-rotation"></div>
+			      </div>
+			    </div>
+			      
+			  </div>
+		  </div>
+		</nav>
+
+
+		<div class="container">
+        	<!-- Page Content goes here -->
+
+
+        	<div class="row row1">
+		      <div class="col s12 m8">
+		        <div class="card-panel teal" id="bloc1">
+		        	<div class="card-header"> <h2>Accueil</h2></div>
+		          <p>I am a very simple card. I am good at containing small bits of information.
+		          I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.I am a very simple card. I am good at containing small bits of information.<br/><br/>
+
+		          I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.I am a very simple card. I am good at containing small bits of information.<br/><br/>
+
+		          I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.I am a very simple card. I am good at containing small bits of information.
+		          </p>
+		        </div>
+		      </div>
+
+		      <div class="col s12 m4">
+		        <div class="card-panel teal" id="aside1">
+		          <div class="card-title"> <h3>Title</h3></div>
+		          <p>I am a very simple card. I am good at containing small bits of information.
+		          I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.I am a very simple card. I am good at containing small bits of information.
+		          I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.
+		          </p>
+		        </div>
+		      </div>
+    		</div>
+
+
+        	<div class="row">
+		      <div class="col s12 m8">
+		        <div class="card-panel teal" id="bloc2">
+		        	<div class="card-title"> <h3>Title</h3></div>
+		          <p>I am a very simple card. I am good at containing small bits of information.
+		          I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.I am a very simple card. I am good at containing small bits of information.
+		          I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.I am a very simple card. I am good at containing small bits of information.
+		          I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.I am a very simple card. I am good at containing small bits of information.
+		          I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.
+		          </p>
+		        </div>
+		      </div>
+
+		      <div class="col s12 m4">
+		        <div class="card-panel teal" id="aside2">
+		          <p>I am a very simple card. I am good at containing small bits of information.
+		          I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.I am a very simple card. I am good at containing small bits of information.
+		          I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.
+		          </p>
+		        </div>
+		      </div>
+    		</div>
+      	</div>
+
+
+
+		<!--Import jQuery before materialize.js-->
+		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="../js/materialize.min.js"></script>
+		<script type="text/javascript" src="../js/menu.js"></script>
+		<script type="text/javascript">
+			window.onload=ajuste;
+			 
+				function ajuste(){
+				document.getElementById('aside1').style.minHeight=document.getElementById('bloc1').offsetHeight+"px";
+				document.getElementById('aside2').style.height=document.getElementById('bloc2').offsetHeight+"px";
+			}
+		</script>
+    </body>
+  </html>
