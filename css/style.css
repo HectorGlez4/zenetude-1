@@ -1,0 +1,97 @@
+html{
+	background-color: #F3EAC5;
+}
+
+nav{
+	z-index: 1;
+	background-color: #FFF;
+	color: #000;
+	height: 200px;
+	padding: 20px;
+	padding-left: 40px;
+	padding-right: 40px;
+}
+
+nav .brand-logo{
+	color: #000;
+}
+
+nav ul a{
+	color: #000;
+}
+
+nav>.nav-wrapper>img{
+	margin-left: 35%;
+	margin-top: 30px;
+}
+
+nav>.nav-wrapper>.hamburglar{
+	float: right;
+	margin-top: 40px;
+}
+
+.row{
+	margin-bottom: 0;
+}
+
+.row1{
+	padding-top:20px; 
+}
+
+.container{
+	width: 100%;
+	z-index: 999;
+	max-width: none;
+	padding: 30px;
+	padding-left: 40px;
+	padding-right: 40px;
+}
+
+.card-panel{
+	padding: 0;
+}
+
+.teal{
+	background-color: #FFF !important;
+}
+
+.card-header{
+	padding: 30px;
+}
+
+.card-title{
+	padding: 30px;
+	background-color: #7BBA42;
+}
+
+.card-header>h2, .card-title>h3{
+	margin: 0;
+	text-align: left;
+	color: #FFF;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 300;
+}
+
+.card-header>h2{
+	color: #cfd1d5;
+	text-align: center;
+}
+
+.card-panel>p{
+	padding: 30px;
+	margin: 0;
+	text-align: justify;
+	font-size: 1.1em;
+	line-height: 1.5em;
+	color: #403c3a;
+}
+
+@media screen and (max-width: 995px) {
+	nav .brand-logo{
+		left: 100px;
+		color: #000;
+	}
+}
+
+@media screen and (max-width: 860px) {
+}
