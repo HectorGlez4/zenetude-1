@@ -6,11 +6,11 @@
 		<!--Import Google Icon Font-->
 		<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<!--Import materialize.css-->
-		<link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>
+		<link type="text/css" rel="stylesheet" href="../../../css/materialize.min.css"  media="screen,projection"/>
 		<!--Import style.css-->
-		<link type="text/css" rel="stylesheet" href="../css/style.css"/>
+		<link type="text/css" rel="stylesheet" href="../../../css/style.css"/>
 		<!--Import menu.css-->
-		<link type="text/css" rel="stylesheet" href="../css/menu.css"/>
+		<link type="text/css" rel="stylesheet" href="../../../css/menu.css"/>
 
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -76,11 +76,40 @@
 
 		      <div class="col s12 m4">
 		        <div class="card-panel teal" id="aside1">
-		          <div class="card-title"> <h3>Title</h3></div>
-		          <p>I am a very simple card. I am good at containing small bits of information.
-		          I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.I am a very simple card. I am good at containing small bits of information.
-		          I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.
-		          </p>
+		          <div class="card-header"> <h2>Connexion</h2></div>
+		          
+                    <!-- Formulaire -->
+        <form class="col s10 push-s1" action="valider.php" method="POST">
+
+
+          <!-- Contenu card -->
+          <div class="card-content">
+
+          <!-- email -->
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="email" type="email" class="validate" name="EMAIL">
+              <label for="email">Email</label>
+            </div>
+          </div><!-- fin email -->
+
+          <!-- mot de passe -->
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="passe" type="password" class="validate" name="PASSE">
+              <label for="passe">Mot de passe</label>
+            </div>
+          </div><!-- fin mot de passe -->
+
+        </div><!-- Fin contenu card -->
+
+        	<div class="card-action  center-align">
+	          <!-- bouton s'inscrire -->
+	          <input class="btn connexion" type="submit" value="Se connecter" />
+            </div>
+
+        </form><!-- Fin formulaire -->
+                    
 		        </div>
 		      </div>
     		</div>
