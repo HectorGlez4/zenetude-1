@@ -22,7 +22,7 @@ $app->get('/', function () {
 date_default_timezone_set('Europe/Paris');
 $app->get('/reminder', function () use ($app) {
     $ch = curl_init();
-    $nbDays = 3;
+    $nbDays = 12;
     $source = 'http://ade-consult.pp.univ-amu.fr/jsp/custom/modules/plannings/anonymous_cal.jsp?resources=6445&projectId=8&startDay=' . date('d', time() + $nbDays * 24 * 60 * 60 /*+14 jours*/ ) . '&startMonth=' . date('m', time() + $nbDays * 24 * 60 * 60) . '&startYear=' . date('Y', time() + $nbDays * 24 * 60 * 60) . '&endDay=' . date('d', time() + $nbDays * 24 * 60 * 60) . '&endMonth=' . date('m', time() + $nbDays * 24 * 60 * 60) . '&endYear=' . date('Y', time() + $nbDays * 24 * 60 * 60) . '';
     curl_setopt($ch, CURLOPT_URL, $source);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -30,9 +30,10 @@ $app->get('/reminder', function () use ($app) {
     curl_close ($ch);
 
     $lines = explode(PHP_EOL, $data);
+
     for ($i = 5; $i < count($lines); ++$i)
     {
-
+         //echo $i . " " . $lines[$i] . "</br>";
          if (strstr($lines[$i], "BEGIN:VEVENT"))
          {
             ++$i;
@@ -62,13 +63,16 @@ $app->get('/reminder', function () use ($app) {
                                                                                                         //NOM PRENOM
             $full_description  = $lines[$i]; 
             $nom_prenom = explode('\n', $full_description);
-            $parameter = utf8_decode($nom_prenom[2]) . "</br>";
+            $parameter = utf8_decode($nom_prenom[2]);
             $first_carac = substr($nom_prenom[2], 0, 1);
              if ($first_carac == "(") {
                 echo '';
              }
              else {
-                echo $parameter;
+                echo $parameter ."</br>";
+                $full_name = explode(' ', $parameter);
+                echo strtolower($full_name[0]) . "</br>";
+                echo strtolower($full_name[1]) . "</br>";
              }
          }
     }
