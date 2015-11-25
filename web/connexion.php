@@ -20,7 +20,7 @@ if (count($_POST) > 0){
         header('Location: index-connecte.php');
 
     }else{
-        header('Location: index.html');
+        header('Location: ../index.html');
 
     }
 
