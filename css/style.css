@@ -86,6 +86,20 @@ nav>.nav-wrapper>.hamburglar{
 	color: #403c3a;
 }
 
+.btn, .btn-large {
+    text-decoration: none;
+    color: #fff;
+    background-color: #7bba42;
+}
+
+.btn:hover, .btn-large:hover {
+    background-color: #7bba42;
+}
+
+.connexion{
+	margin-top: 7%;
+}
+
 @media screen and (max-width: 995px) {
 	nav .brand-logo{
 		left: 100px;
