@@ -1,10 +1,15 @@
 <?php
+	//echo 'lol';
+
+    //ini_set('display_errors', 1)
     session_start();
+	
+
 
     if ($_POST['deco'] == "deco"){
         //echo "<script>alert('Déconnexion !');</script>";
         session_destroy();
-        header('Location: ../index.html');
+        header('Location: ../php/index.html');
     }
 ?>
 <!doctype html>
@@ -56,7 +61,7 @@
                         <a class='lien' href='profil.html'>Pseudo</a>
                     </li>
                     <li>
-                        <?php if ($_SESSION){ echo $_SESSION['nom']; }else{ echo "Prénom Nom"; } ?>
+                        <?php if ($_SESSION){ echo $_SESSION['nom']." ".$_SESSION['prenom']; }else{ echo "Prénom Nom"; } ?>
                     </li>
                     <li>
                         Classe

@@ -17,10 +17,13 @@ if (count($_POST) > 0){
         $data = $result->fetch(PDO::FETCH_OBJ);
         session_start();
         $_SESSION['nom'] = $data->user_name;
+	$_SESSION['prenom'] = $data->user_firstname
+	$_SESSION['email'] = $data->user_instituteemail
+	
         header('Location: index-connecte.php');
 
     }else{
-        header('Location: ../index.html');
+        header('Location: ../index.php?erreur=1');
 
     }
 
