@@ -1,5 +1,8 @@
 <?php   
-include(dirname(__FILE__).'/students.php');
+include(dirname(__FILE__).'/InteractionBD.php');
+
+$students = getStudentsByTrainingGroup(1,1);
+
 ?>
 
 <style type="text/css">
@@ -30,12 +33,12 @@ table {font-size: 16px;}
     </table>
     <table cellspacing="0" style="width: 100%; border: solid 1px black; text-align: center;">
         <?php
-        for($iX = 0; $iX<count($students) - 1;++$iX)
+        for($iX = 0; $iX<count($students);++$iX)
         {
        	?>
         <tr>
-            <td style="width: 30%; text-align: left"><?php echo $students[$iX][0]; ?></td>
-            <td style="width: 20%; text-align: left"><?php echo $students[$iX][1]; ?></td>
+            <td style="width: 30%; text-align: left"><?php echo $students[$iX]["user_name"]; ?></td>
+            <td style="width: 20%; text-align: left"><?php echo $students[$iX]["user_firstname"]; ?></td>
             <td style="width: 50%; text-align: right"></td>
         </tr>
         <?php }?>
