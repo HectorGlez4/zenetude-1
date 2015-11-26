@@ -42,12 +42,17 @@
 
 
 
-                $db = new PDO('mysql:host=localhost; dbname=maquetteprojet_zenetude', 'root', 'root');         
+                $db = new PDO('mysql:host=mysql-dylan.prudhomme.alwaysdata.net; dbname=99389_maquetteprojet_zenetude', '99389', '1234');         
             
-                $request = $db -> prepare('SELECT user_instituteemail FROM user WHERE "' . $first_name . '"=user_firstname AND "' . $last_name . '"=user_name');
+                $request = $db -> prepare('SELECT user_instituteemail FROM User WHERE user_firstname = "' . $first_name . '" AND user_name = "' . $last_name . '"');
+		var_dump($request);
+		echo "</br>";
                 $request -> execute();
                 $results = $request -> fetchAll();
+		var_dump($results);
+		echo "</br>";
                 echo $first_name , $last_name;
+		echo "</br>";
                 foreach ($results as $result) {
 
                     $mailbd = $result[0];
