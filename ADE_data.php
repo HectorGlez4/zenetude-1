@@ -10,78 +10,53 @@
         $response->body( json_encode($content) );
     };
 
-
-
-        
-
-
-      
-    // $mysqli = new mysqli("mysql-maquetteprojet.alwaysdata.net", "114038_equipe1", "123456", "maquetteprojet_zenetude");
-    //     if ($mysqli->connect_errno)
-    //     {
-    //         echo "Echec lors de la connexion à MySQL : (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
-    //     }
-    
-    //     if ($result = $mysqli->query("SELECT user_instituteemail FROM user")) {
-            
-    //     for ($tablearesultat = array (); $row = $result->fetch_assoc(); $tablearesultat[] = $row);
-        
-    //     echo $tablearesultat;
-    
-//}
-
     function sendReminder($first_name, $last_name) {
-                    //Create a new PHPMailer instance
-                $mail = new PHPMailer;
+        //Create a new PHPMailer instance
+        $mail = new PHPMailer;
 
-                //Set who the message is to be sent from
-                $mail->setFrom('Zenetude', 'First Last');
+        //Set who the message is to be sent from
+        $mail->setFrom('Zenetude', 'First Last');
 
-                //Set an alternative reply-to address
-                /*$mail->addReplyTo('replyto@example.com', 'First Last');*/
+        //Set an alternative reply-to address
+        /*$mail->addReplyTo('replyto@example.com', 'First Last');*/
 
+        //Connect to database
+        $db = new PDO('mysql:host=mysql-dylan.prudhomme.alwaysdata.net; dbname=99389_maquetteprojet_zenetude', '99389', '1234');         
+    
+        $request = $db -> prepare('SELECT user_instituteemail FROM User WHERE user_firstname = "' . $first_name . '" AND user_name = "' . $last_name . '"');
+        $request -> execute();
+        $results = $request -> fetchAll();
+        foreach ($results as $result) {
 
+            //Save mail receive
+            $mailbd = $result[0];
 
-                $db = new PDO('mysql:host=mysql-dylan.prudhomme.alwaysdata.net; dbname=99389_maquetteprojet_zenetude', '99389', '1234');         
-            
-                $request = $db -> prepare('SELECT user_instituteemail FROM User WHERE user_firstname = "' . $first_name . '" AND user_name = "' . $last_name . '"');
-		var_dump($request);
-		echo "</br>";
-                $request -> execute();
-                $results = $request -> fetchAll();
-		var_dump($results);
-		echo "</br>";
-                echo $first_name , $last_name;
-		echo "</br>";
-                foreach ($results as $result) {
+            //Set who the message is to be sent to
+            $mail->addAddress($mailbd, $first_name . ' ' . $last_name);
 
-                    $mailbd = $result[0];
-                    echo $mailbd;
-                //Set who the message is to be sent to
-                $mail->addAddress($mailbd, $first_name . ' ' . $last_name);
+            //Set the subject line
+            $mail->Subject = 'PHPMailer mail() test';
 
-                //Set the subject line
-                $mail->Subject = 'PHPMailer mail() test';
+            $mail->isHTML(true);
 
-                //Read an HTML message body from an external file, convert referenced images to embedded,
-                //convert HTML into a basic plain-text alternative body
-                $mail->isHTML(true);
+            //Read an HTML message body from an external file, convert referenced images to embedded,
+            //convert HTML into a basic plain-text alternative body
+            //$mail->Body = file_get_contents('examples/contents.html');
 
-                //Replace the plain text body with one created manually
-                //$mail->Body = file_get_contents('examples/contents.html');
-                $mail->Body = "TEST DE BG MEK";
-                //Attach an image file
-                //$mail->addAttachment('examples/images/phpmailer_mini.png');
+            //Replace the plain text body with one created manually
+            $mail->Body = "TEST DE BG MEK";
 
-                //send the message, check for errors
+            //Attach an image file
+            //$mail->addAttachment('examples/images/phpmailer_mini.png');
 
-                if (!$mail->send()) {
-                    echo "Mailer Error: " . $mail->ErrorInfo;
-                } else {
-                    echo "Message sent!";
-                }
+            //Send the message, check for errors
+            if (!$mail->send()) {
+                echo "Mailer Error: " . $mail->ErrorInfo;
+            } else {
+                echo "Message sent!";
             }
         }
+    }
 
     $app = new \Slim\Slim(array(
         'debug' => true
@@ -160,13 +135,17 @@
                 }
                 // Else save first name and last name
                 else {
-                    echo $parameter ."</br>";
                     $full_name = explode(' ', $parameter);
+                    
+                    //Save first and last name into 2 var
                     // $last_name = strtolower($full_name[0]) . "</br>";
                     // $first_name = strtolower($full_name[1]) . "</br>";
-                    echo 'yolo';
+
+                    //Test sendReminder()
                     sendReminder('dylan', 'prudhomme');
 
+                    //Send an email to the right person
+                    //sendReminder($first_name, $last_name);
                 }
            }
         }
