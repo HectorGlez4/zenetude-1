@@ -147,10 +147,6 @@ nav>.nav-wrapper>.hamburglar{
 	float: right;
 }
 
-.input[type="email"]:focus:not([readonly]) + label{
-	color: red;
-}
-
 footer{
 	height:300px;
 	background-color: #385e2d;
