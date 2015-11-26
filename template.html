@@ -1,21 +1,17 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-  <title>PHPMailer Test</title>
-  <?php
-  	include(ADE_data.php);
-  ?>
-</head>
-<body>
-<div style="width: 640px; font-family: Arial, Helvetica, sans-serif; font-size: 11px;">
-  <h1>Rappel enseignement</h1>
-  <div align="center">
-    <p>Bonjour <?php echo $first_name, $last_name; ?> <p>
-    <p>
-  </div>
-  <p>This example uses <strong>HTML</strong>.</p>
-  <p>ISO-8859-1 text: éèîüçÅñæß</p>
-</div>
-</body>
+	<head>
+	  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	  <title>PHPMailer Test</title>
+	</head>
+	<body>
+	    <div style="width: 640px; font-family: Arial, Helvetica, sans-serif; font-size: 11px;">
+	      <h1>Rappel enseignement</h1>
+	      <div align="center">
+	        <p>Bonjour' . $first_name . ' ' . $last_name' <p>
+	        <p>Ceci est un mail pour vous rappeler que vous avez cours le ' . $date_format . ' de ' . $hour_start + 1 . 'h' . $min_start . ' à ' . $hour_end + 1 . 'h' . $min_end '<p>
+	        <p>En salle ' . $room . ' pour le cours ' . $subject ' <p>
+	      </div>
+	    </div>
+	</body>
 </html>

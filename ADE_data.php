@@ -11,6 +11,24 @@
     };
 
     function sendReminder($first_name, $last_name) {
+        //Content Mail
+        $content = '<html>
+                        <head>
+                          <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+                          <title>PHPMailer Test</title>
+                        </head>
+                        <body>
+                            <div style="width: 640px; font-family: Arial, Helvetica, sans-serif; font-size: 11px;">
+                              <h1>Rappel enseignement</h1>
+                              <div align="center">
+                                <p>Bonjour' . $first_name . ' ' . $last_name' </p>
+                                <p>Ceci est un mail pour vous rappeler que vous avez cours le ' . $date_format . ' de ' . $hour_start + 1 . 'h' . $min_start . ' à ' . $hour_end + 1 . 'h' . $min_end '</p>
+                                <p>En salle ' . $room . ' pour le cours ' . $subject ' </p>
+                              </div>
+                            </div>
+                        </body>
+                    </html>';
+
         //Create a new PHPMailer instance
         $mail = new PHPMailer;
 
@@ -44,7 +62,7 @@
             //$mail->Body = file_get_contents('examples/contents.html');
 
             //Replace the plain text body with one created manually
-            $mail->Body = "TEST DE BG MEK";
+            $mail->Body = $content;
 
             //Attach an image file
             //$mail->addAttachment('examples/images/phpmailer_mini.png');
@@ -97,6 +115,7 @@
                 // date and hour of the beginning class
                 ++$i;
                 $date = substr($lines[$i], 8, 8);
+                $date_format = date_create_from_format('Ymd', $date);
                 $hour_start = substr($lines[$i], 17, 2);
                 $min_start = substr($lines[$i], 19, 2);
                 $d = date_create_from_format('Ymd', $date);
