@@ -1,9 +1,4 @@
-*{
-	font-family: 'Roboto', sans-serif;
-	font-weight: 300;
-}
-
-html, body{
+html{
 	background-color: #F3EAC5;
 }
 
@@ -33,31 +28,6 @@ nav>.nav-wrapper>img{
 nav>.nav-wrapper>.hamburglar{
 	float: right;
 	margin-top: 40px;
-}
-
-#scroll-nav{
-	position: fixed;
-	top:-200px;
-	height: 80px;
-	padding: 10px;
-	padding-left: 50px;
-	padding-right: 50px;
-}
-
-#scroll-nav>.nav-wrapper>.hamburglar{
-	float: right;
-	margin-top: 0px;
-}
-
-#scroll-nav>.nav-wrapper>.brand-logo>img{
-	margin-top: 0px;
-	width: 80px;
-}
-
-#scroll-nav>.nav-wrapper>img{
-	margin-left: 40%;
-	margin-top: 15px;
-	width: 200px;
 }
 
 .row{
@@ -116,44 +86,6 @@ nav>.nav-wrapper>.hamburglar{
 	color: #403c3a;
 }
 
-.btn{
-	background-color: #7BBA42;
-}
-
-.btn:hover{
-	background-color: #385e2d;
-}
-
-.bouton-connection{
-	margin-top: 30px;
-}
-
-.connexion>a{
-	margin-top: 15px;
-	color: #7BBA42;
-}
-
-.connexion>a:hover{
-	margin-top: 15px;
-	color: #385e2d;
-	text-decoration: underline;
-}
-
-.connexion>.right{
-	float: right;
-}
-
-.connexion>.left{
-	float: right;
-}
-
-footer{
-	height:300px;
-	background-color: #385e2d;
-	box-shadow: 0px -5px 5px 0px rgba(0, 0, 0, 0.16), 0px -5px 10px 0px rgba(0, 0, 0, 0.12);
-}
-
-/*1029 px pour le calendrier*/
 @media screen and (max-width: 995px) {
 	nav .brand-logo{
 		left: 100px;
