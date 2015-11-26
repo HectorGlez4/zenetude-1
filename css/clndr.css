@@ -94,9 +94,9 @@
 }
 
 .cal1 .clndr .clndr-table tr .day.today {
-      color: #5482AB!important;
+      color: #385e2d!important;
     text-decoration: none;
-    border: 1px solid #5482AB;
+    border: 1px solid #385e2d;
  }
   
 .cal1 .clndr .clndr-table tr .day.today:hover {

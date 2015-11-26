@@ -1,6 +1,8 @@
   <!DOCTYPE html>
   <html>
     <head>
+    	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
 		<!--Import Roboto Font-->
     	<link href='https://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
 		<!--Import Google Icon Font-->
@@ -117,8 +119,40 @@
 
 		      <div class="col s12 m4">
 		        <div class="card-panel teal" id="aside1">
-		          <div class="card-title" id="test"> 
-		        </div>
+		          <div class="card-header"> <h2>Connexion</h2></div>
+
+                  <!-- Formulaire -->
+			        <form class="col s10 push-s1" action="valider.php" method="POST">
+			
+			
+			          <!-- Contenu card -->
+			          <div class="card-content">
+			
+			          <!-- email -->
+			          <div class="row">
+			            <div class="input-field col s12">
+			              <input id="email" type="email" class="validate" name="EMAIL">
+			              <label for="email">Email</label>
+			            </div>
+			          </div><!-- fin email -->
+			
+			          <!-- mot de passe -->
+			          <div class="row">
+			            <div class="input-field col s12">
+			              <input id="passe" type="password" class="validate" name="PASSE">
+			              <label for="passe">Mot de passe</label>
+			            </div>
+			          </div><!-- fin mot de passe -->
+			
+			        </div><!-- Fin contenu card -->
+			
+			        	<div class="card-action  center-align bouton-connection">
+				          <!-- bouton s'inscrire -->
+				          <input class="btn connexion" type="submit" value="Se connecter" />
+			            </div>
+			
+			        </form><!-- Fin formulaire -->
+			        <p class="connexion"><a href="" class="left">S'inscrire</a><a href="" class="right">Mot de passe oublié</a></p>
 		      </div>
     		</div>
     		</div>
@@ -170,7 +204,6 @@
 
 			 $(function(){
 			   $(window).scroll(function () {//Au scroll dans la fenetre on déclenche la fonction
-			   		document.getElementById('test').innerHTML = $(this).scrollTop();
 			      if ($(this).scrollTop() > 200) { //si on a défilé de plus de 200px du haut vers le bas
 			      	document.getElementById('scroll-nav').style.top='0px';
 			      } else{

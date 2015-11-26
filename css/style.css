@@ -116,12 +116,48 @@ nav>.nav-wrapper>.hamburglar{
 	color: #403c3a;
 }
 
+.btn{
+	background-color: #7BBA42;
+}
+
+.btn:hover{
+	background-color: #385e2d;
+}
+
+.bouton-connection{
+	margin-top: 30px;
+}
+
+.connexion>a{
+	margin-top: 15px;
+	color: #7BBA42;
+}
+
+.connexion>a:hover{
+	margin-top: 15px;
+	color: #385e2d;
+	text-decoration: underline;
+}
+
+.connexion>.right{
+	float: right;
+}
+
+.connexion>.left{
+	float: right;
+}
+
+.input[type="email"]:focus:not([readonly]) + label{
+	color: red;
+}
+
 footer{
 	height:300px;
 	background-color: #385e2d;
 	box-shadow: 0px -5px 5px 0px rgba(0, 0, 0, 0.16), 0px -5px 10px 0px rgba(0, 0, 0, 0.12);
 }
 
+/*1029 px pour le calendrier*/
 @media screen and (max-width: 995px) {
 	nav .brand-logo{
 		left: 100px;
