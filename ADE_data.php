@@ -52,6 +52,7 @@
                 ++$i;
                 $date = substr($lines[$i], 8, 8);
                 $hour_start = substr($lines[$i], 17, 2);
+		$hour_start += 1;
                 $min_start = substr($lines[$i], 19, 2);
                 $d = date_create_from_format('Ymd', $date);
                 echo $d->format('d/m/Y') . ' ' . $hour_start . ':' . $min_start . "</br>";
@@ -59,6 +60,7 @@
                 // date and hour of the beginning class
                 ++$i;
                 $hour_end = substr($lines[$i], 15, 2);
+		$hour_end += 1;
                 $min_end = substr($lines[$i], 17, 2);
                 echo $d->format('d/m/Y') . ' ' . $hour_end . ':' . $min_end . "</br>";
 
@@ -108,16 +110,16 @@
 
                              $content ='<html>
                         <head>
-                          <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+                          <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
                           <title>PHPMailer Test</title>
                         </head>
                         <body>
-                            <div style="width: 640px; font-family: Arial, Helvetica, sans-serif; font-size: 11px;">
+                            <div style="width: 640px; font-family: Arial, Helvetica, sans-serif; font-size: 20px;">
                               <h1>Rappel enseignement</h1>
                               <div align="center">
-                                <p>Bonjour ' . $first_name . ' ' . $last_name . '</p>
-                                <p>Cours le ' . $d->format('d/m/Y') . ' de ' . $hour_start +1 . ':' . $min_start . ' à ' . $hour_end+1 . ':' . $min_end . '</p>
-                                <p>En salle ' . $room . ' pour la matière ' . utf8_decode($subject) . '.</p>
+                                <p>Bonjour ' . $first_name . ' ' . $last_name . ' ! 
+                                N\'oubliez pas que vous avez cours le ' . $d->format('d/m/Y') . ' de ' . $hour_start . ':' . $min_start . ' à ' . 					$hour_end . ':' . $min_end . '
+                                en ' . $room . ' pour la matière ' . $subject . '.</p>
                               </div>
                             </div>
                         </body>
@@ -136,11 +138,12 @@
         //Connect to database
         $db = new PDO('mysql:host=mysql-dylan.prudhomme.alwaysdata.net; dbname=99389_maquetteprojet_zenetude', '99389', '1234');         
     
-        $request = $db -> prepare('SELECT user_instituteemail FROM User WHERE user_firstname = "' . $first_name . '" AND user_name = "' . $last_name . '"');
+        $request = $db -> prepare('SELECT user_instituteemail FROM User WHERE user_firstname = "dylan" AND user_name = "prudhomme"');
         $request -> execute();
         $results = $request -> fetchAll();
+	echo 'zolo2';
         foreach ($results as $result) {
-
+		echo 'zolo3';
             //Save mail receive
             $mailbd = $result[0];
 
@@ -157,12 +160,13 @@
             //$mail->Body = file_get_contents('examples/contents.html');
 
             //Replace the plain text body with one created manually
-            $mail->Body = $content;
+            $mail->Body = utf8_decode($content);
 
             //Attach an image file
             //$mail->addAttachment('examples/images/phpmailer_mini.png');
 
             //Send the message, check for errors
+	    echo 'yolo';
             if (!$mail->send()) {
                 echo "Mailer Error: " . $mail->ErrorInfo;
             } else {
