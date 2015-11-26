@@ -116,6 +116,20 @@ nav>.nav-wrapper>.hamburglar{
 	color: #403c3a;
 }
 
+.btn, .btn-large {
+    text-decoration: none;
+    color: #fff;
+    background-color: #7bba42;
+}
+
+.btn:hover, .btn-large:hover {
+    background-color: #7bba42;
+}
+
+.connexion{
+	margin-top: 7%;
+}
+
 footer{
 	height:300px;
 	background-color: #385e2d;
