@@ -20,27 +20,29 @@ table {font-size: 16px;}
 -->
 </style>
 <page backcolor="#FEFEFE" backimg="./res/bas_page.png" backimgx="center" backimgy="bottom" backimgw="100%" backtop="0" backbottom="30mm" footer="date;heure;page" >
-    <bookmark title="Lettre" level="0" ></bookmark>
-    
-    <h1>Licence Professionnelle SIL DA2I 2015-2016</h1>
-    <br><br><hr><br><br>
-    <table cellspacing="0" style="width: 100%; border: solid 1px black; text-align: center; ">
-        <tr>
-            <th class="left" style="width: 30%">Nom</th>
-            <th class="left" style="width: 20%">Prénom</th>
-            <th class="center" style="width: 50%">Signature</th>
-        </tr>
-    </table>
-    <table cellspacing="0" style="width: 100%; border: solid 1px black; text-align: center;">
-        <?php
-        for($iX = 0; $iX<count($students);++$iX)
-        {
-       	?>
-        <tr>
-            <td style="width: 30%; text-align: left"><?php echo $students[$iX]["user_name"]; ?></td>
-            <td style="width: 20%; text-align: left"><?php echo $students[$iX]["user_firstname"]; ?></td>
-            <td style="width: 50%; text-align: right"></td>
-        </tr>
-        <?php }?>
-    </table>
+    <div style="width:90%;margin:0 auto;">
+        <bookmark title="Lettre" level="0" ></bookmark>
+
+        <h1>Licence Professionnelle SIL DA2I 2015-2016</h1>
+        <br><br><hr><br><br>
+        <table cellspacing="0" style="width: 100%; border: solid 1px black; text-align: center; ">
+            <tr>
+                <th class="left" style="width: 30%">Nom</th>
+                <th class="left" style="width: 20%">Prénom</th>
+                <th class="center" style="width: 50%">Signature</th>
+            </tr>
+        </table>
+        <table cellspacing="0" style="width: 100%; border: solid 1px black; text-align: center;">
+            <?php
+            for($iX = 0; $iX<count($students);++$iX)
+            {
+           	?>
+            <tr>
+                <td style="width: 30%; text-align: left"><?php echo $students[$iX]["user_name"]; ?></td>
+                <td style="width: 20%; text-align: left"><?php echo $students[$iX]["user_firstname"]; ?></td>
+                <td style="width: 50%; text-align: right"></td>
+            </tr>
+            <?php }?>
+        </table>
+    </div>
 </page>
