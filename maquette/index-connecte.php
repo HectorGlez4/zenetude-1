@@ -22,7 +22,7 @@
 
     <div class="nav row">
         <div class='col-md-3 logo'>
-            <a href='./index-connecte.html'>
+            <a href='./index-connecte.php'>
                 <img src='../img/logo.jpg' alt='Logo'/>
             </a>
         </div>
@@ -53,7 +53,7 @@
             <div class="col-md-8 profil">
                 <ul>
                     <li>
-                        <a class='lien' href='profil.html'>Pseudo</a>
+                        <a class='lien' href='profil.php'>Pseudo</a>
                     </li>
                     <li>
                         <?php if ($_SESSION){ echo $_SESSION['nom']; }else{ echo "Prénom Nom"; } ?>
@@ -72,7 +72,7 @@
         </div>
 
         <div class="pedago">
-            <a href="./trombi.html">Documents pédagogiques</a>
+            <a href="trombi.php">Documents pédagogiques</a>
         </div>
         <div class="calendrier">
             <img src="../img/calendrier.jpg" alt='Calendrier'/>
