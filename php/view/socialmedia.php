@@ -281,8 +281,5 @@ $form = '<a href="'.$authUrl.'"><img src="../../img/googleLogo.png" alt="Se conn
 
 
 
-
-
-
 		?>
 
