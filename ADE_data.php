@@ -2,7 +2,7 @@
 
     error_reporting(E_ALL);
     require 'vendor/autoload.php';
-    require 'PHPMailer/PHPMailerAutoload.php';
+    require 'vendor/PHPMailer/PHPMailerAutoload.php';
 
     function toJSON($app, $content) {
         $response = $app->response;
