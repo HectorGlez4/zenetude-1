@@ -4,6 +4,7 @@
 			* Test if the mail address given by the user exists in the database. 
 		**/
 		public function	controlRecoverPassword() {
+			ini_set("display_errors",1);
 			$accountModel = new AccountModel();
 			$accountView = new AccountView();			
 			$mail = htmlspecialchars($_POST['mail']);
@@ -19,6 +20,7 @@
 			* Test if the mail address and the password given by the user exist in the database. 
 		**/
         public function controlConnection() {
+			ini_set('display_error', 1);
 			$accountView = new AccountView();
             if (count($_POST) > 0){
                 $accountModel = new AccountModel();

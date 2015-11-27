@@ -82,7 +82,7 @@
 			$mailer->charSet = "UTF-8"; 	
 		        $mailer->Username = "lpsilda2i@gmail.com";
 		        $mailer->Password = "Projet2015";
-		        $mailer->SetFrom("lpsilda2i@gmail.com");
+		        $mailer->SetFrom("ZenEtude");
 		        $mailer->AddAddress($_POST['mail'] ,utf8_encode(""));
 		        $mailer->Subject ="Subject: =?UTF-8?B?".base64_encode("Réinitialisation du mot de passe | Zenetude")."?=";
 		        $mailer->Body = $body;
