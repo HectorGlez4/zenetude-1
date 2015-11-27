@@ -7,7 +7,6 @@
  */
 function connect()
 {
-    //echo "<script>alert('yo');</script>";
     $db = new PDO('mysql:host=localhost;dbname=zenetude', "root", "root");
     return $db;
 }

@@ -22,18 +22,18 @@ $apiConfig = array(
     'use_objects' => false,
   
     // The application_name is included in the User-Agent HTTP header.
-    'application_name' => 'Zenetude',
+    'application_name' => 'zenetude-1',
 
     // OAuth2 Settings, you can get these keys at https://code.google.com/apis/console
-    'oauth2_client_id' => '710182480383-nb0b27evkivtp0iiocvnk13t0f1bn61n.apps.googleusercontent.com',
-    'oauth2_client_secret' => 'JM6RQyR57GliZvo6IMtNFrXo',
-    'oauth2_redirect_uri' => 'http://localhost/zenetude/google_login_oauth/index.php',
+    'oauth2_client_id' => '657801969546-b1fgtiurlrsbj3t8l8o1a1ioghpuiep0.apps.googleusercontent.com',
+    'oauth2_client_secret' => 'B54pUp6AxMJ5TxPA-tXPLMj0',
+    'oauth2_redirect_uri' => 'http://localhost/zenetude-1/php/index.php',
 
     // The developer key, you get this at https://code.google.com/apis/console
     'developer_key' => '',
   
     // Site name to show in the Google's OAuth 1 authentication screen.
-    'site_name' => 'localhost/zenetude',
+    'site_name' => 'localhost/zenetude-1',
 
     // Which Authentication, Storage and HTTP IO classes to use.
     'authClass'    => 'Google_OAuth2',
