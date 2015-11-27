@@ -105,7 +105,7 @@ class MethodOverrideTest extends PHPUnit_Framework_TestCase
         \Slim\Environment::mock(array(
             'REQUEST_METHOD' => 'POST',
             'REMOTE_ADDR' => '127.0.0.1',
-            'SCRIPT_NAME' => '/foo/index.php', //<-- Physical
+            'SCRIPT_NAME' => '/foo/index-old.php', //<-- Physical
             'PATH_INFO' => '/bar', //<-- Virtual
             'QUERY_STRING' => 'foo=bar',
             'SERVER_NAME' => 'slim',
