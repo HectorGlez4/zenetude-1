@@ -2,7 +2,7 @@
     
     // get the HTML
     ob_start();
-    include(dirname(__FILE__).'/exampledoc.php');
+    include(dirname(__FILE__).'/feuilleTemplate.php');
 
     $content = ob_get_clean();
 
