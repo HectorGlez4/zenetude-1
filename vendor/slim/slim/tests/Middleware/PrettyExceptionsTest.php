@@ -38,7 +38,7 @@ class PrettyExceptionsTest extends PHPUnit_Framework_TestCase
     public function testReturnsUnchangedSuccessResponse()
     {
         \Slim\Environment::mock(array(
-            'SCRIPT_NAME' => '/index.php',
+            'SCRIPT_NAME' => '/index-old.php',
             'PATH_INFO' => '/foo'
         ));
         $app = new \Slim\Slim();
@@ -59,7 +59,7 @@ class PrettyExceptionsTest extends PHPUnit_Framework_TestCase
     public function testReturnsDiagnosticsForErrorResponse()
     {
         \Slim\Environment::mock(array(
-            'SCRIPT_NAME' => '/index.php',
+            'SCRIPT_NAME' => '/index-old.php',
             'PATH_INFO' => '/foo'
         ));
         $app = new \Slim\Slim(array(
@@ -82,7 +82,7 @@ class PrettyExceptionsTest extends PHPUnit_Framework_TestCase
     public function testResponseContentTypeIsOverriddenToHtml()
     {
         \Slim\Environment::mock(array(
-            'SCRIPT_NAME' => '/index.php',
+            'SCRIPT_NAME' => '/index-old.php',
             'PATH_INFO' => '/foo'
         ));
         $app = new \Slim\Slim(array(
@@ -106,7 +106,7 @@ class PrettyExceptionsTest extends PHPUnit_Framework_TestCase
     public function testExceptionTypeIsInResponseBody()
     {
         \Slim\Environment::mock(array(
-            'SCRIPT_NAME' => '/index.php',
+            'SCRIPT_NAME' => '/index-old.php',
             'PATH_INFO' => '/foo'
         ));
         $app = new \Slim\Slim(array(
@@ -131,7 +131,7 @@ class PrettyExceptionsTest extends PHPUnit_Framework_TestCase
         $this->setExpectedException('\LogicException');
 
         \Slim\Environment::mock(array(
-            'SCRIPT_NAME' => '/index.php',
+            'SCRIPT_NAME' => '/index-old.php',
             'PATH_INFO' => '/foo'
         ));
         $app = new \Slim\Slim(array(

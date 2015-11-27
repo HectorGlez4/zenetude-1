@@ -4,7 +4,7 @@
     if ($_POST['deco'] == "deco"){
         //echo "<script>alert('Déconnexion !');</script>";
         session_destroy();
-        header('Location: ../index.html');
+        header('Location: ../web/index.html');
     }
 ?>
 <!doctype html>

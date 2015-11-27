@@ -83,7 +83,7 @@
                                 Classe
                             </li>
                             <li class='deco'>
-                                <a  href='../index.html'>Déconnexion</a>
+                                <a  href='../web/index.html'>Déconnexion</a>
                             </li>
                         </ul>
                     </div>

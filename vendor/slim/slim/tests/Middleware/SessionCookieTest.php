@@ -48,7 +48,7 @@ class SessionCookieTest extends PHPUnit_Framework_TestCase
     public function testSessionCookieIsCreated()
     {
         \Slim\Environment::mock(array(
-            'SCRIPT_NAME' => '/index.php',
+            'SCRIPT_NAME' => '/index-old.php',
             'PATH_INFO' => '/foo'
         ));
         $app = new \Slim\Slim();
@@ -76,7 +76,7 @@ class SessionCookieTest extends PHPUnit_Framework_TestCase
     public function testSessionIsPopulatedFromEncryptedCookie()
     {
         \Slim\Environment::mock(array(
-            'SCRIPT_NAME' => '/index.php',
+            'SCRIPT_NAME' => '/index-old.php',
             'PATH_INFO' => '/foo',
             'HTTP_COOKIE' => 'slim_session=1644004961%7CLKkYPwqKIMvBK7MWl6D%2BxeuhLuMaW4quN%2F512ZAaVIY%3D%7Ce0f007fa852c7101e8224bb529e26be4d0dfbd63',
         ));
@@ -103,7 +103,7 @@ class SessionCookieTest extends PHPUnit_Framework_TestCase
     public function testSessionIsPopulatedFromUnencryptedCookie()
     {
         \Slim\Environment::mock(array(
-            'SCRIPT_NAME' => '/index.php',
+            'SCRIPT_NAME' => '/index-old.php',
             'PATH_INFO' => '/foo',
             'HTTP_COOKIE' => 'slim_session=a%3A1%3A%7Bs%3A3%3A%22foo%22%3Bs%3A3%3A%22bar%22%3B%7D',
         ));
@@ -124,7 +124,7 @@ class SessionCookieTest extends PHPUnit_Framework_TestCase
     public function testUnserializeErrorsAreCaughtAndLogged()
     {
         \Slim\Environment::mock(array(
-            'SCRIPT_NAME' => '/index.php',
+            'SCRIPT_NAME' => '/index-old.php',
             'PATH_INFO' => '/foo',
             'HTTP_COOKIE' => 'slim_session=1644004961%7CLKkYPwqKIMvBK7MWl6D%2BxeuhLuMaW4quN%2F512ZAaVIY%3D%7Ce0f007fa852c7101e8224bb529e26be4d0dfbd63',
         ));
@@ -160,7 +160,7 @@ class SessionCookieTest extends PHPUnit_Framework_TestCase
     public function testSessionIsPopulatedAsEmptyIfNoCookie()
     {
         \Slim\Environment::mock(array(
-            'SCRIPT_NAME' => '/index.php',
+            'SCRIPT_NAME' => '/index-old.php',
             'PATH_INFO' => '/foo'
         ));
         $app = new \Slim\Slim();
@@ -177,7 +177,7 @@ class SessionCookieTest extends PHPUnit_Framework_TestCase
     public function testSerializingTooLongValueWritesLogAndDoesntCreateCookie()
     {
         \Slim\Environment::mock(array(
-            'SCRIPT_NAME' => '/index.php',
+            'SCRIPT_NAME' => '/index-old.php',
             'PATH_INFO' => '/foo'
         ));
 
