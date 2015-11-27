@@ -1,8 +1,10 @@
   $('document').ready(function () {
     var trigger = $('#hamburger'),
-        isClosed = true;
+        isClosed = false;
     var trigger2 = $('#hamburger2'),
-        isClosed = true;
+        isClosed = false;
+
+    var menu = $('#menu');
 
     trigger.click(function () {
       burgerTime();
@@ -16,10 +18,12 @@
       if (isClosed == true) {
         trigger.removeClass('is-open');
         trigger.addClass('is-closed');
+        menu.animate({right: "-300px"});
         isClosed = false;
       } else {
         trigger.removeClass('is-closed');
         trigger.addClass('is-open');
+        menu.animate({right: "0"});
         isClosed = true;
       }
     }
@@ -28,10 +32,12 @@
       if (isClosed == true) {
         trigger2.removeClass('is-open');
         trigger2.addClass('is-closed');
+        menu.animate({right: "-300px"});
         isClosed = false;
       } else {
         trigger2.removeClass('is-closed');
         trigger2.addClass('is-open');
+        menu.animate({right: "0"});
         isClosed = true;
       }
     }
