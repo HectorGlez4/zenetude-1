@@ -7,6 +7,6 @@
  */
 function connect()
 {
-    $db = new PDO('mysql:host=localhost;dbname=zenetude', "root", "root");
+    $db = new PDO('mysql:host=mysql-maquetteprojet.alwaysdata.net;dbname=maquetteprojet_zenetude', "114038_equipe1", "q}2[u9LE");
     return $db;
 }

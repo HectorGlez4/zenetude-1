@@ -127,8 +127,8 @@ class Environment implements \ArrayAccess, \IteratorAggregate
             $env['REMOTE_ADDR'] = $_SERVER['REMOTE_ADDR'];
 
             // Server params
-            $scriptName = $_SERVER['SCRIPT_NAME']; // <-- "/foo/index.php"
-            $requestUri = $_SERVER['REQUEST_URI']; // <-- "/foo/bar?test=abc" or "/foo/index.php/bar?test=abc"
+            $scriptName = $_SERVER['SCRIPT_NAME']; // <-- "/foo/index-old.php"
+            $requestUri = $_SERVER['REQUEST_URI']; // <-- "/foo/bar?test=abc" or "/foo/index-old.php/bar?test=abc"
             $queryString = isset($_SERVER['QUERY_STRING']) ? $_SERVER['QUERY_STRING'] : ''; // <-- "test=abc" or ""
 
             // Physical path

@@ -16,7 +16,7 @@
 
 	<div class="nav row">
         <div class='col-md-3 logo'>
-        <a href='../index.html'>
+        <a href='../web/index.html'>
         <img src='../img/logo.jpg' alt='Logo'/>
         </a>
 		</div>
@@ -30,8 +30,8 @@
             <form id="inscription" action ="valider.php" method="post" onsubmit="">
                 <fieldset>
                     <legend><h2>Inscription</h2></legend>
-                <label for="email"> Adresse email <em>*</em></label>
-                <input id="email" type="email" name="email"  ><br>
+                <label for="mail"> Adresse email <em>*</em></label>
+                <input id="email" type="email" name="mail"  ><br>
                 <label for="passe">Mot de passe: <em>*</em> </label>
                 <input id ="passe" type="password"  name="passe"/><br/>
                 <label for="passe2">Confirmation du mot de passe: </label>

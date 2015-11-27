@@ -32,7 +32,8 @@
 				include_once('../php/controller/AccountController.php');
 				include_once('../php/model/AccountModel.php');
 				include_once('../php/view/AccountView.php');
-				include_once('../PHPMailer-master/PHPMailerAutoload.php');
+				include_once('../PHPMailer/PHPMailerAutoload.php');
+                include_once( '../php/model/db.php');
 				$accountController = new AccountController();
 				$accountController -> controlRecoverPassword();
 			}
