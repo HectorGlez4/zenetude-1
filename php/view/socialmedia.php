@@ -1,4 +1,7 @@
 <?php
+session_start();
+ini_set('display_errors', 1);
+
 			               
 		       //_______________________________________BEGIN FACEBOOK_______________________________________________             
 				    
@@ -10,20 +13,20 @@
 		 *	license			- GNU General Public License version 2 or later
 		*/
 		/* INCLUSION OF LIBRARY FILEs*/
-			require_once( '../Facebook/FacebookSession.php');
-			require_once( '../Facebook/FacebookRequest.php' );
-			require_once( '../Facebook/FacebookResponse.php' );
-			require_once( '../Facebook/FacebookSDKException.php' );
-			require_once( '../Facebook/FacebookRequestException.php' );
-			require_once( '../Facebook/FacebookRedirectLoginHelper.php');
-			require_once( '../Facebook/FacebookAuthorizationException.php' );
-			require_once( '../Facebook/GraphObject.php' );
-			require_once( '../Facebook/GraphUser.php' );
-			require_once( '../Facebook/GraphSessionInfo.php' );
-			require_once( '../Facebook/Entities/AccessToken.php');
-			require_once( '../Facebook/HttpClients/FacebookCurl.php' );
-			require_once( '../Facebook/HttpClients/FacebookHttpable.php');
-			require_once( '../Facebook/HttpClients/FacebookCurlHttpClient.php');
+			require_once( '../../Facebook/FacebookSession.php');
+			require_once( '../../Facebook/FacebookRequest.php' );
+			require_once( '../../Facebook/FacebookResponse.php' );
+			require_once( '../../Facebook/FacebookSDKException.php' );
+			require_once( '../../Facebook/FacebookRequestException.php' );
+			require_once( '../../Facebook/FacebookRedirectLoginHelper.php');
+			require_once( '../../Facebook/FacebookAuthorizationException.php' );
+			require_once( '../../Facebook/GraphObject.php' );
+			require_once( '../../Facebook/GraphUser.php' );
+			require_once( '../../Facebook/GraphSessionInfo.php' );
+			require_once( '../../Facebook/Entities/AccessToken.php');
+			require_once( '../../Facebook/HttpClients/FacebookCurl.php' );
+			require_once( '../../Facebook/HttpClients/FacebookHttpable.php');
+			require_once( '../../Facebook/HttpClients/FacebookCurlHttpClient.php');
 		/* USE NAMESPACES */
 	
 			use Facebook\FacebookSession;
@@ -42,11 +45,11 @@
 		/*PROCESS*/
 	
 			//1.Stat Session
-			session_start();
+			
 			//2.Use app id,secret and redirect url
 			$app_id = '1207370725956552';
 			$app_secret = '1b83b246d8f61a10d05879a692494c63';
-			$redirect_url='http://localhost/zenetude-1/php/index.php';
+			$redirect_url='http://localhost/zenetude-1/php/view/socialmedia.php';
 			 
 			//3.Initialize application, create helper object and get fb sess
 			FacebookSession::setDefaultApplication($app_id,$app_secret);
@@ -61,11 +64,11 @@
 				$graph = $response->getGraphObject(GraphUser::className());
 				// use graph object methods to get user details
 				$_SESSION['nom'] = $graph->getName();
-				header('Location: ../maquette/index-connecte.php');
+				header('Location: index-connecte.php');
 			}else{
 				//else echo login
 				//echo '<a href='.$helper->getLoginUrl().'>Login with facebook</a>';
-				echo '<a href="'.$helper->getLoginUrl().'"><img src="../img/FacebookLogo.png" alt="Se connecter avec Facebook" width="20" height="20"></a>';
+				echo '<a href="'.$helper->getLoginUrl().'"><img src="../../img/FacebookLogo.png" alt="Se connecter avec Facebook" width="20" height="20"></a>';
 			}
             
 	//__________________________________________END FACEBOOK___________________________________
@@ -77,14 +80,14 @@
 
 
 
-	require_once('../TwitterOauth/OAuth.php');
-	require_once('../TwitterOauth/twitteroauth.php');
+	require_once('../../TwitterOauth/OAuth.php');
+	require_once('../../TwitterOauth/twitteroauth.php');
 
-	define('CONSUMER_KEY', 'kMD4spi1lGNeQhmOGR4ioZSyE');
-	define('CONSUMER_SECRET', 'C7YSSjGJalAJA4uk6aBNtjD02CPGwhYxSD1ri00gOYCpN5eMv2');
-	define('OAUTH_CALLBACK', 'http://localhost/zenetude-1/php/index.php');
+	define('CONSUMER_KEY', 'nlOVxx4qz4DDWYFlSPWlbsZWO');
+	define('CONSUMER_SECRET', 'BEGyzam5iYaaBTKc7KaunoEEZFk7QNG9FSJOe4vXKr0gQ2Q19T');
+	define('OAUTH_CALLBACK', 'http://localhost/zenetude-1/php/view/socialmedia.php');
 
-	session_start();
+	
 
 	if(isset($_GET['logout'])){
 	    //unset the session
@@ -123,7 +126,7 @@
 		$data = $connection->get('account/verify_credentials',$params);
 		if($data){
 		    // store the data in the session
-		    $_SESSION['data']=$data;
+		    //$_SESSION['data']=$data;
 		    // redirect to same page to remove url parameters
 		    $redirect = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'];
 		    header('Location: ' . filter_var($redirect, FILTER_SANITIZE_URL));
@@ -138,19 +141,21 @@
 	if(isset($login_url) && !isset($_SESSION['data'])){
 	    // echo the login url
 	    //echo "<a href='$login_url'><button>Login with twitter </button></a>";
-	echo '<a href="'.$login_url.'"><img src="../img/TwitterLogo.png" alt="Se connecter avec Twitter" width="30" height="30"></a>';
+	echo '<a href="'.$login_url.'"><img src="../../img/TwitterLogo.png" alt="Se connecter avec Twitter" width="30" height="30"></a>';
 	}
 	else{
 	    // get the data stored from the session
 	    //$data = $_SESSION['data'];
 	    $_SESSION['nom'] = $data->name;
+		//var_dump($data);
+		//$lol = $data->name;;
 	    // echo the name username and photo
 	    //echo "Name : ".$data->name."<br>";
 	    //echo "Username : ".$data->screen_name."<br>";
 	    //echo "Photo : <img src='".$data->profile_image_url."'/><br><br>";
 	    // echo the logout button
 	    //echo "<a href='?logout=true'><button>Logout</button></a>";
-	    header('Location: ../maquette/index-connecte.php');
+	    header("Location: index-connecte.php?nom=$lol");
 	}
 
 
@@ -178,9 +183,8 @@
 	 * See the License for the specific language governing permissions and
 	 * limitations under the License.
 	 */
-	require_once '../google_login_oauth/src/Google_Client.php';
-	require_once '../google_login_oauth/src/contrib/Google_Oauth2Service.php';
-	session_start();
+	require_once '../../google_login_oauth/src/Google_Client.php';
+	require_once '../../google_login_oauth/src/contrib/Google_Oauth2Service.php';
 
 	if(isset($_GET['logout'])){
 	    //unset the session
@@ -228,7 +232,7 @@
 	}
 	if(isset($authUrl)) {
 	    //$form = "<a class='login' href='$authUrl'><img src='images/googleconnect3.png' /></a>";
-$form = '<a href="'.$authUrl.'"><img src="../img/googleLogo.png" alt="Se connecter avec Google+" width="20" height="20"></a>';
+$form = '<a href="'.$authUrl.'"><img src="../../img/googleLogo.png" alt="Se connecter avec Google+" width="20" height="20"></a>';
 		echo $form;
 	  }
 	//include("html.php");
@@ -238,10 +242,11 @@ $form = '<a href="'.$authUrl.'"><img src="../img/googleLogo.png" alt="Se connect
 		        //echo $content['name'];
 		   
 
-		    if (($content) && ($_SESSION['isConnectGoogle'])){
+		    //if (($content) && ($_SESSION['isConnectGoogle'])){
+		   if (isset($_SESSION['isConnectGoogle'])){
 		        //echo "<a href='?logout=true'>Se déconnecter</a>";
 		
-			header('Location: ../maquette/index-connecte.php');
+			header('Location: index-connecte.php');
 		    }
 
 

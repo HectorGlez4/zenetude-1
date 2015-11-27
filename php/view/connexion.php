@@ -9,7 +9,7 @@
 include_once( '../model/db.php');
 include_once('../controller/AccountController.php');
 include_once('../model/AccountModel.php');
-include_once('../view/AccountView.php');
+include_once('AccountView.php');
 ini_set('display_errors', 1);
 $accountController = new AccountController();
 $accountController->controlConnection();
@@ -33,7 +33,7 @@ if (count($_POST) > 0){
         header('Location: index-connecte.php');
 
     }else{
-        header('Location: ../php/index.php?erreur=1');
+        header('Location: index.php?erreur=1');
 
     }
 

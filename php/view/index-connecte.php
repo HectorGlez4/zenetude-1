@@ -9,7 +9,7 @@
     if ($_POST['deco'] == "deco"){
         session_destroy();
 
-        header('Location: ../php/index.php?logout=true');
+        header('Location: index.php?logout=true');
 
     }
 ?>
@@ -17,9 +17,9 @@
 <html lang="fr">
 <head>
     <title>Zenetude</title>
-    <link rel="stylesheet" href="../css/bootstrap.css">
-    <link rel="stylesheet" href="../css/index.css">
-    <script type="text/javascript" src="../js/fonctions.js"></script>
+    <link rel="stylesheet" href="../../css/bootstrap.css">
+    <link rel="stylesheet" href="../../css/index.css">
+    <script type="text/javascript" src="../../js/fonctions.js"></script>
 
     <meta charset="utf-8">
 </head>
@@ -29,7 +29,7 @@
     <div class="nav row">
         <div class='col-md-3 logo'>
             <a href='./index-connecte.php'>
-                <img src='../img/logo.jpg' alt='Logo'/>
+                <img src='../../img/logo.jpg' alt='Logo'/>
             </a>
         </div>
         <div class='col-md-9 titre'>
@@ -54,7 +54,7 @@
 
         <div class='row'>
             <div class="col-md-4 profil">
-                <img src='../img/avatar.png' alt="Avatar"/>
+                <img src='../../img/avatar.png' alt="Avatar"/>
             </div>
             <div class="col-md-8 profil">
                 <ul>
@@ -62,7 +62,7 @@
                         <a class='lien' href='profil.php'>Pseudo</a>
                     </li>
                     <li>
-                        <?php if ($_SESSION){ echo $_SESSION['nom']." ".$_SESSION['prenom']; }else{ echo "Prénom Nom"; } ?>
+                        <?php if (isset($_SESSION)){ echo $_SESSION['nom']." ".$_SESSION['prenom']; }else{ echo "Prénom Nom"; } ?>
                     </li>
                     <li>
                         Classe
@@ -81,7 +81,7 @@
             <a href="trombi.php">Documents pédagogiques</a>
         </div>
         <div class="calendrier">
-            <img src="../img/calendrier.jpg" alt='Calendrier'/>
+            <img src="../../img/calendrier.jpg" alt='Calendrier'/>
         </div>
     </div>
     <div class='footer'>
