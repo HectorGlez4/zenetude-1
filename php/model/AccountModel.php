@@ -1,23 +1,39 @@
 <?php
 	class AccountModel {
-		public  function getData($param) {
+		public  function getDataUser($param) {
             $db = connect();
-            $request = $db->prepare('SELECT :param FROM users WHERE user_instituteemail = :mail');
+            $request = $db->prepare('SELECT :param FROM User WHERE user_instituteemail = :mail');
             $request->execute(array('param' => $param, 'mail' => $_POST['mail']));
             $result = $request->fetchAll();
             return $result;
         }
 
-        public function getUserpassword() {
+		public function getDataStudent($param, $userId) {
+			$db = connect();
+			$request = $db->prepare('SELECT '.$param.' FROM Student WHERE user_id = '.$userId.'');
+            $request->execute();
+            $result = $request->fetchAll();
+            return $result;
+		}
+
+		public function getDataTrainingManager($param, $userId) {
+			$db = connect();
+			$request = $db->prepare('SELECT :param FROM Training_manager WHERE user_id = :userId');
+            $request->execute(array('param' => $param, 'userId' => $userId));
+            $result = $request->fetchAll();
+            return $result;
+		}		
+
+        public function getUserPassword() {
             $db = connect();
-            $request = $db->prepare('SELECT * FROM users WHERE user_instituteemail = :mail AND user_password = :pass');
+            $request = $db->prepare('SELECT * FROM User WHERE user_instituteemail = :mail AND user_password = :pass');
             $request->execute(array('mail' => $_POST['mail'], 'pass' => $_POST['pass']));
             $result = $request->fetchAll();
             return $result;
         }
 
 		public function recoverPassword() {
-			$accountView = new AccountView();
+	    	$accountView = new AccountView();
 
             $string = "";
 			$chaine = "abcdefghijklmnpqrstuvwxy";
@@ -28,7 +44,7 @@
 
             $db = connect();
 
-            $request = $db->prepare('UPDATE users SET user_password = :password WHERE user_instituteemail = :mail');
+            $request = $db->prepare('UPDATE User SET user_password = :password WHERE user_instituteemail = :mail');
 			$request->execute(array('password' => sha1($string), 'mail' => $_POST['mail']));
 			$body = "
 				<h1>Réinitialisation du mot de passe</h1>
@@ -55,15 +71,15 @@
 		        $mailer->Subject ="Subject: =?UTF-8?B?".base64_encode("Réinitialisation du mot de passe | Zenetude")."?=";
 		        $mailer->Body = $body;
 		        if(!$mailer->Send())
-                    $accountView->showEMessage(2);
+                    $accountView->showMessage(2);
 		        else
-                    $accountView->showEMessage(3);
+                    $accountView->showMessage(3);
 		}
 
         public function addUser() {
             $db = connect();
 
-            $request = $db->prepare('INSERT INTO users (user_password, user_instituteemail) VALUES (:password, :mail)');
+            $request = $db->prepare('INSERT INTO User (user_password, user_instituteemail) VALUES (:password, :mail)');
             $request->execute(array('password' => $_POST['passe'], 'mail' => $_POST['mail']));
         }
 	}

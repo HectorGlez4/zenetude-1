@@ -65,7 +65,7 @@
                         <?php if (isset($_SESSION)){ echo $_SESSION['nom']." ".$_SESSION['prenom']; }else{ echo "Prénom Nom"; } ?>
                     </li>
                     <li>
-                        Classe
+                        <?php if (isset($_SESSION)){ echo 'Groupe '. $_SESSION['class']; } ?>
                     </li>
                     <li class='deco'>
                         <form action="" method="post" id="deconnexion">

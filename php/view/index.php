@@ -1,6 +1,6 @@
 <?php
 
-ini_set('display_errors', 1);
+//ini_set('display_errors', 1);
 
 	if (isset($_GET['erreur'])){
 		echo "<script>alert('Erreur d\'authentification !');</script>";
@@ -146,16 +146,16 @@ ini_set('display_errors', 1);
 			          <!-- email -->
 			          <div class="row">
 			            <div class="input-field col s12">
-			              <input id="email" type="email" class="validate" name="EMAIL">
-			              <label for="email">Email</label>
+			              <input id="email" type="email" class="validate" name="mail">
+			              <label for="mail">Email</label>
 			            </div>
 			          </div><!-- fin email -->
 			
 			          <!-- mot de passe -->
 			          <div class="row">
 			            <div class="input-field col s12">
-			              <input id="passe" type="password" class="validate" name="PASSE">
-			              <label for="passe">Mot de passe</label>
+			              <input id="passe" type="password" class="validate" name="pass">
+			              <label for="pass">Mot de passe</label>
 			            </div>
 			          </div><!-- fin mot de passe -->
 			
