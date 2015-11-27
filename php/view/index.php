@@ -78,7 +78,7 @@ ini_set('display_errors', 1);
 
 		<nav id="menu" class="center-align">
 			<ul>
-				<img src="../../../img/avatar.png" alt="avatar.png" class="circle responsive-img"/><br/>Vous n'êtes pas connecté(e)
+				<img src="../../img/avatar.png" alt="avatar.png" class="circle responsive-img"/><br/>Vous n'êtes pas connecté(e)
 				<li><a class="color" href="">Se connecter</a></li>
 				<li><a class="color" href="">S'inscrire</a></li>
 			</ul>
