@@ -76,6 +76,14 @@
 		  </div>
 		</nav>
 
+		<nav id="menu" class="center-align">
+			<ul>
+				<img src="../../img/avatar.png" alt="avatar.png" class="circle responsive-img"/><br/>Vous n'êtes pas connecté(e)
+				<li><a class="color" href="">Se connecter</a></li>
+				<li><a class="color" href="inscription.php">S'inscrire</a></li>
+			</ul>
+		</nav>
+
 		<nav id="scroll-nav">
 		  <div class="nav-wrapper">
 		    <a href="" class="brand-logo"><img src="../../img/logo.png" alt="logo du site"></a>
@@ -132,6 +140,7 @@
 		        </div>
 		      </div>
 
+
 		      <div class="col s12 m4">
 		        <div class="card-panel teal" id="aside1">
 		          <div class="card-header"> <h2>Connexion</h2></div>
@@ -173,6 +182,7 @@
 			        <p class="connexion"><a href="inscription.php" class="left">S'inscrire</a><a href="recuperation.php" class="right">Mot de passe oublié</a></p>
 		      </div>
     		</div>
+    	</div>
 
 
         	<div class="row">
@@ -204,6 +214,7 @@
     		</div>
 
     	</div>
+    </div>
     	<!-- FIN CONTAINER -->
 
     	<footer></footer>

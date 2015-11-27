@@ -11,7 +11,7 @@ function getStudentsByTrainingGroup($training_id = null, $student_group = null){
     if($training_id == null || $student_group == null)
         return false;
       
-    $mysqli = new mysqli("mysql-maquetteprojet.alwaysdata.net", "114038_equipe1", "123456", "maquetteprojet_zenetude");
+    $mysqli = new mysqli("mysql-maquetteprojet.alwaysdata.net", "114038_equipe1", "q}2[u9LE", "maquetteprojet_zenetude");
     if ($mysqli->connect_errno)
     {
         echo "Echec lors de la connexion à MySQL : (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
