@@ -1,4 +1,4 @@
 .idea/*
 
 #Pour ne pas envoyer les fichiers créés automatiquement avec un ~ à la fin
-*.*~
+*~
