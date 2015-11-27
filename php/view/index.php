@@ -80,7 +80,7 @@ ini_set('display_errors', 1);
 			<ul>
 				<img src="../../img/avatar.png" alt="avatar.png" class="circle responsive-img"/><br/>Vous n'êtes pas connecté(e)
 				<li><a class="color" href="">Se connecter</a></li>
-				<li><a class="color" href="">S'inscrire</a></li>
+				<li><a class="color" href="inscription.php">S'inscrire</a></li>
 			</ul>
 		</nav>
 
