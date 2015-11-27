@@ -109,7 +109,7 @@
                     <div class="col-md-8 profil">
                         <ul>
                             <li>
-                                <a class='lien' href='profil.html'>Pseudo</a>
+                                <a class='lien' href='profil.php'>Pseudo</a>
                             </li>
                             <li>
                                 Prénom Nom 
@@ -126,7 +126,7 @@
                 <div class='row'>
                     <div class="col-md-12">
                         <div class="pedago">
-                            <a href="./trombi.html">Documents pédagogiques</a>
+                            <a href="trombi.php">Documents pédagogiques</a>
                         </div>
                     </div>
                 </div>
