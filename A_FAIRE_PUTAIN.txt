@@ -1,6 +1,0 @@
-FAIL !-> utiliser localtime() pour l'envoie de mail automatique chaque jour (par exemple à 8:00:00)
-	-> utiliser une tâche planifiée sur le serveur (CRONTAB)
-DONE ! -> Comparer le nom et prenom des prof avec ceux inscrits dans la BD du site
-	-> Si ils correspondent, envoyer un mail à l'adresse correspondante
-	-> Sinon ne rien faire 
-mettre un commentaire dans l'html-> Signaler que les nom et prenom composé doivent comporter un tiret et non un espace !
