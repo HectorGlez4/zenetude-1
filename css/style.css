@@ -8,7 +8,7 @@ html, body{
 }
 
 nav{
-	z-index: 1;
+	z-index: 20;
 	background-color: #FFF;
 	color: #000;
 	height: 200px;
@@ -33,9 +33,11 @@ nav>.nav-wrapper>img{
 nav>.nav-wrapper>.hamburglar{
 	float: right;
 	margin-top: 40px;
+	z-index: 30;
 }
 
 #scroll-nav{
+	z-index: 20;
 	position: fixed;
 	top:-200px;
 	height: 80px;
@@ -75,6 +77,10 @@ nav>.nav-wrapper>.hamburglar{
 	padding: 30px;
 	padding-left: 40px;
 	padding-right: 40px;
+}
+
+.color{
+	color: #7BBA42;
 }
 
 .card-panel{
@@ -162,4 +168,16 @@ footer{
 }
 
 @media screen and (max-width: 860px) {
+}
+
+/**********************/
+/** PAGE INSCRIPTION **/
+/**********************/
+.formulaire{
+	margin-top: 8.33333%;
+	margin-bottom: 8.33333%;
+}
+
+.inscription{
+	margin-top: 5%;
 }
