@@ -13,7 +13,7 @@
         $html2pdf->pdf->SetDisplayMode('fullpage');
 //      $html2pdf->pdf->SetProtection(array('print'), 'spipu');
         $html2pdf->writeHTML($content, isset($_GET['vuehtml']));
-        $html2pdf->Output('trombi.pdf');
+        $html2pdf->Output('trombinoscope.pdf');
     }
     catch(HTML2PDF_exception $e) {
         echo $e;
