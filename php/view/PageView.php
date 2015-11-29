@@ -160,7 +160,12 @@
 
 		public function showScrollMenu($connect) {
 			if(!$connect) {?>
-		
+			<nav id="scroll-nav">
+		  		<div class="nav-wrapper">
+		    		<a href="" class="brand-logo"><img src="../../img/logo.png" alt="logo du site"></a>
+		    		<img src="../../img/name.png" alt="Zenetude, titre du site">
+		 	 	</div>
+			</nav>
 		<?php
 			}
 			else {
@@ -207,8 +212,8 @@
 					    </div>
 			      
 			  		</div>
-		 	 </div>
-		</nav>
+		 	 	</div>
+			</nav>
 			<?php
 			}
 
