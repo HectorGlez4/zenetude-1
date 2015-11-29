@@ -2,9 +2,9 @@
 <html lang="fr">
     <head>
         <title>Zenetude</title>
-        <link rel="stylesheet" href="../css/bootstrap.css">
-        <link rel="stylesheet" href="../css/index.css">
-        <link rel="stylesheet" href="../css/profil.css">
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <link rel="stylesheet" href="../../css/index.css">
+        <link rel="stylesheet" href="../../css/profil.css">
 
         <meta charset="utf-8">
     </head>

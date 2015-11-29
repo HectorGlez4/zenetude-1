@@ -30,8 +30,9 @@
 					$_SESSION['prenom'] = $result[0]['user_firstname'];
 					$_SESSION['id'] = $result[0]['user_id'];
 					if($result[0]['user_type'] == 'Etudiant') {
-						$studentResult = $accountModel->getDataStudent("*", $_SESSION['id']);
+						$studentResult = $accountModel->getDataStudent('*', $_SESSION['id']);
 						$_SESSION['class'] = $studentResult[0]['student_group'];
+						var_dump($_SESSION);
 					}
 					else if($result[0]['user_type'] == 'RF'){
 
@@ -39,7 +40,7 @@
 					else {
 
 					}
-                    header('Location: index-connecte.php');
+                    header('Location: index.php');
 
                 }
 				else{
