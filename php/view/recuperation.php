@@ -33,7 +33,7 @@
         <form class="col formulaire s10 push-s1" action="./recuperation.php" method="POST" onsubmit="">
 
           <!-- Titre de la carte -->
-          <div class="card-header"> <h2>Inscription</h2></div>
+          <div class="card-header header-small"> <h2>Récupération de mot de passe</h2></div>
           <!-- Fin titre -->
 
           <!-- Contenu card -->

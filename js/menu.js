@@ -19,11 +19,14 @@
         trigger.removeClass('is-open');
         trigger.addClass('is-closed');
         menu.animate({right: "-300px"});
+        $("body").css("overflow", "hidden");
         isClosed = false;
+
       } else {
         trigger.removeClass('is-closed');
         trigger.addClass('is-open');
         menu.animate({right: "0"});
+        $("body").css("auto", "hidden");
         isClosed = true;
       }
     }
@@ -33,6 +36,7 @@
         trigger2.removeClass('is-open');
         trigger2.addClass('is-closed');
         menu.animate({right: "-300px"});
+        $("body").css("overflow", "hidden");
         isClosed = false;
       } else {
         trigger2.removeClass('is-closed');
