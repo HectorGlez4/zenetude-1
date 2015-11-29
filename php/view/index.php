@@ -14,9 +14,9 @@
     <body>
 		
 		<?php
-			$pageView -> showMetas();
+			$pageView -> showHead();
 		 	$pageController -> controlHeader();
-		    $pageController -> controlScrollMenu();
+		    $pageController -> controlDynamicMenu();
 	    ?>
 
 		<div class="container">

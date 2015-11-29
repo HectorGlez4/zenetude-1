@@ -1,6 +1,11 @@
 <?php
 
 	class PageView {
+
+
+		/**
+			* Show the inscription's form.
+		**/
 		public function showInscriptionForm() {
 		?>
 		<!-- Debut card -->
@@ -51,6 +56,11 @@
 		<?php
 		}
 
+
+
+		/**
+			* Include all javascript's links needed by the pages.
+		**/
 		public function showJavaLinks() {
 		?>
 		<!--Import jQuery before materialize.js-->
@@ -83,7 +93,11 @@
 		<?php
 		}
 
-		public function showindexDescription($connect) {
+
+		/**
+			* Show the first part of description in the index's page.
+		**/
+		public function showIndexDescription($connect) {
 			if(!$connect) {
 			?>
 	      	<div class="col s12 m8">
@@ -119,12 +133,20 @@
 			}
 		}
 
+
+		/**
+			* Show the footer.
+		**/
 		public function showFooter() {
 			?>
 			<footer></footer>
 			<?php
 		}
 
+
+		/**
+			* Show the calendar.
+		**/
 		public function showCalendar() {
 			?>
 			<div class="col s12 m4">
@@ -143,7 +165,11 @@
 			<?php
 		}
 
-		public function showMetas() {
+
+		/**
+			* Include the head needed by pages
+		**/
+		public function showHead() {
 			?>
 			<head>
 		    	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -172,6 +198,10 @@
 			<?php
 		}
 
+
+		/**
+			* Show the header.
+		**/
 		public function showHeader($connect) {
 			if(!$connect) {?>
 			<nav>
@@ -224,6 +254,10 @@
 			}
 		}
 
+
+		/**
+			* Show the static menu.
+		**/
 		public function showMenu($connect) {
 			if(!$connect) {?>
 			<div class="col s12 m4">
@@ -273,7 +307,11 @@
 			}
 		}
 
-		public function showScrollMenu($connect) {
+
+		/**
+			* Show the dynamic menu bar. 
+		**/
+		public function showScrollMenu($connect, $rf = false) {
 			if(!$connect) {?>
 			<nav id="scroll-nav">
 		  		<div class="nav-wrapper">
@@ -287,7 +325,7 @@
 			?>
 			<nav id="menu" class="center-align">
 				<ul>
-					<img src="../../img/avatar.png" alt="avatar.png" class="circle responsive-img"/><br/><?php echo $_SESSION['prenom']." ".$_SESSION['nom']?>
+					<img src="../../img/avatar.png" alt="avatar.png" class="circle responsive-img"/><br/><?php echo $_SESSION['prenom']." ".$_SESSION['nom'].'<br />'; if($rf) {echo 'Responsable de formation <br />';}else {echo 'Groupe '.$_SESSION['class'].'<br />';}?>
 					<li><a class="color" href="profil.php">Mon compte</a></li>
 					<li><a class="color" href="../model/deconnect.php">Déconnexion</a></li>
 				</ul>
@@ -330,6 +368,5 @@
 			</nav>
 			<?php
 			}
-
 		}
 	}
