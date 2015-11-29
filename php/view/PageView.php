@@ -269,7 +269,7 @@
 			
 			
 			          <!-- Contenu card -->
-			         <div class="card-content">
+			         <div >
 			
 			          <!-- email -->
 			          <div class="row">

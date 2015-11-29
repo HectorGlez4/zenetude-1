@@ -36,6 +36,10 @@ nav>.nav-wrapper>.hamburglar{
 	z-index: 30;
 }
 
+#page{
+	position: absolute;
+}
+
 #socialmedia{
 	height: 20px;
 	width: 64px;
@@ -107,7 +111,7 @@ nav>.nav-wrapper>.hamburglar{
 	background-color: #FFF !important;
 }
 
-.card-header{
+.card-header, .card-content{
 	padding: 30px;
 }
 
@@ -125,6 +129,11 @@ nav>.nav-wrapper>.hamburglar{
 }
 
 .card-header>h2{
+	color: #cfd1d5;
+	text-align: center;
+}
+
+.card-header>h3{
 	color: #cfd1d5;
 	text-align: center;
 }
@@ -195,4 +204,8 @@ footer{
 
 .inscription{
 	margin-top: 5%;
+}
+
+.header-small>h2{
+	font-size: 2.4em;
 }

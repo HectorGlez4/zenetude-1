@@ -47,7 +47,6 @@
     		</div>
 
     	</div>
-    </div>
     	<!-- FIN CONTAINER -->
 
  		<?php
