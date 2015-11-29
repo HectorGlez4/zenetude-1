@@ -1,6 +1,56 @@
 <?php
 
 	class PageView {
+		public function showInscriptionForm() {
+		?>
+		<!-- Debut card -->
+      	<div class="card-panel inscription col m4 push-m4 s12 center-align">
+        <!-- Formulaire -->
+        <form class="col formulaire s10 push-s1" action="valider.php" method="POST" onsubmit="">
+
+          	<!-- Titre de la carte -->
+          	<div class="card-header"> <h2>Inscription</h2></div>
+          	<!-- Fin titre -->
+
+	          <!-- Contenu card -->
+          	<div class="card-content">
+
+		          <!-- email -->
+	          	<div class="row">
+	       	 		<div class="input-field col s12">
+	              		<input id="email" type="email" class="validate" name="mail">
+	             	 	<label for="email">Adresse email <em>*</em></label>
+	            	</div>
+	          	</div><!-- fin email -->
+
+		          <!-- mot de passe -->
+	          	<div class="row">
+		            <div class="input-field col s12">
+		              	<input id="passe" type="password" class="validate" name="passe">
+		             	<label for="passe">Mot de passe <em>*</em></label>
+		            </div>
+	          	</div><!-- fin mot de passe -->
+
+	      		<!-- confirmation mot de passe -->
+	          	<div class="row">
+		            <div class="input-field col s12">
+		              	<input id="passe2" type="password" class="validate" name="passe2">
+		              	<label for="passe2">Confirmer votre mot de passe</label>
+		            </div>
+	          	</div><!-- fin confirmation mot de passe -->
+
+        	</div><!-- Fin contenu card -->
+
+	          <!-- bouton s'inscrire -->
+	        <div class="card-action bouton-connection">  
+	            <input class="btn center-align" type="submit" value="S'inscrire" />
+	        </div>
+
+        </form><!-- Fin formulaire -->
+      </div><!-- Fin card -->
+		<?php
+		}
+
 		public function showJavaLinks() {
 		?>
 		<!--Import jQuery before materialize.js-->
