@@ -24,7 +24,7 @@
 
         <nav>
           <div class="nav-wrapper">
-            <a href="" class="brand-logo"><img src="../../img/logo.png" alt="logo du site"></a>
+            <a href="index.php" class="brand-logo"><img src="../../img/logo.png" alt="logo du site"></a>
             <img src="../../img/name.png" alt="Zenetude, titre du site">
             <div id="hamburger2" class="hamburglar is-closed">
 

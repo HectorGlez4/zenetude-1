@@ -4,7 +4,6 @@ include(dirname(__FILE__).'/InteractionBD.php');
 
 $students = getStudentsByTrainingGroup(1,1);
 
-
 //include(dirname(__FILE__).'/students.php');
 ?>
 

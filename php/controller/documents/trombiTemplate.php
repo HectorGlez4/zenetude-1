@@ -4,7 +4,7 @@ include(dirname(__FILE__).'/InteractionBD.php');
 
 $students = getStudentsByTrainingGroup(1,1);
 
-include(dirname(__FILE__).'\students.php');
+include(dirname(__FILE__).'/students.php');
 ?>
 
 <style type="text/css">
@@ -49,8 +49,8 @@ p{font-size: 10px;
                 </td>
 
             <?php
-            
-             } ?>
+                }
+            ?>
             </tr>
         </table>
     </div>

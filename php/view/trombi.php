@@ -1,12 +1,11 @@
 <!doctype html>
-<!--Modification Equipe 1!-->
 <html lang="fr">
     <head>
         <meta charset="utf-8">
         <title>Trombinoscope</title>
-        <link rel="stylesheet" href="../css/bootstrap.css">
-        <link rel="stylesheet" href="../css/index.css">
-        <link rel="stylesheet" href="../css/trombi.css">
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <link rel="stylesheet" href="../../css/index.css">
+        <link rel="stylesheet" href="../../css/trombi.css">
 
         <script src="script.js"></script>
     </head>
@@ -15,7 +14,7 @@
             <div class="nav row">
                 <div class='col-md-3 logo'>
                    <a href='./index-connecte.html'>
-                    <img src='../img/logo.jpg' alt='Logo'/>
+                    <img src='../../img/logo.jpg' alt='Logo'/>
                     </a>
                 </div>     
                 <div class='col-md-9 titre'>
@@ -95,16 +94,17 @@
                 </ul>
             </div>
             <div class='col-md-6 center-block trombi'>
-                <img src="../img/trombinoscope-LP-SIL.jpg" alt="Trombi"/>
+                <img src="../../img/trombinoscope-LP-SIL.jpg" alt="Trombi"/>
                 <p>
-                    <a href="#">Imprimer la feuille d'émargement</a>
+                    <a class="lienblock" href="../controller/documents/generateTrombi.php" target="_blank">Imprimer le trombinoscope</a>
+                    <a class="lienblock" href="../controller/documents/generateFeuille.php" target="_blank">Imprimer la feuille d'émargement</a>
                 </p>
             </div>
             <div class="col-md-4 aside">
 
                 <div class='row'>
                     <div class="col-md-4 profil">
-                        <img id='avatar' src='../img/avatar.png' alt="Avatar"/>
+                        <img id='avatar' src='../../img/avatar.png' alt="Avatar"/>
                     </div>
                     <div class="col-md-8 profil">
                         <ul>
@@ -133,7 +133,7 @@
                 <div class='row'>
                     <div class="col-md-12">
                         <div class="calendrier">
-                            <img src="../img/calendrier.jpg" alt='Calendrier'/>
+                            <img src="../../img/calendrier.jpg" alt='Calendrier'/>
                         </div>
                     </div>
                 </div>
