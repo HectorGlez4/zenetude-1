@@ -1,6 +1,38 @@
 <?php
 
 	class PageView {
+		public function showJavaLinks() {
+		?>
+		<!--Import jQuery before materialize.js-->
+		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="../../js/materialize.min.js"></script>
+		<script type="text/javascript" src="../../js/menu.js"></script>
+		<script src="../../js/underscore-min.js"></script>
+		<script src="../../js/moment-2.2.1.js"></script>
+		<script src="../../js/clndr.js"></script>
+		<script src="../../js/site.js"></script>
+		<script type="text/javascript" src="../../js/fonctions.js"></script>
+		<script type="text/javascript">
+
+		 $(function(){
+		   $(window).scroll(function () {//Au scroll dans la fenetre on déclenche la fonction
+		      if ($(this).scrollTop() > 200) { //si on a défilé de plus de 200px du haut vers le bas
+		      	document.getElementById('scroll-nav').style.top='0px';
+		      } else{
+		      	document.getElementById('scroll-nav').style.top='-200px';
+		      }
+		   });
+		 });
+
+		window.onload=ajuste;
+			function ajuste(){
+			document.getElementById('aside1').style.minHeight=document.getElementById('bloc1').offsetHeight+"px";
+			document.getElementById('aside2').style.minheight=document.getElementById('calendar').offsetHeight+"px";
+		}
+		</script>
+		<?php
+		}
+
 		public function showindexDescription($connect) {
 			if(!$connect) {
 			?>
@@ -76,6 +108,9 @@
 				<link type="text/css" rel="stylesheet" href="../../css/style.css"/>
 				<!--Import menu.css-->
 				<link type="text/css" rel="stylesheet" href="../../css/menu.css"/>
+				<!--Import profil.css-->
+				<link type="text/css" rel="stylesheet" href="../../css/profil.css"/>
+
 
 				<!-- CALENDAR -->
 			  	<link rel="stylesheet" href="../../css/clndr.css" type="text/css" />
@@ -91,7 +126,7 @@
 			if(!$connect) {?>
 			<nav>
 	 		 	<div class="nav-wrapper">
-				    <a href="" class="brand-logo"><img src="../../img/logo.png" alt="logo du site"></a>
+				    <a href="./index.php" class="brand-logo"><img src="../../img/logo.png" alt="logo du site"></a>
 				    <img src="../../img/name.png" alt="Zenetude, titre du site">
 		  		</div>
 			</nav>
@@ -101,7 +136,7 @@
 			?>
 			<nav>
 	 		 	<div class="nav-wrapper">
-				    <a href="" class="brand-logo"><img src="../../img/logo.png" alt="logo du site"></a>
+				    <a href="./index.php" class="brand-logo"><img src="../../img/logo.png" alt="logo du site"></a>
 				    <img src="../../img/name.png" alt="Zenetude, titre du site">
 				    <div id="hamburger2" class="hamburglar is-closed">
 
@@ -204,7 +239,6 @@
 				<ul>
 					<img src="../../img/avatar.png" alt="avatar.png" class="circle responsive-img"/><br/><?php echo $_SESSION['prenom']." ".$_SESSION['nom']?>
 					<li><a class="color" href="profil.php">Mon compte</a></li>
-					<li><a class="color" href="inscription.php">S'inscrire</a></li>
 					<li><a class="color" href="../model/deconnect.php">Déconnexion</a></li>
 				</ul>
 			</nav>

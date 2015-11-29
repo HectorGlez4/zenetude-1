@@ -52,36 +52,8 @@
 
  		<?php
 	     	$pageView->showFooter();
-     ?>
+	     	$pageView->showjavaLinks();
+     	?>
 
-
-		<!--Import jQuery before materialize.js-->
-		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-		<script type="text/javascript" src="../../js/materialize.min.js"></script>
-		<script type="text/javascript" src="../../js/menu.js"></script>
-		<script src="../../js/underscore-min.js"></script>
-		<script src="../../js/moment-2.2.1.js"></script>
-		<script src="../../js/clndr.js"></script>
-		<script src="../../js/site.js"></script>
-		<script type="text/javascript" src="../../js/fonctions.js"></script>
-		<script type="text/javascript">
-
-			 $(function(){
-			   $(window).scroll(function () {//Au scroll dans la fenetre on déclenche la fonction
-			      if ($(this).scrollTop() > 200) { //si on a défilé de plus de 200px du haut vers le bas
-			      	document.getElementById('scroll-nav').style.top='0px';
-			      } else{
-			      	document.getElementById('scroll-nav').style.top='-200px';
-			      }
-			   });
-			 });
-
-			window.onload=ajuste;
-				function ajuste(){
-				document.getElementById('aside1').style.minHeight=document.getElementById('bloc1').offsetHeight+"px";
-				document.getElementById('aside2').style.minheight=document.getElementById('calendar').offsetHeight+"px";
-			}
-
-		</script>
     </body>
   </html>
