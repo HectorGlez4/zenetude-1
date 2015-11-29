@@ -36,6 +36,10 @@ nav>.nav-wrapper>.hamburglar{
 	z-index: 30;
 }
 
+#page{
+	position: absolute;
+}
+
 #scroll-nav{
 	z-index: 20;
 	position: fixed;

@@ -38,7 +38,7 @@ ini_set('display_errors', 1);
     </head>
 
     <body>
-
+<div id="page">
 		<nav>
 		  <div class="nav-wrapper">
 		    <a href="" class="brand-logo"><img src="../../img/logo.png" alt="logo du site"></a>
@@ -214,10 +214,10 @@ ini_set('display_errors', 1);
     		</div>
 
     	</div>
-    </div>
     	<!-- FIN CONTAINER -->
 
     	<footer></footer>
+</div>
 
 
 		<!--Import jQuery before materialize.js-->
@@ -228,24 +228,5 @@ ini_set('display_errors', 1);
 	  <script src="../../js/moment-2.2.1.js"></script>
 	  <script src="../../js/clndr.js"></script>
 	  <script src="../../js/site.js"></script>
-		<script type="text/javascript">
-
-			 $(function(){
-			   $(window).scroll(function () {//Au scroll dans la fenetre on déclenche la fonction
-			      if ($(this).scrollTop() > 200) { //si on a défilé de plus de 200px du haut vers le bas
-			      	document.getElementById('scroll-nav').style.top='0px';
-			      } else{
-			      	document.getElementById('scroll-nav').style.top='-200px';
-			      }
-			   });
-			 });
-
-			window.onload=ajuste;
-				function ajuste(){
-				document.getElementById('aside1').style.minHeight=document.getElementById('bloc1').offsetHeight+"px";
-				document.getElementById('aside2').style.minheight=document.getElementById('calendar').offsetHeight+"px";
-			}
-
-		</script>
     </body>
   </html>
