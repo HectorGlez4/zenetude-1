@@ -91,7 +91,7 @@ nav>.nav-wrapper>.hamburglar{
 	background-color: #FFF !important;
 }
 
-.card-header{
+.card-header, .card-content{
 	padding: 30px;
 }
 
@@ -109,6 +109,11 @@ nav>.nav-wrapper>.hamburglar{
 }
 
 .card-header>h2{
+	color: #cfd1d5;
+	text-align: center;
+}
+
+.card-header>h3{
 	color: #cfd1d5;
 	text-align: center;
 }
