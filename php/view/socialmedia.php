@@ -142,7 +142,7 @@
 	if(isset($login_url) && !isset($_SESSION['data'])){
 	    // echo the login url
 	    //echo "<a href='$login_url'><button>Login with twitter </button></a>";
-	echo '<a href="'.$login_url.'"><img src="../../img/TwitterLogo.png" alt="Se connecter avec Twitter" width="30" height="30"></a>';
+	echo '<a id="twitterimg" href="'.$login_url.'"><img src="../../img/TwitterLogo.png" alt="Se connecter avec Twitter" width="20" height="20"></a>';
 	}
 	else{
 	    // get the data stored from the session

@@ -292,9 +292,11 @@
 			        <div class="card-action  center-align bouton-connection">
 				        <input class="btn connexion" type="submit" value="Se connecter" />
 			        </div>
-					<?php
-						include('socialmedia.php');
-					?>
+			        <div id="socialmedia">
+						<?php
+							include('socialmedia.php');
+						?>
+					</div>
 			        </form><!-- Fin formulaire -->
 			        <p class="connexion"><a href="inscription.php" class="left">S'inscrire</a><a href="recuperation.php" class="right">Mot de passe oublié</a></p>
 		      	</div>

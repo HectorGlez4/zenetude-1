@@ -15,7 +15,7 @@
         $result= $req->rowcount();
 
         // Redirection vers la page d'accueil
-        header('Location: ../index.html');
+        header('Location: index.php');
 */
 ?>
 
