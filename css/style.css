@@ -36,6 +36,14 @@ nav>.nav-wrapper>.hamburglar{
 	z-index: 30;
 }
 
+#socialmedia{
+	height: 20px;
+	width: 60px;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 5px;
+}
+
 #scroll-nav{
 	z-index: 20;
 	position: fixed;
@@ -135,7 +143,6 @@ nav>.nav-wrapper>.hamburglar{
 }
 
 .connexion>a{
-	margin-top: 15px;
 	color: #7BBA42;
 }
 
