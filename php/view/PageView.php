@@ -1,6 +1,42 @@
 <?php
 
 	class PageView {
+		public function showindexDescription($connect) {
+			if(!$connect) {
+			?>
+	      	<div class="col s12 m8">
+	        	<div class="card-panel teal" id="bloc1">
+	        		<div class="card-header"> <h2>Accueil</h2></div>
+	          		<p>I am a very simple card. I am good at containing small bits of information.
+	          		   I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.I am a very simple card. I am good at containing small bits of information.<br/><br/>
+
+	          		   I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.I am a very simple card. I am good at containing small bits of information.<br/><br/>
+
+	          		   I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.I am a very simple card. I am good at containing small bits of information.
+	          		</p>
+	        	</div>
+	      	</div>
+    
+			<?php
+			}
+			else {
+			?>
+	      	<div class="col s12 m12">
+	        	<div class="card-panel teal" id="bloc1">
+	        		<div class="card-header"> <h2>Accueil</h2></div>
+	          		<p>I am a very simple card. I am good at containing small bits of information.
+	          		   I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.I am a very simple card. I am good at containing small bits of information.<br/><br/>
+
+	          		   I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.I am a very simple card. I am good at containing small bits of information.<br/><br/>
+
+	          		   I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.I am a very simple card. I am good at containing small bits of information.
+	          		</p>
+	        	</div>
+	      	</div>
+			<?php
+			}
+		}
+
 		public function showFooter() {
 			?>
 			<footer></footer>
@@ -148,12 +184,6 @@
 			}
 			else {
 			?>
-			<div class="col s12 m4">
-		        <div class="card-panel teal" id="aside1">
-		        	<div class="card-header"> <h2><?php echo $_SESSION['prenom']." ".$_SESSION['nom']."\nGroupe ".$_SESSION['class']?></h2></div>
-		        	
-		      	</div>
-    		</div>
 			<?php
 			}
 		}

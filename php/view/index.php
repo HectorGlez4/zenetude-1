@@ -21,27 +21,13 @@
 
 		<div class="container">
         	<!-- Page Content goes here -->
-
-
         	<div class="row row1">
-		      <div class="col s12 m8">
-		        <div class="card-panel teal" id="bloc1">
-		        	<div class="card-header"> <h2>Accueil</h2></div>
-		          <p>I am a very simple card. I am good at containing small bits of information.
-		          I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.I am a very simple card. I am good at containing small bits of information.<br/><br/>
 
-		          I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.I am a very simple card. I am good at containing small bits of information.<br/><br/>
-
-		          I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.I am a very simple card. I am good at containing small bits of information.
-		          </p>
-		        </div>
-		      </div>
-		      <?php
+        	  <?php
+        	  	$pageController -> controlIndexDescription();
 		      	$pageController -> controlMenu();
 		      ?>
-    	</div>
-
-
+		    </div>
         	<div class="row">
 		      <div class="col s12 m8">
 		        <div class="card-panel teal" id="bloc2">

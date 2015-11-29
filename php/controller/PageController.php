@@ -1,5 +1,13 @@
 <?php
 	class PageController {
+		public function controlIndexDescription() {
+			$pageView = new PageView();
+			if(isset($_SESSION['nom']))
+				$pageView -> showIndexDescription(true);
+			else
+				$pageView -> showIndexDescription(false);
+		}
+
 		public function controlHeader() {
 			$pageView = new PageView();
 			if(isset($_SESSION['nom']))
