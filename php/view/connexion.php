@@ -5,7 +5,6 @@
  * Date: 23/11/2015
  * Time: 14:55
  */
-
 include_once( '../model/db.php');
 include_once('../controller/AccountController.php');
 include_once('../model/AccountModel.php');
@@ -17,7 +16,7 @@ $accountController->controlConnection();
 //require_once 'db.php';
 
 
-if (count($_POST) > 0){
+/*if (count($_POST) > 0){
     $pseudo = $_POST['pseudo'];
     $mdp = $_POST['pass'];
 
@@ -37,5 +36,5 @@ if (count($_POST) > 0){
 
     }
 
-}
+}*/
 

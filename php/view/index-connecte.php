@@ -1,7 +1,6 @@
 <?php
-	//echo 'lol';
 
-    //ini_set('display_errors', 1)
+
     session_start();
 	
 
@@ -19,7 +18,7 @@
     <title>Zenetude</title>
     <link rel="stylesheet" href="../../css/bootstrap.css">
     <link rel="stylesheet" href="../../css/index.css">
-    <script type="text/javascript" src="../../js/fonctions.js"></script>
+    
 
     <meta charset="utf-8">
 </head>
@@ -65,7 +64,7 @@
                         <?php if (isset($_SESSION)){ echo $_SESSION['nom']." ".$_SESSION['prenom']; }else{ echo "Prénom Nom"; } ?>
                     </li>
                     <li>
-                        Classe
+                        <?php if (isset($_SESSION)){ echo 'Groupe '. $_SESSION['class']; } ?>
                     </li>
                     <li class='deco'>
                         <form action="" method="post" id="deconnexion">

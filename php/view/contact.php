@@ -1,5 +1,5 @@
 <?php
-
+/*
 // public function Renseignement($idStudent)
         // Connection à la base de données
         $bdd = new PDO('mysql:host=localhost;dbname=zenetude', 'root', 'root');
@@ -15,23 +15,30 @@
         $result= $req->rowcount();
 
         // Redirection vers la page d'accueil
-        header('Location: ../index.html');
-
+        header('Location: index.php');
+*/
 ?>
 
+<?php
+    session_start();
+    if (isset($_GET['erreur'])){
+        echo "<script>alert('Erreur d\'authentification !');</script>";
+    }
+    include_once('./PageView.php');
+    include_once('../controller/PageController.php');
 
-
-<!doctype html>
-<html lang="fr">
-<head>
-    <title>Zenetude</title>
-    <link rel="stylesheet" href="../css/bootstrap.css">
-    <link rel="stylesheet" href="../css/index.css">
-    <link rel="stylesheet" href="../css/test.css">
-
-    <meta charset="utf-8">
-</head>
-<body>
+    $pageController = new PageController();
+    $pageView = new PageView();
+?>
+  <!DOCTYPE html>
+  <html>
+    <body>
+        
+        <?php
+            $pageView -> showMetas();
+            $pageController -> controlHeader();
+            $pageController -> controlScrollMenu();
+        ?>
 
 <div class="container-fluid">
 

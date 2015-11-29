@@ -1,23 +1,56 @@
 <?php
 	class AccountModel {
-		public  function getData($param) {
+		/**
+			* Get user's informations about an user.
+		**/
+		public  function getDataUser($param) {
             $db = connect();
-            $request = $db->prepare('SELECT :param FROM users WHERE user_instituteemail = :mail');
-            $request->execute(array('param' => $param, 'mail' => $_POST['mail']));
+            $request = $db->prepare('SELECT '.$param.' FROM User WHERE user_instituteemail = '.$mail.'');
+            $request->execute();
             $result = $request->fetchAll();
             return $result;
         }
 
-        public function getUserpassword() {
+		/**
+			* Get student's informations (a parameter) about an student selected by its id.
+		**/
+		public function getDataStudent($param, $userId) {
+			$db = connect();
+			$request = $db->prepare('SELECT '.$param.' FROM Student WHERE user_id = '.$userId.'');
+            $request->execute();
+            $result = $request->fetchAll();
+            return $result;
+		}
+
+		/**
+			* Get training manager's informations about an training manager selected by its id.
+		**/
+		public function getDataTrainingManager($param, $userId) {
+			$db = connect();
+			$request = $db->prepare('SELECT '.$param.' FROM training_manager WHERE user_id = '.$userId.'');
+            $request->execute();
+            $result = $request->fetchAll();
+            return $result;
+		}		
+
+		/**
+			* Get all informations of a user selected by its mail and its password. 
+			* This function is used for test connection for now if a password exits for a mail in the datebase.
+		**/
+        public function getUserPassword() {
             $db = connect();
-            $request = $db->prepare('SELECT * FROM users WHERE user_instituteemail = :mail AND user_password = :pass');
+            var_dump($db);
+            $request = $db->prepare('SELECT * FROM User WHERE user_instituteemail = :mail AND user_password = :pass');
             $request->execute(array('mail' => $_POST['mail'], 'pass' => $_POST['pass']));
             $result = $request->fetchAll();
             return $result;
         }
 
+		/**
+			* Generate a new password an update it in the database. Then, a mail is automaticaly send to the user.
+		**/
 		public function recoverPassword() {
-			$accountView = new AccountView();
+	    	$accountView = new AccountView();
 
             $string = "";
 			$chaine = "abcdefghijklmnpqrstuvwxy";
@@ -28,7 +61,7 @@
 
             $db = connect();
 
-            $request = $db->prepare('UPDATE users SET user_password = :password WHERE user_instituteemail = :mail');
+            $request = $db->prepare('UPDATE User SET user_password = :password WHERE user_instituteemail = :mail');
 			$request->execute(array('password' => sha1($string), 'mail' => $_POST['mail']));
 			$body = "
 				<h1>Réinitialisation du mot de passe</h1>
@@ -48,22 +81,25 @@
 		        $mailer->Port = 465;
 		        $mailer->IsHTML(true);
 			$mailer->charSet = "UTF-8"; 	
-		        $mailer->Username = "cedric.vigne11@gmail.com";
-		        $mailer->Password = "paxwwwww";
-		        $mailer->SetFrom("cedric.vigne11@gmail.com");
+		        $mailer->Username = "lpsilda2i@gmail.com";
+		        $mailer->Password = "Projet2015";
+		        $mailer->SetFrom("lpsilda2i@gmail.com");
 		        $mailer->AddAddress($_POST['mail'] ,utf8_encode(""));
 		        $mailer->Subject ="Subject: =?UTF-8?B?".base64_encode("Réinitialisation du mot de passe | Zenetude")."?=";
 		        $mailer->Body = $body;
 		        if(!$mailer->Send())
-                    $accountView->showEMessage(2);
+                    $accountView->showMessage(2);
 		        else
-                    $accountView->showEMessage(3);
+                    $accountView->showMessage(3);
 		}
 
+		/**
+			* Add a new user to the database.
+		**/
         public function addUser() {
             $db = connect();
 
-            $request = $db->prepare('INSERT INTO users (user_password, user_instituteemail) VALUES (:password, :mail)');
+            $request = $db->prepare('INSERT INTO User (user_password, user_instituteemail) VALUES (:password, :mail)');
             $request->execute(array('password' => $_POST['passe'], 'mail' => $_POST['mail']));
         }
 	}
