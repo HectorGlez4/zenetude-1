@@ -48,10 +48,6 @@ nav>.nav-wrapper>.hamburglar{
 	border-radius: 3px;
 }
 
-#twitterimg{
-	margin: 2px;
-}
-
 #scroll-nav{
 	z-index: 20;
 	position: fixed;
@@ -76,6 +72,10 @@ nav>.nav-wrapper>.hamburglar{
 	margin-left: 40%;
 	margin-top: 15px;
 	width: 200px;
+}
+
+#twitterimg{
+	margin: 2px;
 }
 
 .row{
