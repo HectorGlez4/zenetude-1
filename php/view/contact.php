@@ -55,16 +55,7 @@
     <div class='col-md-8 content'>
 
         <form id="inscription" action ="valider.php" method="post" onsubmit="">
-            <fieldset>
-                <legend><h2>Inscription</h2></legend>
-                <label for="email"> Adresse email <em>*</em></label>
-                <input id="email" type="email" name="email"  ><br>
-                <label for="passe">Mot de passe: <em>*</em> </label>
-                <input id ="passe" type="password"  name="passe"/><br/>
-                <label for="passe2">Confirmation du mot de passe: </label>
-                <input id="passe" type="password"  name="passe2"/><br/>
-                <input value="S'inscrire" type="submit">
-            </fieldset>
+           
         </form>
 
 
