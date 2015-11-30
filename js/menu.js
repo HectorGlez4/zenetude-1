@@ -14,6 +14,8 @@
       function ajuste(){
       document.getElementById('aside1').style.minHeight=document.getElementById('bloc1').offsetHeight+"px";
       document.getElementById('aside2').style.minheight=document.getElementById('calendar').offsetHeight+"px";
+      document.getElementById('bloc1').style.minHeight=document.getElementById('aside1').offsetHeight+"px";
+      document.getElementById('calendar').style.minheight=document.getElementById('aside2').offsetHeight+"px";
     }
 
     var trigger = $('#hamburger'),
