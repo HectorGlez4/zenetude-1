@@ -1,7 +1,7 @@
 <?php
     // get the HTML
     ob_start();
-    include(dirname(__FILE__).'/trombiTemplate.php');
+    include(dirname(__FILE__).'/prepareTrombi.php');
 
     $content = ob_get_clean();
 

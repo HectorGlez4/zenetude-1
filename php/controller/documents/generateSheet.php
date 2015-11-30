@@ -1,7 +1,7 @@
 <?php
     // get the HTML
     ob_start();
-    include(dirname(__FILE__).'/sheetTemplate.php');
+    include(dirname(__FILE__).'/prepareSheet.php');
 
     $content = ob_get_clean();
 

@@ -46,7 +46,7 @@
                             <a href="contact.php">Contacter un responsable de formation</a>
                         </li>
                         <li class="infos">
-                            <a class="right-align" href="trombi.php">Documents pédagogiques</a>
+                            <a class="right-align" href="documents.php">Documents pédagogiques</a>
                         </li>
                     </ul>
                     <p>
