@@ -1,10 +1,10 @@
 <?php   
-/*
-include(dirname(__FILE__).'/InteractionBD.php');
+
+include(dirname(__FILE__).'/../../model/DocumentsModel.php');
 
 $students = getStudentsByTrainingGroup(1,1);
-*/
-include(dirname(__FILE__).'/students.php');
+
+//include(dirname(__FILE__).'/students.php');
 ?>
 
 <style type="text/css">

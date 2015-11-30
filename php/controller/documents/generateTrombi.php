@@ -6,7 +6,7 @@
     $content = ob_get_clean();
 
     // convert to PDF
-    require_once('./html2pdf.class.php');
+    require_once('../../../vendor/html2pdf/html2pdf.class.php');
     try
     {
         $html2pdf = new HTML2PDF('P', 'A4', 'fr');
