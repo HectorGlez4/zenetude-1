@@ -5,13 +5,17 @@
     }
     include_once('./PageView.php');
     include_once('../controller/PageController.php');
+    include_once('../model/db.php');
 
     $pageController = new PageController();
     $pageView = new PageView();
+    $db = connect();
+
 ?>
   <!DOCTYPE html>
   <html>
     <body>
+    
         
         <?php
             $pageView -> showHead();
@@ -23,6 +27,15 @@
         <div class="container">
 
             <div class="row">
+                <div class="col s12 m8">
+                    <div class="card-panel teal" id="bloc2">
+                        <div class="card-title"> <h3>Profil</h3></div>
+                        <?php
+                            $pageView -> showInformations($db);
+                        ?>
+                        <p></p>
+                    </div>
+                </div>
               <?php
                 $pageController->controlProfilForm();
                 $pageView->showCalendar();

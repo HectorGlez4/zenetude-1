@@ -373,6 +373,7 @@
 		}
 
 
+
 		/**
 			* Show the dynamic menu bar. 
 		**/
@@ -433,5 +434,57 @@
 			</nav>
 			<?php
 			}
+		}
+
+		public function showInformations($db){
+			if (isset($_SESSION['id'])) {
+				$request = $db->prepare('SELECT * FROM User WHERE user_id = '.$_SESSION['id']);
+        		$request->execute();
+        		$result = $request->fetch();
+
+				$request = $db->prepare('SELECT * FROM Student WHERE user_id = '.$_SESSION['id']);
+		        $request->execute();
+		        $result2 = $request->fetch();
+
+		        $request = $db->prepare('SELECT description FROM Training WHERE training_id IN (SELECT training_id FROM Student WHERE user_id = '.$_SESSION['id'].')');
+		        $request->execute();
+		        $result3 = $request->fetch();
+	    	}
+
+	    	echo '<div class="card-header"><h2>'.$result[3].' '.$result[4].'</h2></div><ul>';
+
+	    	if(isset($result[2])) {
+	       		echo '<li class="infos">Email académique : '.$result[2].'</li>';}
+            if(isset($result2[4])) {
+            	echo '<li class="infos">Email personnel : '.$result2[4].'</li>';}
+            if(isset($result[6])) {
+            	echo '<li class="infos">Type : '.$result[6].'</li>';}
+            if(isset($result2[5])) {
+            	echo '<li class="infos">Téléphone fixe : 0'.$result2[5].'</li>';}
+            if(isset($result2[6])) {
+            echo '<li class="infos">Téléphone mobile : 0'.$result2[6].'</li>';}
+            if(isset($result[5])) {
+            	echo '<li class="infos">Civilité : '.$result[5].'</li>';}
+            if(isset($result3[0])) {
+            	echo '<li class="infos">Formation actuelle : '.$result3[0].'</li>';}
+            if(isset($result2[2])) {
+            	echo '<li class="infos">Groupe : '.$result2[2].'</li>';}
+            if(isset($result2[13])) {
+            	echo '<li class="infos">Date de naissance : '.$result2[13].'</li>';}
+            if(isset($result2[14])) {
+            	echo '<li class="infos">Lieu de naissance : '.$result2[14].'</li>';}
+            if(isset($result2[15])) {
+            	echo '<li class="infos">Région de naissance : '.$result2[15].'</li>';}
+            if(isset($result2[16])) {
+            	echo '<li class="infos">Pays de naissance : '.$result2[16].'</li>';}
+            if(isset($result2[20])) {
+            	echo '<li class="infos">Formation précédente : '.$result2[20].'</li>';}
+            if(isset($result2[7])) {
+            	echo '<li class="infos">Adresse : '.$result2[7].' '.$result2[8].'</li>';}
+
+
+            if ($result[6]=='E') {
+                        echo '<li class="infos"><a class="right-align" href="gestion.php">Gérer mon compte</a></li>';}
+            echo "</u>";
 		}
 	}

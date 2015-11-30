@@ -3,6 +3,11 @@
 	if(session_id() == '')
 		session_start();
 
+if ((isset($_GET['error'])) || (isset($_GET['denied']))){
+    header('Location: index.php?refus=true');
+}
+	
+
 			               
 		       //_______________________________________BEGIN FACEBOOK_______________________________________________             
 				    
@@ -65,7 +70,7 @@
 				$graph = $response->getGraphObject(GraphUser::className());
 				// use graph object methods to get user details
 				$_SESSION['nom'] = $graph->getName();
-				header('Location: index-connecte.php');
+				header('Location: index.php');
 			}else{
 				//else echo login
 				//echo '<a href='.$helper->getLoginUrl().'>Login with facebook</a>';
@@ -156,7 +161,7 @@
 	    //echo "Photo : <img src='".$data->profile_image_url."'/><br><br>";
 	    // echo the logout button
 	    //echo "<a href='?logout=true'><button>Logout</button></a>";
-	    header("Location: index-connecte.php?nom=$lol");
+	    header("Location: index.php");
 	}
 
 
@@ -247,7 +252,7 @@ $form = '<a href="'.$authUrl.'"><img src="../../img/googleLogo.png" alt="Se conn
 		   if (isset($_SESSION['isConnectGoogle'])){
 		        //echo "<a href='?logout=true'>Se déconnecter</a>";
 		
-			header('Location: index-connecte.php');
+			header('Location: index.php');
 		    }
 
 
