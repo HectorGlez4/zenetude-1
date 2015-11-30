@@ -1,58 +1,56 @@
 <?php
 
 	class PageView {
-
-
 		/**
 			* Show the inscription's form.
 		**/
 		public function showInscriptionForm() {
 		?>
-		<!-- Debut card -->
-      	<div class="card-panel inscription col m4 push-m4 s12 center-align">
-        <!-- Formulaire -->
-        <form class="col formulaire s10 push-s1" action="valider.php" method="POST" onsubmit="">
+			<!-- Debut card -->
+	      	<div class="card-panel inscription col m4 push-m4 s12 center-align">
+	        <!-- Formulaire -->
+		        <form class="col formulaire s10 push-s1" action="valider.php" method="POST" onsubmit="">
 
-          	<!-- Titre de la carte -->
-          	<div class="card-header"> <h2>Inscription</h2></div>
-          	<!-- Fin titre -->
+		          	<!-- Titre de la carte -->
+		          	<div class="card-header"> <h2>Inscription</h2></div>
+		          	<!-- Fin titre -->
 
-	          <!-- Contenu card -->
-          	<div class="card-content">
+			          <!-- Contenu card -->
+		          	<div class="card-content">
 
-		          <!-- email -->
-	          	<div class="row">
-	       	 		<div class="input-field col s12">
-	              		<input id="email" type="email" class="validate" name="mail">
-	             	 	<label for="email">Adresse email <em>*</em></label>
-	            	</div>
-	          	</div><!-- fin email -->
+				          <!-- email -->
+			          	<div class="row">
+			       	 		<div class="input-field col s12">
+			              		<input id="email" type="email" class="validate" name="mail">
+			             	 	<label for="email">Adresse email <em>*</em></label>
+			            	</div>
+			          	</div><!-- fin email -->
 
-		          <!-- mot de passe -->
-	          	<div class="row">
-		            <div class="input-field col s12">
-		              	<input id="passe" type="password" class="validate" name="passe">
-		             	<label for="passe">Mot de passe <em>*</em></label>
-		            </div>
-	          	</div><!-- fin mot de passe -->
+				          <!-- mot de passe -->
+			          	<div class="row">
+				            <div class="input-field col s12">
+				              	<input id="passe" type="password" class="validate" name="passe">
+				             	<label for="passe">Mot de passe <em>*</em></label>
+				            </div>
+			          	</div><!-- fin mot de passe -->
 
-	      		<!-- confirmation mot de passe -->
-	          	<div class="row">
-		            <div class="input-field col s12">
-		              	<input id="passe2" type="password" class="validate" name="passe2">
-		              	<label for="passe2">Confirmer votre mot de passe</label>
-		            </div>
-	          	</div><!-- fin confirmation mot de passe -->
+			      		<!-- confirmation mot de passe -->
+			          	<div class="row">
+				            <div class="input-field col s12">
+				              	<input id="passe2" type="password" class="validate" name="passe2">
+				              	<label for="passe2">Confirmer votre mot de passe</label>
+				            </div>
+			          	</div><!-- fin confirmation mot de passe -->
 
-        	</div><!-- Fin contenu card -->
+		        	</div><!-- Fin contenu card -->
 
-	          <!-- bouton s'inscrire -->
-	        <div class="card-action bouton-connection">  
-	            <input class="btn center-align" type="submit" value="S'inscrire" />
-	        </div>
+			          <!-- bouton s'inscrire -->
+			        <div class="card-action bouton-connection">  
+			            <input class="btn center-align" type="submit" value="S'inscrire" />
+			        </div>
 
-        </form><!-- Fin formulaire -->
-      </div><!-- Fin card -->
+		        </form><!-- Fin formulaire -->
+	      	</div><!-- Fin card -->
 		<?php
 		}
 
@@ -416,3 +414,167 @@
 				}
 			}
 	}
+				/*<nav id="scroll-nav">
+			  		<div class="nav-wrapper">
+			    		<a href="" class="brand-logo"><img src="../../img/logo.png" alt="logo du site"></a>
+			    		<img src="../../img/name.png" alt="Zenetude, titre du site">
+			 	 	</div>
+				</nav>
+				<?php
+					}
+					else {
+					?>
+					<nav id="menu" class="center-align">
+						<ul>
+							<img src="../../img/avatar.png" alt="avatar.png" class="circle responsive-img"/><br/><?php echo $_SESSION['prenom']." ".$_SESSION['nom'].'<br />'; if($rf) {echo 'Responsable de formation <br />';}else {echo 'Groupe '.$_SESSION['class'].'<br />';}?>
+							<li><a class="color" href="profil.php">Mon compte</a></li>
+							<li><a class="color" href="../model/deconnect.php">Déconnexion</a></li>
+						</ul>
+					</nav>
+					<nav id="scroll-nav">
+				  		<div class="nav-wrapper">
+				    		<a href="" class="brand-logo"><img src="../../img/logo.png" alt="logo du site"></a>
+				    		<img src="../../img/name.png" alt="Zenetude, titre du site">
+				    		<div id="hamburger" class="hamburglar is-closed">
+				    			<div class="burger-icon">
+							      <div class="burger-container">
+							        <span class="burger-bun-top"></span>
+							        <span class="burger-filling"></span>
+							        <span class="burger-bun-bot"></span>
+							      </div>
+							    </div>
+						    	<!-- svg ring containter -->
+						    	<div class="burger-ring">
+						      		<svg class="svg-ring">
+							      		<path class="path" fill="none" stroke="#7BBA42" stroke-miterlimit="10" stroke-width="4" d="M 34 2 C 16.3 2 2 16.3 2 34 s 14.3 32 32 32 s 32 -14.3 32 -32 S 51.7 2 34 2" />
+						      		</svg>
+					    		</div>
+					    		<!-- the masked path that animates the fill to the ring -->
+						 		<svg width="0" height="0">
+							       	<mask id="mask">
+							   			<path xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#ff0000" stroke-miterlimit="10" stroke-width="4" d="M 34 2 c 11.6 0 21.8 6.2 27.4 15.5 c 2.9 4.8 5 16.5 -9.4 16.5 h -4" />
+						      	 	</mask>
+							    </svg>
+							    <div class="path-burger">
+							      	<div class="animate-path">
+							        	<div class="path-rotation"></div>
+							      	</div>
+							    </div>
+					  		</div>
+				 	 	</div>
+					</nav>
+				<?php
+					}
+				}
+
+		public function showInformations($db){
+			if (isset($_SESSION['id'])) {
+				$request = $db->prepare('SELECT * FROM User WHERE user_id = '.$_SESSION['id']);
+        		$request->execute();
+        		$result = $request->fetch();
+
+				$request = $db->prepare('SELECT * FROM Student WHERE user_id = '.$_SESSION['id']);
+		        $request->execute();
+		        $result2 = $request->fetch();
+
+		        $request = $db->prepare('SELECT description FROM Training WHERE training_id IN (SELECT training_id FROM Student WHERE user_id = '.$_SESSION['id'].')');
+		        $request->execute();
+		        $result3 = $request->fetch();
+	    	}
+
+	    	echo '<div class="card-header"><h2>'.utf8_encode($result[3]).' '.utf8_encode($result[4]).'</h2></div><ul>';
+
+	    	if(isset($result[2])) {
+	       		echo '<li class="infos">Email académique : '.$result[2].'</li>';}
+            if(isset($result2[4])) {
+            	echo '<li class="infos">Email personnel : '.$result2[4].'</li>';}
+            if(isset($result[6])) {
+            	echo '<li class="infos">Type : '.$result[6].'</li>';}
+            if($result2[5] !== '0') {
+            	echo '<li class="infos">Téléphone fixe : 0'.$result2[5].'</li>';}
+            if(isset($result2[6])) {
+            	echo '<li class="infos">Téléphone mobile : 0'.$result2[6].'</li>';}
+            if(isset($result[5])) {
+            	echo '<li class="infos">Civilité : '.$result[5].'</li>';}
+            if(isset($result3[0])) {
+            	echo '<li class="infos">Formation actuelle : '.utf8_encode($result3[0]).'</li>';}
+            if($result2[2] !== '0') {
+            	echo '<li class="infos">Groupe : '.$result2[2].'</li>';}
+            if($result2[13] !== '0000-00-00') {
+            	echo '<li class="infos">Date de naissance : '.$result2[13].'</li>';}
+            if(isset($result2[14])) {
+            	echo '<li class="infos">Lieu de naissance : '.utf8_encode($result2[14]).'</li>';}
+            if(isset($result2[15])) {
+            	echo '<li class="infos">Région de naissance : '.utf8_encode($result2[15]).'</li>';}
+            if(isset($result2[16])) {
+            	echo '<li class="infos">Pays de naissance : '.utf8_encode($result2[16]).'</li>';}
+            if(isset($result2[20])) {
+            	echo '<li class="infos">Formation précédente : '.utf8_encode($result2[20]).'</li>';}
+            if(isset($result2[7])) {
+            	echo '<li class="infos">Adresse : '.utf8_encode($result2[7]).' '.utf8_encode($result2[8]).'</li>';}
+            if($result2[9] !== '0') {
+            	echo '<li class="infos">Code postal : '.$result2[9].'</li>';}
+            if ($result[6] == 'RF'){
+            	echo '<a class="right-align" href="trombi.php">Documents pédagogiques</a>';}
+            if ($result[6]== 'Etudiant') {
+    			echo '<li class="infos"><a href="contact.php">Contacter un responsable de formation</a></li>';
+                echo '<li class="infos"><a class="right-align" href="gestion.php">Gérer mon compte</a></li>';}
+            echo "</u>";
+		}
+
+		/*public function showAdministration($db){
+			if (isset($_SESSION['id'])) {
+				?>
+				<form name="form" method="POST">
+					<?php
+						$register = mysql_query("SELECT id, user_name FROM user");
+						echo "<label>Nombre d\inscrit : " . mysql_num_rows($register) . "<\br>";
+						if(mysql_num_rows($member) > 0){
+							echo "<label for='register'>Sélection du membre : </label>     
+								  <select name='register' onchange='javascript:submit(this)''>     
+								  <option value='Sélectionner un register'>Sélectionner un membre</option>';";
+
+							while ($list = mysql_fetch_array($register)) {
+								echo '<option value="'.$liste['id'].'" ';
+            					if(isset($_POST["register"]) && $_POST["register"]==$liste['id']){
+            						echo "selected='selected'";
+            					}
+           						echo '>'.$list['pseudo'].'</option>';
+           					}
+        					echo '</select><br/>';
+						}
+						if(isset($_POST["register"]) && $_POST["register"]!='Sélectionner un membre'){
+					        //on sélectionne tout les membres
+					        $selection = mysql_query("SELECT * FROM LOGIN WHERE id='".mysql_real_escape_string($_POST["membre"])."'");
+					        while($resultat = mysql_fetch_array($selection)){
+					            //on stock tout dans des variables
+					            $id_register = $resultat['id'];
+					            $pseudo_register = $resultat['user_name'];
+					            $email_register = $resultat['user_institueemail'];
+					            $status_register = $resultat['user_type'];
+					        }
+					        ?>
+					        <label for="pseudo">Pseudo : </label>
+					        <input type="text" name="pseudo" maxlength="20" value="<?php echo htmlspecialchars($pseudo_register);?>" /><br/>
+					 
+					        <label for="email">Email : </label>
+					        <input type="text" name="email" maxlength="50" value="<?php echo htmlspecialchars($email_register);?>" /><br/>
+					 
+					        <label for="statut">Statut : </label> 
+					        <select name="statut">
+						        <option value="Etudiant" <?php if(strcmp($statut_membre, "Etudiant") == true) echo "selected='selected'";?>>Etudiant</option>
+						        <option value="RF" <?php if(strcmp($statut_membre, "RF") == true) echo "selected='selected'";?>>Responsable de Formation</option>
+					        </select><br/>
+					 
+					        <label for="action">Action : </label>
+					        <input type="submit" name="Envoyer" value="Envoyer" />
+					        <input name="Effacer" value="Effacer" type="reset" />   
+					        </form>
+					        <br/>
+					        <!--ToDo suppression de membre -->
+					    }
+				</form>
+    		}
+    	} */
+    }
+

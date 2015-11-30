@@ -30,39 +30,40 @@
     $pageController = new PageController();
     $pageView = new PageView();
 ?>
-  <!DOCTYPE html>
-  <html>
+<!DOCTYPE html>
+<html>
     <body>
         
         <?php
-            $pageView -> showMetas();
+            $pageView -> showHead();
             $pageController -> controlHeader();
-            $pageController -> controlScrollMenu();
+            //$pageController -> showScrollMenu();
         ?>
 
-        <!-- CONTAINER -->
         <div class="container-fluid">
 
+            <div class="nav row">
+                <!-- <div class='col-md-3 logo'>
+                    <a href='../index.html'>
+                        <img src='../../img/logo.jpg' alt='Logo'/>
+                    </a>
+                </div> -->
+                <!-- <div class='col-md-9 titre'>
+                    <h1>Bannière ZENETUDE</h1>
+                </div> -->
+            </div>
+            <div class='col-md-8 content'>
+                <form id="contact" action ="" method="post" onsubmit="">
 
+                </form>
+            </div>
+            <div id="footer">
+                <p>
+                    ZENETUDE - Projet réalisé par les étudiants de LP SIL DA2I 2015/2016
+                </p>
 
-            <div class="row">
-                <?php
-               
-                ?>
             </div>
 
-
         </div>
-
-
-
-    <!-- FIN CONTAINER -->
-    <!--<div class="footer">
-        <p> ZENETUDE - Projet réalisé par les étudiants de LP SIL DA2I 2015/2016 </p>
-    </div> -->
-    <?php
-    $pageView->showFooter();
-    $pageView->showjavaLinks();
-    ?>
-</body>
+    </body>
 </html>
