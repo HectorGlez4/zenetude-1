@@ -396,17 +396,17 @@
             	echo '<li class="infos">Email personnel : '.$result2[4].'</li>';}
             if(isset($result[6])) {
             	echo '<li class="infos">Type : '.$result[6].'</li>';}
-            if($result2[5] !== '0') {
+            if(isset($result2[5])) {
             	echo '<li class="infos">Téléphone fixe : 0'.$result2[5].'</li>';}
-            if($result2[6] !== '0') {
+            if(isset($result2[6])) {
             echo '<li class="infos">Téléphone mobile : 0'.$result2[6].'</li>';}
             if(isset($result[5])) {
             	echo '<li class="infos">Civilité : '.$result[5].'</li>';}
             if(isset($result3[0])) {
             	echo '<li class="infos">Formation actuelle : '.utf8_encode($result3[0]).'</li>';}
-            if($result2[2] !== '0') {
+            if(isset($result2[2])) {
             	echo '<li class="infos">Groupe : '.$result2[2].'</li>';}
-            if($result2[13] !== '0000-00-00') {
+            if(isset($result2[13])) {
             	echo '<li class="infos">Date de naissance : '.$result2[13].'</li>';}
             if(isset($result2[14])) {
             	echo '<li class="infos">Lieu de naissance : '.utf8_encode($result2[14]).'</li>';}
@@ -418,7 +418,7 @@
             	echo '<li class="infos">Formation précédente : '.utf8_encode($result2[20]).'</li>';}
             if(isset($result2[7])) {
             	echo '<li class="infos">Adresse : '.utf8_encode($result2[7]).' '.utf8_encode($result2[8]).'</li>';}
-            if($result2[9] !== '0') {
+            if(isset($result2[9])) {
             	echo '<li class="infos">Code postal : '.$result2[9].'</li>';}
 
 
