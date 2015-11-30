@@ -382,7 +382,7 @@
 		        $result3 = $request->fetch();
 	    	}
 
-	    	echo '<div class="card-header"><h2>'.$result[3].' '.$result[4].'</h2></div><ul>';
+	    	echo '<div class="card-header"><h2>'.utf8_encode($result[3]).' '.utf8_encode($result[4]).'</h2></div><ul>';
 
 	    	if(isset($result[2])) {
 	       		echo '<li class="infos">Email académique : '.$result[2].'</li>';}
@@ -390,33 +390,35 @@
             	echo '<li class="infos">Email personnel : '.$result2[4].'</li>';}
             if(isset($result[6])) {
             	echo '<li class="infos">Type : '.$result[6].'</li>';}
-            if(isset($result2[5])) {
+            if($result2[5] !== '0') {
             	echo '<li class="infos">Téléphone fixe : 0'.$result2[5].'</li>';}
             if(isset($result2[6])) {
             	echo '<li class="infos">Téléphone mobile : 0'.$result2[6].'</li>';}
             if(isset($result[5])) {
             	echo '<li class="infos">Civilité : '.$result[5].'</li>';}
             if(isset($result3[0])) {
-            	echo '<li class="infos">Formation actuelle : '.$result3[0].'</li>';}
-            if(isset($result2[2])) {
+            	echo '<li class="infos">Formation actuelle : '.utf8_encode($result3[0]).'</li>';}
+            if($result2[2] !== '0') {
             	echo '<li class="infos">Groupe : '.$result2[2].'</li>';}
-            if(isset($result2[13])) {
+            if($result2[13] !== '0000-00-00') {
             	echo '<li class="infos">Date de naissance : '.$result2[13].'</li>';}
             if(isset($result2[14])) {
-            	echo '<li class="infos">Lieu de naissance : '.$result2[14].'</li>';}
+            	echo '<li class="infos">Lieu de naissance : '.utf8_encode($result2[14]).'</li>';}
             if(isset($result2[15])) {
-            	echo '<li class="infos">Région de naissance : '.$result2[15].'</li>';}
+            	echo '<li class="infos">Région de naissance : '.utf8_encode($result2[15]).'</li>';}
             if(isset($result2[16])) {
-            	echo '<li class="infos">Pays de naissance : '.$result2[16].'</li>';}
+            	echo '<li class="infos">Pays de naissance : '.utf8_encode($result2[16]).'</li>';}
             if(isset($result2[20])) {
-            	echo '<li class="infos">Formation précédente : '.$result2[20].'</li>';}
+            	echo '<li class="infos">Formation précédente : '.utf8_encode($result2[20]).'</li>';}
             if(isset($result2[7])) {
-            	echo '<li class="infos">Adresse : '.$result2[7].' '.$result2[8].'</li>';}
-
-
-            if ($result[6]=='E') {
-                echo '<li class="infos"><a class="right-align" href="gestion.php">Gérer mon compte</a></li>';
-            }
+            	echo '<li class="infos">Adresse : '.utf8_encode($result2[7]).' '.utf8_encode($result2[8]).'</li>';}
+            if($result2[9] !== '0') {
+            	echo '<li class="infos">Code postal : '.$result2[9].'</li>';}
+            if ($result[6] == 'RF'){
+            	echo '<a class="right-align" href="trombi.php">Documents pédagogiques</a>';}
+            if ($result[6]== 'Etudiant') {
+    			echo '<li class="infos"><a href="contact.php">Contacter un responsable de formation</a></li>';
+                echo '<li class="infos"><a class="right-align" href="gestion.php">Gérer mon compte</a></li>';}
             echo "</u>";
 		}
 
