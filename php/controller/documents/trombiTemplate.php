@@ -29,7 +29,7 @@ p{font-size: 10px;
         <h2>"Nom de Formation" 2015-2016</h2>
         <h3>Département "Nom Département"</h3>
         <br><hr><br>
-        "Nombres d'éléves"
+        "Nombres d'élèves"
         <table cellspacing="0" style="width: 100%; border: solid 1px black; text-align: center; ">
             <tr style='height:3cm;width:100%;'>
             <?php

@@ -142,8 +142,8 @@
             
             <div class="col m8 s12">
                 <img src="../../img/trombinoscope-LP-SIL.jpg" alt="Trombi"/>
-                <p><a href="#">Imprimer la feuille d'émargement</a></p>
-                <p><a href="trombi.php">Documents pédagogiques</a></p>
+                <p><a href="../controller/documents/generateTrombi.php" target="_blank">Imprimer le trombinoscope</a></p>
+                <p><a href="../controller/documents/generateSheet.php" target="_blank">Imprimer la feuille d'émargement</a></p>
             </div>
             
         </div>
