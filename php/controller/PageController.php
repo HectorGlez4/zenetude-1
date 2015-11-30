@@ -2,8 +2,13 @@
 	class PageController {
 
 
-		public function controlProfilForm() {
-			
+		public function controlProfilInformations() {
+			$pageView = new PageView();
+			if(isset($_SESSION['infoUser']) && $_SESSION['infoUser'][0]['user_type'] == 'RF')
+				$pageView -> showProfilInformations($_SESSION, true);
+			else
+				$pageView -> showProfilInformations($_SESSION, false);
+
 		}
 
 
@@ -12,7 +17,7 @@
 		**/
 		public function controlIndexDescription() {
 			$pageView = new PageView();
-			if(isset($_SESSION['nom']))
+			if(isset($_SESSION['infoUser']))
 				$pageView -> showIndexDescription(true);
 			else
 				$pageView -> showIndexDescription(false);
@@ -24,7 +29,7 @@
 		**/
 		public function controlHeader() {
 			$pageView = new PageView();
-			if(isset($_SESSION['nom']))
+			if(isset($_SESSION['infoUser']))
 				$pageView -> showHeader(true);
 			else
 				$pageView -> showHeader(false);
@@ -36,11 +41,10 @@
 		**/
 		public function controlMenu() {
 			$pageView = new PageView();
-			if(isset($_SESSION['nom'])) {
-				$_SESSION['nom'] = htmlspecialchars($_SESSION['nom']);
-				$_SESSION['prenom'] = htmlspecialchars($_SESSION['prenom']);
+			if(isset($_SESSION['infoUser'])) {
+				$_SESSION['nom'] = htmlspecialchars($_SESSION['infoUser'][0]['user_name']);
+				$_SESSION['prenom'] = htmlspecialchars($_SESSION['infoUser'][0]['user_firstname']);
 				if(isset ($_SESSION['class']))
-					$_SESSION['class'] = htmlspecialchars($_SESSION['class']);
 				$pageView -> showMenu(true);
 			}
 				
@@ -54,17 +58,16 @@
 		**/
 		public function controlDynamicMenu() {
 			$pageView = new PageView();
-			if(isset($_SESSION['nom'])) {
-				$_SESSION['nom'] = htmlspecialchars($_SESSION['nom']);
-				$_SESSION['prenom'] = htmlspecialchars($_SESSION['prenom']);
-				if(isset($_SESSION['class']) && !empty($_SESSION['class'])) {
-					$_SESSION['class'] = htmlspecialchars($_SESSION['class']);
-					$pageView -> showScrollMenu(true, false);
+			if(isset($_SESSION['infoUser'])) {
+				$_SESSION['nom'] = htmlspecialchars($_SESSION['infoUser'][0]['user_name']);
+				$_SESSION['prenom'] = htmlspecialchars($_SESSION['infoUser'][0]['user_firstname']);
+				if($_SESSION['infoUser'][0]['user_type'] == 'RF') {
+					$pageView -> showScrollMenu(true, $_SESSION, true);
 				}
 				else 
-					$pageView -> showScrollMenu(true, true);
+					$pageView -> showScrollMenu(true, $_SESSION, false);
 			}	
 			else 
-				$pageView -> showScrollMenu(false);
+				$pageView -> showScrollMenu(false, $_SESSION);
 		}
 	}
