@@ -1,27 +1,12 @@
 <?php   
 
-include(dirname(__FILE__).'/InteractionBD.php');
+include(dirname(__FILE__).'../model/DocumentsModel.php');
 
 $students = getStudentsByTrainingGroup(1,1);
 
 //include(dirname(__FILE__).'/students.php');
 ?>
 
-<style type="text/css">
-<!--
-td    { vertical-align: bottom; 
-		border:1px solid;
-		height: 25;
-	}
-table {font-size: 16px;}
-h3
-h2{margin:0 auto;}
-p{font-size: 10px;  
-    margin-top: 5px;}
-
-}
--->
-</style>
 <page backcolor="#FEFEFE" backimg="./res/bas_page.png" backimgx="center" backimgy="bottom" backimgw="100%" backtop="0" backbottom="30mm" footer="date;heure;page" >
     <div style="width:100%;margin:0 auto;">
         <bookmark title="Lettre" level="0" ></bookmark>
@@ -43,7 +28,7 @@ p{font-size: 10px;
                     }
             ?>
                 <td style="width: 16%;height:3cm;">
-                    <img src="../../../../img/avatar/<?php echo $students[$iX]["student_avatar"] ?>" alt="trombi"  style="height:140px;">
+                    <img src="../../../img/avatar/<?php echo (isset($students[$iX]["student_avatar"])) ? $students[$iX]["student_avatar"] : "avatar.png" ?>" alt="trombi"  style="height:140px;">
                     <p ><?php echo $students[$iX]["user_name"] . "<br/>" .
                      $students[$iX ]["user_firstname"]?></p>
                 </td>
