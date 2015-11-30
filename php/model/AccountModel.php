@@ -1,5 +1,11 @@
 <?php
 	class AccountModel {
+		public function isStudent() {
+			db = connect();
+            $request = $db->prepare('SELECT * FROM Student WHERE user_id = :userId');
+            $request->execute(array('userId'=>$_POST['id']));
+		}
+
 		/**
 			* Get user's informations about an user.
 		**/

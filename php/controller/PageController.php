@@ -2,6 +2,11 @@
 	class PageController {
 
 
+		public function controlProfilForm() {
+			
+		}
+
+
 		/**
 			* Test if a session exists before show the index's description. 
 		**/

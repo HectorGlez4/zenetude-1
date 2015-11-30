@@ -1,31 +1,25 @@
-<!doctype html>
-<html lang="fr">
-<head>
-    <title>Zenetude</title>
-    <link rel="stylesheet" href="../../css/materialize.css">
-    <link rel="stylesheet" href="../../css/index.css">
-    <link rel="stylesheet" href="../../css/style.css">
-    <meta charset="utf-8">
-</head>
-<body>
+<?php
+    session_start();
+    if (isset($_GET['erreur'])){
+        echo "<script>alert('Erreur d\'authentification !');</script>";
+    }
+    include_once('./PageView.php');
+    include_once('../controller/PageController.php');
+
+    $pageController = new PageController();
+    $pageView = new PageView();
+?>
+  <!DOCTYPE html>
+  <html>
+    <body>
+        
+        <?php
+            $pageView -> showHead();
+            $pageController -> controlHeader();
+            $pageController -> controlDynamicMenu();
+        ?>
     <!-- CONTAINER -->
     <div class="container-fluid">
-
-    <!--<div id="content">
-         <h2>Inscription</h2>
-        <div class='renseignements'>
-            <form action ="valider.php" method="post">
-                <label>Adresse e-mail: <input type="text" id ="email" name="EMAIL"/></label><br/>
-                <label>Mot de passe: <input type="password" id ="passe" name="PASSE"/></label><br/>
-                <label>Confirmation du mot de passe: <input type="password" id="passe" name="PASSE2"/></label><br/>
-                <input type="submit" value="M'inscrire"/>
-            </form>
-            <div class='col-md-8 content'>
-           	<form method="post" action="./recuperation.php">
-			<label for="mail">Entrez votre adresse mail : </label><input type="email" id="mail" name="mail" />
-			<input type="submit" name="submit" value ="Envoyer" />
-		</form>
-    </div>-->
 
     <div class="row">
       <!-- Debut card -->
@@ -57,7 +51,6 @@
 
         </form><!-- Fin formulaire -->
         <?php
-            ini_set('display_errors', '1'); 
             if(isset($_POST['mail'])) {
                 include_once('../php/controller/AccountController.php');
                 include_once('../php/model/AccountModel.php');
@@ -71,12 +64,11 @@
       </div><!-- Fin card -->
   </div>
 
-    
+    <?php
+        $pageView->showFooter();
+        $pageView->showjavaLinks();
+    ?>
 </div><!-- FIN CONTAINER -->
-    <!--<div class="footer">
-        <p> ZENETUDE - Projet réalisé par les étudiants de LP SIL DA2I 2015/2016 </p>
-    </div> -->
-    <script type="text/javascript" src="../../js/jquery-1.11.3.min.js"></script>
-    <script type="text/javascript" src="../../js/materialize.js"></script>
+    
 </body>
 </html>
