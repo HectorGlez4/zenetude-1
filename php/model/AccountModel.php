@@ -1,18 +1,18 @@
 <?php
 	class AccountModel {
 		/**
-			* Get informations about an user.
+			* Get user's informations about an user.
 		**/
 		public  function getDataUser($param) {
             $db = connect();
-            $request = $db->prepare('SELECT :param FROM User WHERE user_instituteemail = :mail');
-            $request->execute(array('param' => $param, 'mail' => $_POST['mail']));
+            $request = $db->prepare('SELECT '.$param.' FROM User WHERE user_instituteemail = '.$mail.'');
+            $request->execute();
             $result = $request->fetchAll();
             return $result;
         }
 
 		/**
-			* Get informations (a parameter) about an student selected by its id.
+			* Get student's informations (a parameter) about an student selected by its id.
 		**/
 		public function getDataStudent($param, $userId) {
 			$db = connect();
@@ -23,12 +23,12 @@
 		}
 
 		/**
-			* Get informations about an training manager selected by its id.
+			* Get training manager's informations about an training manager selected by its id.
 		**/
 		public function getDataTrainingManager($param, $userId) {
 			$db = connect();
-			$request = $db->prepare('SELECT :param FROM Training_manager WHERE user_id = :userId');
-            $request->execute(array('param' => $param, 'userId' => $userId));
+			$request = $db->prepare('SELECT '.$param.' FROM training_manager WHERE user_id = '.$userId.'');
+            $request->execute();
             $result = $request->fetchAll();
             return $result;
 		}		
@@ -39,6 +39,7 @@
 		**/
         public function getUserPassword() {
             $db = connect();
+            var_dump($db);
             $request = $db->prepare('SELECT * FROM User WHERE user_instituteemail = :mail AND user_password = :pass');
             $request->execute(array('mail' => $_POST['mail'], 'pass' => $_POST['pass']));
             $result = $request->fetchAll();

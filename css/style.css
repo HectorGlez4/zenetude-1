@@ -36,6 +36,22 @@ nav>.nav-wrapper>.hamburglar{
 	z-index: 30;
 }
 
+#page{
+	position: absolute;
+}
+
+#socialmedia{
+	height: 20px;
+	width: 64px;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 5px;
+}
+
+#socialmedia img{
+	border-radius: 3px;
+}
+
 #scroll-nav{
 	z-index: 20;
 	position: fixed;
@@ -60,6 +76,10 @@ nav>.nav-wrapper>.hamburglar{
 	margin-left: 40%;
 	margin-top: 15px;
 	width: 200px;
+}
+
+#twitterimg{
+	margin: 2px;
 }
 
 .row{
@@ -91,7 +111,7 @@ nav>.nav-wrapper>.hamburglar{
 	background-color: #FFF !important;
 }
 
-.card-header{
+.card-header, .card-content{
 	padding: 30px;
 }
 
@@ -109,6 +129,11 @@ nav>.nav-wrapper>.hamburglar{
 }
 
 .card-header>h2{
+	color: #cfd1d5;
+	text-align: center;
+}
+
+.card-header>h3{
 	color: #cfd1d5;
 	text-align: center;
 }
@@ -135,7 +160,6 @@ nav>.nav-wrapper>.hamburglar{
 }
 
 .connexion>a{
-	margin-top: 15px;
 	color: #7BBA42;
 }
 
@@ -180,4 +204,8 @@ footer{
 
 .inscription{
 	margin-top: 5%;
+}
+
+.header-small>h2{
+	font-size: 2.4em;
 }

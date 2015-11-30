@@ -1,5 +1,7 @@
 <?php
 	class AccountController {
+
+
 		/**
 			* Test if the mail address given by the user exists in the database. 
 		**/
@@ -14,6 +16,7 @@
 			else
 				$accountView -> showMessage(1);
 		}
+
 
 		/**
 			* Test if the mail address and the password given by the user exist in the database. 
@@ -30,7 +33,7 @@
 					$_SESSION['prenom'] = $result[0]['user_firstname'];
 					$_SESSION['id'] = $result[0]['user_id'];
 					if($result[0]['user_type'] == 'Etudiant') {
-						$studentResult = $accountModel->getDataStudent("*", $_SESSION['id']);
+						$studentResult = $accountModel->getDataStudent('*', $_SESSION['id']);
 						$_SESSION['class'] = $studentResult[0]['student_group'];
 					}
 					else if($result[0]['user_type'] == 'RF'){
@@ -39,7 +42,7 @@
 					else {
 
 					}
-                    header('Location: index-connecte.php');
+                    header('Location: index.php');
 
                 }
 				else{
@@ -48,6 +51,7 @@
             }
         }
 		
+
 		/**
 			* Test if informations given by the user before create a new user in the database. 
 		**/
@@ -64,7 +68,6 @@
                 if($_POST["passe"] !=  $_POST["passe2"])
                 {
                     $accountView->showMessage(4);
-
                 }
                 else
                 {
