@@ -4,7 +4,7 @@ include(dirname(__FILE__).'/InteractionBD.php');
 
 $students = getStudentsByTrainingGroup(1,1);
 
-include(dirname(__FILE__).'/students.php');
+//include(dirname(__FILE__).'/students.php');
 ?>
 
 <style type="text/css">
@@ -43,7 +43,7 @@ p{font-size: 10px;
                     }
             ?>
                 <td style="width: 16%;height:3cm;">
-                    <img src="<?php echo $students[$iX]["student_avatar"] ?>" alt="trombi"  style="height:140px;">
+                    <img src="../../../../img/avatar/<?php echo $students[$iX]["student_avatar"] ?>" alt="trombi"  style="height:140px;">
                     <p ><?php echo $students[$iX]["user_name"] . "<br/>" .
                      $students[$iX ]["user_firstname"]?></p>
                 </td>
