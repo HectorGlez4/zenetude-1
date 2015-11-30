@@ -11,10 +11,6 @@
     $pageView = new PageView();
     $db = connect();
 
-    if (isset($_SESSION['id'])) {       
-        
-    }
-
 ?>
   <!DOCTYPE html>
   <html>
@@ -32,15 +28,14 @@
             <div class="row">
                 
                 <div class="col s12 m8">
-                <div class="card-panel teal" id="bloc2">
-                    <div class="card-title"> <h3>Profil</h3></div>
-                    <?php
-                        $pageView -> showInformations($db);
-                    ?>
-                    <p>
-                    </p>
+                    <div class="card-panel teal" id="bloc2">
+                        <div class="card-title"> <h3>Profil</h3></div>
+                        <?php
+                            $pageView -> showInformations($db);
+                        ?>
+                        <p></p>
+                    </div>
                 </div>
-              </div>
 
               
 
