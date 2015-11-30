@@ -54,8 +54,8 @@
     </div>
     <div class='col-md-8 content'>
 
-        <form id="inscription" action ="valider.php" method="post" onsubmit="">
-           
+        <form id="contact" action ="" method="post" onsubmit="">
+
         </form>
 
 
