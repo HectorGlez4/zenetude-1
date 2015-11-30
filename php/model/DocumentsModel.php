@@ -25,3 +25,4 @@ function getStudentsByTrainingGroup($training_id = null, $student_group = null){
         
         return $tablearesultat;
     }
+} // getStudentsByTrainingGroup()

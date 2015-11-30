@@ -1,6 +1,6 @@
 <?php   
 
-include(dirname(__FILE__).'../model/DocumentsModel.php');
+include(dirname(__FILE__).'/../../model/DocumentsModel.php');
 
 $students = getStudentsByTrainingGroup(1,1);
 
@@ -14,7 +14,7 @@ $students = getStudentsByTrainingGroup(1,1);
         <h2>"Nom de Formation" 2015-2016</h2>
         <h3>Département "Nom Département"</h3>
         <br><hr><br>
-        "Nombres d'éléves"
+        "Nombres d'élèves"
         <table cellspacing="0" style="width: 100%; border: solid 1px black; text-align: center; ">
             <tr style='height:3cm;width:100%;'>
             <?php
