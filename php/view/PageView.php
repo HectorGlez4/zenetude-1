@@ -396,15 +396,15 @@
             	echo '<li class="infos">Email personnel : '.$result2[4].'</li>';}
             if(isset($result[6])) {
             	echo '<li class="infos">Type : '.$result[6].'</li>';}
-            if(isset($result2[5])) {
+            if($result2[5] != '0') {
             	echo '<li class="infos">Téléphone fixe : 0'.$result2[5].'</li>';}
-            if(isset($result2[6])) {
+            if($result2[6] != '0') {
             echo '<li class="infos">Téléphone mobile : 0'.$result2[6].'</li>';}
             if(isset($result[5])) {
             	echo '<li class="infos">Civilité : '.$result[5].'</li>';}
             if(isset($result3[0])) {
             	echo '<li class="infos">Formation actuelle : '.$result3[0].'</li>';}
-            if(isset($result2[2])) {
+            if($result2[2] != '0') {
             	echo '<li class="infos">Groupe : '.$result2[2].'</li>';}
             if(isset($result2[13])) {
             	echo '<li class="infos">Date de naissance : '.$result2[13].'</li>';}
@@ -418,10 +418,15 @@
             	echo '<li class="infos">Formation précédente : '.$result2[20].'</li>';}
             if(isset($result2[7])) {
             	echo '<li class="infos">Adresse : '.$result2[7].' '.$result2[8].'</li>';}
+            if($result2[9] != '0') {
+            	echo '<li class="infos">Code postal : '.$result2[9].'</li>';}
 
 
-            if ($result[6]=='E') {
-                        echo '<li class="infos"><a class="right-align" href="gestion.php">Gérer mon compte</a></li>';}
+            if ($result[6] == 'RF'){
+            	echo '<a class="right-align" href="trombi.php">Documents pédagogiques</a>';}
+            if ($result[6]== 'Etudiant') {
+    			echo '<li class="infos"><a href="contact.php">Contacter un responsable de formation</a></li>';
+                echo '<li class="infos"><a class="right-align" href="gestion.php">Gérer mon compte</a></li>';}
             echo "</u>";
 		}
 	}
