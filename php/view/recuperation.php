@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <title>Zenetude</title>
-    <link rel="stylesheet" href="../../css/materialize.css">
+    <link rel="stylesheet" href="../../vendor/css/materialize.css">
     <link rel="stylesheet" href="../../css/index.css">
     <link rel="stylesheet" href="../../css/style.css">
     <meta charset="utf-8">
