@@ -169,7 +169,6 @@ nav>.nav-wrapper>.hamburglar{
 }
 
 .connexion>a:hover{
-	margin-top: 15px;
 	color: #385e2d;
 	text-decoration: underline;
 }
@@ -208,7 +207,8 @@ footer{
 }
 
 .inscription{
-	margin-top: 5%;
+	margin-top: 2%;
+	margin-bottom: 2%;
 }
 
 .header-small>h2{
