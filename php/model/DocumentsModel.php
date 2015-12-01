@@ -20,7 +20,7 @@ function getStudentsByTrainingGroup($training_id = null, $student_group = null){
                                 FROM    Student JOIN User ON Student.user_id = User.user_id 
                                         JOIN Training ON Student.training_id = Training .training_id
                                         JOIN Departement ON Training.departement_id = Departement.departement_id
-                                WHERE   training_id = ".$training_id." 
+                                WHERE   Training.training_id = ".$training_id." 
                                 AND     student_group = ".$student_group." 
                                 ORDER BY user_name")) {
             
