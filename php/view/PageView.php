@@ -336,7 +336,6 @@
 		    		<a href="" class="brand-logo"><img src="../../img/logo.png" alt="logo du site"></a>
 		    		<img src="../../img/name.png" alt="Zenetude, titre du site">
 		    		<div id="hamburger" class="hamburglar is-closed">
-
 		    			<div class="burger-icon">
 					      <div class="burger-container">
 					        <span class="burger-bun-top"></span>
@@ -443,7 +442,7 @@
 	            </div>';
 				}
 			}
-	}
+	
 
 
 		/*
