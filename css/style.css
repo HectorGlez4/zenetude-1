@@ -214,3 +214,10 @@ footer{
 .header-small>h2{
 	font-size: 2.4em;
 }
+
+/********************/
+/** PAGE DOCUMENTS **/
+/********************/
+.indent {
+	text-indent: 40px;
+}

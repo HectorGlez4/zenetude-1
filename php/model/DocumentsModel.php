@@ -29,3 +29,26 @@ function getStudentsByTrainingGroup($training_id = null, $student_group = null){
         return $tablearesultat;
     }
 } // getStudentsByTrainingGroup()
+
+
+function getStudentsGroupByTrainingGroup($student_group = null, $description = null) {
+
+    if($student_group == null || $description == null) {
+        return false;
+    }
+
+    $mysqli = new mysqli("mysql-maquetteprojet.alwaysdata.net", "114038_equipe1", "q}2[u9LE", "maquetteprojet_zenetude");
+    if ($mysqli->connect_errno)
+    {
+        echo "Echec lors de la connexion à MySQL : (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+    }
+
+    if ($result = $mysqli->query("SELECT student_group, description
+                                FROM Student JOIN Training ON Student.training_id = Training.training_id
+                                ORDER BY description, student_group")) {
+
+        for ($tablearesultat = array (); $row = $result->fetch_assoc(); $tablearesultat[] = $row);
+
+        return $tablearesultat;
+    }
+} // getStudentsGroupByTrainingGroup()

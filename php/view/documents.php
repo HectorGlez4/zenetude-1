@@ -1,3 +1,9 @@
+<?php
+  include(dirname(__FILE__).'/../model/DocumentsModel.php');
+
+  $studentsGroup = getStudentsGroupByTrainingGroup(1,1);
+?>
+
 <!doctype html>
 <!--Modification Equipe 1!-->
 <html lang="fr">
@@ -114,28 +120,44 @@
                   <div class="card-panel teal" id="bloc1">
                       <div class="card-header"> <h3>Formations</h3></div>
                       <div class="card-content center-align">
+
+                        <?php
+                          $formation = $studentsGroup[0]["description"];
+                          $group = $studentsGroup[0]["student_group"];
+                        ?>
+
                           <ul>
-                              <li>Formation 1</li>
-                              <li>Formation 2</li>
-                              <li>Formation 3</li>
-                              <li>Formation 4</li>
-                              <li>Formation 5</li>
-                              <li>Formation 6</li>
-                              <li>Formation 7</li>
-                              <li>Formation 8</li>
-                              <li>Formation 9</li>
-                              <li>Formation 10</li>
-                              <li>Formation 11</li>
-                              <li>Formation 12</li>
-                              <li>Formation 13</li>
-                              <li>Formation 14</li>
-                              <li>Formation 15</li>
-                              <li>Formation 16</li>
-                              <li>Formation 17</li>
-                              <li>Formation 18</li>
-                              <li>Formation 19</li>
-                              <li>Formation 20</li>
+                            <li><?php echo $formation ?></li>
+                            <li class="indent"><a href="#">Groupe <?php echo $group ?></a></li>
                           </ul>
+
+                        <?php
+                        for($iX = 0; $iX < count($studentsGroup); ++$iX) {
+
+                          if (!($formation == $studentsGroup[$iX]["description"])) {
+                            $formation = $studentsGroup[$iX]["description"];
+                        ?>
+
+                          <ul>
+                            <li><?php echo $studentsGroup[$iX]["description"] ?></li>
+                          </ul>
+
+                        <?php
+                          }
+
+                          if (!($group == $studentsGroup[$iX]["student_group"])) {
+                            $group = $studentsGroup[$iX]["student_group"];
+                        ?>
+                        
+                          <ul>
+                            <li class="indent"><a href="#">Groupe <?php echo $studentsGroup[$iX]["student_group"] ?></a></li>
+                          </ul>
+
+                        <?php
+                          }
+                        }
+                        ?>
+
                       </div>
                   </div>
               </div>
