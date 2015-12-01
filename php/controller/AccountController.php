@@ -38,8 +38,8 @@
                    	else {
                    		$studentResult = $accountModel->getDataStudent('*', $_SESSION['infoUser'][0]['user_id']);
 						$_SESSION['infoStudent'] = $studentResult;
-                        /*$trainingResult = $accountModel->getTrainingInformationsForUser('description', $_SESSION['infoUser'][0]['user_id']);
-                        $_SESSION['infoTraining'] = $trainingResult;*/
+                        $trainingResult = $accountModel->getTrainingInformationsForUser('description', $_SESSION['infoUser'][0]['user_id']);
+                        $_SESSION['infoTraining'] = $trainingResult;
                    	}
                     header('Location: index.php');
 
