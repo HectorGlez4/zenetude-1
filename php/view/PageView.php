@@ -373,7 +373,35 @@
 			}
 		}
 
-		public function showInformations($db){
+        public function showContact($db){
+            if (isset($_SESSION['id'])) {
+
+                $request = $db->prepare('SELECT user_name,user_firstname,user_instituteemail
+                                          FROM User U , Student S, Training T ,Training_manager TM
+                                          WHERE S.training_id = T.training_id AND
+                                          T.training_manager_id = TM.training_manager_id AND
+                                          TM.user_id = U.user_id AND S.user_id ='.$_SESSION['id']);
+                $request->execute();
+                $resul = $request->fetch();
+            }
+
+            echo '<div class="card-header"><h2>'.utf8_encode($resul[1]).' '.utf8_encode($resul[0]).'</h2></div><ul>';
+
+            if(isset($resul[0])) {
+                echo '<li class="infos">Nom  : '.$resul[0].'</li>';}
+
+
+            if(isset($resul[1])) {
+                echo '<li class="infos"> Prénom : '.$resul[1].'</li>';}
+
+
+            if(isset($resul[2])) {
+                echo '<li class="infos">Email personnel : '.$resul[2].'</li>';}
+
+
+        }
+
+        public function showInformations($db){
 			if (isset($_SESSION['id'])) {
 				$request = $db->prepare('SELECT * FROM User WHERE user_id = '.$_SESSION['id']);
         		$request->execute();
@@ -429,4 +457,9 @@
                 echo '<li class="infos"><a class="right-align" href="gestion.php">Gérer mon compte</a></li>';}
             echo "</u>";
 		}
+
+
+
+
+
 	}
