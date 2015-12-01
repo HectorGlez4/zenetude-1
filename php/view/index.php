@@ -1,5 +1,6 @@
 <?php
 	session_start();
+ini_set('display_errors', 1);
 	if (isset($_GET['erreur'])){
 		echo "<script>alert('Erreur d\'authentification !');</script>";
 	}
