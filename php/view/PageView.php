@@ -1,58 +1,57 @@
 <?php
 ini_set('display_errors', 1);
+include_once '../model/db.php';
 	class PageView {
-
-
 		/**
 			* Show the inscription's form.
 		**/
 		public function showInscriptionForm() {
 		?>
-		<!-- Debut card -->
-      	<div class="card-panel inscription col m4 push-m4 s12 center-align">
-        <!-- Formulaire -->
-        <form class="col formulaire s10 push-s1" action="valider.php" method="POST" onsubmit="">
+			<!-- Debut card -->
+	      	<div class="card-panel inscription col m4 push-m4 s12 center-align">
+	        <!-- Formulaire -->
+		        <form class="col formulaire s10 push-s1" action="valider.php" method="POST" onsubmit="">
 
-          	<!-- Titre de la carte -->
-          	<div class="card-header"> <h2>Inscription</h2></div>
-          	<!-- Fin titre -->
+		          	<!-- Titre de la carte -->
+		          	<div class="card-header"> <h2>Inscription</h2></div>
+		          	<!-- Fin titre -->
 
-	          <!-- Contenu card -->
-          	<div class="card-content">
+			          <!-- Contenu card -->
+		          	<div class="card-content">
 
-		          <!-- email -->
-	          	<div class="row">
-	       	 		<div class="input-field col s12">
-	              		<input id="email" type="email" class="validate" name="mail">
-	             	 	<label for="email">Adresse email <em>*</em></label>
-	            	</div>
-	          	</div><!-- fin email -->
+				          <!-- email -->
+			          	<div class="row">
+			       	 		<div class="input-field col s12">
+			              		<input id="email" type="email" class="validate" name="mail">
+			             	 	<label for="email">Adresse email <em>*</em></label>
+			            	</div>
+			          	</div><!-- fin email -->
 
-		          <!-- mot de passe -->
-	          	<div class="row">
-		            <div class="input-field col s12">
-		              	<input id="passe" type="password" class="validate" name="passe">
-		             	<label for="passe">Mot de passe <em>*</em></label>
-		            </div>
-	          	</div><!-- fin mot de passe -->
+				          <!-- mot de passe -->
+			          	<div class="row">
+				            <div class="input-field col s12">
+				              	<input id="passe" type="password" class="validate" name="passe">
+				             	<label for="passe">Mot de passe <em>*</em></label>
+				            </div>
+			          	</div><!-- fin mot de passe -->
 
-	      		<!-- confirmation mot de passe -->
-	          	<div class="row">
-		            <div class="input-field col s12">
-		              	<input id="passe2" type="password" class="validate" name="passe2">
-		              	<label for="passe2">Confirmer votre mot de passe</label>
-		            </div>
-	          	</div><!-- fin confirmation mot de passe -->
+			      		<!-- confirmation mot de passe -->
+			          	<div class="row">
+				            <div class="input-field col s12">
+				              	<input id="passe2" type="password" class="validate" name="passe2">
+				              	<label for="passe2">Confirmer votre mot de passe</label>
+				            </div>
+			          	</div><!-- fin confirmation mot de passe -->
 
-        	</div><!-- Fin contenu card -->
+		        	</div><!-- Fin contenu card -->
 
-	          <!-- bouton s'inscrire -->
-	        <div class="card-action bouton-connection">  
-	            <input class="btn center-align" type="submit" value="S'inscrire" />
-	        </div>
+			          <!-- bouton s'inscrire -->
+			        <div class="card-action bouton-connection">  
+			            <input class="btn center-align" type="submit" value="S'inscrire" />
+			        </div>
 
-        </form><!-- Fin formulaire -->
-      </div><!-- Fin card -->
+		        </form><!-- Fin formulaire -->
+	      	</div><!-- Fin card -->
 		<?php
 		}
 
@@ -310,19 +309,12 @@ ini_set('display_errors', 1);
 		}
 
 
-
+		
 		/**
 			* Show the dynamic menu bar. 
 		**/
-		public function showScrollMenu($connect, $rf = false) {
+		public function showScrollMenu($connect, $userInfos, $rf = false) {
 
-if (isset($_SESSION['image'])){
-	$pic = $_SESSION['image'];
-}else{
-	$pic = "../../img/avatar.png";
-}
-	//echo "<script>alert('$pic');</script>";
-			
 			if(!$connect) {?>
 			<nav id="scroll-nav">
 		  		<div class="nav-wrapper">
@@ -336,19 +328,31 @@ if (isset($_SESSION['image'])){
 			?>
 			<nav id="menu" class="center-align">
 				<ul>
+
 					<?php
-						echo "<img src='".$pic."' alt='avatar.png' class='circle responsive-img'/><br/>";
 
-					echo $_SESSION['prenom']." ".$_SESSION['nom'].'<br />';
-
-					if($rf) 
-					{
-						echo 'Responsable de formation <br />';
-					}else{
-						echo 'Groupe '.$_SESSION['class'].'<br />';
-					}
+						if (isset($_SESSION['image'])){
+							$pic = $_SESSION['image'];
+						}else{
+							$pic = "../../img/avatar.png";
+						}
 
 					?>
+
+					<img src="<?php echo $pic; ?>" alt="avatar.png" class="circle responsive-img"/><br/>
+					<?php 
+
+						echo $userInfos['infoUser'][0]['user_firstname']." ".$userInfos['infoUser'][0]['user_name'].'<br />'; 
+
+						if($rf) {
+
+							echo 'Responsable de formation <br />';
+
+						}else{
+							echo 'Groupe '.$userInfos['infoStudent'][0]['student_group'].'<br />';
+						}
+					?>
+
 					<li><a class="color" href="profil.php">Mon compte</a></li>
 					<li><a class="color" href="../model/deconnect.php">Déconnexion</a></li>
 				</ul>
@@ -393,55 +397,85 @@ if (isset($_SESSION['image'])){
 			}
 		}
 
-		public function showInformations($db){
-			if (isset($_SESSION['id'])) {
-				$request = $db->prepare('SELECT * FROM User WHERE user_id = '.$_SESSION['id']);
-        		$request->execute();
-        		$result = $request->fetch();
 
-				$request = $db->prepare('SELECT * FROM Student WHERE user_id = '.$_SESSION['id']);
-		        $request->execute();
-		        $result2 = $request->fetch();
+        public function showContact($db){
+            if (isset($_SESSION['id'])) {
 
-		        $request = $db->prepare('SELECT description FROM Training WHERE training_id IN (SELECT training_id FROM Student WHERE user_id = '.$_SESSION['id'].')');
-		        $request->execute();
-		        $result3 = $request->fetch();
-	    	}
+                $request = $db->prepare('SELECT user_name,user_firstname,user_instituteemail
+                                          FROM User U , Student S, Training T ,Training_manager TM
+                                          WHERE S.training_id = T.training_id AND
+                                          T.training_manager_id = TM.training_manager_id AND
+                                          TM.user_id = U.user_id AND S.user_id ='.$_SESSION['id']);
+                $request->execute();
+                $resul = $request->fetch();
+            }
 
-	    	echo '<div class="card-header"><h2>'.$result[3].' '.$result[4].'</h2></div><ul>';
+            echo '<div class="card-header"><h2>'.utf8_encode($resul[1]).' '.utf8_encode($resul[0]).'</h2></div><ul>';
 
-	    	if(isset($result[2])) {
-	       		echo '<li class="infos">Email académique : '.$result[2].'</li>';}
-            if(isset($result2[4])) {
-            	echo '<li class="infos">Email personnel : '.$result2[4].'</li>';}
-            if(isset($result[6])) {
-            	echo '<li class="infos">Type : '.$result[6].'</li>';}
-            if(isset($result2[5])) {
-            	echo '<li class="infos">Téléphone fixe : 0'.$result2[5].'</li>';}
-            if(isset($result2[6])) {
-            echo '<li class="infos">Téléphone mobile : 0'.$result2[6].'</li>';}
-            if(isset($result[5])) {
-            	echo '<li class="infos">Civilité : '.$result[5].'</li>';}
-            if(isset($result3[0])) {
-            	echo '<li class="infos">Formation actuelle : '.$result3[0].'</li>';}
-            if(isset($result2[2])) {
-            	echo '<li class="infos">Groupe : '.$result2[2].'</li>';}
-            if(isset($result2[13])) {
-            	echo '<li class="infos">Date de naissance : '.$result2[13].'</li>';}
-            if(isset($result2[14])) {
-            	echo '<li class="infos">Lieu de naissance : '.$result2[14].'</li>';}
-            if(isset($result2[15])) {
-            	echo '<li class="infos">Région de naissance : '.$result2[15].'</li>';}
-            if(isset($result2[16])) {
-            	echo '<li class="infos">Pays de naissance : '.$result2[16].'</li>';}
-            if(isset($result2[20])) {
-            	echo '<li class="infos">Formation précédente : '.$result2[20].'</li>';}
-            if(isset($result2[7])) {
-            	echo '<li class="infos">Adresse : '.$result2[7].' '.$result2[8].'</li>';}
+            if(isset($resul[0])) {
+                echo '<li class="infos">Nom  : '.$resul[0].'</li>';}
 
 
-            if ($result[6]=='E') {
-                        echo '<li class="infos"><a class="right-align" href="gestion.php">Gérer mon compte</a></li>';}
-            echo "</u>";
-		}
+            if(isset($resul[1])) {
+                echo '<li class="infos"> Prénom : '.$resul[1].'</li>';}
+
+
+            if(isset($resul[2])) {
+                echo '<li class="infos">Email personnel : '.$resul[2].'</li>';}
+
+
+        }
+
+
+		public function showProfilInformations($userInfos, $rf = false){
+			if(!$rf) {
+	    	echo '
+		    	<div class="col s12 m8">
+	                <div class="card-panel teal" id="bloc2">
+	                    <div class="card-title"> <h3>Profil</h3></div>
+				    	<div class="card-header"><h2>'.$userInfos['infoUser'][0]['user_firstname'].' '.$userInfos['infoUser'][0]['user_name'].'</h2></div><ul>
+			       		<li class="infos">Email académique : '.$userInfos['infoUser'][0]['user_instituteemail'].'</li>
+			        	<li class="infos">Email personnel : '.$userInfos['infoStudent'][0]['student_personnalemail'].'</li>
+			        	<li class="infos">Type : '.$userInfos['infoUser'][0]['user_type'].'</li>
+						<li class="infos">Téléphone fixe : 0'.$userInfos['infoStudent'][0]['student_phone'].'</li>
+			       		<li class="infos">Téléphone mobile : 0'.$userInfos['infoStudent'][0]['student_mobile'].'</li>
+						<li class="infos">Civilité : '.$userInfos['infoUser'][0]['user_civility'].'</li>
+			       		<li class="infos">Formation actuelle : </li>
+			        	<li class="infos">Groupe : '.$userInfos['infoStudent'][0]['student_group'].'</li>
+						<li class="infos">Date de naissance : '.$userInfos['infoStudent'][0]['student_birthday'].'</li>
+						<li class="infos">Lieu de naissance : '.$userInfos['infoStudent'][0]['student_birthcity'].'</li>
+						<li class="infos">Région de naissance : '.$userInfos['infoStudent'][0]['student_birtharea'].'</li>
+						<li class="infos">Pays de naissance : '.$userInfos['infoStudent'][0]['student_birthcountry'].'</li>
+			    		<li class="infos">Formation précédente : </li>
+			     		<li class="infos">Adresse : '.$userInfos['infoStudent'][0]['student_adresse1'].'</li>
+			     		<li class="infos"><a class="right-align" href="gestion.php">Gérer mon compte</a></li>
+			     		<li class="infos"><a class="right-align" href="contact.php">Contacter un responsable de formation</a></li>
+			       	</div>
+	            </div>
+	            ';
+	           }
+	        	else {
+	        	echo '
+		    	<div class="col s12 m8">
+	                <div class="card-panel teal" id="bloc2">
+	                    <div class="card-title"> <h3>Profil</h3></div>
+				    	<div class="card-header"><h2>'.$userInfos['infoUser'][0]['user_firstname'].' '.$userInfos['infoUser'][0]['user_name'].'</h2></div><ul>
+				    	<li class="infos">Email académique : '.$userInfos['infoUser'][0]['user_instituteemail'].'</li>
+		          		<li class="infos">Type : '.$userInfos['infoUser'][0]['user_type'].'</li>
+		          		<li class="infos">Civilité : '.$userInfos['infoUser'][0]['user_civility'].'</li>
+		          		<li class="infos"><a class="right-align" href="gestion.php">Gérer mon compte</a></li>
+		          		<li class="infos"><a class="right-align" href="trombi.php">Accéder au trombinoscope</a></li>
+		          	</div>
+	            </div>';
+				}
+			}
+	}
+
+
+		
+		public function showAdministration(){
+	
+		   }
+			
+		
 	}
