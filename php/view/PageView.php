@@ -328,11 +328,6 @@ include_once '../model/db.php';
 			?>
 			<nav id="menu" class="center-align">
 				<ul>
-<<<<<<< HEAD
-					<img src="../../img/avatar.png" alt="avatar.png" class="circle responsive-img"/><br/><?php echo $userInfos['infoUser'][0]['user_firstname']." ".$userInfos['infoUser'][0]['user_name'].'<br />'; if($rf) {echo 'Responsable de formation <br />';}
-                    else {echo 'Groupe '.$userInfos['infoStudent'][0]['student_group'].'<br />';}?>
-=======
-
 					<?php
 
 						if (isset($_SESSION['image'])){
@@ -356,8 +351,6 @@ include_once '../model/db.php';
 							echo 'Groupe '.$userInfos['infoStudent'][0]['student_group'].'<br />';
 						}
 					?>
-
->>>>>>> 7f3eccce819cc41b611a59c9a2178e99050e563d
 					<li><a class="color" href="profil.php">Mon compte</a></li>
 					<li><a class="color" href="../model/deconnect.php">Déconnexion</a></li>
 				</ul>

@@ -127,6 +127,10 @@
             $db = connect();
 
             $request = $db->query('INSERT INTO User (user_password, user_instituteemail) VALUES ("'.$userPassword.'", "'.$userMail.'")');
+            $request0 = $db->query("SELECT user_id FROM User WHERE user_instituteemail = '$userMail'");
+            $result0 = $request0->fetch();
+            $id = $result0[0];
+            $request2 = $db->query('INSERT INTO Student (user_id, student_instituteemail) VALUES ("'.$id.'", "'.$userMail.'")');
         }
 	}
 

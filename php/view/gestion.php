@@ -163,7 +163,7 @@ header('Location: profil.php');
                                 <input type="text" class="form-control" value="<?php echo $result[16]; ?>" name="student_birthcountry">
                                 
                                 
-<!--                                 <div class="input-field col s12"> 
+                                <div class="input-field col s12"> 
                                     <select>
                                         <option value="BAC">
                                             BAC
@@ -194,8 +194,8 @@ header('Location: profil.php');
                                         </option>
                                     </select>
                                     <label for="">Niveau d'études</label>
-                                </div> -->
-                                <label for="">Niveau d'études</label>
+                                </div>
+<!--                                 <label for="">Niveau d'études</label>
                                 <input id="BAC" class="with-gap" name="student_grantholder" type="radio" value="BAC"/>
                                 <label for="BAC">BAC</label>
                                 <input id="BAC+1" class="with-gap" name="student_grantholder" type="radio" value="BAC+1"/>
@@ -213,7 +213,7 @@ header('Location: profil.php');
                                 <input id="BAC+7" class="with-gap" name="student_grantholder" type="radio" value="BAC+7"/>
                                 <label for="BAC+7">BAC+7</label>
                                 <input id="BAC+8" class="with-gap" name="student_grantholder" type="radio" value="BAC+8"/>
-                                <label for="BAC+8">BAC+8</label>
+                                <label for="BAC+8">BAC+8</label> -->
                                 </br>
                                 <label for="">Origine</label>
                                 <input type="text" class="form-control" value="<?php echo $result[20]; ?>" name="student_origin">
@@ -228,7 +228,7 @@ header('Location: profil.php');
                                 <input type="text" class="form-control" value="<?php echo $result[21]; ?>" name="student_comment">
 
 
-<!--                                 <div class="input-field col s12"> 
+                                <div class="input-field col s12"> 
                                     <select>
                                         <option value="FI">
                                             FI
@@ -244,9 +244,9 @@ header('Location: profil.php');
                                         </option>
                                     </select>
                                     <label>Type de formation</label>
-                                </div> -->
+                                </div>
 
-                           <label for="">Type de formation</label>
+<!--                            <label for="">Type de formation</label>
                                 <input id="FI" class="with-gap" name="student_grantholder" type="radio" value="<?php echo $result[24]; ?>"/>
                                 <label for="FI">FI</label>
                                 <input id="FA" class="with-gap" name="student_grantholder" type="radio" value="<?php echo $result[24]; ?>"/>
@@ -254,7 +254,7 @@ header('Location: profil.php');
                                 <input id="FC" class="with-gap" name="student_grantholder" type="radio" value="<?php echo $result[24]; ?>"/>
                                 <label for="FC">FC</label>
                                 <input id="CP" class="with-gap" name="student_grantholder" type="radio" value="<?php echo $result[24]; ?>"/>
-                                <label for="CP">CP</label>
+                                <label for="CP">CP</label> -->
                                 </br></br>
                                 <button type="submit" name="student_update" class="btn btn-primary">Enregistrer</button>
                         </div>
