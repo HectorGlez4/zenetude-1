@@ -32,12 +32,14 @@
                     $_SESSION['infoUser'] = $userResult;
                  
                    	if($_SESSION['infoUser'][0]['user_type'] == 'RF') {
-                   		$rfResult = $accountModel->getDataTrainingManager('*', $_SESSION['info_user'][0]['user_id']);
+                   		$rfResult = $accountModel->getDataTrainingManager('*', $_SESSION['infoUser'][0]['user_id']);
                    		$_SESSION['infoRF'] = $rfResult;
                    	}
                    	else {
-                   		$studentResult = $accountModel->getDataStudent('*', $_SESSION['info_user'][0]['user_id']);
+                   		$studentResult = $accountModel->getDataStudent('*', $_SESSION['infoUser'][0]['user_id']);
 						$_SESSION['infoStudent'] = $studentResult;
+                        /*$trainingResult = $accountModel->getTrainingInformationsForUser('description', $_SESSION['infoUser'][0]['user_id']);
+                        $_SESSION['infoTraining'] = $trainingResult;*/
                    	}
                     header('Location: index.php');
 

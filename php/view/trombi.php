@@ -20,6 +20,7 @@
     <body>
         
         <?php
+            $pageController -> controlConnexion();
             $pageView -> showHead();
             $pageController -> controlHeader();
             $pageController -> controlDynamicMenu();

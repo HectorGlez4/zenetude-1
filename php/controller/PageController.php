@@ -1,6 +1,13 @@
 <?php
 	class PageController {
 
+        public function controlConnexion() {
+            if(!isset($_SESSION['infoUser'])) {
+                echo '<script>document.location.href="../view/index.php"</script>';
+                exit;
+            }
+        }
+
 
 		public function controlProfilInformations() {
 			$pageView = new PageView();
