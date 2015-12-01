@@ -328,11 +328,6 @@ include_once '../model/db.php';
 			?>
 			<nav id="menu" class="center-align">
 				<ul>
-<<<<<<< HEAD
-					<img src="../../img/avatar.png" alt="avatar.png" class="circle responsive-img"/><br/><?php echo $userInfos['infoUser'][0]['user_firstname']." ".$userInfos['infoUser'][0]['user_name'].'<br />'; if($rf) {echo 'Responsable de formation <br />';}
-                    else {echo 'Groupe '.$userInfos['infoStudent'][0]['student_group'].'<br />';}?>
-=======
-
 					<?php
 
 						if (isset($_SESSION['image'])){
@@ -357,7 +352,6 @@ include_once '../model/db.php';
 						}
 					?>
 
->>>>>>> 7f3eccce819cc41b611a59c9a2178e99050e563d
 					<li><a class="color" href="profil.php">Mon compte</a></li>
 					<li><a class="color" href="../model/deconnect.php">Déconnexion</a></li>
 				</ul>
@@ -433,7 +427,6 @@ include_once '../model/db.php';
 
 		public function showProfilInformations($userInfos, $rf = false){
 			if(!$rf) {
-                var_dump($_SESSION);
 	    	echo '
 		    	<div class="col s12 m8">
 	                <div class="card-panel teal" id="bloc2">
@@ -445,14 +438,14 @@ include_once '../model/db.php';
 						<li class="infos">Téléphone fixe : 0'.$userInfos['infoStudent'][0]['student_phone'].'</li>
 			       		<li class="infos">Téléphone mobile : 0'.$userInfos['infoStudent'][0]['student_mobile'].'</li>
 						<li class="infos">Civilité : '.$userInfos['infoUser'][0]['user_civility'].'</li>
-			       		<li class="infos">Formation actuelle : </li>
+			       		<li class="infos">Formation actuelle : '.$userInfos['infoTraining'][0]['description'].'</li>
 			        	<li class="infos">Groupe : '.$userInfos['infoStudent'][0]['student_group'].'</li>
 						<li class="infos">Date de naissance : '.$userInfos['infoStudent'][0]['student_birthday'].'</li>
 						<li class="infos">Lieu de naissance : '.$userInfos['infoStudent'][0]['student_birthcity'].'</li>
 						<li class="infos">Région de naissance : '.$userInfos['infoStudent'][0]['student_birtharea'].'</li>
 						<li class="infos">Pays de naissance : '.$userInfos['infoStudent'][0]['student_birthcountry'].'</li>
-			    		<li class="infos">Formation précédente : </li>
-			     		<li class="infos">Adresse : '.$userInfos['infoStudent'][0]['student_adresse2'].'|'.$userInfos['infoStudent'][0]['student_adresse1'].' '.$userInfos['infoStudent'][0]['student_zipcode'].' '.$userInfos['infoStudent'][0]['student_city'].'</li>
+			    		<li class="infos">Formation précédente : '.$userInfos['infoStudent'][0]['student_origin'].' </li>
+			     		<li class="infos">Adresse : '.$userInfos['infoStudent'][0]['student_adresse2'].' '.$userInfos['infoStudent'][0]['student_adresse1'].' '.$userInfos['infoStudent'][0]['student_zipcode'].' '.$userInfos['infoStudent'][0]['student_city'].'</li>
 			     		<li class="infos"><a class="right-align" href="gestion.php">Gérer mon compte</a></li>
 			     		<li class="infos"><a class="right-align" href="contact.php">Contacter un responsable de formation</a></li>
 			       	</div>
