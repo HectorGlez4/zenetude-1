@@ -446,61 +446,118 @@
 	}
 
 
-
-		/*public function showAdministration($db){
-			if (isset($_SESSION['id'])) {
+		/*
+		public function showAdministration(){
+			//if (isset($_SESSION['id'])) {
+				ini_set('display_errors', 1);
+				$db = connect();
 				?>
 				<form name="form" method="POST">
+				<?php
+				$register = $db->query("SELECT user_id, user_name FROM user");
+				$result=$register -> fetch();
+				if(count($register) > 0){
+					echo '<label for="register">Sélection du membre : </label>';    
+					echo '<select name="register" size=1 onchange="javascript:submit(this)">';
+					while ($result=$register -> fetch()) {
+						echo '<option value="'.$result['user_name'].'" ';
+            			if(isset($_POST["register"]) && $_POST["register"]==$result['user_id']){echo "selected='selected'";}
+            			echo '>'.$result['user_name'].'</option>';
+   					}
+					echo '</select><br/>';
+				}
+				if(isset($_POST["register"]) && $_POST["register"]!='Sélectionner un membre'){
+			        //on sélectionne tout les membres
+			        $selection = $db->query("SELECT * FROM user WHERE user_id='".($_POST["register"])."'");
+			        while($resultat = $selection -> fetch()){
+			            //on stock tout dans des variables
+			            $id_register = $resultat['user_id'];
+			            $pseudo_register = $resultat['user_name'];
+			            $email_register = $resultat['user_instituteemail'];
+			            $status_register = $resultat['user_type'];
+			        
+			        ?>
+			        <label for="pseudo">Pseudo : </label>
+			        <input type="text" name="pseudo" maxlength="20" value="<?php echo htmlspecialchars($pseudo_register);?>" /></br>
+			 
+			        <label for="email">Email : </label>
+			        <input type="text" name="email" maxlength="50" value="<?php echo htmlspecialchars($email_register);?>" /></br>
+			 
+			        <label for="statut">Statut : </label> 
+			        <select name="statut">
+				        <option value="Etudiant" <?php if(strcmp($statut_membre, "Etudiant") == true) echo "selected='selected'";?>>Etudiant</option>
+				        <option value="RF" <?php if(strcmp($statut_membre, "RF") == true) echo "selected='selected'";?>>Responsable de Formation</option>
+			        </select></br>
+			 
+			        <label for="action">Action : </label>
+			        <input type="submit" name="Envoyer" value="Envoyer" />
+			        <input name="Effacer" value="Effacer" type="reset" />   
+			        </form>
+			        </br>
+			        
+			        <h2>Supprimer le membre</h2>
+					<ul style="margin-left: 350px;">
+						<li><a href="Admin.php?supmembre=<?php echo $id_register;?>">Supprimer le membre></a></li>         
+					</ul>
 					<?php
-						$register = mysql_query("SELECT id, user_name FROM user");
-						echo "<label>Nombre d\inscrit : " . mysql_num_rows($register) . "<\br>";
-						if(mysql_num_rows($member) > 0){
-							echo "<label for='register'>Sélection du membre : </label>     
-								  <select name='register' onchange='javascript:submit(this)''>     
-								  <option value='Sélectionner un register'>Sélectionner un membre</option>';";
-
-							while ($list = mysql_fetch_array($register)) {
-								echo '<option value="'.$liste['id'].'" ';
-            					if(isset($_POST["register"]) && $_POST["register"]==$liste['id']){
-            						echo "selected='selected'";
-            					}
-           						echo '>'.$list['pseudo'].'</option>';
-           					}
-        					echo '</select><br/>';
-						}
-						if(isset($_POST["register"]) && $_POST["register"]!='Sélectionner un membre'){
-					        //on sélectionne tout les membres
-					        $selection = mysql_query("SELECT * FROM LOGIN WHERE id='".mysql_real_escape_string($_POST["membre"])."'");
-					        while($resultat = mysql_fetch_array($selection)){
-					            //on stock tout dans des variables
-					            $id_register = $resultat['id'];
-					            $pseudo_register = $resultat['user_name'];
-					            $email_register = $resultat['user_institueemail'];
-					            $status_register = $resultat['user_type'];
-					        }
-					        ?>
-					        <label for="pseudo">Pseudo : </label>
-					        <input type="text" name="pseudo" maxlength="20" value="<?php echo htmlspecialchars($pseudo_register);?>" /><br/>
-					 
-					        <label for="email">Email : </label>
-					        <input type="text" name="email" maxlength="50" value="<?php echo htmlspecialchars($email_register);?>" /><br/>
-					 
-					        <label for="statut">Statut : </label> 
-					        <select name="statut">
-						        <option value="Etudiant" <?php if(strcmp($statut_membre, "Etudiant") == true) echo "selected='selected'";?>>Etudiant</option>
-						        <option value="RF" <?php if(strcmp($statut_membre, "RF") == true) echo "selected='selected'";?>>Responsable de Formation</option>
-					        </select><br/>
-					 
-					        <label for="action">Action : </label>
-					        <input type="submit" name="Envoyer" value="Envoyer" />
-					        <input name="Effacer" value="Effacer" type="reset" />   
-					        </form>
-					        <br/>
-					        <!--ToDo suppression de membre -->
-					    }
-				</form>
-    		}
-    	} */
-    
-
-
+					}
+			    }
+			    //suppression du membre
+			    if(isset($_GET['supmembre'])){
+			    //on supprime le membre
+			    $supprime_membre = mysql_query("DELETE FROM user WHERE id = ".$_GET['supmembre']."");
+			    //si erreur
+				    if (!$supprime_membre) {
+		                die('Requête invalide : ' . mysql_error());
+		            }
+		            //si ok
+		            else{
+			        //on informe et on redirige
+			        echo '<div class="ok">Membre supprimé avec succès. Redirection en cours...</div><script type="text/javascript"> window.setTimeout("location=(\'auth-admin.php\');",3000) </script>';
+				    }
+				}
+				if(isset($_POST['Envoyer'])){
+				//on sélectionne tout les pseudo et email
+		            $donnees = mysql_query("SELECT user_name, user_institueemail FROM user") or die ('Erreur :'.mysql_error());
+		            while($result1 = mysql_fetch_array($donnees)){
+		                //si le pseudo posté est différent du pseudo actuel du membre, le pseudo a alors été modifié
+		                //et si le pseudo posté correspond à un pseudo déjà présent en bd, on informe
+		                if($_POST['pseudo']!=$pseudo_register && $_POST['pseudo']==$result1['pseudo']){
+		                    echo '<div class="erreur">Ce pseudo « '.$_POST['pseudo'].' » est utilisé!</div>'; return false;
+		                }
+		                //idem pour l'email
+		                if($_POST['email']!=$email_register && $_POST['email']==$result1['email']){
+		                    echo '<div class="erreur">Cet email « '.$_POST['email'].' » est utilisé!</div>'; return false;
+		                }               
+					}
+					//si pseudo vide
+			        if(empty($_POST['pseudo'])){
+			            echo '<div class="erreur">Veuillez saisir un pseudo!</div>';
+			        }
+			        //si l'email vide
+			        else if(empty($_POST['email'])){
+			            echo '<div class="erreur">Veuillez saisir un email!</div>';
+			        }
+			        //si l'email est invalide
+			        else if (!preg_match("$[0-9a-z]([-_.]?[0-9a-z])*@[0-9a-z]([-.]?[0-9a-z])*\.[a-z]{2,4}$",$_POST['email'])){
+			            echo '<div class="erreur">Veuillez saisir un email valide!</div>';
+			        }
+			        //si le statut du membre est vide
+			        else if($_POST['statut']==''){
+			            echo '<div class="erreur">Veuillez saisir le statut du membre!</div>';
+			        }
+			        //tout est ok, on modifie les données
+			        else{
+			            $modif = mysql_query("UPDATE LOGIN SET pseudo='".mysql_real_escape_string(stripcslashes($_POST['pseudo']))."',
+			            									   email='".mysql_real_escape_string(stripcslashes($_POST['email']))."',
+			            									   statut='".mysql_real_escape_string(stripcslashes($_POST['statut']))."' 
+			            									   WHERE id='".mysql_real_escape_string($id_membre)."'");
+			            if(!$modif) {
+        					die('Requête invalide : ' . mysql_error());
+			            }
+			            echo '<div class="ok">Profil du membre modifié avec succès. Redirection en cours...</div><script type="text/javascript"> window.setTimeout("location=(\'Admin.php\');",3000) </script>';
+			        }
+			    }
+			//}
+		}*/
+	}
