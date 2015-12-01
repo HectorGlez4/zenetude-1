@@ -1,5 +1,5 @@
 <?php
-
+ini_set('display_errors', 1);
 	class PageView {
 
 
@@ -291,12 +291,12 @@
 			
 			        <div class="card-action  center-align bouton-connection">
 				        <input class="btn connexion" type="submit" value="Se connecter" />
-			        </div>
+			        </div><br />
 			        <div id="socialmedia">
 						<?php
 							include('socialmedia.php');
 						?>
-					</div>
+					</div><br />
 			        </form><!-- Fin formulaire -->
 			        <p class="connexion"><a href="inscription.php" class="left">S'inscrire</a><a href="recuperation.php" class="right">Mot de passe oublié</a></p>
 		      	</div>
@@ -315,6 +315,14 @@
 			* Show the dynamic menu bar. 
 		**/
 		public function showScrollMenu($connect, $rf = false) {
+
+if (isset($_SESSION['image'])){
+	$pic = $_SESSION['image'];
+}else{
+	$pic = "../../img/avatar.png";
+}
+	//echo "<script>alert('$pic');</script>";
+			
 			if(!$connect) {?>
 			<nav id="scroll-nav">
 		  		<div class="nav-wrapper">
@@ -328,7 +336,19 @@
 			?>
 			<nav id="menu" class="center-align">
 				<ul>
-					<img src="../../img/avatar.png" alt="avatar.png" class="circle responsive-img"/><br/><?php echo $_SESSION['prenom']." ".$_SESSION['nom'].'<br />'; if($rf) {echo 'Responsable de formation <br />';}else {echo 'Groupe '.$_SESSION['class'].'<br />';}?>
+					<?php
+						echo "<img src='".$pic."' alt='avatar.png' class='circle responsive-img'/><br/>";
+
+					echo $_SESSION['prenom']." ".$_SESSION['nom'].'<br />';
+
+					if($rf) 
+					{
+						echo 'Responsable de formation <br />';
+					}else{
+						echo 'Groupe '.$_SESSION['class'].'<br />';
+					}
+
+					?>
 					<li><a class="color" href="profil.php">Mon compte</a></li>
 					<li><a class="color" href="../model/deconnect.php">Déconnexion</a></li>
 				</ul>
