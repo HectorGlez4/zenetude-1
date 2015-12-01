@@ -15,8 +15,11 @@ function getStudentsByTrainingGroup($training_id = null, $student_group = null){
         echo "Echec lors de la connexion à MySQL : (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
     }
     
-    if ($result = $mysqli->query("SELECT  student_id, Student.user_id, student_personnalemail, student_origin, student_avatar, user_name, user_firstname 
+    if ($result = $mysqli->query("SELECT  student_id, Student.user_id, student_personnalemail, student_origin, student_avatar,
+                                         user_name, description, user_firstname, Departement.departement_name
                                 FROM    Student JOIN User ON Student.user_id = User.user_id 
+                                        JOIN Training ON Student.training_id = Training .training_id
+                                        JOIN Departement ON Training.departement_id = Departement.departement_id
                                 WHERE   training_id = ".$training_id." 
                                 AND     student_group = ".$student_group." 
                                 ORDER BY user_name")) {

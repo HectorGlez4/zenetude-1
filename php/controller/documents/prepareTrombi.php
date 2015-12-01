@@ -13,8 +13,8 @@ $students = getStudentsByTrainingGroup(1,1);
     <div style="width:100%;margin:0 auto;">
         <bookmark title="Lettre" level="0" ></bookmark>
 
-        <h2>"Nom de Formation" 2015-2016</h2>
-        <h3>Département "Nom Département"</h3>
+        <h2><?php echo $students[0]["description"] ?> 2015-2016</h2>
+        <h3>Département: <?php echo $students[0]["departement_name"] ?></h3>
         <br><hr><br>
         <h5><?php echo count($students) ?> étudiants</h5>
         <table cellspacing="0" style="width: 100%; border: solid 1px black; text-align: center; ">

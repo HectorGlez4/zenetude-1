@@ -14,7 +14,7 @@ $students = getStudentsByTrainingGroup(1,1);
         <bookmark title="Lettre" level="0" ></bookmark>
 
         <h4>ANNEE 2015/2016</h4><br>
-        <h4 class="center">"Nom de formation"</h4>
+        <h4 class="center"><?php echo $students[0]["description"] ?></h4>
         <h5 class="center"><?php echo count($students)?> ÉTUDIANTS</h5><br>
         <table class="noneborder" style="width:100%"><tr><td style="width: 60%"><h4 >ENSEIGNANT :</h4></td><td style="width: 40%"><h4 >DATE</h4></td> </tr> </table>
         <br>
