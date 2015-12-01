@@ -312,115 +312,139 @@
 		/**
 			* Show the dynamic menu bar. 
 		**/
-		public function showScrollMenu($connect, $rf = false) {
+		public function showScrollMenu($connect, $userInfos, $rf = false) {
 			if(!$connect) {?>
-				<nav id="scroll-nav">
-			  		<div class="nav-wrapper">
-			    		<a href="" class="brand-logo"><img src="../../img/logo.png" alt="logo du site"></a>
-			    		<img src="../../img/name.png" alt="Zenetude, titre du site">
-			 	 	</div>
-				</nav>
-				<?php
-					}
-					else {
-					?>
-					<nav id="menu" class="center-align">
-						<ul>
-							<img src="../../img/avatar.png" alt="avatar.png" class="circle responsive-img"/><br/><?php echo $_SESSION['prenom']." ".$_SESSION['nom'].'<br />'; if($rf) {echo 'Responsable de formation <br />';}else {echo 'Groupe '.$_SESSION['class'].'<br />';}?>
-							<li><a class="color" href="profil.php">Mon compte</a></li>
-							<li><a class="color" href="../model/deconnect.php">Déconnexion</a></li>
-						</ul>
-					</nav>
-					<nav id="scroll-nav">
-				  		<div class="nav-wrapper">
-				    		<a href="" class="brand-logo"><img src="../../img/logo.png" alt="logo du site"></a>
-				    		<img src="../../img/name.png" alt="Zenetude, titre du site">
-				    		<div id="hamburger" class="hamburglar is-closed">
-				    			<div class="burger-icon">
-							      <div class="burger-container">
-							        <span class="burger-bun-top"></span>
-							        <span class="burger-filling"></span>
-							        <span class="burger-bun-bot"></span>
-							      </div>
-							    </div>
-						    	<!-- svg ring containter -->
-						    	<div class="burger-ring">
-						      		<svg class="svg-ring">
-							      		<path class="path" fill="none" stroke="#7BBA42" stroke-miterlimit="10" stroke-width="4" d="M 34 2 C 16.3 2 2 16.3 2 34 s 14.3 32 32 32 s 32 -14.3 32 -32 S 51.7 2 34 2" />
-						      		</svg>
-					    		</div>
-					    		<!-- the masked path that animates the fill to the ring -->
-						 		<svg width="0" height="0">
-							       	<mask id="mask">
-							   			<path xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#ff0000" stroke-miterlimit="10" stroke-width="4" d="M 34 2 c 11.6 0 21.8 6.2 27.4 15.5 c 2.9 4.8 5 16.5 -9.4 16.5 h -4" />
-						      	 	</mask>
-							    </svg>
-							    <div class="path-burger">
-							      	<div class="animate-path">
-							        	<div class="path-rotation"></div>
-							      	</div>
-							    </div>
-					  		</div>
-				 	 	</div>
-					</nav>
-				<?php
-					}
-				}
-
-		public function showInformations($db){
-			if (isset($_SESSION['id'])) {
-				$request = $db->prepare('SELECT * FROM User WHERE user_id = '.$_SESSION['id']);
-        		$request->execute();
-        		$result = $request->fetch();
-
-				$request = $db->prepare('SELECT * FROM Student WHERE user_id = '.$_SESSION['id']);
-		        $request->execute();
-		        $result2 = $request->fetch();
-
-		        $request = $db->prepare('SELECT description FROM Training WHERE training_id IN (SELECT training_id FROM Student WHERE user_id = '.$_SESSION['id'].')');
-		        $request->execute();
-		        $result3 = $request->fetch();
-	    	}
-
-	    	echo '<div class="card-header"><h2>'.utf8_encode($result[3]).' '.utf8_encode($result[4]).'</h2></div><ul>';
-
-	    	if(isset($result[2])) {
-	       		echo '<li class="infos">Email académique : '.$result[2].'</li>';}
-            if(isset($result2[4])) {
-            	echo '<li class="infos">Email personnel : '.$result2[4].'</li>';}
-            if(isset($result[6])) {
-            	echo '<li class="infos">Type : '.$result[6].'</li>';}
-            if(isset($result2[5])) {
-            	echo '<li class="infos">Téléphone fixe : 0'.$result2[5].'</li>';}
-            if(isset($result2[6])) {
-            	echo '<li class="infos">Téléphone mobile : 0'.$result2[6].'</li>';}
-            if(isset($result[5])) {
-            	echo '<li class="infos">Civilité : '.$result[5].'</li>';}
-            if(isset($result3[0])) {
-            	echo '<li class="infos">Formation actuelle : '.utf8_encode($result3[0]).'</li>';}
-            if(isset($result2[2])) {
-            	echo '<li class="infos">Groupe : '.$result2[2].'</li>';}
-            if(isset($result2[13])) {
-            	echo '<li class="infos">Date de naissance : '.$result2[13].'</li>';}
-            if(isset($result2[14])) {
-            	echo '<li class="infos">Lieu de naissance : '.utf8_encode($result2[14]).'</li>';}
-            if(isset($result2[15])) {
-            	echo '<li class="infos">Région de naissance : '.utf8_encode($result2[15]).'</li>';}
-            if(isset($result2[16])) {
-            	echo '<li class="infos">Pays de naissance : '.utf8_encode($result2[16]).'</li>';}
-            if(isset($result2[20])) {
-            	echo '<li class="infos">Formation précédente : '.utf8_encode($result2[20]).'</li>';}
-            if(isset($result2[7])) {
-            	echo '<li class="infos">Adresse : '.utf8_encode($result2[7]).' '.utf8_encode($result2[8]).'</li>';}
-            if(isset($result2[9])) {
-            	echo '<li class="infos">Code postal : '.$result2[9].'</li>';}
-            if ($result[6] == 'RF'){
-            	echo '<a class="right-align" href="trombi.php">Documents pédagogiques</a>';}
-            if ($result[6]== 'Etudiant') {
-    			echo '<li class="infos"><a href="contact.php">Contacter un responsable de formation</a></li>';
-                echo '<li class="infos"><a class="right-align" href="gestion.php">Gérer mon compte</a></li>';}
-            echo "</u>";
+			<nav id="scroll-nav">
+		  		<div class="nav-wrapper">
+		    		<a href="" class="brand-logo"><img src="../../img/logo.png" alt="logo du site"></a>
+		    		<img src="../../img/name.png" alt="Zenetude, titre du site">
+		 	 	</div>
+			</nav>
+		<?php
+			}
+			else {
+			?>
+			<nav id="menu" class="center-align">
+				<ul>
+					<img src="../../img/avatar.png" alt="avatar.png" class="circle responsive-img"/><br/><?php echo $userInfos['infoUser'][0]['user_firstname']." ".$userInfos['infoUser'][0]['user_name'].'<br />'; if($rf) {echo 'Responsable de formation <br />';}else {echo 'Groupe '.$userInfos['infoStudent'][0]['student_group'].'<br />';}?>
+					<li><a class="color" href="profil.php">Mon compte</a></li>
+					<li><a class="color" href="../model/deconnect.php">Déconnexion</a></li>
+				</ul>
+			</nav>
+			<nav id="scroll-nav">
+		  		<div class="nav-wrapper">
+		    		<a href="" class="brand-logo"><img src="../../img/logo.png" alt="logo du site"></a>
+		    		<img src="../../img/name.png" alt="Zenetude, titre du site">
+		    		<div id="hamburger" class="hamburglar is-closed">
+		    			<div class="burger-icon">
+					      <div class="burger-container">
+					        <span class="burger-bun-top"></span>
+					        <span class="burger-filling"></span>
+					        <span class="burger-bun-bot"></span>
+					      </div>
+					    </div>
+			    
+				    	<!-- svg ring containter -->
+				    	<div class="burger-ring">
+				      		<svg class="svg-ring">
+					      		<path class="path" fill="none" stroke="#7BBA42" stroke-miterlimit="10" stroke-width="4" d="M 34 2 C 16.3 2 2 16.3 2 34 s 14.3 32 32 32 s 32 -14.3 32 -32 S 51.7 2 34 2" />
+				      		</svg>
+			    		</div>
+			    		<!-- the masked path that animates the fill to the ring -->
+			    
+				 		<svg width="0" height="0">
+					       	<mask id="mask">
+					   			<path xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#ff0000" stroke-miterlimit="10" stroke-width="4" d="M 34 2 c 11.6 0 21.8 6.2 27.4 15.5 c 2.9 4.8 5 16.5 -9.4 16.5 h -4" />
+				      	 	</mask>
+					    </svg>
+					    <div class="path-burger">
+					      	<div class="animate-path">
+					        	<div class="path-rotation"></div>
+					      	</div>
+					    </div>
+			      
+			  		</div>
+		 	 	</div>
+			</nav>
+			<?php
+			}
 		}
+
+
+        public function showContact($db){
+            if (isset($_SESSION['id'])) {
+
+                $request = $db->prepare('SELECT user_name,user_firstname,user_instituteemail
+                                          FROM User U , Student S, Training T ,Training_manager TM
+                                          WHERE S.training_id = T.training_id AND
+                                          T.training_manager_id = TM.training_manager_id AND
+                                          TM.user_id = U.user_id AND S.user_id ='.$_SESSION['id']);
+                $request->execute();
+                $resul = $request->fetch();
+            }
+
+            echo '<div class="card-header"><h2>'.utf8_encode($resul[1]).' '.utf8_encode($resul[0]).'</h2></div><ul>';
+
+            if(isset($resul[0])) {
+                echo '<li class="infos">Nom  : '.$resul[0].'</li>';}
+
+
+            if(isset($resul[1])) {
+                echo '<li class="infos"> Prénom : '.$resul[1].'</li>';}
+
+
+            if(isset($resul[2])) {
+                echo '<li class="infos">Email personnel : '.$resul[2].'</li>';}
+
+
+        }
+
+
+		public function showProfilInformations($userInfos, $rf = false){
+			if(!$rf) {
+	    	echo '
+		    	<div class="col s12 m8">
+	                <div class="card-panel teal" id="bloc2">
+	                    <div class="card-title"> <h3>Profil</h3></div>
+				    	<div class="card-header"><h2>'.$userInfos['infoUser'][0]['user_firstname'].' '.$userInfos['infoUser'][0]['user_name'].'</h2></div><ul>
+			       		<li class="infos">Email académique : '.$userInfos['infoUser'][0]['user_instituteemail'].'</li>
+			        	<li class="infos">Email personnel : '.$userInfos['infoStudent'][0]['student_personnalemail'].'</li>
+			        	<li class="infos">Type : '.$userInfos['infoUser'][0]['user_type'].'</li>
+						<li class="infos">Téléphone fixe : 0'.$userInfos['infoStudent'][0]['student_phone'].'</li>
+			       		<li class="infos">Téléphone mobile : 0'.$userInfos['infoStudent'][0]['student_mobile'].'</li>
+						<li class="infos">Civilité : '.$userInfos['infoUser'][0]['user_civility'].'</li>
+			       		<li class="infos">Formation actuelle : </li>
+			        	<li class="infos">Groupe : '.$userInfos['infoStudent'][0]['student_group'].'</li>
+						<li class="infos">Date de naissance : '.$userInfos['infoStudent'][0]['student_birthday'].'</li>
+						<li class="infos">Lieu de naissance : '.$userInfos['infoStudent'][0]['student_birthcity'].'</li>
+						<li class="infos">Région de naissance : '.$userInfos['infoStudent'][0]['student_birtharea'].'</li>
+						<li class="infos">Pays de naissance : '.$userInfos['infoStudent'][0]['student_birthcountry'].'</li>
+			    		<li class="infos">Formation précédente : </li>
+			     		<li class="infos">Adresse : '.$userInfos['infoStudent'][0]['student_adresse1'].'</li>
+			     		<li class="infos"><a class="right-align" href="gestion.php">Gérer mon compte</a></li>
+			     		<li class="infos"><a class="right-align" href="contact.php">Contacter un responsable de formation</a></li>
+			       	</div>
+	            </div>
+	            ';
+	           }
+	        	else {
+	        	echo '
+		    	<div class="col s12 m8">
+	                <div class="card-panel teal" id="bloc2">
+	                    <div class="card-title"> <h3>Profil</h3></div>
+				    	<div class="card-header"><h2>'.$userInfos['infoUser'][0]['user_firstname'].' '.$userInfos['infoUser'][0]['user_name'].'</h2></div><ul>
+				    	<li class="infos">Email académique : '.$userInfos['infoUser'][0]['user_instituteemail'].'</li>
+		          		<li class="infos">Type : '.$userInfos['infoUser'][0]['user_type'].'</li>
+		          		<li class="infos">Civilité : '.$userInfos['infoUser'][0]['user_civility'].'</li>
+		          		<li class="infos"><a class="right-align" href="gestion.php">Gérer mon compte</a></li>
+		          		<li class="infos"><a class="right-align" href="trombi.php">Accéder au trombinoscope</a></li>
+		          	</div>
+	            </div>';
+				}
+			}
+	
+
+
 
 		/*public function showAdministration($db){
 			if (isset($_SESSION['id'])) {
@@ -476,4 +500,6 @@
 				</form>
     		}
     	} */
-    }
+    
+
+
