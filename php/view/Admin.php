@@ -12,37 +12,33 @@
     $db = connect();
 
 ?>
-  <!DOCTYPE html>
-  <html>
+<!DOCTYPE html>
+<html>
     <body>
-    
-        
         <?php
             $pageView -> showHead();
             $pageController -> controlHeader();
             $pageController -> controlDynamicMenu();
         ?>
-
-
         <div class="container">
-
             <div class="row">
-            <?php
-                $pageController -> controlProfilInformations();
-                $pageView->showCalendar();
-             ?>
-
+                <div class="col s12 m8">
+                    <div class="card-panel teal" id="bloc2">
+                        <div class="card-title"> <h3>Profil</h3></div>
+                        <?php
+                            $pageView -> showAdministration($db);
+                        ?>
+                        <p></p>
+                    </div>
+                </div>
+                <?php
+                    $pageView->showCalendar();
+                ?>
             </div>
-
         </div><!-- Fin container -->
-
-            
-        </div>
-           
         <?php
             $pageView->showFooter();
             $pageView->showjavaLinks();
         ?>
-
     </body>
 </html>
