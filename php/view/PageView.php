@@ -486,7 +486,7 @@ include_once '../model/db.php';
 					while ($result=$register -> fetch()) {
 						echo '<option value="'.$result['user_id'].'" ';
             			if(isset($_POST["register"]) && $_POST["register"]==$result['user_id']){echo "selected='selected'";}
-            			echo '>'.$result['user_name'].'</option>';
+            			echo '>'.$result['user_firstname'].'</option>';
    					}
 					echo '</select><br/>';
 				}
@@ -502,10 +502,10 @@ include_once '../model/db.php';
 			            $statut_register = $resultat['user_type'];
 			        
 			        ?>
-			        <label for="user_name">Pseudo : </label>
+			        <label for="user_name">Nom : </label>
 			        <input type="text" name="user_name" maxlength="20" value="<?php echo htmlspecialchars($name_register);?>" /></br>
 
-			        <label for="user_firstname">Pseudo : </label>
+			        <label for="user_firstname">Prénom : </label>
 			        <input type="text" name="user_firstname" maxlength="20" value="<?php echo htmlspecialchars($firstname_register);?>" /></br>
 			 
 			        <label for="email">Email : </label>
