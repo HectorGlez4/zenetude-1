@@ -531,14 +531,14 @@ include_once '../model/db.php';
 				/*$result=$register -> fetch();*/
 				if(count($register) > 0){
 					echo '<label for="register">Sélection du membre : </label>';
-					echo '<select name="register" size=1 onchange="javascript:submit(this)" >';
+					echo '<select id="register" name="register" size=1 onchange="javascript:submit(this)" >';
 					echo '<option value = "default" selected>Sélectionner l\'utilisateur</option>';
 					while ($result=$register -> fetch()) {
 						echo '<option value="'.$result['user_id'].'" ';
             			if(isset($_POST["register"]) && $_POST["register"]==$result['user_id']){echo "selected='selected'";}
             			echo '>'.$result['user_firstname'].' '.$result['user_name'].'</option>';
    					}
-					echo '</select><br/>';
+					echo '</select>';
 				}
 			        //on sélectionne tout les membres
 				if (isset($_POST['register'])) {
@@ -552,29 +552,37 @@ include_once '../model/db.php';
 			            $statut_register = $resultat['user_type'];
 
 			        ?>
-			        <label for="user_name">Nom : </label>
-			        <input type="text" name="user_name" maxlength="20" value="<?php echo htmlspecialchars($name_register);?>" /></br>
+			        <div class="row">
+				        <div class="input-field col s12">
+					        <input type="text" id="user_name" name="user_name" maxlength="20" value="<?php echo htmlspecialchars($name_register);?>" />
+					        <label for="user_name">Nom</label>
+					    </div>
+			        </div>
 
-			        <label for="user_firstname">Prénom : </label>
-			        <input type="text" name="user_firstname" maxlength="20" value="<?php echo htmlspecialchars($firstname_register);?>" /></br>
+			        <div class="row">
+			        	<div class="input-field col s12">
+					        <input type="text" id="user_firstname" name="user_firstname" maxlength="20" value="<?php echo htmlspecialchars($firstname_register);?>" /></br>
+					        <label for="user_firstname">Prénom</label>
+			        	</div>
+			        </div>
 
-			        <label for="email">Email : </label>
-			        <input type="text" name="email" maxlength="50" value="<?php echo htmlspecialchars($email_register);?>" /></br>
+			        <div class="row">
+			        	<div class="input-field col s12">
+					        <input type="text" id="email" name="email" maxlength="50" value="<?php echo htmlspecialchars($email_register);?>" /></br>
+					        <label for="email">Email</label>
+			        	</div>
+			        </div>
 
-			        <label for="statut">Statut : </label>
-			        <select name="statut">
+			        <label for="statut">Statut</label>
+			        <select id="statut" name="statut">
 				        <option value="Etudiant" <?php if($statut_register == "Etudiant") echo "selected='selected'";?>>Etudiant</option>
 				        <option value="RF" <?php if($statut_register == "RF") echo "selected='selected'";?>>Responsable de Formation</option>
-			        </select></br>
+			        </select>
 
-			        <label for="action">Modifier : </label>
-			        <input type="submit" name="Modifier" value="Modifier" />
-			        </form>
-			        </br>
+			        <button class="btn" type="submit" name="Modifier">Modifier</button>
+					<a class="btn supp" href="Admin.php?supmembre=<?php echo $id_register;?>">Supprimer</a>
+			    </form>
 
-					<ul>
-						<li><a href="Admin.php?supmembre=<?php echo $id_register;?>">Supprimer le membre</a></li>
-					</ul>
 					<?php
 					}
 				}
