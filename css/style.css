@@ -187,6 +187,10 @@ nav>.nav-wrapper>.hamburglar{
 	float: left !important;
 }
 
+.card-action>input{
+	width: inherit;
+}
+
 footer{
 	height:300px;
 	background-color: #385e2d;
