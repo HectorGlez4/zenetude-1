@@ -10,7 +10,7 @@
                                                                                          WHERE user_id = '.$userId.'
                                                                                         )
             ');
-            $result = $request->fetchAll();
+            $result = $request->fetch();
             return $result;
         }
 
@@ -20,7 +20,7 @@
 		public  function getDataUser($param, $mail) {
             $db = connect();
             $request = $db->query('SELECT '.$param.' FROM User WHERE user_instituteemail = "'.$mail.'"');
-            $result = $request->fetchAll();
+            $result = $request->fetch();
             return $result;
         }
 
@@ -30,7 +30,7 @@
 		public function getDataStudent($param, $userId) {
 			$db = connect();
 			$request = $db->query('SELECT '.$param.' FROM Student WHERE user_id = "'.$userId.'"');
-            $result = $request->fetchAll();
+            $result = $request->fetch();
             return $result;
 		}
 
@@ -40,7 +40,7 @@
 		public function getDataTrainingManager($param, $userId) {
 			$db = connect();
 			$request = $db->query('SELECT '.$param.' FROM Training_manager WHERE user_id = "'.$userId.'"');
-            $result = $request->fetchAll();
+            $result = $request->fetch();
             return $result;
 		}		
 
@@ -51,7 +51,7 @@
         public function getUserPassword($userMail, $userPassword) {
             $db = connect();
             $request = $db->query('SELECT * FROM User WHERE user_instituteemail = "'.$userMail.'" AND user_password = "'.$userPassword.'"');
-            $result = $request->fetchAll();
+            $result = $request->fetch();
             return $result;
         }
 

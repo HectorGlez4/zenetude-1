@@ -341,14 +341,14 @@ include_once '../model/db.php';
 					<img src="<?php echo $pic; ?>" alt="avatar.png" class="circle responsive-img"/><br/>
 					<?php 
 
-						echo $userInfos['infoUser'][0]['user_firstname']." ".$userInfos['infoUser'][0]['user_name'].'<br />'; 
+						echo $userInfos['infoUser']['user_firstname']." ".$userInfos['infoUser']['user_name'].'<br />'; 
 
 						if($rf) {
 
 							echo 'Responsable de formation <br />';
 
 						}else{
-							echo 'Groupe '.$userInfos['infoStudent'][0]['student_group'].'<br />';
+							echo 'Groupe '.$userInfos['infoStudent']['student_group'].'<br />';
 						}
 					?>
 					<li><a class="color" href="profil.php">Mon compte</a></li>
@@ -429,38 +429,37 @@ include_once '../model/db.php';
 	    	echo '
 		    	<div class="col s12 m8">
 	                <div class="card-panel teal" id="bloc2">
-	                    <div class="card-title"> <h3>Profil</h3></div>
-            ';
-	                    if($userInfos['infoUser'][0]['user_firstname'] != 'NULL')
-                            echo '<div class="card-header"><h2>'.$userInfos['infoUser'][0]['user_firstname'].' '.$userInfos['infoUser'][0]['user_name'].'</h2></div><ul>';
-                        if($userInfos['infoUser'][0]['user_instituteemail'] != 'NULL')
-                            echo '<li class="infos">Email académique : '.$userInfos['infoUser'][0]['user_instituteemail'].'</li>';
-                        if($userInfos['infoStudent'][0]['student_personalemail'] != 'NULL')
-			        	    echo '<li class="infos">Email personnel : '.$userInfos['infoStudent'][0]['student_personalemail'].'</li>';
-                        if($userInfos['infoUser'][0]['user_type'] != 'NULL')
-                            echo '<li class="infos">Type : '.$userInfos['infoUser'][0]['user_type'].'</li>';
-                        if($userInfos['infoStudent'][0]['student_phone'] != 'NULL')
-                            echo '<li class="infos">Téléphone fixe : 0'.$userInfos['infoStudent'][0]['student_phone'].'</li>';
-                        if($userInfos['infoStudent'][0]['student_mobile'] != 'NULL')
-                            echo '<li class="infos">Téléphone mobile : 0'.$userInfos['infoStudent'][0]['student_mobile'].'</li>';
-                        if($userInfos['infoUser'][0]['user_civility'] != 'NULL')
-                            echo '<li class="infos">Civilité : '.$userInfos['infoUser'][0]['user_civility'].'</li>';
-                        if($userInfos['infoTraining'][0]['description'] != 'NULL')
-			       		    echo '<li class="infos">Formation actuelle : '.$userInfos['infoTraining'][0]['description'].'</li>';
-                        if($userInfos['infoStudent'][0]['student_group'] != 'NULL')
-                            echo '<li class="infos">Groupe : '.$userInfos['infoStudent'][0]['student_group'].'</li>';
-                        if($userInfos['infoStudent'][0]['student_birthdate'] != 'NULL')
-						    echo '<li class="infos">Date de naissance : '.$userInfos['infoStudent'][0]['student_birthdate'].'</li>';
-                        if($userInfos['infoStudent'][0]['student_birthcity'] != 'NULL')
-						    echo '<li class="infos">Lieu de naissance : '.$userInfos['infoStudent'][0]['student_birthcity'].'</li>';
-                        if($userInfos['infoStudent'][0]['student_birtharea'] != 'NULL')
-						    echo '<li class="infos">Région de naissance : '.$userInfos['infoStudent'][0]['student_birtharea'].'</li>';
-                        if($userInfos['infoStudent'][0]['student_birthcountry'] != 'NULL')
-                            echo '<li class="infos">Pays de naissance : '.$userInfos['infoStudent'][0]['student_birthcountry'].'</li>';
-                        if($userInfos['infoStudent'][0]['student_origin'] != 'NULL')
-                            echo '<li class="infos">Formation précédente : '.$userInfos['infoStudent'][0]['student_origin'].' </li>';
-                        if($userInfos['infoStudent'][0]['student_address2'] != 'NULL')
-                            echo '<li class="infos">Adresse : '.$userInfos['infoStudent'][0]['student_address2'].' '.$userInfos['infoStudent'][0]['student_address1'].' '.$userInfos['infoStudent'][0]['student_zipcode'].' '.$userInfos['infoStudent'][0]['student_city'].'</li>';
+	                    <div class="card-title"> <h3>Profil</h3></div>';
+	                    if($userInfos['infoUser']['user_firstname'] != 'NULL')
+                            echo '<div class="card-header"><h2>'.$userInfos['infoUser']['user_firstname'].' '.$userInfos['infoUser']['user_name'].'</h2></div><ul>';
+                        if($userInfos['infoUser']['user_instituteemail'] != 'NULL')
+                            echo '<li class="infos">Email académique : '.$userInfos['infoUser']['user_instituteemail'].'</li>';
+                        if($userInfos['infoStudent']['student_personalemail'] != 'NULL')
+			        	    echo '<li class="infos">Email personnel : '.$userInfos['infoStudent']['student_personalemail'].'</li>';
+                        if($userInfos['infoUser']['user_type'] != 'NULL')
+                            echo '<li class="infos">Type : '.$userInfos['infoUser']['user_type'].'</li>';
+                        if($userInfos['infoStudent']['student_phone'] != 'NULL')
+                            echo '<li class="infos">Téléphone fixe : 0'.$userInfos['infoStudent']['student_phone'].'</li>';
+                        if($userInfos['infoStudent']['student_mobile'] != 'NULL')
+                            echo '<li class="infos">Téléphone mobile : 0'.$userInfos['infoStudent']['student_mobile'].'</li>';
+                        if($userInfos['infoUser']['user_civility'] != 'NULL')
+                            echo '<li class="infos">Civilité : '.$userInfos['infoUser']['user_civility'].'</li>';
+                        if($userInfos['infoTraining']['description'] != 'NULL')
+			       		    echo '<li class="infos">Formation actuelle : '.$userInfos['infoTraining']['description'].'</li>';
+                        if($userInfos['infoStudent']['student_group'] != 'NULL')
+                            echo '<li class="infos">Groupe : '.$userInfos['infoStudent']['student_group'].'</li>';
+                        if($userInfos['infoStudent']['student_birthdate'] != 'NULL')
+						    echo '<li class="infos">Date de naissance : '.$userInfos['infoStudent']['student_birthdate'].'</li>';
+                        if($userInfos['infoStudent']['student_birthcity'] != 'NULL')
+						    echo '<li class="infos">Lieu de naissance : '.$userInfos['infoStudent']['student_birthcity'].'</li>';
+                        if($userInfos['infoStudent']['student_birtharea'] != 'NULL')
+						    echo '<li class="infos">Région de naissance : '.$userInfos['infoStudent']['student_birtharea'].'</li>';
+                        if($userInfos['infoStudent']['student_birthcountry'] != 'NULL')
+                            echo '<li class="infos">Pays de naissance : '.$userInfos['infoStudent']['student_birthcountry'].'</li>';
+                        if($userInfos['infoStudent']['student_origin'] != 'NULL')
+                            echo '<li class="infos">Formation précédente : '.$userInfos['infoStudent']['student_origin'].' </li>';
+                        if($userInfos['infoStudent']['student_address2'] != 'NULL')
+                            echo '<li class="infos">Adresse : '.$userInfos['infoStudent']['student_address2'].' '.$userInfos['infoStudent']['student_address1'].' '.$userInfos['infoStudent']['student_zipcode'].' '.$userInfos['infoStudent']['student_city'].'</li>';
 			     		echo '
                         <li class="infos"><a class="right-align" href="gestion.php">Gérer mon compte</a></li>
 			     		<li class="infos"><a class="right-align" href="contact.php">Contacter un responsable de formation</a></li>
@@ -473,10 +472,10 @@ include_once '../model/db.php';
 		    	<div class="col s12 m8">
 	                <div class="card-panel teal" id="bloc2">
 	                    <div class="card-title"> <h3>Profil</h3></div>
-				    	<div class="card-header"><h2>'.$userInfos['infoUser'][0]['user_firstname'].' '.$userInfos['infoUser'][0]['user_name'].'</h2></div><ul>
-				    	<li class="infos">Email académique : '.$userInfos['infoUser'][0]['user_instituteemail'].'</li>
-		          		<li class="infos">Type : '.$userInfos['infoUser'][0]['user_type'].'</li>
-		          		<li class="infos">Civilité : '.$userInfos['infoUser'][0]['user_civility'].'</li>
+				    	<div class="card-header"><h2>'.$userInfos['infoUser']['user_firstname'].' '.$userInfos['infoUser']['user_name'].'</h2></div><ul>
+				    	<li class="infos">Email académique : '.$userInfos['infoUser']['user_instituteemail'].'</li>
+		          		<li class="infos">Type : '.$userInfos['infoUser']['user_type'].'</li>
+		          		<li class="infos">Civilité : '.$userInfos['infoUser']['user_civility'].'</li>
 		          		<li class="infos"><a class="right-align" href="gestion.php">Gérer mon compte</a></li>
 		          		<li class="infos"><a class="right-align" href="trombi.php">Accéder au trombinoscope</a></li>
 		          	</div>

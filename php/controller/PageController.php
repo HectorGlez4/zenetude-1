@@ -11,7 +11,7 @@
 
 		public function controlProfilInformations() {
 			$pageView = new PageView();
-			if(isset($_SESSION['infoUser']) && $_SESSION['infoUser'][0]['user_type'] == 'RF')
+			if(isset($_SESSION['infoUser']) && $_SESSION['infoUser']['user_type'] == 'RF')
 				$pageView -> showProfilInformations($_SESSION, true);
 			else
 				$pageView -> showProfilInformations($_SESSION, false);
@@ -64,7 +64,7 @@
 		public function controlDynamicMenu() {
 			$pageView = new PageView();
 			if(isset($_SESSION['infoUser'])) {
-				if($_SESSION['infoUser'][0]['user_type'] == 'RF') {
+				if($_SESSION['infoUser']['user_type'] == 'RF') {
 					$pageView -> showScrollMenu(true, $_SESSION, true);
 				}
 				else 
