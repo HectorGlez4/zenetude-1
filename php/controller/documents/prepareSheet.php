@@ -4,7 +4,7 @@
 
 include(dirname(__FILE__).'/../../model/DocumentsModel.php');
 
-$students = getStudentsByTrainingGroup(1,1);
+$students = getStudentsByTrainingGroup($f,$g);
 
 //include(dirname(__FILE__).'/students.php');
 ?>

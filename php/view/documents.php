@@ -2,6 +2,13 @@
   include(dirname(__FILE__).'/../model/DocumentsModel.php');
 
   $studentsGroup = getStudentsGroupByTrainingGroup(1,1);
+  $get =  false;
+  if(isset($_GET['f']) && isset($_GET['g']))
+  {
+    $get = true
+    $frm = $_GET['f'];
+    $grp = $_GET['g']
+  }
 ?>
 
 <!doctype html>
@@ -124,11 +131,12 @@
                         <?php
                           $formation = $studentsGroup[0]["description"];
                           $group = $studentsGroup[0]["student_group"];
+                          $formation_id = $studentsGroup[0]["Training.training_id"];
                         ?>
 
                           <ul>
                             <li><?php echo $formation ?></li>
-                            <li class="indent"><a href="documents.php/<?php echo $formation ?>/<?php echo $group ?>">Groupe <?php echo $group ?></a></li>
+                            <li class="indent"><a href="documents.php/<?php echo $formation_id ?>/<?php echo $group ?>">Groupe <?php echo $group ?></a></li>
                           </ul>
 
                         <?php
@@ -150,7 +158,7 @@
                         ?>
                         
                           <ul>
-                            <li class="indent"><a href="documents.php/<?php echo $formation ?>/<?php echo $group ?>">Groupe <?php echo $group ?></a></li>
+                            <li class="indent"><a href="documents.php/<?php echo $formation_id ?>/<?php echo $group ?>">Groupe <?php echo $group ?></a></li>
                           </ul>
 
                         <?php
@@ -164,8 +172,10 @@
                   <div class="card-panel teal" id="bloc1">
                       <div class="card-header"> <h3>Documents</h3></div>
                       <div class="card-content center-align">
-                          <p><a href="../controller/documents/generateTrombi.php" target="_blank">Imprimer le trombinoscope</a></p>
-                          <p><a href="../controller/documents/generateSheet.php" target="_blank">Imprimer la feuille d'émargement</a></p>
+                      <?php if($get){?>
+                          <p><a href="../controller/documents/generateTrombi.php?f=<?php echo $frm ?>&g=<?php echo $grp ?>" target="_blank">Imprimer le trombinoscope</a></p>
+                          <p><a href="../controller/documents/generateSheet.php?f=<?php echo $frm ?>&g=<?php echo $grp ?>" target="_blank">Imprimer la feuille d'émargement</a></p>
+                      <?php } ?>
                       </div>
                   </div>
               </div>
