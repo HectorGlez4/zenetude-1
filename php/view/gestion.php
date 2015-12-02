@@ -12,7 +12,7 @@
     $db = connect();
 
     if (isset($_SESSION['id'])) {
-        $request = $db->prepare('SELECT * FROM student WHERE user_id = '.$_SESSION['id']);
+        $request = $db->prepare('SELECT * FROM Student WHERE user_id = '.$_SESSION['id']);
         $request->execute();
         $result = $request->fetch();
     }
