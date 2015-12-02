@@ -227,3 +227,22 @@ footer{
 .indent {
 	text-indent: 40px;
 }
+.form-group{
+	padding: 30px;
+	margin: 0 auto;
+	width: 90%
+}
+
+input, select{
+	margin-bottom: 45px !important;
+}
+
+.col>.button{
+	font-size: 1em !important;
+	margin-bottom: 45px !important;
+	margin-top: 21px !important;
+}
+
+.col>label{
+	font-size: 1.2em !important;
+}

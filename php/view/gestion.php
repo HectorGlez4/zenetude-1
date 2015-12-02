@@ -115,112 +115,104 @@ header('Location: profil.php');
             <div class="row">
                 
                 <div class="col s12 m8">
-                <div class="card-panel teal" id="bloc2">
+                    <div class="card-panel teal" id="bloc2">
                     <div class="card-title"> <h3>Gestion du compte</h3></div>
                     <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST" role="form">
                             <div class="form-group">
-        
-                        <div class="col-md-6">
                             <input type="hidden" class="form-control" value="<?php echo $_SESSION['infoUser']['user_id']; ?>" name="user_id">
-                            <label for="">Mail</label>
-                                <input type="email" class="form-control" value="<?php echo $result[4]; ?>" name="student_personalemail">
-                                <label for="">Telephone</label>
-                                <input type="number" class="form-control" value="<?php echo $result[5] ?>" name="student_phone">
-                                <label for="">Portable</label>
-                                <input type="text" class="form-control" value="<?php echo $result[6]; ?>" name="student_mobile">
-                                <label for="">Adresse 1</label>
-                                <input type="text" class="form-control" value="<?php echo $result[7]; ?>" name="student_address1">
-                                <label for="">Adresse 2</label>
-                                <input type="text" class="form-control" value="<?php echo $result[8]; ?>" name="student_address2">
-                                <label for="">Code postal</label>
-                                <input type="text" class="form-control" value="<?php echo $result[9]; ?>" name="student_zipcode" maxlength="5">
-                                <label for="">Ville</label>
-                                <input type="text" class="form-control" value="<?php echo $result[10]; ?>" name="student_city">
-                                <label for="">Pays</label>
-                                <input type="text" class="form-control" value="<?php echo $result[11]; ?>" name="student_country">
-                                <label for="">Nationalité</label>
-                                <input type="text" class="form-control" value="<?php echo $result[12]; ?>" name="student_nationality">
-                                <label for="">Date de naissance</label>
-                                <input type="date" class="form-control" value="<?php echo $result[13]; ?>" name="student_birthday">
-                        </div>
-                        <div class="col-md-6">
-                            <label for="">Ville de naissance</label>
-                                <input type="text" class="form-control" value="<?php echo $result[14]; ?>" name="student_birthcity">
-                                <label for="">Region de naissance</label>
-                                <input type="text" class="form-control" value="<?php echo $result[15]; ?>" name="student_birtharea">
-                                <label for="">Pays de naissance</label>
-                                <input type="text" class="form-control" value="<?php echo $result[16]; ?>" name="student_birthcountry">
-                                <div class="input-field col s12"> 
-                                    <select name="student_educationallevel">
-                                        <option value="BAC">
-                                            BAC
-                                        </option>
-                                        <option value="BAC+1">
-                                            BAC+1
-                                        </option>
-                                        <option value="BAC+2">
-                                            BAC+2
-                                        </option>
-                                        <option value="BAC+3">
-                                            BAC+3
-                                        </option>
-                                        <option value="BAC+4">
-                                            BAC+4
-                                        </option>
-                                        <option value="BAC+5">
-                                            BAC+5
-                                        </option>
-                                        <option value="BAC+6">
-                                            BAC+6
-                                        </option>
-                                        <option value="BAC+7">
-                                            BAC+7
-                                        </option>
-                                        <option value="BAC+8">
-                                            BAC+8
-                                        </option>
-                                    </select>
+                                <div class="col s6">
+                                    <label for="">Mail</label>
+                                    <input type="email" class="form-control" placeholder="Placeholder"value="<?php echo $result[4]; ?>" name="student_personalemail">
+                                    <label for="">Telephone</label>
+                                    <input type="number" class="form-control" placeholder="Placeholder" value="<?php echo $result[5] ?>" name="student_phone">
+                                    <label for="">Portable</label>
+                                    <input type="text" class="form-control" placeholder="Placeholder" value="<?php echo $result[6]; ?>" name="student_mobile">
+                                    <label for="">Adresse 1</label>
+                                    <input type="text" class="form-control" placeholder="Placeholder" value="<?php echo $result[7]; ?>" name="student_address1">
+                                    <label for="">Adresse 2</label>
+                                    <input type="text" class="form-control" placeholder="Placeholder" value="<?php echo $result[8]; ?>" name="student_address2">
+                                    <label for="">Code postal</label>
+                                    <input type="text" class="form-control" placeholder="Placeholder" value="<?php echo $result[9]; ?>" name="student_zipcode" maxlength="5">
+                                    <label for="">Ville</label>
+                                    <input type="text" class="form-control" placeholder="Placeholder" value="<?php echo $result[10]; ?>" name="student_city">
+                                    <label for="">Pays</label>
+                                    <input type="text" class="form-control" placeholder="Placeholder" value="<?php echo $result[11]; ?>" name="student_country">
+                                    <label for="">Nationalité</label>
+                                    <input type="text" class="form-control" placeholder="Placeholder" value="<?php echo $result[12]; ?>" name="student_nationality">
+                                </div>
+                                <div class="col s6">
+                                    <label for="">Date de naissance</label>
+                                    <input type="date" class="form-control" placeholder="Placeholder" value="<?php echo $result[13]; ?>" name="student_birthday">
+                                    <label for="">Ville de naissance</label>
+                                    <input type="text" class="form-control" placeholder="Placeholder" value="<?php echo $result[14]; ?>" name="student_birthcity">
+                                    <label for="">Region de naissance</label>
+                                    <input type="text" class="form-control" placeholder="Placeholder" value="<?php echo $result[15]; ?>" name="student_birtharea">
+                                    <label for="">Pays de naissance</label>
+                                    <input type="text" class="form-control" placeholder="Placeholder" value="<?php echo $result[16]; ?>" name="student_birthcountry">
                                     <label for="">Niveau d'études</label>
-                                </div>
-                                </br>
-                                <label for="">Origine</label>
-                                <input type="text" class="form-control" value="<?php echo $result[20]; ?>" name="student_origin">
-                                <label for="">Bourse</label>
-                                <input id="oui" class="with-gap" name="student_grantholder" type="radio" value="Oui"/>
-                                <label for="oui">Oui</label>                        
-                                <input id="non" class="with-gap" name="student_grantholder" type="radio" value="Non"/>    
-                                <label for="non">Non</label> </br>
-                                <label for="">Groupe</label>
-                                <input type="text" class="form-control" value="<?php echo $result[22]; ?>" name="student_group">
-                                <label for="">Commentaires</label>
-                                <input type="text" class="form-control" value="<?php echo $result[21]; ?>" name="student_comment">
+                                        <select name="student_educationallevel">
+                                            <option value="BAC">
+                                                BAC
+                                            </option>
+                                            <option value="BAC+1">
+                                                BAC+1
+                                            </option>
+                                            <option value="BAC+2">
+                                                BAC+2
+                                            </option>
+                                            <option value="BAC+3">
+                                                BAC+3
+                                            </option>
+                                            <option value="BAC+4">
+                                                BAC+4
+                                            </option>
+                                            <option value="BAC+5">
+                                                BAC+5
+                                            </option>
+                                            <option value="BAC+6">
+                                                BAC+6
+                                            </option>
+                                            <option value="BAC+7">
+                                                BAC+7
+                                            </option>
+                                            <option value="BAC+8">
+                                                BAC+8
+                                            </option>
+                                        </select>
+                                    <label for="">Origine</label>
+                                    <input type="text" class="form-control" placeholder="Placeholder" value="<?php echo $result[20]; ?>" name="student_origin">
+                                    <label for="">Bourse</label></br>
+                                    <input id="oui" class="with-gap" name="student_grantholder" type="radio" value="Oui"/>
+                                    <label class="button" for="oui">Oui</label>                       
+                                    <input id="non" class="with-gap" name="student_grantholder" type="radio" value="Non"/>  
+                                    <label class="button" for="non">Non</label> </br>
+                                    <label for="">Groupe</label>
+                                    <input type="text" class="form-control" placeholder="Placeholder" value="<?php echo $result[22]; ?>" name="student_group">
+                                    <label for="">Commentaires</label>
+                                    <input type="text" class="form-control" placeholder="Placeholder" value="<?php echo $result[21]; ?>" name="student_comment">
 
-
-                                <div class="input-field col s12"> 
-                                    <select name="student_status">
-                                        <option value="FI">
-                                            FI
-                                        </option>
-                                        <option value="FA">
-                                            FA
-                                        </option>
-                                        <option value="FC">
-                                            FC
-                                        </option>
-                                        <option value="CP">
-                                            CP
-                                        </option>
-                                    </select>
                                     <label>Type de formation</label>
+                                        <select name="student_status">
+                                            <option value="FI">
+                                                FI
+                                            </option>
+                                            <option value="FA">
+                                                FA
+                                            </option>
+                                            <option value="FC">
+                                                FC
+                                            </option>
+                                            <option value="CP">
+                                                CP
+                                            </option>
+                                        </select>
                                 </div>
-                                </br></br>
+                                
                                 <button type="submit" name="student_update" class="btn btn-primary">Enregistrer</button>
-                        </div>
                     </div>  
                     </form>
-
+                    </div>
                 </div>
-              </div>
 
               <?php
                 $pageView->showCalendar();
