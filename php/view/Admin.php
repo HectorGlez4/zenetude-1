@@ -28,7 +28,6 @@
                         <?php
                             $pageView->showAdministration();
                         ?>
-                        <p></p>
                     </div>
                 </div>
                 <?php
