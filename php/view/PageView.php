@@ -314,7 +314,6 @@ include_once '../model/db.php';
 			* Show the dynamic menu bar. 
 		**/
 		public function showScrollMenu($connect, $userInfos, $rf = false) {
-
 			if(!$connect) {?>
 			<nav id="scroll-nav">
 		  		<div class="nav-wrapper">
@@ -357,6 +356,19 @@ include_once '../model/db.php';
 					?>
 					<li><a class="color" href="profil.php">Mon compte</a></li>
 					<li><a class="color" href="../model/deconnect.php">Déconnexion</a></li>
+
+					<?php
+						$db=connect();
+						$permission = $db->query('SELECT user_id FROM Administrator');
+						$truc =  $_SESSION['infoUser'][0]['user_id'];
+						$test = $permission->fetchAll();
+						foreach ($test as $machin) {
+							if ($machin['user_id'] == $truc) {
+								echo '<li><a class="color" href="Admin.php">Administration</a></li>';
+								break;
+							}
+						}
+					?>
 				</ul>
 			</nav>
 			<nav id="scroll-nav">
@@ -518,6 +530,7 @@ include_once '../model/db.php';
 				if(count($register) > 0){
 					echo '<label for="register">Sélection du membre : </label>';
 					echo '<select name="register" size=1 onchange="javascript:submit(this)" >';
+					echo '<option value = "default" selected>Sélectionner l\'utilisateur</option>';
 					while ($result=$register -> fetch()) {
 						echo '<option value="'.$result['user_id'].'" ';
             			if(isset($_POST["register"]) && $_POST["register"]==$result['user_id']){echo "selected='selected'";}
@@ -552,8 +565,8 @@ include_once '../model/db.php';
 				        <option value="RF" <?php if($statut_register == "RF") echo "selected='selected'";?>>Responsable de Formation</option>
 			        </select></br>
 
-			        <label for="action">Action : </label>
-			        <input type="submit" name="Envoyer" value="Envoyer" />
+			        <label for="action">Modifier : </label>
+			        <input type="submit" name="Modifier" value="Modifier" />
 			        </form>
 			        </br>
 
