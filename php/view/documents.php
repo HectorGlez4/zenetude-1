@@ -128,7 +128,7 @@
 
                           <ul>
                             <li><?php echo $formation ?></li>
-                            <li class="indent"><a href="#">Groupe <?php echo $group ?></a></li>
+                            <li class="indent"><a href="documents.php/<?php echo $formation ?>/<?php echo $group ?>">Groupe <?php echo $group ?></a></li>
                           </ul>
 
                         <?php
@@ -150,7 +150,7 @@
                         ?>
                         
                           <ul>
-                            <li class="indent"><a href="#">Groupe <?php echo $studentsGroup[$iX]["student_group"] ?></a></li>
+                            <li class="indent"><a href="documents.php/<?php echo $formation ?>/<?php echo $group ?>">Groupe <?php echo $group ?></a></li>
                           </ul>
 
                         <?php
@@ -162,6 +162,7 @@
                   </div>
               </div>
               
+              <!-- Trombinoscope picture -->
               <div class="col m8 s12">
                   <img src="../../img/trombinoscope-LP-SIL.jpg" alt="Trombi"/>
                   <p><a href="../controller/documents/generateTrombi.php" target="_blank">Imprimer le trombinoscope</a></p>
