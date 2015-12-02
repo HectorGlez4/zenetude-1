@@ -99,6 +99,7 @@
 				//else echo login
 				//echo '<a href='.$helper->getLoginUrl().'>Login with facebook</a>';
 
+
 				echo '<a href="'.$helper->getLoginUrl(array('scope' => 'email')).'"><img src="../../img/FacebookLogo.png" alt="Se connecter avec Facebook""></a>';
 			}
             
@@ -179,7 +180,9 @@
 	if(isset($login_url) && !isset($_SESSION['data'])){
 	    // echo the login url
 	    //echo "<a href='$login_url'><button>Login with twitter </button></a>";
+
 		echo '<a id="twitterimg" href="'.$login_url.'"><img src="../../img/TwitterLogo.png" alt="Se connecter avec Twitter" ></a>';
+
 	}
 	else{
 	
@@ -273,7 +276,9 @@
 	}
 	if(isset($authUrl)) {
 	    //$form = "<a class='login' href='$authUrl'><img src='images/googleconnect3.png' /></a>";
+
 $form = '<a href="'.$authUrl.'"><img src="../../img/googleLogo.png" alt="Se connecter avec Google+""></a>';
+
 		echo $form;
 	  }
 	//include("html.php");

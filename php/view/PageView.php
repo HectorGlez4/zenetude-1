@@ -340,8 +340,12 @@ include_once '../model/db.php';
 
 					<img src="<?php echo $pic; ?>" alt="avatar.png" class="circle responsive-img"/><br/>
 					<?php 
+						if ($userInfos['infoUser'][0]['user_firstname'] != 'NULL')
+							echo $userInfos['infoUser'][0]['user_firstname']." ";
 
-						echo $userInfos['infoUser'][0]['user_firstname']." ".$userInfos['infoUser'][0]['user_name'].'<br />'; 
+						if ($userInfos['infoUser'][0]['user_name'] != 'NULL')
+							echo $userInfos['infoUser'][0]['user_name'];
+						echo '<br />';
 
 						if($rf) {
 
@@ -423,29 +427,46 @@ include_once '../model/db.php';
 
         }
 
-
 		public function showProfilInformations($userInfos, $rf = false){
+            ini_set('display_errors', 1);
 			if(!$rf) {
 	    	echo '
 		    	<div class="col s12 m8">
 	                <div class="card-panel teal" id="bloc2">
 	                    <div class="card-title"> <h3>Profil</h3></div>
-				    	<div class="card-header"><h2>'.$userInfos['infoUser'][0]['user_firstname'].' '.$userInfos['infoUser'][0]['user_name'].'</h2></div><ul>
-			       		<li class="infos">Email académique : '.$userInfos['infoUser'][0]['user_instituteemail'].'</li>
-			        	<li class="infos">Email personnel : '.$userInfos['infoStudent'][0]['student_personnalemail'].'</li>
-			        	<li class="infos">Type : '.$userInfos['infoUser'][0]['user_type'].'</li>
-						<li class="infos">Téléphone fixe : 0'.$userInfos['infoStudent'][0]['student_phone'].'</li>
-			       		<li class="infos">Téléphone mobile : 0'.$userInfos['infoStudent'][0]['student_mobile'].'</li>
-						<li class="infos">Civilité : '.$userInfos['infoUser'][0]['user_civility'].'</li>
-			       		<li class="infos">Formation actuelle : '.$userInfos['infoTraining'][0]['description'].'</li>
-			        	<li class="infos">Groupe : '.$userInfos['infoStudent'][0]['student_group'].'</li>
-						<li class="infos">Date de naissance : '.$userInfos['infoStudent'][0]['student_birthday'].'</li>
-						<li class="infos">Lieu de naissance : '.$userInfos['infoStudent'][0]['student_birthcity'].'</li>
-						<li class="infos">Région de naissance : '.$userInfos['infoStudent'][0]['student_birtharea'].'</li>
-						<li class="infos">Pays de naissance : '.$userInfos['infoStudent'][0]['student_birthcountry'].'</li>
-			    		<li class="infos">Formation précédente : '.$userInfos['infoStudent'][0]['student_origin'].' </li>
-			     		<li class="infos">Adresse : '.$userInfos['infoStudent'][0]['student_adresse2'].' '.$userInfos['infoStudent'][0]['student_adresse1'].' '.$userInfos['infoStudent'][0]['student_zipcode'].' '.$userInfos['infoStudent'][0]['student_city'].'</li>
-			     		<li class="infos"><a class="right-align" href="gestion.php">Gérer mon compte</a></li>
+            ';
+	                    if($userInfos['infoUser'][0]['user_firstname'] != 'NULL')
+                            echo '<div class="card-header"><h2>'.$userInfos['infoUser'][0]['user_firstname'].' '.$userInfos['infoUser'][0]['user_name'].'</h2></div><ul>';
+                        if($userInfos['infoUser'][0]['user_instituteemail'] != 'NULL')
+                            echo '<li class="infos">Email académique : '.$userInfos['infoUser'][0]['user_instituteemail'].'</li>';
+                        if($userInfos['infoStudent'][0]['student_personalemail'] != 'NULL')
+			        	    echo '<li class="infos">Email personnel : '.$userInfos['infoStudent'][0]['student_personalemail'].'</li>';
+                        if($userInfos['infoUser'][0]['user_type'] != 'NULL')
+                            echo '<li class="infos">Type : '.$userInfos['infoUser'][0]['user_type'].'</li>';
+                        if($userInfos['infoStudent'][0]['student_phone'] != 'NULL')
+                            echo '<li class="infos">Téléphone fixe : 0'.$userInfos['infoStudent'][0]['student_phone'].'</li>';
+                        if($userInfos['infoStudent'][0]['student_mobile'] != 'NULL')
+                            echo '<li class="infos">Téléphone mobile : 0'.$userInfos['infoStudent'][0]['student_mobile'].'</li>';
+                        if($userInfos['infoUser'][0]['user_civility'] != 'NULL')
+                            echo '<li class="infos">Civilité : '.$userInfos['infoUser'][0]['user_civility'].'</li>';
+                        if($userInfos['infoTraining'][0]['description'] != 'NULL')
+			       		    echo '<li class="infos">Formation actuelle : '.$userInfos['infoTraining'][0]['description'].'</li>';
+                        if($userInfos['infoStudent'][0]['student_group'] != 'NULL')
+                            echo '<li class="infos">Groupe : '.$userInfos['infoStudent'][0]['student_group'].'</li>';
+                        if($userInfos['infoStudent'][0]['student_birthdate'] != 'NULL')
+						    echo '<li class="infos">Date de naissance : '.$userInfos['infoStudent'][0]['student_birthdate'].'</li>';
+                        if($userInfos['infoStudent'][0]['student_birthcity'] != 'NULL')
+						    echo '<li class="infos">Lieu de naissance : '.$userInfos['infoStudent'][0]['student_birthcity'].'</li>';
+                        if($userInfos['infoStudent'][0]['student_birtharea'] != 'NULL')
+						    echo '<li class="infos">Région de naissance : '.$userInfos['infoStudent'][0]['student_birtharea'].'</li>';
+                        if($userInfos['infoStudent'][0]['student_birthcountry'] != 'NULL')
+                            echo '<li class="infos">Pays de naissance : '.$userInfos['infoStudent'][0]['student_birthcountry'].'</li>';
+                        if($userInfos['infoStudent'][0]['student_origin'] != 'NULL')
+                            echo '<li class="infos">Formation précédente : '.$userInfos['infoStudent'][0]['student_origin'].' </li>';
+                        if($userInfos['infoStudent'][0]['student_address2'] != 'NULL')
+                            echo '<li class="infos">Adresse : '.$userInfos['infoStudent'][0]['student_address2'].' '.$userInfos['infoStudent'][0]['student_address1'].' '.$userInfos['infoStudent'][0]['student_zipcode'].' '.$userInfos['infoStudent'][0]['student_city'].'</li>';
+			     		echo '
+                        <li class="infos"><a class="right-align" href="gestion.php">Gérer mon compte</a></li>
 			     		<li class="infos"><a class="right-align" href="contact.php">Contacter un responsable de formation</a></li>
 			       	</div>
 	            </div>
@@ -476,10 +497,10 @@ include_once '../model/db.php';
 				?>
 				<form name="form" method="POST">
 				<?php
-				$register = $db->query("SELECT user_id, user_name FROM User");
+				$register = $db->query("SELECT user_id, user_name, user_firstname FROM User");
 				/*$result=$register -> fetch();*/
 				if(count($register) > 0){
-					echo '<label for="register">Sélection du membre : </label>';    
+					echo '<label for="register">Sélection du membre : </label>';
 					echo '<select name="register" size=1 onchange="javascript:submit(this)" >';
 					while ($result=$register -> fetch()) {
 						echo '<option value="'.$result['user_id'].'" ';
@@ -498,30 +519,30 @@ include_once '../model/db.php';
 			            $firstname_register = $resultat['user_firstname'];
 			            $email_register = $resultat['user_instituteemail'];
 			            $statut_register = $resultat['user_type'];
-			        
+
 			        ?>
 			        <label for="user_name">Nom : </label>
 			        <input type="text" name="user_name" maxlength="20" value="<?php echo htmlspecialchars($name_register);?>" /></br>
 
 			        <label for="user_firstname">Prénom : </label>
 			        <input type="text" name="user_firstname" maxlength="20" value="<?php echo htmlspecialchars($firstname_register);?>" /></br>
-			 
+
 			        <label for="email">Email : </label>
 			        <input type="text" name="email" maxlength="50" value="<?php echo htmlspecialchars($email_register);?>" /></br>
-			 
-			        <label for="statut">Statut : </label> 
+
+			        <label for="statut">Statut : </label>
 			        <select name="statut">
 				        <option value="Etudiant" <?php if($statut_register == "Etudiant") echo "selected='selected'";?>>Etudiant</option>
 				        <option value="RF" <?php if($statut_register == "RF") echo "selected='selected'";?>>Responsable de Formation</option>
 			        </select></br>
-			 
+
 			        <label for="action">Action : </label>
 			        <input type="submit" name="Envoyer" value="Envoyer" />
 			        </form>
 			        </br>
-			        
+
 					<ul>
-						<li><a href="Admin.php?supmembre=<?php echo $id_register;?>">Supprimer le membre</a></li>         
+						<li><a href="Admin.php?supmembre=<?php echo $id_register;?>">Supprimer le membre</a></li>
 					</ul>
 					<?php
 					}
@@ -555,7 +576,7 @@ include_once '../model/db.php';
 		                //idem pour l'email
 		                if(($_POST['email']!=$email_register) && ($_POST['email']==$result1['user_instituteemail'])){
 		                    echo '<div class="erreur">Cet email « '.$_POST['email'].' » est utilisé!</div>'; return false;
-		                }               
+		                }
 					}
 					//si pseudo vide
 			        if(empty($_POST['user_name'])){
