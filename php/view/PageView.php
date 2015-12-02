@@ -340,20 +340,20 @@ include_once '../model/db.php';
 
 					<img src="<?php echo $pic; ?>" alt="avatar.png" class="circle responsive-img"/><br/>
 					<?php 
-						if ($userInfos['infoUser'][0]['user_firstname'] != 'NULL')
-							echo $userInfos['infoUser'][0]['user_firstname']." ";
+						if(isset($userInfos['infoUser'][0]['user_firstname']) && isset($userInfos['infoUser'][0]['user_name']))
+							echo $userInfos['infoUser'][0]['user_firstname']. ' '.$userInfos['infoUser'][0]['user_name'].'<br />';
+						else if (isset($userInfos['infoUser'][0]['user_firstname']) && !isset($userInfos['infoUser'][0]['user_name']))
+							echo $userInfos['infoUser'][0]['user_firstname'].'<br />';
+						else if (isset($userInfos['infoUser'][0]['user_name']) && !isset($userInfos['infoUser'][0]['user_firstname']))
+							echo $userInfos['infoUser'][0]['user_name'].'<br />';
 
-						if ($userInfos['infoUser'][0]['user_name'] != 'NULL')
-							echo $userInfos['infoUser'][0]['user_name'];
-						echo '<br />';
-
-						if($rf) {
-
+						if($rf)
 							echo 'Responsable de formation <br />';
 
-						}else{
+						if(isset($userInfos['infoTraining'][0]['description']))
+							echo 'Formation : '.$userInfos['infoTraining'][0]['description'].'<br />';
+						if (isset($userInfos['infoStudent'][0]['student_group']))
 							echo 'Groupe '.$userInfos['infoStudent'][0]['student_group'].'<br />';
-						}
 					?>
 					<li><a class="color" href="profil.php">Mon compte</a></li>
 					<li><a class="color" href="../model/deconnect.php">Déconnexion</a></li>
@@ -400,18 +400,18 @@ include_once '../model/db.php';
 
 
         public function showContact($db){
-            if (isset($_SESSION['id'])) {
+            if (isset($_SESSION['infoUser'][0]['user_id'])) {
 
                 $request = $db->prepare('SELECT user_name,user_firstname,user_instituteemail
                                           FROM User U , Student S, Training T ,Training_manager TM
                                           WHERE S.training_id = T.training_id AND
                                           T.training_manager_id = TM.training_manager_id AND
-                                          TM.user_id = U.user_id AND S.user_id ='.$_SESSION['id']);
+                                          TM.user_id = U.user_id AND S.user_id ='.$_SESSION['infoUser'][0]['user_id']);
                 $request->execute();
                 $resul = $request->fetch();
             }
 
-            echo '<div class="card-header"><h2>'.utf8_encode($resul[1]).' '.utf8_encode($resul[0]).'</h2></div><ul>';
+            echo '<div class="card-header"><h2>'.$resul[1].' '.$resul[0].'</h2></div><ul>';
 
             if(isset($resul[0])) {
                 echo '<li class="infos">Nom  : '.$resul[0].'</li>';}
@@ -435,40 +435,45 @@ include_once '../model/db.php';
 	                <div class="card-panel teal" id="bloc2">
 	                    <div class="card-title"> <h3>Profil</h3></div>
             ';
-	                    if($userInfos['infoUser'][0]['user_firstname'] != 'NULL')
-                            echo '<div class="card-header"><h2>'.$userInfos['infoUser'][0]['user_firstname'].' '.$userInfos['infoUser'][0]['user_name'].'</h2></div><ul>';
-                        if($userInfos['infoUser'][0]['user_instituteemail'] != 'NULL')
+	                    if (isset($userInfos['infoUser'][0]['user_firstname']) && isset($userInfos['infoUser'][0]['user_name']))	
+                            echo '<div class="card-header"><h2>'.$userInfos['infoUser'][0]['user_firstname'].' '.$userInfos['infoUser'][0]['user_name'].'</h2></div>';
+				    	else if(isset($userInfos['infoUser'][0]['user_firstname']) && !isset($userInfos['infoUser'][0]['user_name']))
+				    		echo '<div class="card-header"><h2>'.$userInfos['infoUser'][0]['user_firstname'].'</h2></div>';
+				    	else if(!isset($userInfos['infoUser'][0]['user_firstname']) && isset($userInfos['infoUser'][0]['user_name']))
+				    		echo '<div class="card-header"><h2>'.$userInfos['infoUser'][0]['user_name'].'</h2></div>';
+				    	echo '<ul>';
+                        if(isset($userInfos['infoUser'][0]['user_instituteemail']))
                             echo '<li class="infos">Email académique : '.$userInfos['infoUser'][0]['user_instituteemail'].'</li>';
-                        if($userInfos['infoStudent'][0]['student_personalemail'] != 'NULL')
+                        if(isset($userInfos['infoStudent'][0]['student_personalemail']))
 			        	    echo '<li class="infos">Email personnel : '.$userInfos['infoStudent'][0]['student_personalemail'].'</li>';
-                        if($userInfos['infoUser'][0]['user_type'] != 'NULL')
+                        if(isset($userInfos['infoUser'][0]['user_type']))
                             echo '<li class="infos">Type : '.$userInfos['infoUser'][0]['user_type'].'</li>';
-                        if($userInfos['infoStudent'][0]['student_phone'] != 'NULL')
+                        if(isset($userInfos['infoStudent'][0]['student_phone']))
                             echo '<li class="infos">Téléphone fixe : 0'.$userInfos['infoStudent'][0]['student_phone'].'</li>';
-                        if($userInfos['infoStudent'][0]['student_mobile'] != 'NULL')
+                        if(isset($userInfos['infoStudent'][0]['student_mobile']))
                             echo '<li class="infos">Téléphone mobile : 0'.$userInfos['infoStudent'][0]['student_mobile'].'</li>';
-                        if($userInfos['infoUser'][0]['user_civility'] != 'NULL')
+                        if(isset($userInfos['infoUser'][0]['user_civility']))
                             echo '<li class="infos">Civilité : '.$userInfos['infoUser'][0]['user_civility'].'</li>';
-                        if($userInfos['infoTraining'][0]['description'] != 'NULL')
+                        if(isset($userInfos['infoTraining'][0]['description']))
 			       		    echo '<li class="infos">Formation actuelle : '.$userInfos['infoTraining'][0]['description'].'</li>';
-                        if($userInfos['infoStudent'][0]['student_group'] != 'NULL')
+                        if(isset($userInfos['infoStudent'][0]['student_group']))
                             echo '<li class="infos">Groupe : '.$userInfos['infoStudent'][0]['student_group'].'</li>';
-                        if($userInfos['infoStudent'][0]['student_birthdate'] != 'NULL')
+                        if(isset($userInfos['infoStudent'][0]['student_birthdate']))
 						    echo '<li class="infos">Date de naissance : '.$userInfos['infoStudent'][0]['student_birthdate'].'</li>';
-                        if($userInfos['infoStudent'][0]['student_birthcity'] != 'NULL')
+                        if(isset($userInfos['infoStudent'][0]['student_birthcity']))
 						    echo '<li class="infos">Lieu de naissance : '.$userInfos['infoStudent'][0]['student_birthcity'].'</li>';
-                        if($userInfos['infoStudent'][0]['student_birtharea'] != 'NULL')
+                        if(isset($userInfos['infoStudent'][0]['student_birtharea']))
 						    echo '<li class="infos">Région de naissance : '.$userInfos['infoStudent'][0]['student_birtharea'].'</li>';
-                        if($userInfos['infoStudent'][0]['student_birthcountry'] != 'NULL')
+                        if(isset($userInfos['infoStudent'][0]['student_birthcountry']))
                             echo '<li class="infos">Pays de naissance : '.$userInfos['infoStudent'][0]['student_birthcountry'].'</li>';
-                        if($userInfos['infoStudent'][0]['student_origin'] != 'NULL')
+                        if(isset($userInfos['infoStudent'][0]['student_origin']))
                             echo '<li class="infos">Formation précédente : '.$userInfos['infoStudent'][0]['student_origin'].' </li>';
-                        if($userInfos['infoStudent'][0]['student_address2'] != 'NULL')
+                        if(isset($userInfos['infoStudent'][0]['student_address2']))
                             echo '<li class="infos">Adresse : '.$userInfos['infoStudent'][0]['student_address2'].' '.$userInfos['infoStudent'][0]['student_address1'].' '.$userInfos['infoStudent'][0]['student_zipcode'].' '.$userInfos['infoStudent'][0]['student_city'].'</li>';
 			     		echo '
                         <li class="infos"><a class="right-align" href="gestion.php">Gérer mon compte</a></li>
 			     		<li class="infos"><a class="right-align" href="contact.php">Contacter un responsable de formation</a></li>
-			       	</div>
+			       	</ul></div>
 	            </div>
 	            ';
 	           }
@@ -476,14 +481,25 @@ include_once '../model/db.php';
 	        	echo '
 		    	<div class="col s12 m8">
 	                <div class="card-panel teal" id="bloc2">
-	                    <div class="card-title"> <h3>Profil</h3></div>
-				    	<div class="card-header"><h2>'.$userInfos['infoUser'][0]['user_firstname'].' '.$userInfos['infoUser'][0]['user_name'].'</h2></div><ul>
-				    	<li class="infos">Email académique : '.$userInfos['infoUser'][0]['user_instituteemail'].'</li>
-		          		<li class="infos">Type : '.$userInfos['infoUser'][0]['user_type'].'</li>
-		          		<li class="infos">Civilité : '.$userInfos['infoUser'][0]['user_civility'].'</li>
-		          		<li class="infos"><a class="right-align" href="gestion.php">Gérer mon compte</a></li>
-		          		<li class="infos"><a class="right-align" href="trombi.php">Accéder au trombinoscope</a></li>
-		          	</div>
+	                    <div class="card-title"> <h3>Profil</h3></div>';
+	                    if (isset($userInfos['infoUser'][0]['user_firstname']) && isset($userInfos['infoUser'][0]['user_name']))	
+                            echo '<div class="card-header"><h2>'.$userInfos['infoUser'][0]['user_firstname'].' '.$userInfos['infoUser'][0]['user_name'].'</h2></div>';
+				    	else if(isset($userInfos['infoUser'][0]['user_firstname']) && !isset($userInfos['infoUser'][0]['user_name']))
+				    		echo '<div class="card-header"><h2>'.$userInfos['infoUser'][0]['user_firstname'].'</h2></div>';
+				    	else if(!isset($userInfos['infoUser'][0]['user_firstname']) && isset($userInfos['infoUser'][0]['user_name']))
+				    		echo '<div class="card-header"><h2>'.$userInfos['infoUser'][0]['user_name'].'</h2></div>';
+				    	echo '<ul>';
+				    	if(isset($userInfos['infoUser'][0]['user_instituteemail']))
+				    		echo '<li class="infos">Email académique : '.$userInfos['infoUser'][0]['user_instituteemail'].'</li>';
+				    	if(isset($userInfos['infoUser'][0]['user_type']))
+		          			echo '<li class="infos">Type : '.$userInfos['infoUser'][0]['user_type'].'</li>';
+		          		if(isset($userInfos['infoUser'][0]['user_civility']))
+		          			echo '<li class="infos">Civilité : '.$userInfos['infoUser'][0]['user_civility'].'</li>';
+		          		echo '
+		          			<li class="infos"><a class="right-align" href="gestion.php">Gérer mon compte</a></li>
+		          			<li class="infos"><a class="right-align" href="trombi.php">Accéder au trombinoscope</a></li>
+		          			</ul>
+		          		</div>
 	            </div>';
 				}
 			}
