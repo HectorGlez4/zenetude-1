@@ -11,10 +11,11 @@
     $pageView = new PageView();
     $db = connect();
 
-    if (isset($_SESSION['id'])) {
-        $request = $db->prepare('SELECT * FROM student WHERE user_id = '.$_SESSION['id']);
+    if(isset($_SESSION['infoUser'][0]['user_id'])) {
+        $request = $db->prepare('SELECT * FROM Student WHERE user_id = '.$_SESSION['infoUser'][0]['user_id']);
         $request->execute();
         $result = $request->fetch();
+        var_dump($request);
     }
 
 
@@ -66,7 +67,7 @@ $values = array($student_personalemail,
 
     foreach ($values as $key => $value) {
         if (empty($value)) {
-        $values[$key] = NULL;
+            $values[$key] = NULL;
     } else {
         $values[$key] = $value;
     }
@@ -132,7 +133,7 @@ header('Location: profil.php');
                             <div class="form-group">
         
                         <div class="col-md-6">
-                            <input type="hidden" class="form-control" value="<?php echo $_SESSION['id'] ?>" name="user_id">
+                            <input type="hidden" class="form-control" value="<?php echo $_SESSION['infoUser'][0]['user_id'] ?>" name="user_id">
                             <label for="">Mail</label>
                                 <input type="email" class="form-control" value="<?php echo $result[4]; ?>" name="student_personalemail">
                                 <label for="">Telephone</label>
@@ -147,7 +148,7 @@ header('Location: profil.php');
                                 <input type="text" class="form-control" value="<?php echo $result[9]; ?>" name="student_zipcode" maxlength="5">
                                 <label for="">Ville</label>
                                 <input type="text" class="form-control" value="<?php echo $result[10]; ?>" name="student_city">
-                                <label for="">Pays</labe
+                                <label for="">Pays</label>
                                 <input type="text" class="form-control" value="<?php echo $result[11]; ?>" name="student_country">
                                 <label for="">Nationalité</label>
                                 <input type="text" class="form-control" value="<?php echo $result[12]; ?>" name="student_nationality">
