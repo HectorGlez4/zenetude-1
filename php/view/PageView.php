@@ -178,7 +178,7 @@ include_once '../model/db.php';
 				<!--Import Google Icon Font-->
 				<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 				<!--Import materialize.css-->
-				<link type="text/css" rel="stylesheet" href="../../css/materialize.min.css"  media="screen,projection"/>
+				<link type="text/css" rel="stylesheet" href="../../vendor/css/materialize.min.css"  media="screen,projection"/>
 				<!--Import style.css-->
 				<link type="text/css" rel="stylesheet" href="../../css/style.css"/>
 				<!--Import menu.css-->
@@ -511,7 +511,7 @@ include_once '../model/db.php';
 		          			echo '<li class="infos">Civilité : '.$userInfos['infoUser']['user_civility'].'</li>';
 		          		echo '
 		          			<li class="infos"><a class="right-align" href="gestion.php">Gérer mon compte</a></li>
-		          			<li class="infos"><a class="right-align" href="trombi.php">Accéder au trombinoscope</a></li>
+		          			<li class="infos"><a class="right-align" href="documents.php">Accéder aux documents pédagogique</a></li>
 		          			</ul>
 		          		</div>
 	            </div>';
@@ -536,7 +536,7 @@ include_once '../model/db.php';
 					while ($result=$register -> fetch()) {
 						echo '<option value="'.$result['user_id'].'" ';
             			if(isset($_POST["register"]) && $_POST["register"]==$result['user_id']){echo "selected='selected'";}
-            			echo '>'.$result['user_firstname'].'</option>';
+            			echo '>'.$result['user_firstname'].' '.$result['user_name'].'</option>';
    					}
 					echo '</select><br/>';
 				}

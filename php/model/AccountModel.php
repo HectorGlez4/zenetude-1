@@ -54,6 +54,23 @@
             $result = $request->fetch();
             return $result;
         }
+        
+        /**
+            * Return true if the user is a training manager.
+        **/
+        public function isTrainingManager($id_user = null){
+            if($id_user == null)
+                return false;
+                
+            $bd = connect();
+            $request = $db->prepare('SELECT * 
+                                     FROM   Training_manager 
+                                     WHERE  user_id = '.$id_user.'');
+            if($request->execute())
+                return true;
+            else
+                return false;
+        }
 
 		/**
 			* Generate a new password an update it in the database. Then, a mail is automaticaly send to the user.

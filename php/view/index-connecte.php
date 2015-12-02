@@ -17,7 +17,7 @@
 <html lang="fr">
 <head>
     <title>Zenetude</title>
-    <link rel="stylesheet" href="../../css/bootstrap.css">
+    <link rel="stylesheet" href="../../vendor/css/bootstrap.css">
     <link rel="stylesheet" href="../../css/index.css">
     
 
