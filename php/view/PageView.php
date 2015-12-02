@@ -340,8 +340,12 @@ include_once '../model/db.php';
 
 					<img src="<?php echo $pic; ?>" alt="avatar.png" class="circle responsive-img"/><br/>
 					<?php 
+						if ($userInfos['infoUser'][0]['user_firstname'] != 'NULL')
+							echo $userInfos['infoUser'][0]['user_firstname']." ";
 
-						echo $userInfos['infoUser'][0]['user_firstname']." ".$userInfos['infoUser'][0]['user_name'].'<br />'; 
+						if ($userInfos['infoUser'][0]['user_name'] != 'NULL')
+							echo $userInfos['infoUser'][0]['user_name'];
+						echo '<br />';
 
 						if($rf) {
 
@@ -493,7 +497,7 @@ include_once '../model/db.php';
 				?>
 				<form name="form" method="POST">
 				<?php
-				$register = $db->query("SELECT user_id, user_name FROM User");
+				$register = $db->query("SELECT user_id, user_name, user_firstname FROM User");
 				/*$result=$register -> fetch();*/
 				if(count($register) > 0){
 					echo '<label for="register">Sélection du membre : </label>';
