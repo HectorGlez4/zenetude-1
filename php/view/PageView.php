@@ -365,7 +365,7 @@ include_once '../model/db.php';
 						$test = $permission->fetchAll();
 						foreach ($test as $machin) {
 							if ($machin['user_id'] == $truc) {
-								echo '<li><a class="color" href="Admin.php">Administration</a></li>';
+								echo '<li><a class="color" href="admin.php">Administration</a></li>';
 								break;
 							}
 						}
@@ -580,7 +580,7 @@ include_once '../model/db.php';
 			        </select>
 
 			        <button class="btn" type="submit" name="Modifier">Modifier</button>
-					<a class="btn supp" href="Admin.php?supmembre=<?php echo $id_register;?>">Supprimer</a>
+					<a class="btn supp" href="admin.php?supmembre=<?php echo $id_register;?>">Supprimer</a>
 			    </form>
 
 					<?php
@@ -597,7 +597,7 @@ include_once '../model/db.php';
 		            //si ok
 		            else{
 			        //on informe et on redirige
-			        echo '<div class="ok">Membre supprimé avec succès. Redirection en cours...</div><script type="text/javascript"> window.setTimeout("location=(\'Admin.php\');",3000) </script>';
+			        echo '<div class="ok">Membre supprimé avec succès. Redirection en cours...</div><script type="text/javascript"> window.setTimeout("location=(\'admin.php\');",3000) </script>';
 				    }
 				}
 				if(isset($_POST['Envoyer'])){
@@ -646,7 +646,7 @@ include_once '../model/db.php';
 			            if(!$modif) {
         					die('Requête invalide : ' . $db->errorInfo());
 			            }
-			            echo '<div class="ok">Profil du membre modifié avec succès. Redirection en cours...</div><script type="text/javascript"> window.setTimeout("location=(\'Admin.php\');",3000) </script>';
+			            echo '<div class="ok">Profil du membre modifié avec succès. Redirection en cours...</div><script type="text/javascript"> window.setTimeout("location=(\'admin.php\');",3000) </script>';
 			        }
 			    }
 			/*}*/
