@@ -129,42 +129,45 @@
                       <div class="card-content center-align">
 
                         <?php
-                          $formation = $studentsGroup[0]["description"];
-                          $group = $studentsGroup[0]["student_group"];
-                          $formation_id = $studentsGroup[0]["training"];
+                            $formation = $studentsGroup[0]["description"];
+                            $group = $studentsGroup[0]["student_group"];
+                            $formation_id = $studentsGroup[0]["training"];
+
+                            if (!empty($formation) || !empty($group)) {
                         ?>
 
-                          <ul>
-                            <li><?php echo $formation ?></li>
-                            <li class="indent"><a href="documents.php?f=<?php echo $formation_id ?>&g=<?php echo $group ?>">Groupe <?php echo $group ?></a></li>
-                          </ul>
+                                <ul>
+                                    <li><?php echo $formation ?></li>
+                                    <li class="indent"><a href="documents.php?f=<?php echo $formation_id ?>&g=<?php echo $group ?>">Groupe <?php echo $group ?></a></li>
+                                </ul>
+
+                            <?php
+                            for($iX = 0; $iX < count($studentsGroup); ++$iX) {
+
+                                if (!($formation == $studentsGroup[$iX]["description"])) {
+                                    $formation = $studentsGroup[$iX]["description"];
+                                    $formation_id = $studentsGroup[$iX]["training"];
+                            ?>
+
+                                <ul>
+                                    <li><?php echo $studentsGroup[$iX]["description"] ?></li>
+                                </ul>
+
+                            <?php
+                              }
+
+                                if (!($group == $studentsGroup[$iX]["student_group"])) {
+                                    $group = $studentsGroup[$iX]["student_group"];
+                            ?>
+                            
+                                <ul>
+                                    <li class="indent"><a href="documents.php?f=<?php echo $formation_id ?>&g=<?php echo $group ?>">Groupe <?php echo $group ?></a></li>
+                                </ul>
 
                         <?php
-                        for($iX = 0; $iX < count($studentsGroup); ++$iX) {
-
-                          if (!($formation == $studentsGroup[$iX]["description"])) {
-                            $formation = $studentsGroup[$iX]["description"];
-                            $formation_id = $studentsGroup[$iX]["training"];
-                        ?>
-
-                          <ul>
-                            <li><?php echo $studentsGroup[$iX]["description"] ?></li>
-                          </ul>
-
-                        <?php
-                          }
-
-                          if (!($group == $studentsGroup[$iX]["student_group"])) {
-                            $group = $studentsGroup[$iX]["student_group"];
-                        ?>
-                        
-                          <ul>
-                            <li class="indent"><a href="documents.php?f=<?php echo $formation_id ?>&g=<?php echo $group ?>">Groupe <?php echo $group ?></a></li>
-                          </ul>
-
-                        <?php
-                          }
-                        }
+                                  }
+                                }
+                            }
                         ?>
 
                       </div>
