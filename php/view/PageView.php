@@ -290,12 +290,12 @@ include_once '../model/db.php';
 			
 			        <div class="card-action  center-align bouton-connection">
 				        <input class="btn connexion" type="submit" value="Se connecter" />
-			        </div><br />
-			        <div class="center-align">
+			        </div>
+			        <div id="socialmedia">
 						<?php
 							include('socialmedia.php');
 						?>
-					</div><br />
+					</div>
 			        </form><!-- Fin formulaire -->
 			        <p class="connexion"><a href="inscription.php" class="left">S'inscrire</a><a href="recuperation.php" class="right">Mot de passe oublié</a></p>
 		      	</div>
@@ -314,7 +314,6 @@ include_once '../model/db.php';
 			* Show the dynamic menu bar. 
 		**/
 		public function showScrollMenu($connect, $userInfos, $rf = false) {
-
 			if(!$connect) {?>
 			<nav id="scroll-nav">
 		  		<div class="nav-wrapper">
@@ -341,18 +340,36 @@ include_once '../model/db.php';
 					<img src="<?php echo $pic; ?>" alt="avatar.png" class="circle responsive-img"/><br/>
 					<?php 
 
-						echo $userInfos['infoUser']['user_firstname']." ".$userInfos['infoUser']['user_name'].'<br />'; 
+						if(isset($userInfos['infoUser']['user_firstname']) && isset($userInfos['infoUser']['user_name']))
+							echo $userInfos['infoUser']['user_firstname']. ' '.$userInfos['infoUser']['user_name'].'<br />';
+						else if (isset($userInfos['infoUser']['user_firstname']) && !isset($userInfos['infoUser']['user_name']))
+							echo $userInfos['infoUser']['user_firstname'].'<br />';
+						else if (isset($userInfos['infoUser']['user_name']) && !isset($userInfos['infoUser']['user_firstname']))
+							echo $userInfos['infoUser']['user_name'].'<br />';
 
-						if($rf) {
-
+						if($rf)
 							echo 'Responsable de formation <br />';
 
-						}else{
+						if(isset($userInfos['infoTraining']['description']))
+							echo 'Formation : '.$userInfos['infoTraining']['description'].'<br />';
+						if (isset($userInfos['infoStudent']['student_group']))
 							echo 'Groupe '.$userInfos['infoStudent']['student_group'].'<br />';
-						}
 					?>
 					<li><a class="color" href="profil.php">Mon compte</a></li>
 					<li><a class="color" href="../model/deconnect.php">Déconnexion</a></li>
+
+					<?php
+						$db=connect();
+						$permission = $db->query('SELECT user_id FROM Administrator');
+						$truc =  $_SESSION['infoUser']['user_id'];
+						$test = $permission->fetchAll();
+						foreach ($test as $machin) {
+							if ($machin['user_id'] == $truc) {
+								echo '<li><a class="color" href="Admin.php">Administration</a></li>';
+								break;
+							}
+						}
+					?>
 				</ul>
 			</nav>
 			<nav id="scroll-nav">
@@ -396,18 +413,18 @@ include_once '../model/db.php';
 
 
         public function showContact($db){
-            if (isset($_SESSION['id'])) {
+            if (isset($_SESSION['infoUser']['user_id'])) {
 
                 $request = $db->prepare('SELECT user_name,user_firstname,user_instituteemail
                                           FROM User U , Student S, Training T ,Training_manager TM
                                           WHERE S.training_id = T.training_id AND
                                           T.training_manager_id = TM.training_manager_id AND
-                                          TM.user_id = U.user_id AND S.user_id ='.$_SESSION['id']);
+                                          TM.user_id = U.user_id AND S.user_id ='.$_SESSION['infoUser']['user_id']);
                 $request->execute();
                 $resul = $request->fetch();
             }
 
-            echo '<div class="card-header"><h2>'.utf8_encode($resul[1]).' '.utf8_encode($resul[0]).'</h2></div><ul>';
+            echo '<div class="card-header"><h2>'.$resul[1].' '.$resul[0].'</h2></div><ul>';
 
             if(isset($resul[0])) {
                 echo '<li class="infos">Nom  : '.$resul[0].'</li>';}
@@ -429,41 +446,47 @@ include_once '../model/db.php';
 	    	echo '
 		    	<div class="col s12 m8">
 	                <div class="card-panel teal" id="bloc2">
-	                    <div class="card-title"> <h3>Profil</h3></div>';
-	                    if($userInfos['infoUser']['user_firstname'] != 'NULL')
-                            echo '<div class="card-header"><h2>'.$userInfos['infoUser']['user_firstname'].' '.$userInfos['infoUser']['user_name'].'</h2></div><ul>';
-                        if($userInfos['infoUser']['user_instituteemail'] != 'NULL')
+	                    <div class="card-title"> <h3>Profil</h3></div>
+            ';
+	                    if (isset($userInfos['infoUser']['user_firstname']) && isset($userInfos['infoUser']['user_name']))	
+                            echo '<div class="card-header"><h2>'.$userInfos['infoUser']['user_firstname'].' '.$userInfos['infoUser']['user_name'].'</h2></div>';
+				    	else if(isset($userInfos['infoUser']['user_firstname']) && !isset($userInfos['infoUser']['user_name']))
+				    		echo '<div class="card-header"><h2>'.$userInfos['infoUser']['user_firstname'].'</h2></div>';
+				    	else if(!isset($userInfos['infoUser']['user_firstname']) && isset($userInfos['infoUser']['user_name']))
+				    		echo '<div class="card-header"><h2>'.$userInfos['infoUser']['user_name'].'</h2></div>';
+				    	echo '<ul>';
+                        if(isset($userInfos['infoUser']['user_instituteemail']))
                             echo '<li class="infos">Email académique : '.$userInfos['infoUser']['user_instituteemail'].'</li>';
-                        if($userInfos['infoStudent']['student_personalemail'] != 'NULL')
+                        if(isset($userInfos['infoStudent']['student_personalemail']))
 			        	    echo '<li class="infos">Email personnel : '.$userInfos['infoStudent']['student_personalemail'].'</li>';
-                        if($userInfos['infoUser']['user_type'] != 'NULL')
+                        if(isset($userInfos['infoUser']['user_type']))
                             echo '<li class="infos">Type : '.$userInfos['infoUser']['user_type'].'</li>';
-                        if($userInfos['infoStudent']['student_phone'] != 'NULL')
+                        if(isset($userInfos['infoStudent']['student_phone']))
                             echo '<li class="infos">Téléphone fixe : 0'.$userInfos['infoStudent']['student_phone'].'</li>';
-                        if($userInfos['infoStudent']['student_mobile'] != 'NULL')
+                        if(isset($userInfos['infoStudent']['student_mobile']))
                             echo '<li class="infos">Téléphone mobile : 0'.$userInfos['infoStudent']['student_mobile'].'</li>';
-                        if($userInfos['infoUser']['user_civility'] != 'NULL')
+                        if(isset($userInfos['infoUser']['user_civility']))
                             echo '<li class="infos">Civilité : '.$userInfos['infoUser']['user_civility'].'</li>';
-                        if($userInfos['infoTraining']['description'] != 'NULL')
+                        if(isset($userInfos['infoTraining']['description']))
 			       		    echo '<li class="infos">Formation actuelle : '.$userInfos['infoTraining']['description'].'</li>';
-                        if($userInfos['infoStudent']['student_group'] != 'NULL')
+                        if(isset($userInfos['infoStudent']['student_group']))
                             echo '<li class="infos">Groupe : '.$userInfos['infoStudent']['student_group'].'</li>';
-                        if($userInfos['infoStudent']['student_birthdate'] != 'NULL')
+                        if(isset($userInfos['infoStudent']['student_birthdate']))
 						    echo '<li class="infos">Date de naissance : '.$userInfos['infoStudent']['student_birthdate'].'</li>';
-                        if($userInfos['infoStudent']['student_birthcity'] != 'NULL')
+                        if(isset($userInfos['infoStudent']['student_birthcity']))
 						    echo '<li class="infos">Lieu de naissance : '.$userInfos['infoStudent']['student_birthcity'].'</li>';
-                        if($userInfos['infoStudent']['student_birtharea'] != 'NULL')
+                        if(isset($userInfos['infoStudent']['student_birtharea']))
 						    echo '<li class="infos">Région de naissance : '.$userInfos['infoStudent']['student_birtharea'].'</li>';
-                        if($userInfos['infoStudent']['student_birthcountry'] != 'NULL')
+                        if(isset($userInfos['infoStudent']['student_birthcountry']))
                             echo '<li class="infos">Pays de naissance : '.$userInfos['infoStudent']['student_birthcountry'].'</li>';
-                        if($userInfos['infoStudent']['student_origin'] != 'NULL')
+                        if(isset($userInfos['infoStudent']['student_origin']))
                             echo '<li class="infos">Formation précédente : '.$userInfos['infoStudent']['student_origin'].' </li>';
-                        if($userInfos['infoStudent']['student_address2'] != 'NULL')
+                        if(isset($userInfos['infoStudent']['student_address2']))
                             echo '<li class="infos">Adresse : '.$userInfos['infoStudent']['student_address2'].' '.$userInfos['infoStudent']['student_address1'].' '.$userInfos['infoStudent']['student_zipcode'].' '.$userInfos['infoStudent']['student_city'].'</li>';
 			     		echo '
                         <li class="infos"><a class="right-align" href="gestion.php">Gérer mon compte</a></li>
 			     		<li class="infos"><a class="right-align" href="contact.php">Contacter un responsable de formation</a></li>
-			       	</div>
+			       	</ul></div>
 	            </div>
 	            ';
 	           }
@@ -471,14 +494,26 @@ include_once '../model/db.php';
 	        	echo '
 		    	<div class="col s12 m8">
 	                <div class="card-panel teal" id="bloc2">
-	                    <div class="card-title"> <h3>Profil</h3></div>
-				    	<div class="card-header"><h2>'.$userInfos['infoUser']['user_firstname'].' '.$userInfos['infoUser']['user_name'].'</h2></div><ul>
-				    	<li class="infos">Email académique : '.$userInfos['infoUser']['user_instituteemail'].'</li>
-		          		<li class="infos">Type : '.$userInfos['infoUser']['user_type'].'</li>
-		          		<li class="infos">Civilité : '.$userInfos['infoUser']['user_civility'].'</li>
-		          		<li class="infos"><a class="right-align" href="gestion.php">Gérer mon compte</a></li>
-		          		<li class="infos"><a class="right-align" href="trombi.php">Accéder au trombinoscope</a></li>
-		          	</div>
+
+	                    <div class="card-title"> <h3>Profil</h3></div>';
+	                    if (isset($userInfos['infoUser']['user_firstname']) && isset($userInfos['infoUser']['user_name']))	
+                            echo '<div class="card-header"><h2>'.$userInfos['infoUser']['user_firstname'].' '.$userInfos['infoUser']['user_name'].'</h2></div>';
+				    	else if(isset($userInfos['infoUser']['user_firstname']) && !isset($userInfos['infoUser']['user_name']))
+				    		echo '<div class="card-header"><h2>'.$userInfos['infoUser']['user_firstname'].'</h2></div>';
+				    	else if(!isset($userInfos['infoUser']['user_firstname']) && isset($userInfos['infoUser']['user_name']))
+				    		echo '<div class="card-header"><h2>'.$userInfos['infoUser']['user_name'].'</h2></div>';
+				    	echo '<ul>';
+				    	if(isset($userInfos['infoUser']['user_instituteemail']))
+				    		echo '<li class="infos">Email académique : '.$userInfos['infoUser']['user_instituteemail'].'</li>';
+				    	if(isset($userInfos['infoUser']['user_type']))
+		          			echo '<li class="infos">Type : '.$userInfos['infoUser']['user_type'].'</li>';
+		          		if(isset($userInfos['infoUser']['user_civility']))
+		          			echo '<li class="infos">Civilité : '.$userInfos['infoUser']['user_civility'].'</li>';
+		          		echo '
+		          			<li class="infos"><a class="right-align" href="gestion.php">Gérer mon compte</a></li>
+		          			<li class="infos"><a class="right-align" href="trombi.php">Accéder au trombinoscope</a></li>
+		          			</ul>
+		          		</div>
 	            </div>';
 				}
 			}
@@ -492,11 +527,12 @@ include_once '../model/db.php';
 				?>
 				<form name="form" method="POST">
 				<?php
-				$register = $db->query("SELECT user_id, user_name FROM User");
+				$register = $db->query("SELECT user_id, user_name, user_firstname FROM User");
 				/*$result=$register -> fetch();*/
 				if(count($register) > 0){
 					echo '<label for="register">Sélection du membre : </label>';
 					echo '<select name="register" size=1 onchange="javascript:submit(this)" >';
+					echo '<option value = "default" selected>Sélectionner l\'utilisateur</option>';
 					while ($result=$register -> fetch()) {
 						echo '<option value="'.$result['user_id'].'" ';
             			if(isset($_POST["register"]) && $_POST["register"]==$result['user_id']){echo "selected='selected'";}
@@ -531,8 +567,8 @@ include_once '../model/db.php';
 				        <option value="RF" <?php if($statut_register == "RF") echo "selected='selected'";?>>Responsable de Formation</option>
 			        </select></br>
 
-			        <label for="action">Action : </label>
-			        <input type="submit" name="Envoyer" value="Envoyer" />
+			        <label for="action">Modifier : </label>
+			        <input type="submit" name="Modifier" value="Modifier" />
 			        </form>
 			        </br>
 
