@@ -136,7 +136,7 @@
 
                           <ul>
                             <li><?php echo $formation ?></li>
-                            <li class="indent"><a href="documents.php/<?php echo $formation_id ?>/<?php echo $group ?>">Groupe <?php echo $group ?></a></li>
+                            <li class="indent"><a href="documents.php?f=<?php echo $formation_id ?>&g=<?php echo $group ?>">Groupe <?php echo $group ?></a></li>
                           </ul>
 
                         <?php
@@ -158,7 +158,7 @@
                         ?>
                         
                           <ul>
-                            <li class="indent"><a href="documents.php/<?php echo $formation_id ?>/<?php echo $group ?>">Groupe <?php echo $group ?></a></li>
+                            <li class="indent"><a href="documents.php?f=<?php echo $formation_id ?>&g=<?php echo $group ?>">Groupe <?php echo $group ?></a></li>
                           </ul>
 
                         <?php
