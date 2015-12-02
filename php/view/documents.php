@@ -1,13 +1,13 @@
 <?php
   include(dirname(__FILE__).'/../model/DocumentsModel.php');
 
-  $studentsGroup = getStudentsGroupByTrainingGroup(1,1);
+  $studentsGroup = getStudentsGroupByTrainingGroup();
   $get =  false;
   if(isset($_GET['f']) && isset($_GET['g']))
   {
-    $get = true
+    $get = true;
     $frm = $_GET['f'];
-    $grp = $_GET['g']
+    $grp = $_GET['g'];
   }
 ?>
 
@@ -131,7 +131,7 @@
                         <?php
                           $formation = $studentsGroup[0]["description"];
                           $group = $studentsGroup[0]["student_group"];
-                          $formation_id = $studentsGroup[0]["Training.training_id"];
+                          $formation_id = $studentsGroup[0]["training"];
                         ?>
 
                           <ul>
@@ -144,6 +144,7 @@
 
                           if (!($formation == $studentsGroup[$iX]["description"])) {
                             $formation = $studentsGroup[$iX]["description"];
+                            $formation_id = $studentsGroup[$iX]["training"];
                         ?>
 
                           <ul>
