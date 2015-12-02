@@ -2,6 +2,18 @@
 	class AccountModel {
 
 
+        public function getTrainingInformationsForUser($param, $userId) {
+            $db = connect();
+            $request = $db->query('SELECT '.$param.' FROM Training WHERE training_id IN
+                                                                                        (SELECT training_id
+                                                                                         FROM Student
+                                                                                         WHERE user_id = '.$userId.'
+                                                                                        )
+            ');
+            $result = $request->fetchAll();
+            return $result;
+        }
+
 		/**
 			* Get user's informations about an user.
 		**/
@@ -47,6 +59,7 @@
 			* Generate a new password an update it in the database. Then, a mail is automaticaly send to the user.
 		**/
 		public function recoverPassword($userMail) {
+            var_dump($userMail);
 	    	$accountView = new AccountView();
 
             $string = "";
@@ -114,6 +127,10 @@
             $db = connect();
 
             $request = $db->query('INSERT INTO User (user_password, user_instituteemail) VALUES ("'.$userPassword.'", "'.$userMail.'")');
+            $request0 = $db->query("SELECT user_id FROM User WHERE user_instituteemail = '$userMail'");
+            $result0 = $request0->fetch();
+            $id = $result0[0];
+            $request2 = $db->query('INSERT INTO Student (user_id, student_instituteemail) VALUES ("'.$id.'", "'.$userMail.'")');
         }
 	}
 

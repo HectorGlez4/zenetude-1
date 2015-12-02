@@ -7,6 +7,7 @@
     include_once('../controller/PageController.php');
     include_once('../model/db.php');
 
+
     $pageController = new PageController();
     $pageView = new PageView();
     $db = connect();
@@ -18,6 +19,7 @@
     
         
         <?php
+            $pageController -> controlConnexion();
             $pageView -> showHead();
             $pageController -> controlHeader();
             $pageController -> controlDynamicMenu();

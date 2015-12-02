@@ -1,6 +1,13 @@
 <?php
 	class PageController {
 
+        public function controlConnexion() {
+            if(!isset($_SESSION['infoUser'])) {
+                echo '<script>document.location.href="../view/index.php"</script>';
+                exit;
+            }
+        }
+
 
 		public function controlProfilInformations() {
 			$pageView = new PageView();
@@ -42,8 +49,6 @@
 		public function controlMenu() {
 			$pageView = new PageView();
 			if(isset($_SESSION['infoUser'])) {
-				$_SESSION['nom'] = htmlspecialchars($_SESSION['infoUser'][0]['user_name']);
-				$_SESSION['prenom'] = htmlspecialchars($_SESSION['infoUser'][0]['user_firstname']);
 				if(isset ($_SESSION['class']))
 				$pageView -> showMenu(true);
 			}
@@ -59,8 +64,6 @@
 		public function controlDynamicMenu() {
 			$pageView = new PageView();
 			if(isset($_SESSION['infoUser'])) {
-				$_SESSION['nom'] = htmlspecialchars($_SESSION['infoUser'][0]['user_name']);
-				$_SESSION['prenom'] = htmlspecialchars($_SESSION['infoUser'][0]['user_firstname']);
 				if($_SESSION['infoUser'][0]['user_type'] == 'RF') {
 					$pageView -> showScrollMenu(true, $_SESSION, true);
 				}

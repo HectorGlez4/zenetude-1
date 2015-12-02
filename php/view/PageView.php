@@ -1,5 +1,6 @@
 <?php
-
+ini_set('display_errors', 1);
+include_once '../model/db.php';
 	class PageView {
 		/**
 			* Show the inscription's form.
@@ -289,12 +290,12 @@
 			
 			        <div class="card-action  center-align bouton-connection">
 				        <input class="btn connexion" type="submit" value="Se connecter" />
-			        </div>
-			        <div id="socialmedia">
+			        </div><br />
+			        <div class="center-align">
 						<?php
 							include('socialmedia.php');
 						?>
-					</div>
+					</div><br />
 			        </form><!-- Fin formulaire -->
 			        <p class="connexion"><a href="inscription.php" class="left">S'inscrire</a><a href="recuperation.php" class="right">Mot de passe oublié</a></p>
 		      	</div>
@@ -308,11 +309,12 @@
 		}
 
 
-
+		
 		/**
 			* Show the dynamic menu bar. 
 		**/
 		public function showScrollMenu($connect, $userInfos, $rf = false) {
+
 			if(!$connect) {?>
 			<nav id="scroll-nav">
 		  		<div class="nav-wrapper">
@@ -326,7 +328,29 @@
 			?>
 			<nav id="menu" class="center-align">
 				<ul>
-					<img src="../../img/avatar.png" alt="avatar.png" class="circle responsive-img"/><br/><?php echo $userInfos['infoUser'][0]['user_firstname']." ".$userInfos['infoUser'][0]['user_name'].'<br />'; if($rf) {echo 'Responsable de formation <br />';}else {echo 'Groupe '.$userInfos['infoStudent'][0]['student_group'].'<br />';}?>
+					<?php
+
+						if (isset($_SESSION['image'])){
+							$pic = $_SESSION['image'];
+						}else{
+							$pic = "../../img/avatar.png";
+						}
+
+					?>
+
+					<img src="<?php echo $pic; ?>" alt="avatar.png" class="circle responsive-img"/><br/>
+					<?php 
+
+						echo $userInfos['infoUser'][0]['user_firstname']." ".$userInfos['infoUser'][0]['user_name'].'<br />'; 
+
+						if($rf) {
+
+							echo 'Responsable de formation <br />';
+
+						}else{
+							echo 'Groupe '.$userInfos['infoStudent'][0]['student_group'].'<br />';
+						}
+					?>
 					<li><a class="color" href="profil.php">Mon compte</a></li>
 					<li><a class="color" href="../model/deconnect.php">Déconnexion</a></li>
 				</ul>
@@ -399,29 +423,46 @@
 
         }
 
-
 		public function showProfilInformations($userInfos, $rf = false){
+            ini_set('display_errors', 1);
 			if(!$rf) {
 	    	echo '
 		    	<div class="col s12 m8">
 	                <div class="card-panel teal" id="bloc2">
 	                    <div class="card-title"> <h3>Profil</h3></div>
-				    	<div class="card-header"><h2>'.$userInfos['infoUser'][0]['user_firstname'].' '.$userInfos['infoUser'][0]['user_name'].'</h2></div><ul>
-			       		<li class="infos">Email académique : '.$userInfos['infoUser'][0]['user_instituteemail'].'</li>
-			        	<li class="infos">Email personnel : '.$userInfos['infoStudent'][0]['student_personnalemail'].'</li>
-			        	<li class="infos">Type : '.$userInfos['infoUser'][0]['user_type'].'</li>
-						<li class="infos">Téléphone fixe : 0'.$userInfos['infoStudent'][0]['student_phone'].'</li>
-			       		<li class="infos">Téléphone mobile : 0'.$userInfos['infoStudent'][0]['student_mobile'].'</li>
-						<li class="infos">Civilité : '.$userInfos['infoUser'][0]['user_civility'].'</li>
-			       		<li class="infos">Formation actuelle : </li>
-			        	<li class="infos">Groupe : '.$userInfos['infoStudent'][0]['student_group'].'</li>
-						<li class="infos">Date de naissance : '.$userInfos['infoStudent'][0]['student_birthday'].'</li>
-						<li class="infos">Lieu de naissance : '.$userInfos['infoStudent'][0]['student_birthcity'].'</li>
-						<li class="infos">Région de naissance : '.$userInfos['infoStudent'][0]['student_birtharea'].'</li>
-						<li class="infos">Pays de naissance : '.$userInfos['infoStudent'][0]['student_birthcountry'].'</li>
-			    		<li class="infos">Formation précédente : </li>
-			     		<li class="infos">Adresse : '.$userInfos['infoStudent'][0]['student_adresse1'].'</li>
-			     		<li class="infos"><a class="right-align" href="gestion.php">Gérer mon compte</a></li>
+            ';
+	                    if($userInfos['infoUser'][0]['user_firstname'] != 'NULL')
+                            echo '<div class="card-header"><h2>'.$userInfos['infoUser'][0]['user_firstname'].' '.$userInfos['infoUser'][0]['user_name'].'</h2></div><ul>';
+                        if($userInfos['infoUser'][0]['user_instituteemail'] != 'NULL')
+                            echo '<li class="infos">Email académique : '.$userInfos['infoUser'][0]['user_instituteemail'].'</li>';
+                        if($userInfos['infoStudent'][0]['student_personalemail'] != 'NULL')
+			        	    echo '<li class="infos">Email personnel : '.$userInfos['infoStudent'][0]['student_personalemail'].'</li>';
+                        if($userInfos['infoUser'][0]['user_type'] != 'NULL')
+                            echo '<li class="infos">Type : '.$userInfos['infoUser'][0]['user_type'].'</li>';
+                        if($userInfos['infoStudent'][0]['student_phone'] != 'NULL')
+                            echo '<li class="infos">Téléphone fixe : 0'.$userInfos['infoStudent'][0]['student_phone'].'</li>';
+                        if($userInfos['infoStudent'][0]['student_mobile'] != 'NULL')
+                            echo '<li class="infos">Téléphone mobile : 0'.$userInfos['infoStudent'][0]['student_mobile'].'</li>';
+                        if($userInfos['infoUser'][0]['user_civility'] != 'NULL')
+                            echo '<li class="infos">Civilité : '.$userInfos['infoUser'][0]['user_civility'].'</li>';
+                        if($userInfos['infoTraining'][0]['description'] != 'NULL')
+			       		    echo '<li class="infos">Formation actuelle : '.$userInfos['infoTraining'][0]['description'].'</li>';
+                        if($userInfos['infoStudent'][0]['student_group'] != 'NULL')
+                            echo '<li class="infos">Groupe : '.$userInfos['infoStudent'][0]['student_group'].'</li>';
+                        if($userInfos['infoStudent'][0]['student_birthdate'] != 'NULL')
+						    echo '<li class="infos">Date de naissance : '.$userInfos['infoStudent'][0]['student_birthdate'].'</li>';
+                        if($userInfos['infoStudent'][0]['student_birthcity'] != 'NULL')
+						    echo '<li class="infos">Lieu de naissance : '.$userInfos['infoStudent'][0]['student_birthcity'].'</li>';
+                        if($userInfos['infoStudent'][0]['student_birtharea'] != 'NULL')
+						    echo '<li class="infos">Région de naissance : '.$userInfos['infoStudent'][0]['student_birtharea'].'</li>';
+                        if($userInfos['infoStudent'][0]['student_birthcountry'] != 'NULL')
+                            echo '<li class="infos">Pays de naissance : '.$userInfos['infoStudent'][0]['student_birthcountry'].'</li>';
+                        if($userInfos['infoStudent'][0]['student_origin'] != 'NULL')
+                            echo '<li class="infos">Formation précédente : '.$userInfos['infoStudent'][0]['student_origin'].' </li>';
+                        if($userInfos['infoStudent'][0]['student_address2'] != 'NULL')
+                            echo '<li class="infos">Adresse : '.$userInfos['infoStudent'][0]['student_address2'].' '.$userInfos['infoStudent'][0]['student_address1'].' '.$userInfos['infoStudent'][0]['student_zipcode'].' '.$userInfos['infoStudent'][0]['student_city'].'</li>';
+			     		echo '
+                        <li class="infos"><a class="right-align" href="gestion.php">Gérer mon compte</a></li>
 			     		<li class="infos"><a class="right-align" href="contact.php">Contacter un responsable de formation</a></li>
 			       	</div>
 	            </div>
@@ -442,96 +483,103 @@
 	            </div>';
 				}
 			}
-	
 
 
-		/*
+
 		public function showAdministration(){
-			//if (isset($_SESSION['id'])) {
+			/*if (isset($_SESSION['id'])) {*/
 				ini_set('display_errors', 1);
 				$db = connect();
 				?>
 				<form name="form" method="POST">
 				<?php
-				$register = $db->query("SELECT user_id, user_name FROM user");
-				$result=$register -> fetch();
+				$register = $db->query("SELECT user_id, user_name FROM User");
+				/*$result=$register -> fetch();*/
 				if(count($register) > 0){
-					echo '<label for="register">Sélection du membre : </label>';    
-					echo '<select name="register" size=1 onchange="javascript:submit(this)">';
+					echo '<label for="register">Sélection du membre : </label>';
+					echo '<select name="register" size=1 onchange="javascript:submit(this)" >';
 					while ($result=$register -> fetch()) {
-						echo '<option value="'.$result['user_name'].'" ';
+						echo '<option value="'.$result['user_id'].'" ';
             			if(isset($_POST["register"]) && $_POST["register"]==$result['user_id']){echo "selected='selected'";}
-            			echo '>'.$result['user_name'].'</option>';
+            			echo '>'.$result['user_firstname'].'</option>';
    					}
 					echo '</select><br/>';
 				}
-				if(isset($_POST["register"]) && $_POST["register"]!='Sélectionner un membre'){
 			        //on sélectionne tout les membres
-			        $selection = $db->query("SELECT * FROM user WHERE user_id='".($_POST["register"])."'");
+				if (isset($_POST['register'])) {
+			        $selection = $db->query("SELECT user_id, user_name, user_firstname, user_instituteemail, user_type  FROM User WHERE user_id='".$_POST['register']."'");
 			        while($resultat = $selection -> fetch()){
 			            //on stock tout dans des variables
 			            $id_register = $resultat['user_id'];
-			            $pseudo_register = $resultat['user_name'];
+			            $name_register = $resultat['user_name'];
+			            $firstname_register = $resultat['user_firstname'];
 			            $email_register = $resultat['user_instituteemail'];
-			            $status_register = $resultat['user_type'];
-			        
+			            $statut_register = $resultat['user_type'];
+
 			        ?>
-			        <label for="pseudo">Pseudo : </label>
-			        <input type="text" name="pseudo" maxlength="20" value="<?php echo htmlspecialchars($pseudo_register);?>" /></br>
-			 
+			        <label for="user_name">Nom : </label>
+			        <input type="text" name="user_name" maxlength="20" value="<?php echo htmlspecialchars($name_register);?>" /></br>
+
+			        <label for="user_firstname">Prénom : </label>
+			        <input type="text" name="user_firstname" maxlength="20" value="<?php echo htmlspecialchars($firstname_register);?>" /></br>
+
 			        <label for="email">Email : </label>
 			        <input type="text" name="email" maxlength="50" value="<?php echo htmlspecialchars($email_register);?>" /></br>
-			 
-			        <label for="statut">Statut : </label> 
+
+			        <label for="statut">Statut : </label>
 			        <select name="statut">
-				        <option value="Etudiant" <?php if(strcmp($statut_membre, "Etudiant") == true) echo "selected='selected'";?>>Etudiant</option>
-				        <option value="RF" <?php if(strcmp($statut_membre, "RF") == true) echo "selected='selected'";?>>Responsable de Formation</option>
+				        <option value="Etudiant" <?php if($statut_register == "Etudiant") echo "selected='selected'";?>>Etudiant</option>
+				        <option value="RF" <?php if($statut_register == "RF") echo "selected='selected'";?>>Responsable de Formation</option>
 			        </select></br>
-			 
+
 			        <label for="action">Action : </label>
 			        <input type="submit" name="Envoyer" value="Envoyer" />
-			        <input name="Effacer" value="Effacer" type="reset" />   
 			        </form>
 			        </br>
-			        
-			        <h2>Supprimer le membre</h2>
-					<ul style="margin-left: 350px;">
-						<li><a href="Admin.php?supmembre=<?php echo $id_register;?>">Supprimer le membre></a></li>         
+
+					<ul>
+						<li><a href="Admin.php?supmembre=<?php echo $id_register;?>">Supprimer le membre</a></li>
 					</ul>
 					<?php
 					}
-			    }
+				}
 			    //suppression du membre
 			    if(isset($_GET['supmembre'])){
 			    //on supprime le membre
-			    $supprime_membre = mysql_query("DELETE FROM user WHERE id = ".$_GET['supmembre']."");
+			    $supprime_membre = $db->query("DELETE FROM User WHERE user_id = ".$_GET['supmembre']."");
 			    //si erreur
 				    if (!$supprime_membre) {
-		                die('Requête invalide : ' . mysql_error());
+		                die('Requête invalide : ' . $db->errorInfo());
 		            }
 		            //si ok
 		            else{
 			        //on informe et on redirige
-			        echo '<div class="ok">Membre supprimé avec succès. Redirection en cours...</div><script type="text/javascript"> window.setTimeout("location=(\'auth-admin.php\');",3000) </script>';
+			        echo '<div class="ok">Membre supprimé avec succès. Redirection en cours...</div><script type="text/javascript"> window.setTimeout("location=(\'Admin.php\');",3000) </script>';
 				    }
 				}
 				if(isset($_POST['Envoyer'])){
 				//on sélectionne tout les pseudo et email
-		            $donnees = mysql_query("SELECT user_name, user_institueemail FROM user") or die ('Erreur :'.mysql_error());
-		            while($result1 = mysql_fetch_array($donnees)){
+		            $data = $db->query("SELECT user_name, user_firstname, user_instituteemail FROM User") or die ('Erreur :'.$db->errorInfo());
+		            while($result1 = $data->fetch()){
 		                //si le pseudo posté est différent du pseudo actuel du membre, le pseudo a alors été modifié
 		                //et si le pseudo posté correspond à un pseudo déjà présent en bd, on informe
-		                if($_POST['pseudo']!=$pseudo_register && $_POST['pseudo']==$result1['pseudo']){
-		                    echo '<div class="erreur">Ce pseudo « '.$_POST['pseudo'].' » est utilisé!</div>'; return false;
+		                if(($_POST['user_name']!=$name_register) && ($_POST['user_name']==$result1['user_name'])){
+		                    echo '<div class="erreur">Ce pseudo « '.$_POST['user_name'].' » est utilisé!</div>'; return false;
+		                }
+		                if(($_POST['user_firstname']!=$firstname_register) && ($_POST['user_firstname']==$result1['user_firstname'])){
+		                    echo '<div class="erreur">Ce pseudo « '.$_POST['user_firstname'].' » est utilisé!</div>'; return false;
 		                }
 		                //idem pour l'email
-		                if($_POST['email']!=$email_register && $_POST['email']==$result1['email']){
+		                if(($_POST['email']!=$email_register) && ($_POST['email']==$result1['user_instituteemail'])){
 		                    echo '<div class="erreur">Cet email « '.$_POST['email'].' » est utilisé!</div>'; return false;
-		                }               
+		                }
 					}
 					//si pseudo vide
-			        if(empty($_POST['pseudo'])){
-			            echo '<div class="erreur">Veuillez saisir un pseudo!</div>';
+			        if(empty($_POST['user_name'])){
+			            echo '<div class="erreur">Veuillez saisir un nom!</div>';
+			        }
+			        if(empty($_POST['user_firstname'])){
+			            echo '<div class="erreur">Veuillez saisir un nom!</div>';
 			        }
 			        //si l'email vide
 			        else if(empty($_POST['email'])){
@@ -547,16 +595,17 @@
 			        }
 			        //tout est ok, on modifie les données
 			        else{
-			            $modif = mysql_query("UPDATE LOGIN SET pseudo='".mysql_real_escape_string(stripcslashes($_POST['pseudo']))."',
-			            									   email='".mysql_real_escape_string(stripcslashes($_POST['email']))."',
-			            									   statut='".mysql_real_escape_string(stripcslashes($_POST['statut']))."' 
-			            									   WHERE id='".mysql_real_escape_string($id_membre)."'");
+			            $modif = $db->query("UPDATE User SET user_name='".stripcslashes($_POST['user_name'])."',
+			            									 user_firstname='".stripcslashes($_POST['user_firstname'])."',
+			            									 user_instituteemail='".stripcslashes($_POST['email'])."',
+			            									 user_type='".stripcslashes($_POST['statut'])."'
+			            									 WHERE user_id=".$id_register."");
 			            if(!$modif) {
-        					die('Requête invalide : ' . mysql_error());
+        					die('Requête invalide : ' . $db->errorInfo());
 			            }
 			            echo '<div class="ok">Profil du membre modifié avec succès. Redirection en cours...</div><script type="text/javascript"> window.setTimeout("location=(\'Admin.php\');",3000) </script>';
 			        }
 			    }
-			//}
-		}*/
+			/*}*/
+		}
 	}

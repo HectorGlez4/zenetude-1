@@ -42,7 +42,12 @@ $pageController -> controlDynamicMenu();
 
 
         <?php
-        $pageView->showCalendar();
+            $pageController -> controlConnexion();
+            $pageView -> showHead();
+            $pageController -> controlHeader();
+            $pageController -> showScrollMenu();
+            $pageView->showCalendar();
+
         ?>
 
     </div>

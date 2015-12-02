@@ -11,10 +11,13 @@
     $pageView = new PageView();
     $db = connect();
 
-    if (isset($_SESSION['id'])) {
-        $request = $db->prepare('SELECT * FROM Student WHERE user_id = '.$_SESSION['id']);
+
+    if(isset($_SESSION['infoUser'][0]['user_id'])) {
+        $request = $db->prepare('SELECT * FROM Student WHERE user_id = '.$_SESSION['infoUser'][0]['user_id']);
+
         $request->execute();
         $result = $request->fetch();
+        var_dump($request);
     }
 
 
@@ -66,7 +69,7 @@ $values = array($student_personalemail,
 
     foreach ($values as $key => $value) {
         if (empty($value)) {
-        $values[$key] = NULL;
+            $values[$key] = NULL;
     } else {
         $values[$key] = $value;
     }
@@ -132,7 +135,7 @@ header('Location: profil.php');
                             <div class="form-group">
         
                         <div class="col-md-6">
-                            <input type="hidden" class="form-control" value="<?php echo $_SESSION['id'] ?>" name="user_id">
+                            <input type="hidden" class="form-control" value="<?php echo $_SESSION['infoUser'][0]['user_id'] ?>" name="user_id">
                             <label for="">Mail</label>
                                 <input type="email" class="form-control" value="<?php echo $result[4]; ?>" name="student_personalemail">
                                 <label for="">Telephone</label>
@@ -147,7 +150,7 @@ header('Location: profil.php');
                                 <input type="text" class="form-control" value="<?php echo $result[9]; ?>" name="student_zipcode" maxlength="5">
                                 <label for="">Ville</label>
                                 <input type="text" class="form-control" value="<?php echo $result[10]; ?>" name="student_city">
-                                <label for="">Pays</labe
+                                <label for="">Pays</label>
                                 <input type="text" class="form-control" value="<?php echo $result[11]; ?>" name="student_country">
                                 <label for="">Nationalité</label>
                                 <input type="text" class="form-control" value="<?php echo $result[12]; ?>" name="student_nationality">
@@ -163,7 +166,7 @@ header('Location: profil.php');
                                 <input type="text" class="form-control" value="<?php echo $result[16]; ?>" name="student_birthcountry">
                                 
                                 
-<!--                                 <div class="input-field col s12"> 
+                                <div class="input-field col s12"> 
                                     <select>
                                         <option value="BAC">
                                             BAC
@@ -194,8 +197,8 @@ header('Location: profil.php');
                                         </option>
                                     </select>
                                     <label for="">Niveau d'études</label>
-                                </div> -->
-                                <label for="">Niveau d'études</label>
+                                </div>
+<!--                                 <label for="">Niveau d'études</label>
                                 <input id="BAC" class="with-gap" name="student_grantholder" type="radio" value="BAC"/>
                                 <label for="BAC">BAC</label>
                                 <input id="BAC+1" class="with-gap" name="student_grantholder" type="radio" value="BAC+1"/>
@@ -213,7 +216,7 @@ header('Location: profil.php');
                                 <input id="BAC+7" class="with-gap" name="student_grantholder" type="radio" value="BAC+7"/>
                                 <label for="BAC+7">BAC+7</label>
                                 <input id="BAC+8" class="with-gap" name="student_grantholder" type="radio" value="BAC+8"/>
-                                <label for="BAC+8">BAC+8</label>
+                                <label for="BAC+8">BAC+8</label> -->
                                 </br>
                                 <label for="">Origine</label>
                                 <input type="text" class="form-control" value="<?php echo $result[20]; ?>" name="student_origin">
@@ -228,7 +231,7 @@ header('Location: profil.php');
                                 <input type="text" class="form-control" value="<?php echo $result[21]; ?>" name="student_comment">
 
 
-<!--                                 <div class="input-field col s12"> 
+                                <div class="input-field col s12"> 
                                     <select>
                                         <option value="FI">
                                             FI
@@ -244,9 +247,9 @@ header('Location: profil.php');
                                         </option>
                                     </select>
                                     <label>Type de formation</label>
-                                </div> -->
+                                </div>
 
-                           <label for="">Type de formation</label>
+<!--                            <label for="">Type de formation</label>
                                 <input id="FI" class="with-gap" name="student_grantholder" type="radio" value="<?php echo $result[24]; ?>"/>
                                 <label for="FI">FI</label>
                                 <input id="FA" class="with-gap" name="student_grantholder" type="radio" value="<?php echo $result[24]; ?>"/>
@@ -254,7 +257,7 @@ header('Location: profil.php');
                                 <input id="FC" class="with-gap" name="student_grantholder" type="radio" value="<?php echo $result[24]; ?>"/>
                                 <label for="FC">FC</label>
                                 <input id="CP" class="with-gap" name="student_grantholder" type="radio" value="<?php echo $result[24]; ?>"/>
-                                <label for="CP">CP</label>
+                                <label for="CP">CP</label> -->
                                 </br></br>
                                 <button type="submit" name="student_update" class="btn btn-primary">Enregistrer</button>
                         </div>

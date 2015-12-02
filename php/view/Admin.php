@@ -1,4 +1,5 @@
 <?php
+	ini_set('display_errors', 1);
     session_start();
     if (isset($_GET['erreur'])){
         echo "<script>alert('Erreur d\'authentification !');</script>";
@@ -26,7 +27,7 @@
                     <div class="card-panel teal" id="bloc2">
                         <div class="card-title"> <h3>Profil</h3></div>
                         <?php
-                            $pageView -> showAdministration($db);
+                            $pageView->showAdministration();
                         ?>
                         <p></p>
                     </div>
