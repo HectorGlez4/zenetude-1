@@ -142,7 +142,7 @@ header('Location: profil.php');
                                 </div>
                                 <div class="col s6">
                                     <label for="">Date de naissance</label>
-                                    <input type="date" class="form-control" placeholder="Placeholder" value="<?php echo $result[13]; ?>" name="student_birthday">
+                                    <input type="date" class="form-control datepicker" placeholder="Placeholder" value="<?php echo $result[13]; ?>" name="student_birthday">
                                     <label for="">Ville de naissance</label>
                                     <input type="text" class="form-control" placeholder="Placeholder" value="<?php echo $result[14]; ?>" name="student_birthcity">
                                     <label for="">Region de naissance</label>

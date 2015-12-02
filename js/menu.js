@@ -18,6 +18,12 @@
       document.getElementById('calendar').style.minheight=document.getElementById('aside2').offsetHeight+"px";
     }
 
+  $('.datepicker').pickadate({
+    selectMonths: true, // Creates a dropdown to control month
+    selectYears: 15 // Creates a dropdown of 15 years to control year
+  });  
+
+
     var trigger = $('#hamburger'),
         isClosed = false;
     var trigger2 = $('#hamburger2'),
