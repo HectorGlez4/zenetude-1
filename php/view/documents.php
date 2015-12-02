@@ -160,13 +160,19 @@
 
                       </div>
                   </div>
+
+                  <div class="card-panel teal" id="bloc1">
+                      <div class="card-header"> <h3>Documents</h3></div>
+                      <div class="card-content center-align">
+                          <p><a href="../controller/documents/generateTrombi.php" target="_blank">Imprimer le trombinoscope</a></p>
+                          <p><a href="../controller/documents/generateSheet.php" target="_blank">Imprimer la feuille d'émargement</a></p>
+                      </div>
+                  </div>
               </div>
               
               <!-- Trombinoscope picture -->
               <div class="col m8 s12">
                   <img src="../../img/trombinoscope-LP-SIL.jpg" alt="Trombi"/>
-                  <p><a href="../controller/documents/generateTrombi.php" target="_blank">Imprimer le trombinoscope</a></p>
-                  <p><a href="../controller/documents/generateSheet.php" target="_blank">Imprimer la feuille d'émargement</a></p>
               </div>
               
           </div>
