@@ -314,7 +314,6 @@ include_once '../model/db.php';
 			* Show the dynamic menu bar. 
 		**/
 		public function showScrollMenu($connect, $userInfos, $rf = false) {
-
 			if(!$connect) {?>
 			<nav id="scroll-nav">
 		  		<div class="nav-wrapper">
@@ -357,6 +356,19 @@ include_once '../model/db.php';
 					?>
 					<li><a class="color" href="profil.php">Mon compte</a></li>
 					<li><a class="color" href="../model/deconnect.php">Déconnexion</a></li>
+
+					<?php
+						$db=connect();
+						$permission = $db->query('SELECT user_id FROM Administrator');
+						$truc =  $_SESSION['infoUser'][0]['user_id'];
+						$test = $permission->fetchAll();
+						foreach ($test as $machin) {
+							if ($machin['user_id'] == $truc) {
+								echo '<li><a class="color" href="Admin.php">Administration</a></li>';
+								break;
+							}
+						}
+					?>
 				</ul>
 			</nav>
 			<nav id="scroll-nav">
