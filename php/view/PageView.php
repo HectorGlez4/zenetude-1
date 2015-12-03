@@ -332,10 +332,10 @@ include_once '../model/db.php';
 							$pic = $_SESSION['image'];
 						}
 						else*/ if($rf){
-							$pic = "../../img/avatar.png";
+							$pic = "../../img/avatar/avatar.png";
 						}
 						else{
-							$pic = "../../img/".$userInfos['infoStudent']['student_avatar'];
+							$pic = "../../img/avatar/".$userInfos['infoStudent']['student_avatar'];
 
 						}
 
