@@ -54,6 +54,16 @@
             $result = $request->fetch();
             return $result;
         }
+        /**
+         * Get the user email to check if it's already on the database.
+         **/
+
+        public function getUserEmail($userMail) {
+            $db = connect();
+            $request = $db->query('SELECT * FROM User WHERE user_instituteemail = "'.$userMail.'"');
+            $result = $request->fetch(PDO::FETCH_ASSOC);
+            return $result;
+        }
         
         /**
             * Return true if the user is a training manager.
@@ -62,7 +72,7 @@
             if($id_user == null)
                 return false;
                 
-            $bd = connect();
+            $db = connect();
             $request = $db->prepare('SELECT * 
                                      FROM   Training_manager 
                                      WHERE  user_id = '.$id_user.'');
@@ -142,12 +152,13 @@
 		**/
         public function addUser($userMail, $userPassword) {
             $db = connect();
+                $request = $db->query('INSERT INTO User (user_password, user_instituteemail) VALUES ("'.$userPassword.'", "'.$userMail.'")');
+                $request0 = $db->query("SELECT user_id FROM User WHERE user_instituteemail = '$userMail'");
+                $result0 = $request0->fetch();
+                $id = $result0[0];
+                $request2 = $db->query('INSERT INTO Student (user_id, student_instituteemail, student_avatar) VALUES ("'.$id.'", "'.$userMail.'", "avatar.png")');
 
-            $request = $db->query('INSERT INTO User (user_password, user_instituteemail) VALUES ("'.$userPassword.'", "'.$userMail.'")');
-            $request0 = $db->query("SELECT user_id FROM User WHERE user_instituteemail = '$userMail'");
-            $result0 = $request0->fetch();
-            $id = $result0[0];
-            $request2 = $db->query('INSERT INTO Student (user_id, student_instituteemail, student_avatar) VALUES ("'.$id.'", "'.$userMail.'", "avatar.png")');
         }
+
 	}
 

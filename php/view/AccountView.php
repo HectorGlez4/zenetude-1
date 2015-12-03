@@ -13,6 +13,8 @@
             else if($num ==4)
                 echo "Mot de passe non identique.";
 			else if($num ==5)
-                header('Location: index.php?erreur=true');	
+                header('Location: index.php?erreur=true');
+            else if($num ==6)
+                echo "Votre adresse e-mail existe d&eacutej&agrave. ";
 		}
 	}
