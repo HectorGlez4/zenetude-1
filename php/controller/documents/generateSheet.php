@@ -1,6 +1,8 @@
 <?php
     // get the HTML
     ob_start();
+    $g = $_GET["g"];
+    $f = $_GET["f"];
     include(dirname(__FILE__).'/prepareSheet.php');
 
     $content = ob_get_clean();

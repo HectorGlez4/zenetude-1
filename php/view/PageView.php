@@ -328,15 +328,20 @@ include_once '../model/db.php';
 				<ul>
 					<?php
 
-						if (isset($_SESSION['image'])){
+						/*if (isset($_SESSION['image'])){
 							$pic = $_SESSION['image'];
-						}else{
-							$pic = "../../img/avatar.png";
+						}
+						else*/ if($rf){
+							$pic = "../../img/avatar/avatar.png";
+						}
+						else{
+							$pic = "../../img/avatar/".$userInfos['infoStudent']['student_avatar'];
+
 						}
 
 					?>
 
-					<img src="<?php echo $pic; ?>" alt="avatar.png" class="circle responsive-img"/><br/>
+					<img src="<?php echo $pic; ?>" alt="avatar" class="circle responsive-img"/><br/>
 					<?php 
 
 						if(isset($userInfos['infoUser']['user_firstname']) && isset($userInfos['infoUser']['user_name']))
@@ -360,10 +365,10 @@ include_once '../model/db.php';
 					<?php
 						$db=connect();
 						$permission = $db->query('SELECT user_id FROM Administrator');
-						$truc =  $_SESSION['infoUser']['user_id'];
-						$test = $permission->fetchAll();
-						foreach ($test as $machin) {
-							if ($machin['user_id'] == $truc) {
+						$user_connect_id =  $_SESSION['infoUser']['user_id'];
+						$result_permission = $permission->fetchAll();
+						foreach ($result_permission as $var) {
+							if ($var['user_id'] == $user_connect_id) {
 								echo '<li><a class="color" href="admin.php">Administration</a></li>';
 								break;
 							}
@@ -440,7 +445,6 @@ include_once '../model/db.php';
         }
 
 		public function showProfilInformations($userInfos, $rf = false){
-            ini_set('display_errors', 1);
 			if(!$rf) {
 	    	echo '
 		    	<div class="col s12 m8">
@@ -482,9 +486,10 @@ include_once '../model/db.php';
                             echo '<li class="infos">Formation précédente : '.$userInfos['infoStudent']['student_origin'].' </li>';
                         if(isset($userInfos['infoStudent']['student_address2']))
                             echo '<li class="infos">Adresse : '.$userInfos['infoStudent']['student_address2'].' '.$userInfos['infoStudent']['student_address1'].' '.$userInfos['infoStudent']['student_zipcode'].' '.$userInfos['infoStudent']['student_city'].'</li>';
-			     		echo '
-                        <li class="infos"><a class="right-align" href="gestion.php">Gérer mon compte</a></li>
-			     		<li class="infos"><a class="right-align" href="contact.php">Contacter un responsable de formation</a></li>
+			     		echo '<li class="infos"><a class="right-align" href="gestion.php">Gérer mon compte</a></li>';
+			     		if($userInfos['infoStudent']['training_id'] != '1')
+			     			echo '<li class="infos"><a class="right-align" href="contact.php">Contacter un responsable de formation</a></li>';
+			     		echo'
 			       	</ul></div>
 	            </div>
 	            ';
@@ -518,123 +523,122 @@ include_once '../model/db.php';
 			}
 
 
+		public function showAdministration(){
+			ini_set('display_errors', 1);
+			$db = connect();
+			?>
+			<form name="form" method="POST">
+			<?php
+			$register = $db->query("SELECT user_id, user_name, user_firstname FROM User");
+			if(count($register) > 0){
+				echo '<label for="register">Sélection du membre : </label>';
+				echo '<select id="register" name="register" size=1 onchange="javascript:submit(this)" >';
+				echo '<option value = "default" selected>Sélectionner l\'utilisateur</option>';
+				while ($result=$register -> fetch()) {
+					echo '<option value="'.$result['user_id'].'" ';
+        			if(isset($_POST["register"]) && $_POST["register"]==$result['user_id']){echo "selected='selected'";}
+        			echo '>'.$result['user_firstname'].' '.$result['user_name'].'</option>';
+					}
+				echo '</select>';
+			}
+		    //Select all register
+			if (isset($_POST['register'])) {
+		        $selection = $db->query("SELECT user_id, user_name, user_firstname, user_instituteemail, user_type  FROM User WHERE user_id='".$_POST['register']."'");
+		        while($resultat = $selection -> fetch()){
+		            //Store all register's elements
+		            $id_register = $resultat['user_id'];
+		            $name_register = $resultat['user_name'];
+		            $firstname_register = $resultat['user_firstname'];
+		            $email_register = $resultat['user_instituteemail'];
+		            $statut_register = $resultat['user_type'];
 
-        public function showAdministration(){
-            ini_set('display_errors', 1);
-            $db = connect();
-            ?>
-            <form name="form" method="POST">
-            <?php
-            $register = $db->query("SELECT user_id, user_name, user_firstname FROM User");
-            if(count($register) > 0){
-                echo '<label for="register">Sélection du membre : </label>';
-                echo '<select id="register" name="register" size=1 onchange="javascript:submit(this)" >';
-                echo '<option value = "default" selected>Sélectionner l\'utilisateur</option>';
-                while ($result=$register -> fetch()) {
-                    echo '<option value="'.$result['user_id'].'" ';
-                    if(isset($_POST["register"]) && $_POST["register"]==$result['user_id']){echo "selected='selected'";}
-                    echo '>'.$result['user_firstname'].' '.$result['user_name'].'</option>';
-                }
-                echo '</select>';
-            }
-            //Select all register
-            if (isset($_POST['register'])) {
-                $selection = $db->query("SELECT user_id, user_name, user_firstname, user_instituteemail, user_type  FROM User WHERE user_id='".$_POST['register']."'");
-                while($resultat = $selection -> fetch()){
-                    //Store all register's elements
-                    $id_register = $resultat['user_id'];
-                    $name_register = $resultat['user_name'];
-                    $firstname_register = $resultat['user_firstname'];
-                    $email_register = $resultat['user_instituteemail'];
-                    $statut_register = $resultat['user_type'];
-                    ?>
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <input type="text" id="user_name" name="user_name" maxlength="20" value="<?php echo htmlspecialchars($name_register);?>" />
-                            <label for="user_name">Nom</label>
-                        </div>
-                    </div>
+		        ?>
+		        <div class="row">
+			        <div class="input-field col s12">
+				        <input type="text" id="user_name" name="user_name" maxlength="20" value="<?php echo htmlspecialchars($name_register);?>" />
+				        <label for="user_name">Nom</label>
+				    </div>
+		        </div>
 
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <input type="text" id="user_firstname" name="user_firstname" maxlength="20" value="<?php echo htmlspecialchars($firstname_register);?>" /></br>
-                            <label for="user_firstname">Prénom</label>
-                        </div>
-                    </div>
+		        <div class="row">
+		        	<div class="input-field col s12">
+				        <input type="text" id="user_firstname" name="user_firstname" maxlength="20" value="<?php echo htmlspecialchars($firstname_register);?>" /></br>
+				        <label for="user_firstname">Prénom</label>
+		        	</div>
+		        </div>
 
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <input type="text" id="email" name="email" maxlength="50" value="<?php echo htmlspecialchars($email_register);?>" /></br>
-                            <label for="email">Email</label>
-                        </div>
-                    </div>
+		        <div class="row">
+		        	<div class="input-field col s12">
+				        <input type="text" id="email" name="email" maxlength="50" value="<?php echo htmlspecialchars($email_register);?>" /></br>
+				        <label for="email">Email</label>
+		        	</div>
+		        </div>
 
-                    <label for="statut">Statut</label>
-                    <select id="statut" name="statut">
-                        <option value="Etudiant" <?php if($statut_register == "Etudiant") echo "selected='selected'";?>>Etudiant</option>
-                        <option value="RF" <?php if($statut_register == "RF") echo "selected='selected'";?>>Responsable de Formation</option>
-                    </select>
+		        <label for="statut">Statut</label>
+		        <select id="statut" name="statut">
+			        <option value="Etudiant" <?php if($statut_register == "Etudiant") echo "selected='selected'";?>>Etudiant</option>
+			        <option value="RF" <?php if($statut_register == "RF") echo "selected='selected'";?>>Responsable de Formation</option>
+		        </select>
 
-                    <button class="btn" type="submit" name="Modifier">Modifier</button>
-                    <a class="btn supp" href="admin.php?supmembre=<?php echo $id_register;?>">Supprimer</a>
-                    </form>
+		        <button class="btn" type="submit" name="Modifier">Modifier</button>
+				<a class="btn supp" href="admin.php?supmembre=<?php echo $id_register;?>">Supprimer</a>
+		    </form>
 
-                <?php
-                }
-            }
-            //Delete register
-            if(isset($_GET['supmembre'])){
-                //Delete register on database
-                $supprime_membre = $db->query("DELETE FROM User WHERE user_id = ".$_GET['supmembre']."");
-                //If errors
-                if (!$supprime_membre) {
-                    die('Requête invalide : ' . $db->errorInfo()[2]);
-                }
-                else{
-                    //Informations and redirect
-                    echo '<div class="ok">Membre supprimé avec succès. Redirection en cours...</div><script type="text/javascript"> window.setTimeout("location=(\'admin.php\');",3000) </script>';
-                }
-            }
-            if(isset($_POST['Modifier'])){
-                //Select users' firstname, lastname and email
-                $data = $db->query("SELECT user_name, user_firstname, user_instituteemail FROM User") or die ('Erreur :'.$db->errorInfo());
-                while($result1 = $data->fetch()){
-                    //If the element submit is different of the element store in databse, change element
-                    //and if the element has is the same as an other element in the databse, user get information
-                    if(($_POST['user_name']!=$name_register) && ($_POST['user_name']==$result1['user_name'])){
-                        echo '<div class="erreur">Ce pseudo « '.$_POST['user_name'].' » est utilisé!</div>'; return false;
-                    }
-                    if(($_POST['user_firstname']!=$firstname_register) && ($_POST['user_firstname']==$result1['user_firstname'])){
-                        echo '<div class="erreur">Ce pseudo « '.$_POST['user_firstname'].' » est utilisé!</div>'; return false;
-                    }
-                    //idem pour l'email
-                    if(($_POST['email']!=$email_register) && ($_POST['email']==$result1['user_instituteemail'])){
-                        echo '<div class="erreur">Cet email « '.$_POST['email'].' » est utilisé!</div>'; return false;
-                    }
-                }
-                //If first and last name empty
-                if(empty($_POST['user_name'])){
-                    echo '<div class="erreur">Veuillez saisir un nom!</div>';
-                }
-                if(empty($_POST['user_firstname'])){
-                    echo '<div class="erreur">Veuillez saisir un nom!</div>';
-                }
-                //If email empty
-                else if(empty($_POST['email'])){
-                    echo '<div class="erreur">Veuillez saisir un email!</div>';
-                }
-                //If wrong email
-                else if (!preg_match("$[0-9a-z]([-_.]?[0-9a-z])*@[0-9a-z]([-.]?[0-9a-z])*\.[a-z]{2,4}$",$_POST['email'])){
-                    echo '<div class="erreur">Veuillez saisir un email valide!</div>';
-                }
-                //If user_type empty
-                else if($_POST['statut']==''){
-                    echo '<div class="erreur">Veuillez saisir le statut du membre!</div>';
-                }
-                //If all correct, changes send
-
-                else{
-                    $modif = $db->query("UPDATE User SET user_name='".stripcslashes($_POST['user_name'])."',
+				<?php
+				}
+			}
+		    //Delete register
+		    if(isset($_GET['supmembre'])){
+		    //Delete register on database
+		    $supprime_membre = $db->query("DELETE FROM User WHERE user_id = ".$_GET['supmembre']."");
+		    //If errors
+			    if (!$supprime_membre) {
+	                die('Requête invalide : ' . $db->errorInfo());
+	            }
+	            else{
+		        //Informations and redirect
+		        echo '<div class="ok">Membre supprimé avec succès. Redirection en cours...</div><script type="text/javascript"> window.setTimeout("location=(\'admin.php\');",3000) </script>';
+			    }
+			}
+			if(isset($_POST['Modifier'])){
+			//Select users' firstname, lastname and email
+	            $data = $db->query("SELECT user_name, user_firstname, user_instituteemail FROM User") or die ('Erreur :'.$db->errorInfo());
+	            while($result1 = $data->fetch()){
+	                //If the element submit is different of the element store in databse, change element
+	                //and if the element has is the same as an other element in the databse, user get information
+	                if(($_POST['user_name']!=$name_register) && ($_POST['user_name']==$result1['user_name'])){
+	                    echo '<div class="erreur">Ce pseudo « '.$_POST['user_name'].' » est utilisé!</div>'; return false;
+	                }
+	                if(($_POST['user_firstname']!=$firstname_register) && ($_POST['user_firstname']==$result1['user_firstname'])){
+	                    echo '<div class="erreur">Ce pseudo « '.$_POST['user_firstname'].' » est utilisé!</div>'; return false;
+	                }
+	                //idem pour l'email
+	                if(($_POST['email']!=$email_register) && ($_POST['email']==$result1['user_instituteemail'])){
+	                    echo '<div class="erreur">Cet email « '.$_POST['email'].' » est utilisé!</div>'; return false;
+	                }
+				}
+				//If first and last name empty
+		        if(empty($_POST['user_name'])){
+		            echo '<div class="erreur">Veuillez saisir un nom!</div>';
+		        }
+		        if(empty($_POST['user_firstname'])){
+		            echo '<div class="erreur">Veuillez saisir un nom!</div>';
+		        }
+		        //If email empty
+		        else if(empty($_POST['email'])){
+		            echo '<div class="erreur">Veuillez saisir un email!</div>';
+		        }
+		        //If wrong email
+		        else if (!preg_match("$[0-9a-z]([-_.]?[0-9a-z])*@[0-9a-z]([-.]?[0-9a-z])*\.[a-z]{2,4}$",$_POST['email'])){
+		            echo '<div class="erreur">Veuillez saisir un email valide!</div>';
+		        }
+		        //If user_type empty
+		        else if($_POST['statut']==''){
+		            echo '<div class="erreur">Veuillez saisir le statut du membre!</div>';
+		        }
+		        //If all correct, changes send 
+		        else{
+		            $modif = $db->query("UPDATE User SET user_name='".stripcslashes($_POST['user_name'])."',
 		            									 user_firstname='".stripcslashes($_POST['user_firstname'])."',
 		            									 user_instituteemail='".stripcslashes($_POST['email'])."',
 		            									 user_type='".stripcslashes($_POST['statut'])."'
@@ -663,3 +667,4 @@ include_once '../model/db.php';
             }
         }
     }
+
