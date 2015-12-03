@@ -54,10 +54,10 @@ session_start();
                             /*if (!empty($formation) || !empty($group)) {*/
                         ?>
 
-                                <ul>
+                                <!--<ul>
                                     <li><?php echo $formation ?></li>
                                     <li class="indent"><a href="documents.php?f=<?php echo $formation_id ?>&g=<?php echo $group ?>">Groupe <?php echo $group ?></a></li>
-                                </ul>
+                                </ul>-->
 
                             <?php
                             for($iX = 0; $iX < count($studentsGroup); ++$iX) {

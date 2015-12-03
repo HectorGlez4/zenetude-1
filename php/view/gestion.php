@@ -133,14 +133,14 @@ header('Location: profil.php');
                 <div class="col s12 m8">
                     <div class="card-panel teal" id="bloc2">
                     <div class="card-title"> <h3>Gestion du compte</h3></div>
-                    <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST" role="form">
+                    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" role="form">
                             <div class="form-group">
                             <input type="hidden" class="form-control" value="<?php echo $_SESSION['infoUser']['user_id']; ?>" name="user_id">
                                 <div class="col s6">
                                     <label for="">Mail</label>
                                     <input type="email" class="form-control" value="<?php echo $result[4]; ?>" name="student_personalemail">
                                     <label for="">Telephone</label>
-                                    <input type="text" class="form-control" placeholder="Placeholder" value="<?php echo $result[5] ?>" name="student_phone">
+                                    <input type="text" class="form-control" value="<?php echo $result[5]; ?>" name="student_phone">
                                     <label for="">Portable</label>
                                     <input type="text" class="form-control" value="<?php echo $result[6]; ?>" name="student_mobile">
                                     <label for="">Adresse 1</label>
