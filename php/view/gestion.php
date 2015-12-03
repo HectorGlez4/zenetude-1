@@ -18,6 +18,10 @@ $idUser = $_SESSION['infoUser']['user_id'];
         $result = $request->fetch();
     }
 
+        $request = $db->prepare('SELECT description FROM Training');
+        $request->execute();
+        $result2 = $request->fetchAll();
+
 
 
 if (isset($_POST['student_update']) ) //SI LE FORMULAIRE A ETE ENVOYE
@@ -42,7 +46,14 @@ $student_origin=$_POST['student_origin'];
 $student_birthcity=$_POST['student_birthcity'];
 $student_comment=$_POST['student_comment'];
 $student_group=$_POST['student_group'];
+$training_description=$_POST['training_description'];
+$student_educationallevel=$_POST['student_educationallevel'];
+$student_grantholder=$_POST['student_grantholder'];
 
+        $request = $db->prepare('SELECT training_id FROM Training WHERE description = "'.$training_description.'"');
+        $request->execute();
+        $result3 = $request->fetchAll();
+        $training_id = $result3[0][0];
 
 $values = array($student_personalemail,
                 $student_phone,
@@ -61,8 +72,10 @@ $values = array($student_personalemail,
                 $student_origin,
                 $student_birthcity,
                 $student_comment,
-                $student_group);
-
+                $student_group,
+                $training_id,
+                $student_educationallevel,
+                $student_grantholder);
 
     foreach ($values as $key => $value) {
         if (empty($value)) {
@@ -71,6 +84,7 @@ $values = array($student_personalemail,
         $values[$key] = $value;
     }
 }
+var_dump($values);
 
 $update = $db->query("UPDATE Student SET 
 student_personalemail = '$values[0]',
@@ -90,7 +104,10 @@ student_educationallevel = '$values[13]',
 student_origin = '$values[14]',
 student_comment = '$values[15]',
 student_group = '$values[16]',
-student_birthcity = '$values[17]'
+student_birthcity = '$values[17]',
+training_id = '$values[18]',
+student_educationallevel = '$values[19]',
+student_grantholder = '$values[20]'
 WHERE user_id='$idUser'");
 
 $userInfos['infoStudent']['student_personalemail'] = $values[0];
@@ -109,7 +126,6 @@ header('Location: profil.php');
             $pageController -> controlDynamicMenu();
         ?>
 
-            
         <div class="container">
 
             <div class="row">
@@ -122,33 +138,45 @@ header('Location: profil.php');
                             <input type="hidden" class="form-control" value="<?php echo $_SESSION['infoUser']['user_id']; ?>" name="user_id">
                                 <div class="col s6">
                                     <label for="">Mail</label>
-                                    <input type="email" class="form-control" placeholder="Placeholder"value="<?php echo $result[4]; ?>" name="student_personalemail">
+                                    <input type="email" class="form-control" value="<?php echo $result[4]; ?>" name="student_personalemail">
                                     <label for="">Telephone</label>
                                     <input type="text" class="form-control" placeholder="Placeholder" value="<?php echo $result[5] ?>" name="student_phone">
                                     <label for="">Portable</label>
-                                    <input type="text" class="form-control" placeholder="Placeholder" value="<?php echo $result[6]; ?>" name="student_mobile">
+                                    <input type="text" class="form-control" value="<?php echo $result[6]; ?>" name="student_mobile">
                                     <label for="">Adresse 1</label>
-                                    <input type="text" class="form-control" placeholder="Placeholder" value="<?php echo $result[7]; ?>" name="student_address1">
+                                    <input type="text" class="form-control" value="<?php echo $result[7]; ?>" name="student_address1">
                                     <label for="">Adresse 2</label>
-                                    <input type="text" class="form-control" placeholder="Placeholder" value="<?php echo $result[8]; ?>" name="student_address2">
+                                    <input type="text" class="form-control" value="<?php echo $result[8]; ?>" name="student_address2">
                                     <label for="">Code postal</label>
-                                    <input type="text" class="form-control" placeholder="Placeholder" value="<?php echo $result[9]; ?>" name="student_zipcode" maxlength="5">
+                                    <input type="text" class="form-control" value="<?php echo $result[9]; ?>" name="student_zipcode" maxlength="5">
                                     <label for="">Ville</label>
-                                    <input type="text" class="form-control" placeholder="Placeholder" value="<?php echo $result[10]; ?>" name="student_city">
+                                    <input type="text" class="form-control" value="<?php echo $result[10]; ?>" name="student_city">
                                     <label for="">Pays</label>
-                                    <input type="text" class="form-control" placeholder="Placeholder" value="<?php echo $result[11]; ?>" name="student_country">
+                                    <input type="text" class="form-control" value="<?php echo $result[11]; ?>" name="student_country">
                                     <label for="">Nationalité</label>
-                                    <input type="text" class="form-control" placeholder="Placeholder" value="<?php echo $result[12]; ?>" name="student_nationality">
+                                    <input type="text" class="form-control" value="<?php echo $result[12]; ?>" name="student_nationality">
+                                    <label>Formation actuelle</label>
+                                    <select name="training_description">
+                                        <?php
+                                        foreach ($result2 as $value) {
+                                            if ($value[0] !== NULL) {
+                                                echo "<option value=" . $value[0] . ">
+                                                    " . $value[0] . "
+                                                    </option>";
+                                                  }
+                                            }
+                                        ?>
+                                    </select>
                                 </div>
                                 <div class="col s6">
                                     <label for="">Date de naissance</label>
-                                    <input type="date" class="form-control datepicker" placeholder="Placeholder" value="<?php echo $result[13]; ?>" name="student_birthday">
+                                    <input type="date" class="form-control datepicker" value="<?php echo $result[13]; ?>" name="student_birthday">
                                     <label for="">Ville de naissance</label>
-                                    <input type="text" class="form-control" placeholder="Placeholder" value="<?php echo $result[14]; ?>" name="student_birthcity">
+                                    <input type="text" class="form-control" value="<?php echo $result[14]; ?>" name="student_birthcity">
                                     <label for="">Region de naissance</label>
-                                    <input type="text" class="form-control" placeholder="Placeholder" value="<?php echo $result[15]; ?>" name="student_birtharea">
+                                    <input type="text" class="form-control" value="<?php echo $result[15]; ?>" name="student_birtharea">
                                     <label for="">Pays de naissance</label>
-                                    <input type="text" class="form-control" placeholder="Placeholder" value="<?php echo $result[16]; ?>" name="student_birthcountry">
+                                    <input type="text" class="form-control" value="<?php echo $result[16]; ?>" name="student_birthcountry">
                                     <label for="">Niveau d'études</label>
                                         <select name="student_educationallevel">
                                             <option value="BAC">
@@ -180,17 +208,16 @@ header('Location: profil.php');
                                             </option>
                                         </select>
                                     <label for="">Origine</label>
-                                    <input type="text" class="form-control" placeholder="Placeholder" value="<?php echo $result[20]; ?>" name="student_origin">
-                                    <label for="">Bourse</label></br>
-                                    <input id="oui" class="with-gap" name="student_grantholder" type="radio" value="Oui"/>
+                                    <input type="text" class="form-control" value="<?php echo $result[20]; ?>" name="student_origin">
+                                    <label name="student_grantholder" for="">Bourse</label></br>
+                                    <input id="oui" class="with-gap" name="student_grantholder" type="radio" value="1"/>
                                     <label class="button" for="oui">Oui</label>                       
-                                    <input id="non" class="with-gap" name="student_grantholder" type="radio" value="Non"/>  
+                                    <input id="non" class="with-gap" name="student_grantholder" type="radio" value="0"/>  
                                     <label class="button" for="non">Non</label> </br>
                                     <label for="">Groupe</label>
-                                    <input type="text" class="form-control" placeholder="Placeholder" value="<?php echo $result[22]; ?>" name="student_group">
+                                    <input type="text" class="form-control" value="<?php echo $result[24]; ?>" name="student_group">
                                     <label for="">Commentaires</label>
-                                    <input type="text" class="form-control" placeholder="Placeholder" value="<?php echo $result[21]; ?>" name="student_comment">
-
+                                    <input type="text" class="form-control" value="<?php echo $result[23]; ?>" name="student_comment">
                                     <label>Type de formation</label>
                                         <select name="student_status">
                                             <option value="FI">
