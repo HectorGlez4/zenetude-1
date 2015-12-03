@@ -5,6 +5,9 @@
  * Date: 23/11/2015
  * Time: 14:55
  */
+ini_set('display_errors', 1);
+session_start();
+
 include_once( '../model/db.php');
 include_once('../controller/AccountController.php');
 include_once('../model/AccountModel.php');
