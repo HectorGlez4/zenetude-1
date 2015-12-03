@@ -1,5 +1,4 @@
 <?php
-ini_set('display_errors', 1);
 include_once '../model/db.php';
 	class PageView {
 		/**
@@ -511,7 +510,7 @@ include_once '../model/db.php';
 		          			echo '<li class="infos">Civilité : '.$userInfos['infoUser']['user_civility'].'</li>';
 		          		echo '
 		          			<li class="infos"><a class="right-align" href="gestion.php">Gérer mon compte</a></li>
-		          			<li class="infos"><a class="right-align" href="documents.php">Accéder aux documents pédagogique</a></li>
+		          			<li class="infos"><a class="right-align" href="documents.php">Documents pédagogiques</a></li>
 		          			</ul>
 		          		</div>
 	            </div>';
