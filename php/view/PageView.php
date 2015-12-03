@@ -328,15 +328,20 @@ include_once '../model/db.php';
 				<ul>
 					<?php
 
-						if (isset($_SESSION['image'])){
+						/*if (isset($_SESSION['image'])){
 							$pic = $_SESSION['image'];
-						}else{
+						}
+						else*/ if($rf){
 							$pic = "../../img/avatar.png";
+						}
+						else{
+							$pic = "../../img/".$userInfos['infoStudent']['student_avatar'];
+
 						}
 
 					?>
 
-					<img src="<?php echo $pic; ?>" alt="avatar.png" class="circle responsive-img"/><br/>
+					<img src="<?php echo $pic; ?>" alt="avatar" class="circle responsive-img"/><br/>
 					<?php 
 
 						if(isset($userInfos['infoUser']['user_firstname']) && isset($userInfos['infoUser']['user_name']))
@@ -440,7 +445,6 @@ include_once '../model/db.php';
         }
 
 		public function showProfilInformations($userInfos, $rf = false){
-            ini_set('display_errors', 1);
 			if(!$rf) {
 	    	echo '
 		    	<div class="col s12 m8">
@@ -482,9 +486,10 @@ include_once '../model/db.php';
                             echo '<li class="infos">Formation précédente : '.$userInfos['infoStudent']['student_origin'].' </li>';
                         if(isset($userInfos['infoStudent']['student_address2']))
                             echo '<li class="infos">Adresse : '.$userInfos['infoStudent']['student_address2'].' '.$userInfos['infoStudent']['student_address1'].' '.$userInfos['infoStudent']['student_zipcode'].' '.$userInfos['infoStudent']['student_city'].'</li>';
-			     		echo '
-                        <li class="infos"><a class="right-align" href="gestion.php">Gérer mon compte</a></li>
-			     		<li class="infos"><a class="right-align" href="contact.php">Contacter un responsable de formation</a></li>
+			     		echo '<li class="infos"><a class="right-align" href="gestion.php">Gérer mon compte</a></li>';
+			     		if($userInfos['infoStudent']['training_id'] != '1')
+			     			echo '<li class="infos"><a class="right-align" href="contact.php">Contacter un responsable de formation</a></li>';
+			     		echo'
 			       	</ul></div>
 	            </div>
 	            ';
