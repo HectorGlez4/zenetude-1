@@ -103,9 +103,9 @@
 				<h1>Réinitialisation du mot de passe</h1>
 				<hr />
 				<p>Bonjour, votre mot de passe a été réinitialisé.</p>
-				<p>Votre nouveau mot de passe est : <a href='http://139.124.187.191/cedric/web/index.html'>$string</a></p>
+				<p>Votre nouveau mot de passe est : <a href='http://139.124.187.191/cedric/web/index.php'>$string</a></p>
 				<hr />
-				<p>Ce message à été généré automatiquement. Merci de ne pas y répondre.</p>
+				<p>Ce message a été généré automatiquement. Merci de ne pas y répondre.</p>
 			";
 
 			/*$mailer = new PHPMailer();
@@ -152,11 +152,11 @@
 		**/
         public function addUser($userMail, $userPassword) {
             $db = connect();
-                $request = $db->query('INSERT INTO User (user_password, user_instituteemail) VALUES ("'.$userPassword.'", "'.$userMail.'")');
-                $request0 = $db->query("SELECT user_id FROM User WHERE user_instituteemail = '$userMail'");
-                $result0 = $request0->fetch();
-                $id = $result0[0];
-                $request2 = $db->query('INSERT INTO Student (user_id, student_instituteemail, student_avatar) VALUES ("'.$id.'", "'.$userMail.'", "avatar.png")');
+            $request = $db->query('INSERT INTO User (user_password, user_instituteemail) VALUES ("'.$userPassword.'", "'.$userMail.'")');
+            $request0 = $db->query("SELECT user_id FROM User WHERE user_instituteemail = '$userMail'");
+            $result0 = $request0->fetch();
+            $id = $result0[0];
+            $request2 = $db->query('INSERT INTO Student (user_id, student_instituteemail, student_avatar, student_trombi) VALUES ("'.$id.'", "'.$userMail.'", "avatar.png", "avatar.png")');
 
         }
 
