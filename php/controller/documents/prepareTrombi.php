@@ -31,8 +31,8 @@ $students = getStudentsByTrainingGroup($f,$g);
             ?>
                 <td style="width: 16%;height:3cm;">
                     <img src="../../../img/avatar/<?php echo $students[$iX]["student_avatar"] === NULL ? $students[$iX]["student_avatar"] : "avatar.png" ?>" alt="trombi"  style="height:140px;">
-                    <p ><?php echo $students[$iX]["user_name"] . "<br/>" .
-                     $students[$iX ]["user_firstname"]?></p>
+                    <p><?php echo utf8_encode($students[$iX]["user_name"]) . "<br/>" .
+                     utf8_encode($students[$iX ]["user_firstname"]); ?></p>
                 </td>
 
             <?php
