@@ -1,8 +1,18 @@
 <?php
+
+
+//ini_set('display_errors', 1);
 	session_start();
+
 	if (isset($_GET['erreur'])){
 		echo "<script>alert('Erreur d\'authentification !');</script>";
 	}
+
+	if (isset($_GET['refus'])){
+		session_destroy();
+		echo "<script>alert('Vous avez refuser l\'accès au réseau social !');</script>";
+	}
+
 	include_once('./PageView.php');
 	include_once('../controller/PageController.php');
 

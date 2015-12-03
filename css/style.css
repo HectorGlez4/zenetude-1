@@ -42,14 +42,20 @@ nav>.nav-wrapper>.hamburglar{
 
 #socialmedia{
 	height: 20px;
-	width: 64px;
+	width: 66px;
 	margin-right: auto;
 	margin-left: auto;
 	margin-top: 5px;
 }
 
+#socialmedia a{
+	width: 20px;
+}
+
 #socialmedia img{
 	border-radius: 3px;
+	width: 20px;
+	height: 20px;
 }
 
 #scroll-nav{
@@ -79,7 +85,7 @@ nav>.nav-wrapper>.hamburglar{
 }
 
 #twitterimg{
-	margin: 2px;
+	margin: 3px;
 }
 
 .row{
@@ -181,6 +187,11 @@ nav>.nav-wrapper>.hamburglar{
 	float: left !important;
 }
 
+.card-action>input{
+	width: inherit;
+	margin-bottom: 0 !important;
+}
+
 footer{
 	height:300px;
 	background-color: #385e2d;
@@ -224,4 +235,32 @@ footer{
 
 .card-content {
 	padding-top: 0px;
+}
+
+.form-group{
+	padding: 30px;
+	margin: 0 auto;
+	width: 90%
+}
+
+input, select{
+	margin-bottom: 45px !important;
+}
+
+.col>.button{
+	font-size: 1em !important;
+	margin-bottom: 45px !important;
+	margin-top: 21px !important;
+}
+
+.col>label{
+	font-size: 1.2em !important;
+}
+
+.card-panel form{
+	padding: 50px;
+}
+
+.supp{
+	float: right;
 }

@@ -1,18 +1,22 @@
 <?php
 
-	if(session_id() == '')
-		session_start();
+	ini_set('display_errors', 0);
 
+	//if(session_id() == '')
+		//session_start();
+
+	if ((isset($_GET['error'])) || (isset($_GET['denied']))){
+    	header('Location: index.php?refus=true');
+	}
+
+	include_once 'socialmediadata.php';
+
+	
+		
 			               
-		       //_______________________________________BEGIN FACEBOOK_______________________________________________             
+		//_______________________________________BEGIN FACEBOOK_______________________________________________             
 				    
-				    /*	FACEBOOK LOGIN BASIC - PHP SDK V4.0
-		 *	file 			- index.php
-		 * 	Developer 		- Krishna Teja G S
-		 *	Website			- http://packetcode.com/apps/fblogin-basic/
-		 *	Date 			- 27th Sept 2014
-		 *	license			- GNU General Public License version 2 or later
-		*/
+	
 		/* INCLUSION OF LIBRARY FILEs*/
 			require_once( '../../Facebook/FacebookSession.php');
 			require_once( '../../Facebook/FacebookRequest.php' );
@@ -28,6 +32,7 @@
 			require_once( '../../Facebook/HttpClients/FacebookCurl.php' );
 			require_once( '../../Facebook/HttpClients/FacebookHttpable.php');
 			require_once( '../../Facebook/HttpClients/FacebookCurlHttpClient.php');
+
 		/* USE NAMESPACES */
 	
 			use Facebook\FacebookSession;
@@ -43,33 +48,59 @@
 			use Facebook\FacebookHttpable;
 			use Facebook\FacebookCurlHttpClient;
 			use Facebook\FacebookCurl;
+
 		/*PROCESS*/
-	
-			//1.Stat Session
+			
+			//1.Start Session
 			
 			//2.Use app id,secret and redirect url
 			$app_id = '1207370725956552';
 			$app_secret = '1b83b246d8f61a10d05879a692494c63';
-			$redirect_url='http://localhost/zenetude-1/php/view/socialmedia.php';
+			$redirect_url='http://localhost/zenetude-1/php/view/index.php';
 			 
 			//3.Initialize application, create helper object and get fb sess
 			FacebookSession::setDefaultApplication($app_id,$app_secret);
 			$helper = new FacebookRedirectLoginHelper($redirect_url);
+			//$email = $helper->getLoginUrl(['email']);
 			$sess = $helper->getSessionFromRedirect();
+
 			//4. if fb sess exists echo name 
-				if(isset($sess)){
+			if(isset($sess)){
+				$sess = new FacebookSession($sess->getToken());
 					//create request object,execute and capture response
-				$request = new FacebookRequest($sess, 'GET', '/me');
+				$request = new FacebookRequest($sess, 'GET', '/me?fields=id,first_name,last_name,email');
 				// from response get graph object
 				$response = $request->execute();
+				//$graph = $response->getGraphObject(GraphUser::className())->asArray();
 				$graph = $response->getGraphObject(GraphUser::className());
+
+				//echo $graph->getProperty('email');
+				
+				//var_dump($graph);
+				//echo $graph['email'];
+			
+				$email = $graph->getProperty('email');
 				// use graph object methods to get user details
-				$_SESSION['nom'] = $graph->getName();
-				header('Location: index-connecte.php');
+				$_SESSION['nom'] = $graph->getProperty('first_name');
+				$_SESSION['prenom'] = $graph->getProperty('last_name');
+				//$email = $graph->getEmail();
+				$id = $graph->getId();
+				$picture = "http://graph.facebook.com/$id/picture/";
+				addDataFacebook($email, $picture); 	
+
+
+				header('Location: index.php');
+
+
+
+
 			}else{
+
 				//else echo login
 				//echo '<a href='.$helper->getLoginUrl().'>Login with facebook</a>';
-				echo '<a href="'.$helper->getLoginUrl().'"><img src="../../img/FacebookLogo.png" alt="Se connecter avec Facebook" width="20" height="20"></a>';
+
+
+				echo '<a href="'.$helper->getLoginUrl(array('scope' => 'email')).'"><img src="../../img/FacebookLogo.png" alt="Se connecter avec Facebook""></a>';
 			}
             
 	//__________________________________________END FACEBOOK___________________________________
@@ -86,7 +117,7 @@
 
 	define('CONSUMER_KEY', 'nlOVxx4qz4DDWYFlSPWlbsZWO');
 	define('CONSUMER_SECRET', 'BEGyzam5iYaaBTKc7KaunoEEZFk7QNG9FSJOe4vXKr0gQ2Q19T');
-	define('OAUTH_CALLBACK', 'http://localhost/zenetude-1/php/view/socialmedia.php');
+	define('OAUTH_CALLBACK', 'http://localhost/zenetude-1/php/view/index.php');
 
 	
 
@@ -112,6 +143,7 @@
 		$login_url = $connection->getAuthorizeURL($token);
 	    }
 	}
+
 	// 3. if its a callback url
 	if(isset($_GET['oauth_token'])){
 	    // create a new twitter connection object with request token
@@ -119,19 +151,25 @@
 	    // get the access token from getAccesToken method
 	    $access_token = $connection->getAccessToken($_REQUEST['oauth_verifier']);
 	    if($access_token){
-		// create another connection object with access token
-		$connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $access_token['oauth_token'], $access_token['oauth_token_secret']);
-		// set the parameters array with attributes include_entities false
-		$params =array('include_entities'=>'false');
-		// get the data
-		$data = $connection->get('account/verify_credentials',$params);
-		if($data){
-		    // store the data in the session
-		    //$_SESSION['data']=$data;
-		    // redirect to same page to remove url parameters
-		    $redirect = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'];
-		    header('Location: ' . filter_var($redirect, FILTER_SANITIZE_URL));
-		}
+			// create another connection object with access token
+			$connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $access_token['oauth_token'], $access_token	['oauth_token_secret']);
+			// set the parameters array with attributes include_entities false
+			$params = array('include_entities'=>'true', 'include_email'=>'true');
+			// get the data
+			$data = $connection->get('account/verify_credentials',$params);
+			if($data){
+				// store the data in the session
+				$_SESSION['data'] = $data;
+				$nomprenom = split(" ", $data->name);
+				$_SESSION['nom'] = $nomprenom[0];
+				$_SESSION['prenom'] = $nomprenom[1];
+
+				
+				//$_SESSION['image'] = $picture;
+				// redirect to same page to remove url parameters
+				$redirect = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'];
+				header('Location: ' . filter_var($redirect, FILTER_SANITIZE_URL));
+			}
 	    }
 	}
 	/* 
@@ -142,22 +180,44 @@
 	if(isset($login_url) && !isset($_SESSION['data'])){
 	    // echo the login url
 	    //echo "<a href='$login_url'><button>Login with twitter </button></a>";
-	echo '<a id="twitterimg" href="'.$login_url.'"><img src="../../img/TwitterLogo.png" alt="Se connecter avec Twitter" width="20" height="20"></a>';
+
+		echo '<a id="twitterimg" href="'.$login_url.'"><img src="../../img/TwitterLogo.png" alt="Se connecter avec Twitter" ></a>';
+
 	}
 	else{
+	
+//echo "<script>alert('la');</script>";
+
 	    // get the data stored from the session
-	    //$data = $_SESSION['data'];
-	    $_SESSION['nom'] = $data->name;
-		//var_dump($data);
-		//$lol = $data->name;;
+	    $data = $_SESSION['data'];
+
+	 
+		//$nomprenom = split(" ", $data->name);
+
+		//$_SESSION['nom'] = $nomprenom[0];
+		//$_SESSION['prenom'] = $nomprenom[1];
+		
+		$email = $data->email;
+		$picture = $data->profile_image_url;
+
+		
+	addDataTwitter($email, $picture);
+
+		//$lol = $data->name;
 	    // echo the name username and photo
 	    //echo "Name : ".$data->name."<br>";
 	    //echo "Username : ".$data->screen_name."<br>";
 	    //echo "Photo : <img src='".$data->profile_image_url."'/><br><br>";
 	    // echo the logout button
 	    //echo "<a href='?logout=true'><button>Logout</button></a>";
-	    header("Location: index-connecte.php?nom=$lol");
-	}
+		//var_dump($data);
+		echo '<script>document.location.href="index.php"</script>';
+	    //header("Location: index.php");
+	
+
+
+
+}
 
 
 
@@ -167,23 +227,6 @@
 	//__________________________________________BEGIN GOOGLE +___________________________________
 
 	
-	
-
-		/*
-	 * Copyright 2011 Google Inc.
-	 *
-	 * Licensed under the Apache License, Version 2.0 (the "License");
-	 * you may not use this file except in compliance with the License.
-	 * You may obtain a copy of the License at
-	 *
-	 *     http://www.apache.org/licenses/LICENSE-2.0
-	 *
-	 * Unless required by applicable law or agreed to in writing, software
-	 * distributed under the License is distributed on an "AS IS" BASIS,
-	 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-	 * See the License for the specific language governing permissions and
-	 * limitations under the License.
-	 */
 	require_once '../../google_login_oauth/src/Google_Client.php';
 	require_once '../../google_login_oauth/src/contrib/Google_Oauth2Service.php';
 
@@ -233,7 +276,9 @@
 	}
 	if(isset($authUrl)) {
 	    //$form = "<a class='login' href='$authUrl'><img src='images/googleconnect3.png' /></a>";
-$form = '<a href="'.$authUrl.'"><img src="../../img/googleLogo.png" alt="Se connecter avec Google+" width="20" height="20"></a>';
+
+$form = '<a href="'.$authUrl.'"><img src="../../img/googleLogo.png" alt="Se connecter avec Google+""></a>';
+
 		echo $form;
 	  }
 	//include("html.php");
@@ -246,40 +291,13 @@ $form = '<a href="'.$authUrl.'"><img src="../../img/googleLogo.png" alt="Se conn
 		    //if (($content) && ($_SESSION['isConnectGoogle'])){
 		   if (isset($_SESSION['isConnectGoogle'])){
 		        //echo "<a href='?logout=true'>Se déconnecter</a>";
-		
-			header('Location: index-connecte.php');
+				$email = $content['email'];
+				$picture = $content['picture'];
+				addDataGoogle($email, $picture);			
+
+				//var_dump($content);
+				header('Location: index.php');
 		    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 		?>

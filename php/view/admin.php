@@ -7,44 +7,37 @@
     include_once('../controller/PageController.php');
     include_once('../model/db.php');
 
-
     $pageController = new PageController();
     $pageView = new PageView();
     $db = connect();
 
 ?>
-  <!DOCTYPE html>
-  <html>
+<!DOCTYPE html>
+<html>
     <body>
-    
-        
         <?php
-            $pageController -> controlConnexion();
             $pageView -> showHead();
             $pageController -> controlHeader();
             $pageController -> controlDynamicMenu();
         ?>
-
-
         <div class="container">
-
             <div class="row">
-            <?php
-                $pageController -> controlProfilInformations();
-                $pageView->showCalendar();
-             ?>
-
+                <div class="col s12 m8">
+                    <div class="card-panel teal" id="bloc2">
+                        <div class="card-title"> <h3>Profil</h3></div>
+                        <?php
+                            $pageView->showAdministration();
+                        ?>
+                    </div>
+                </div>
+                <?php
+                    $pageView->showCalendar();
+                ?>
             </div>
-
         </div><!-- Fin container -->
-
-            
-        </div>
-           
         <?php
             $pageView->showFooter();
             $pageView->showjavaLinks();
         ?>
-
     </body>
 </html>

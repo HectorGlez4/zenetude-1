@@ -8,10 +8,10 @@
 		public function	controlRecoverPassword() {
 			$accountModel = new AccountModel();
 			$accountView = new AccountView();			
-			$mail = htmlspecialchars($_POST['mail']);
+			$_POST['mail'] = htmlspecialchars($_POST['mail']);
 			
-			if($accountModel -> getDataUser('*')) {
-				$accountModel -> recoverPassword();
+			if($accountModel -> getDataUser('*', $_POST['mail'])) {
+				$accountModel -> recoverPassword($_POST['mail']);
 			}
 			else
 				$accountView -> showMessage(1);
@@ -27,21 +27,20 @@
                 $accountModel = new AccountModel();
                 $_POST['mail'] = htmlspecialchars($_POST['mail']);
                 $_POST['pass'] = htmlspecialchars(sha1($_POST['pass']));
-                if ($result = $accountModel -> getUserPassword()){
+                if ($userResult = $accountModel -> getUserPassword($_POST['mail'],  $_POST['pass'])){
                     session_start();
-                    $_SESSION['nom'] = $result[0]['user_name'];
-					$_SESSION['prenom'] = $result[0]['user_firstname'];
-					$_SESSION['id'] = $result[0]['user_id'];
-					if($result[0]['user_type'] == 'Etudiant') {
-						$studentResult = $accountModel->getDataStudent('*', $_SESSION['id']);
-						$_SESSION['class'] = $studentResult[0]['student_group'];
-					}
-					else if($result[0]['user_type'] == 'RF'){
-
-					}
-					else {
-
-					}
+                    $_SESSION['infoUser'] = $userResult;
+                 
+                   	if($_SESSION['infoUser']['user_type'] == 'RF') {
+                   		$rfResult = $accountModel->getDataTrainingManager('*', $_SESSION['infoUser']['user_id']);
+                   		$_SESSION['infoRF'] = $rfResult;
+                   	}
+                   	else {
+                   		$studentResult = $accountModel->getDataStudent('*', $_SESSION['infoUser']['user_id']);
+						$_SESSION['infoStudent'] = $studentResult;
+                        $trainingResult = $accountModel->getTrainingInformationsForUser('description', $_SESSION['infoUser']['user_id']);
+                        $_SESSION['infoTraining'] = $trainingResult;
+                   	}
                     header('Location: index.php');
 
                 }
@@ -72,7 +71,7 @@
                 else
                 {
                     $_POST["passe"] = sha1($_POST["passe"]);
-                    $accountModel->addUser();
+                    $accountModel->addUser($_POST["mail"],  $_POST["passe"]);
                     header('Location: index.php');
                 }
 

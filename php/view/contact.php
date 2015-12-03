@@ -1,81 +1,63 @@
 <?php
-/*
-// public function Renseignement($idStudent)
-        // Connection à la base de données
-        $bdd = new PDO('mysql:host=localhost;dbname=zenetude', 'root', 'root');
+session_start();
+if (isset($_GET['erreur'])){
+    echo "<script>alert('Erreur d\'authentification !');</script>";
+}
+include_once('./PageView.php');
+include_once('../controller/PageController.php');
+include_once('../model/db.php');
 
-        $bdd->query('SELECT user_name,user_firstname,user_instituteemail FROM users ');
-        $req=$bdd->query('SELECT user_name,user_firstname,user_instituteemail FROM users U , students S, training T ,
-                      training_manager TM WHERE S.training_id = T.training_id AND
-                      T.training_manager_id = TM.training_manager_id AND
-                      TM.user_id = U.user_id AND
-                      student_id = :idStudent');
+$pageController = new PageController();
+$pageView = new PageView();
+$db = connect();
 
-        $result = $req->fetchAll(PDO::FETCH_ASSOC);
-        $result= $req->rowcount();
-
-        // Redirection vers la page d'accueil
-        header('Location: index.php');
-*/
 ?>
+<!DOCTYPE html>
+<html>
+<body>
+
 
 <?php
-    session_start();
-    if (isset($_GET['erreur'])){
-        echo "<script>alert('Erreur d\'authentification !');</script>";
-    }
-    include_once('./PageView.php');
-    include_once('../controller/PageController.php');
-
-    $pageController = new PageController();
-    $pageView = new PageView();
+$pageView -> showHead();
+$pageController -> controlHeader();
+$pageController -> controlDynamicMenu();
 ?>
-  <!DOCTYPE html>
-  <html>
-    <body>
-        
+
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="col s12 m8">
+            <div class="card-panel teal" id="bloc2">
+                <div class="card-title"> <h3>Contact</h3></div>
+                <?php
+                $pageView -> showContact($db);
+                ?>
+                <p></p>
+            </div>
+        </div>
+
+
+
+
         <?php
-            $pageView -> showMetas();
-            $pageController -> controlHeader();
-            $pageController -> controlScrollMenu();
+            $pageController -> controlConnexion();
+            $pageView->showCalendar();
+
         ?>
 
-<div class="container-fluid">
-
-    <div class="nav row">
-        <div class='col-md-3 logo'>
-            <a href='../index.html'>
-                <img src='../img/logo.jpg' alt='Logo'/>
-            </a>
-        </div>
-        <div class='col-md-9 titre'>
-            <h1>Bannière ZENETUDE</h1>
-        </div>
     </div>
-    <div class='col-md-8 content'>
 
-        <form id="inscription" action ="valider.php" method="post" onsubmit="">
-            <fieldset>
-                <legend><h2>Inscription</h2></legend>
-                <label for="email"> Adresse email <em>*</em></label>
-                <input id="email" type="email" name="email"  ><br>
-                <label for="passe">Mot de passe: <em>*</em> </label>
-                <input id ="passe" type="password"  name="passe"/><br/>
-                <label for="passe2">Confirmation du mot de passe: </label>
-                <input id="passe" type="password"  name="passe2"/><br/>
-                <input value="S'inscrire" type="submit">
-            </fieldset>
-        </form>
+</div><!-- Fin container -->
 
-
-    </div>
-    <div id="footer">
-        <p>
-            ZENETUDE - Projet réalisé par les étudiants de LP SIL DA2I 2015/2016
-        </p>
-
-    </div>
 
 </div>
+
+<?php
+$pageView->showFooter();
+$pageView->showjavaLinks();
+?>
+
 </body>
 </html>

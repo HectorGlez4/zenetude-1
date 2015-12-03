@@ -1,13 +1,26 @@
 <?php
 	class AccountModel {
+
+
+        public function getTrainingInformationsForUser($param, $userId) {
+            $db = connect();
+            $request = $db->query('SELECT '.$param.' FROM Training WHERE training_id IN
+                                                                                        (SELECT training_id
+                                                                                         FROM Student
+                                                                                         WHERE user_id = '.$userId.'
+                                                                                        )
+            ');
+            $result = $request->fetch();
+            return $result;
+        }
+
 		/**
 			* Get user's informations about an user.
 		**/
-		public  function getDataUser($param) {
+		public  function getDataUser($param, $mail) {
             $db = connect();
-            $request = $db->prepare('SELECT '.$param.' FROM User WHERE user_instituteemail = '.$mail.'');
-            $request->execute();
-            $result = $request->fetchAll();
+            $request = $db->query('SELECT '.$param.' FROM User WHERE user_instituteemail = "'.$mail.'"');
+            $result = $request->fetch();
             return $result;
         }
 
@@ -16,9 +29,8 @@
 		**/
 		public function getDataStudent($param, $userId) {
 			$db = connect();
-			$request = $db->prepare('SELECT '.$param.' FROM Student WHERE user_id = '.$userId.'');
-            $request->execute();
-            $result = $request->fetchAll();
+			$request = $db->query('SELECT '.$param.' FROM Student WHERE user_id = "'.$userId.'"');
+            $result = $request->fetch();
             return $result;
 		}
 
@@ -27,9 +39,8 @@
 		**/
 		public function getDataTrainingManager($param, $userId) {
 			$db = connect();
-			$request = $db->prepare('SELECT '.$param.' FROM training_manager WHERE user_id = '.$userId.'');
-            $request->execute();
-            $result = $request->fetchAll();
+			$request = $db->query('SELECT '.$param.' FROM Training_manager WHERE user_id = "'.$userId.'"');
+            $result = $request->fetch();
             return $result;
 		}		
 
@@ -37,12 +48,10 @@
 			* Get all informations of a user selected by its mail and its password. 
 			* This function is used for test connection for now if a password exits for a mail in the datebase.
 		**/
-        public function getUserPassword() {
+        public function getUserPassword($userMail, $userPassword) {
             $db = connect();
-            var_dump($db);
-            $request = $db->prepare('SELECT * FROM User WHERE user_instituteemail = :mail AND user_password = :pass');
-            $request->execute(array('mail' => $_POST['mail'], 'pass' => $_POST['pass']));
-            $result = $request->fetchAll();
+            $request = $db->query('SELECT * FROM User WHERE user_instituteemail = "'.$userMail.'" AND user_password = "'.$userPassword.'"');
+            $result = $request->fetch();
             return $result;
         }
         
@@ -66,7 +75,8 @@
 		/**
 			* Generate a new password an update it in the database. Then, a mail is automaticaly send to the user.
 		**/
-		public function recoverPassword() {
+		public function recoverPassword($userMail) {
+            var_dump($userMail);
 	    	$accountView = new AccountView();
 
             $string = "";
@@ -78,18 +88,17 @@
 
             $db = connect();
 
-            $request = $db->prepare('UPDATE User SET user_password = :password WHERE user_instituteemail = :mail');
-			$request->execute(array('password' => sha1($string), 'mail' => $_POST['mail']));
+            $request = $db->query('UPDATE User SET user_password = "'.$string.'" WHERE user_instituteemail = "'.$userMail.'"');
 			$body = "
 				<h1>Réinitialisation du mot de passe</h1>
 				<hr />
 				<p>Bonjour, votre mot de passe a été réinitialisé.</p>
-				<p>Votre nouveau mot de passe est : <a href='http://139.124.187.191/cedric/web/index.html'>$string</a></p>
+				<p>Votre nouveau mot de passe est : <a href='http://139.124.187.191/cedric/web/index.php'>$string</a></p>
 				<hr />
-				<p>Ce message à été généré automatiquement. Merci de ne pas y répondre.</p>
+				<p>Ce message a été généré automatiquement. Merci de ne pas y répondre.</p>
 			";
 
-			$mailer = new PHPMailer();
+			/*$mailer = new PHPMailer();
 		        $mailer->IsSMTP();
 		        $mailer->SMTPDebug = 0;
 		        $mailer->SMTPAuth = true;
@@ -97,27 +106,48 @@
 		        $mailer->Host = "smtp.gmail.com";
 		        $mailer->Port = 465;
 		        $mailer->IsHTML(true);
-			$mailer->charSet = "UTF-8"; 	
+				$mailer->charSet = "UTF-8"; 	
 		        $mailer->Username = "lpsilda2i@gmail.com";
 		        $mailer->Password = "Projet2015";
 		        $mailer->SetFrom("lpsilda2i@gmail.com");
-		        $mailer->AddAddress($_POST['mail'] ,utf8_encode(""));
+		        $mailer->AddAddress($userMail ,utf8_encode(""));
 		        $mailer->Subject ="Subject: =?UTF-8?B?".base64_encode("Réinitialisation du mot de passe | Zenetude")."?=";
 		        $mailer->Body = $body;
 		        if(!$mailer->Send())
                     $accountView->showMessage(2);
 		        else
-                    $accountView->showMessage(3);
+                    $accountView->showMessage(3);*/
+
+                //Create a new PHPMailer instance
+				$mailer = new PHPMailer;
+				//Set who the message is to be sent from
+				$mailer->setFrom('Zenetude', 'First Last');
+				//Set who the message is to be sent to
+				$mailer->addAddress($userMail, '');
+				//Set the subject line
+				$mailer->Subject = 'PHPMailer mail() test';
+				$mailer->isHTML(true);
+				//Replace the plain text body with one created manually
+				 $mailer->Body = utf8_decode($body);
+				//send the message, check for errors
+				if (!$mailer->send()) {
+				    echo "Mailer Error: " . $mailer->ErrorInfo;
+				} else {
+				    echo "Message sent!";
+				}
 		}
 
 		/**
 			* Add a new user to the database.
 		**/
-        public function addUser() {
+        public function addUser($userMail, $userPassword) {
             $db = connect();
 
-            $request = $db->prepare('INSERT INTO User (user_password, user_instituteemail) VALUES (:password, :mail)');
-            $request->execute(array('password' => $_POST['passe'], 'mail' => $_POST['mail']));
+            $request = $db->query('INSERT INTO User (user_password, user_instituteemail) VALUES ("'.$userPassword.'", "'.$userMail.'")');
+            $request0 = $db->query("SELECT user_id FROM User WHERE user_instituteemail = '$userMail'");
+            $result0 = $request0->fetch();
+            $id = $result0[0];
+            $request2 = $db->query('INSERT INTO Student (user_id, student_instituteemail, student_avatar, student_trombi) VALUES ("'.$id.'", "'.$userMail.'", "avatar.png", "avatar.png")');
         }
 	}
 
