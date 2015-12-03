@@ -235,7 +235,7 @@ header('Location: profil.php');
                                             </option>
                                         </select>
                                 </div>
-                                
+                                <input type="button" name="return" value="Retour" class="btn btn-primary" onclick="self.location.href='profil.php'">
                                 <button type="submit" name="student_update" class="btn btn-primary">Enregistrer</button>
                     </div>  
                     </form>
