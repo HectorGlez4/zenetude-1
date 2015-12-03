@@ -160,11 +160,12 @@ header('Location: profil.php');
                                         <?php
                                         foreach ($result2 as $value) {
                                             if ($value[0] !== NULL) {
-                                                echo "<option value=" . $value[0] . ">
-                                                    " . $value[0] . "
-                                                    </option>";
-                                                  }
+                                                echo "<option value=" . $value[0];
+                                                if( $value[0] == $result[2]) 
+                                                    echo " selected";
+                                                echo ">" . $value[0] . "</option>";
                                             }
+                                        }
                                         ?>
                                     </select>
                                 </div>
