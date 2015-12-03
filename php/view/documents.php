@@ -1,5 +1,5 @@
 <?php
-session_start();
+    session_start();
     if (isset($_GET['erreur'])){
         echo "<script>alert('Erreur d\'authentification !');</script>";
     }
@@ -34,7 +34,7 @@ session_start();
             $pageView -> showHead();
             $pageController -> controlHeader();
             $pageController -> controlDynamicMenu();
-?>
+        ?>
 
 
         <!-- CONTAINER -->
@@ -54,10 +54,10 @@ session_start();
                             /*if (!empty($formation) || !empty($group)) {*/
                         ?>
 
-                                <!--<ul>
+                                <ul>
                                     <li><?php echo $formation ?></li>
                                     <li class="indent"><a href="documents.php?f=<?php echo $formation_id ?>&g=<?php echo $group ?>">Groupe <?php echo $group ?></a></li>
-                                </ul>-->
+                                </ul>
 
                             <?php
                             for($iX = 0; $iX < count($studentsGroup); ++$iX) {
