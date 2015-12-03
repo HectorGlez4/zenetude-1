@@ -124,7 +124,7 @@ header('Location: profil.php');
                                     <label for="">Mail</label>
                                     <input type="email" class="form-control" placeholder="Placeholder"value="<?php echo $result[4]; ?>" name="student_personalemail">
                                     <label for="">Telephone</label>
-                                    <input type="number" class="form-control" placeholder="Placeholder" value="<?php echo $result[5] ?>" name="student_phone">
+                                    <input type="text" class="form-control" placeholder="Placeholder" value="<?php echo $result[5] ?>" name="student_phone">
                                     <label for="">Portable</label>
                                     <input type="text" class="form-control" placeholder="Placeholder" value="<?php echo $result[6]; ?>" name="student_mobile">
                                     <label for="">Adresse 1</label>
