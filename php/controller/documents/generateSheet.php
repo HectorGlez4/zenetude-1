@@ -1,8 +1,9 @@
 <?php
     // get the HTML
+    $groupe = $_POST["groupe"];
+    $formation = $_POST["formation"];
+
     ob_start();
-    $g = $_GET["g"];
-    $f = $_GET["f"];
     include(dirname(__FILE__).'/prepareSheet.php');
 
     $content = ob_get_clean();
@@ -13,11 +14,19 @@
     {
         $html2pdf = new HTML2PDF('P', 'A4', 'fr');
         $html2pdf->pdf->SetDisplayMode('fullpage');
-//      $html2pdf->pdf->SetProtection(array('print'), 'spipu');
+        //$html2pdf->pdf->SetProtection(array('print'), 'spipu');
         $html2pdf->writeHTML($content, isset($_GET['vuehtml']));
-        $html2pdf->Output('feuille_emargement.pdf');
+        $html2pdf->Output('feuille_emargement.pdf', 'F');
+        echo json_encode([
+            'message' => "success",
+            'success' => true
+        ]);
     }
     catch(HTML2PDF_exception $e) {
+        echo json_encode([
+            'message' => "erreur",
+            'success' => false
+        ]);
         echo $e;
         exit;
     }

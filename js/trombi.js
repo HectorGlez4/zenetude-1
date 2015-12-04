@@ -14,6 +14,44 @@ function actualiserTrombi(formation,groupe){
             {
                 var html = '<iframe src="../controller/documents/trombinoscope.pdf" width="100%" height="800px" ></iframe>';
                 $('#trombi').html(html);
+                var html2 = '<p><a onclick="imprimerDoc(1,'+formation+','+groupe+');" href="#">Imprimer le trombinoscope</a></p>';
+                html2 += '<p><a onclick="imprimerDoc(2,'+formation+','+groupe+');" href="#">Imprimer la feuille d\'émargement</a></p>';
+                $('#docchoice').html(html2);
+            }
+            else
+            {
+                alert("Erreur: veuillez contacter le support");
+            }
+        },
+        error: function (resultat, statut, erreur){
+            alert("error");
+        }
+
+    });
+}
+//../controller/documents/generateTrombi.php?f=<?php echo $frm ?>&g=<?php echo $grp ?>
+//../controller/documents/generateSheet.php?f=<?php echo $frm ?>&g=<?php echo $grp ?>
+
+function imprimerDoc(doc, formation, groupe){
+    if(doc == 1)
+    {
+        doc = "Trombi";
+        var url = "trombinoscope.pdf";
+    }
+    else if(doc == 2)
+    {
+        doc = "Sheet";
+        var url = "feuille_emargement.pdf";
+    }
+    $.ajax({
+        url: '../controller/documents/generate'+doc+'.php',
+        type: 'POST',
+        data: 'formation='+formation+'&groupe='+groupe,
+        dataType: 'json',
+        success: function (JsonData, statut){
+            if(JsonData.message=="success")
+            {
+                window.open('../controller/documents/'+url);
             }
             else
             {

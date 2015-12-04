@@ -1,6 +1,4 @@
 <?php
-    error_reporting(-1);
-    ini_set('display_errors', 1);
     // get the HTML
     $groupe = $_POST["groupe"];
     $formation = $_POST["formation"];
@@ -12,7 +10,8 @@
 
     // convert to PDF
     require_once('../../../vendor/html2pdf/html2pdf.class.php');
-try{
+    try
+    {
         $html2pdf = new HTML2PDF('P', 'A4', 'fr');
         $html2pdf->pdf->SetDisplayMode('fullpage');
         //$html2pdf->pdf->SetProtection(array('print'), 'spipu');

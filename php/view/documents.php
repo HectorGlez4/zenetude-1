@@ -16,13 +16,13 @@
   include(dirname(__FILE__).'/../model/DocumentsModel.php');
 
   $studentsGroup = getStudentsGroupByTrainingGroup();
-  $get =  false;
+  /*$get =  false;
   if(isset($_GET['f']) && isset($_GET['g']))
   {
     $get = true;
     $frm = $_GET['f'];
     $grp = $_GET['g'];
-  }
+  }*/
 
 ?>
   <!DOCTYPE html>
@@ -47,45 +47,15 @@
                       <div class="card-content center-align">
 
                         <?php
-                            $formation = $studentsGroup[0]["description"];
-                            $group = $studentsGroup[0]["student_group"];
-                            $formation_id = $studentsGroup[0]["training"];
-
-                            /*if (!empty($formation) || !empty($group)) {*/
+                            for($i = 0 ; $i < count($studentsGroup) ; $i++)
+                            {
                         ?>
-
-                                <ul>
-                                    <li><?php echo $formation ?></li>
-                                    <li class="indent"><a href="documents.php?f=<?php echo $formation_id ?>&g=<?php echo $group ?>">Groupe <?php echo $group ?></a></li>
-                                </ul>
-
-                            <?php
-                            for($iX = 0; $iX < count($studentsGroup); ++$iX) {
-
-                                if (!($formation == $studentsGroup[$iX]["description"])) {
-                                    $formation = $studentsGroup[$iX]["description"];
-                                    $formation_id = $studentsGroup[$iX]["training"];
-                            ?>
-
-                                <ul>
-                                    <li><?php echo $studentsGroup[$iX]["description"] ?></li>
-                                </ul>
-
-                            <?php
-                              }
-
-                                if (!($group == $studentsGroup[$iX]["student_group"])) {
-                                    $group = $studentsGroup[$iX]["student_group"];
-                            ?>
-                            
-                                <ul>
-                                    <li class="indent"><a href="documents.php?f=<?php echo $formation_id ?>&g=<?php echo $group ?>">Groupe <?php echo $group ?></a></li>
-                                </ul>
-
+                            <ul>
+                                <li><?php echo $studentsGroup[$i]['description']?></li>
+                                <li><a href="#" onclick="actualiserTrombi(<?php echo $studentsGroup[$i]['training']?>, <?php echo $studentsGroup[$i]['student_group']?>)">Groupe <?php echo $studentsGroup[$i]['student_group']?></a></li>
+                            </ul>
                         <?php
-                                  }
-                                }
-                            //}
+                            }
                         ?>
 
                       </div>
@@ -93,19 +63,12 @@
 
                   <div class="card-panel teal" id="bloc1">
                       <div class="card-header"> <h3>Documents</h3></div>
-                      <div class="card-content center-align">
-                      <?php if($get){?>
-                          <p><a href="../controller/documents/generateTrombi.php?f=<?php echo $frm ?>&g=<?php echo $grp ?>" target="_blank">Imprimer le trombinoscope</a></p>
-                          <p><a href="../controller/documents/generateSheet.php?f=<?php echo $frm ?>&g=<?php echo $grp ?>" target="_blank">Imprimer la feuille d'émargement</a></p>
-                      <?php } ?>
-                      </div>
+                      <div id="docchoice" class="card-content center-align"></div>
                   </div>
               </div>
               
               <!-- Trombinoscope picture -->
-              <div class="col m8 s12">
-                  <img src="../../img/trombinoscope-LP-SIL.jpg" alt="Trombi"/>
-              </div>
+              <div id="trombi" class="col m8 s12"></div>
               
           </div>
         </div><!-- CONTAINER -->   
