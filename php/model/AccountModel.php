@@ -142,7 +142,7 @@
 
         }
 
- 		public function controlAdministrator(){
+ 		public function isAdministrator(){
  			$db = connect();
             $request = $db->query('SELECT admin_id FROM Administrator WHERE user_id IN (SELECT user_id FROM User WHERE user_id ='.$_SESSION['infoUser']['user_id'].')');
             $result = $request -> fetch();
@@ -150,13 +150,26 @@
             return $result;
  		}
 
- 		public function controlDocuments(){
+ 		public function nbDocuments(){
  			$db = connect();
  			$nbGroupForRF = $db->query("SELECT count(training_id) FROM Student WHERE training_id IN (SELECT training_id FROM Training WHERE training_manager_id = '".$_SESSION['infoRF']['training_manager_id']."')");
 			$result = $nbGroupForRF -> fetch();
 
 			return $result;
  		}
+
+        public function infoMyTrainingManager(){
+            $db = connect();
+            $request = $db->prepare('SELECT user_name,user_firstname,user_instituteemail
+                                      FROM User U , Student S, Training T ,Training_manager TM
+                                      WHERE S.training_id = T.training_id AND
+                                      T.training_manager_id = TM.training_manager_id AND
+                                      TM.user_id = U.user_id AND S.user_id ='.$_SESSION['infoUser']['user_id']);
+            $request->execute();
+            $result = $request->fetch();
+
+            return $result;
+        }
 
 	}
 

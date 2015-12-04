@@ -11,10 +11,14 @@
 
 		public function controlProfilInformations() {
 			$pageView = new PageView();
-			if(isset($_SESSION['infoUser']) && $_SESSION['infoUser']['user_type'] == 'RF')
-				$pageView -> showProfilInformations($_SESSION, true);
+			$result = 0;
+			if(isset($_SESSION['infoUser']) && $_SESSION['infoUser']['user_type'] == 'RF'){
+				$accountmodel = new AccountModel();
+				$result = $accountmodel -> nbDocuments();
+				$pageView -> showProfilInformations($_SESSION, true, $result);
+			}
 			else
-				$pageView -> showProfilInformations($_SESSION, false);
+				$pageView -> showProfilInformations($_SESSION, false, $result);
 
 		}
 
@@ -32,9 +36,16 @@
 				echo '<script>document.location.href="../view/index.php"</script>';
 		}
 
+		public function controlShowContact(){
+			$pageView = new PageView();
+			$accountmodel = new AccountModel();
+			$result = $accountmodel -> infoMyTrainingManager();
+			$pageView -> showContact($_SESSION, $result);
+		}
+
 		public function controlAdmin(){
             $accountmodel = new AccountModel();
-            $result = $accountmodel -> controlAdministrator();
+            $result = $accountmodel -> isAdministrator();
 			if(!(isset($_SESSION['infoUser']) && isset($result[0])))
 				echo '<script>document.location.href="../view/index.php"</script>';				
 		}
@@ -45,7 +56,7 @@
 				echo '<script>document.location.href="../view/index.php"</script>';
 			else{
 				$accountmodel = new AccountModel();
-				$result = $accountmodel -> controlDocuments();
+				$result = $accountmodel -> nbDocuments();
 				if($result[0] == 0)
 					echo '<script>document.location.href="../view/index.php"</script>';
 			}	
