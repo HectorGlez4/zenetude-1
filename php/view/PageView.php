@@ -69,6 +69,7 @@ include_once '../model/db.php';
 		<script src="../../js/moment-2.2.1.js"></script>
 		<script src="../../js/clndr.js"></script>
 		<script src="../../js/site.js"></script>
+        <script src="../../js/trombi.js"></script>
 		<script type="text/javascript" src="../../js/fonctions.js"></script>
 		<script type="text/javascript">
 
@@ -273,7 +274,7 @@ include_once '../model/db.php';
 			          <div class="row">
 			            <div class="input-field col s12">
 			              <input id="email" type="email" class="validate" name="mail">
-			              <label for="mail">Email</label>
+			              <label for="email">Email</label>
 			            </div>
 			          </div><!-- fin email -->
 			
@@ -281,7 +282,7 @@ include_once '../model/db.php';
 			          <div class="row">
 			            <div class="input-field col s12">
 			              <input id="passe" type="password" class="validate" name="pass">
-			              <label for="pass">Mot de passe</label>
+			              <label for="passe">Mot de passe</label>
 			            </div>
 			          </div><!-- fin mot de passe -->
 			
