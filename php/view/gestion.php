@@ -189,7 +189,8 @@ header('Location: profil.php');
                     <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" role="form">
                             <div class="form-group">
                             <input type="hidden" class="form-control" value="<?php echo $_SESSION['infoUser']['user_id']; ?>" name="user_id">
-                                <div class="col s6">
+                                <?php if (!$rf){ ?>
+                                <div class="col s6"><?php } ?>
                                     <label for="">Nom</label>
                                     <input type="text" class="form-control" value="<?php echo $result4[3];?>" name="user_name">
                                     <label for="">Prénom</label>
@@ -223,6 +224,10 @@ header('Location: profil.php');
                                         <input type="text" class="form-control" value="<?php echo $result[10]; ?>" name="student_city">
                                         <label for="">Pays</label>
                                         <input type="text" class="form-control" value="<?php echo $result[11]; ?>" name="student_country">
+                                    <?php if (!$rf){ ?>
+                                    </div>
+                                    <div class="col s6">
+                                    <?php } ?>
                                         <label for="">Nationalité</label>
                                         <input type="text" class="form-control" value="<?php echo $result[12]; ?>" name="student_nationality">
                                         <label>Formation actuelle</label>
@@ -238,8 +243,6 @@ header('Location: profil.php');
                                             }
                                             ?>
                                         </select>
-                                    </div>
-                                    <div class="col s6">
                                         <label for="">Date de naissance</label>
                                         <input type="date" class="form-control datepicker" value="<?php echo $result[13]; ?>" name="student_birthday">
                                         <label for="">Ville de naissance</label>
@@ -304,10 +307,10 @@ header('Location: profil.php');
                                                     CP
                                                 </option>
                                             </select>
-                                        <?php } ?>
                                 </div>
+                                        <?php } ?>
                                 <input type="button" name="return" value="Retour" class="btn btn-primary" onclick="self.location.href='profil.php'">
-                                <button type="submit" name="student_update" class="btn btn-primary">Enregistrer</button>
+                                <button type="submit" name="student_update" class="btn btn-primary right">Enregistrer</button>
                     </div>  
                     </form>
                     </div>
