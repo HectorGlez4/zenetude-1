@@ -41,17 +41,19 @@
 
                         <?php
                             $description = null;
-                            for($i = 0 ; $i < count($studentsGroup) ; $i++)
+                            for ($i = 0 ; $i < count($studentsGroup) ; $i++)
                             {
                         ?>
                             <ul>
-                                <?php if($description != $studentsGroup[$i]['description']){?>
+                                <?php if ($description != $studentsGroup[$i]['description'] && $studentsGroup[$i]['student_group'] != 0){?>
                                     <li><?php echo $studentsGroup[$i]['description']?></li>
-                                <?php } $description = $studentsGroup[$i]['description'] ?>
+                                <?php } $description = $studentsGroup[$i]['description'];
+                                    if ($studentsGroup[$i]['student_group'] != 0) { ?>
                                 <li><a id="form-<?php echo $studentsGroup[$i]['training_id'];?>_group-<?php echo $studentsGroup[$i]['student_group'];?>" href="#" onclick="actualiserTrombi(<?php echo $studentsGroup[$i]['training_id'];?>, <?php echo $studentsGroup[$i]['student_group'];?>)">Groupe <?php echo $studentsGroup[$i]['student_group'];?></a></li>
                             </ul>
                         <?php
-                            }
+                                    }
+                                }
                         ?>
 
                       </div>
