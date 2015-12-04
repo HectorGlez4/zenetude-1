@@ -8,7 +8,7 @@
     	header('Location: index.php?refus=true');
 	}
 
-	include_once 'socialmediadata.php';
+	include_once '../model/socialmediadata.php';
 
 	
 		
