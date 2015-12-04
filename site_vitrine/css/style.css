@@ -26,6 +26,10 @@ p {
   width: 100%;
 }
 
+.parallax-container .section .first {
+  margin-top: 5%;
+}
+
 #logo-container img{
   height: 60px;
   margin-top: 2px;
