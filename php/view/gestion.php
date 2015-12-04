@@ -18,7 +18,7 @@ $idUser = $_SESSION['infoUser']['user_id'];
         $result = $request->fetch();
     }
 
-        $request = $db->prepare('SELECT description FROM Training');
+        $request = $db->prepare('SELECT description, training_id FROM Training');
         $request->execute();
         $result2 = $request->fetchAll();
 
@@ -161,7 +161,7 @@ header('Location: profil.php');
                                         foreach ($result2 as $value) {
                                             if ($value[0] !== NULL) {
                                                 echo "<option value=" . $value[0];
-                                                if( $value[0] == $result[2]) 
+                                                if( $value[1] == $result[2]) 
                                                     echo " selected='selected'";
                                                 echo ">" . $value[0] . "</option>";
                                             }
@@ -171,7 +171,7 @@ header('Location: profil.php');
                                 </div>
                                 <div class="col s6">
                                     <label for="">Date de naissance</label>
-                                    <input type="date" class="form-control datepicker" value="<?php echo $result[13]; ?>" name="student_birthday">
+                                    <input type="date" class="form-control datepicker" value="<?php if($result[13] != "0000-00-00") echo $result[13]; ?>" name="student_birthday">
                                     <label for="">Ville de naissance</label>
                                     <input type="text" class="form-control" value="<?php echo $result[14]; ?>" name="student_birthcity">
                                     <label for="">Region de naissance</label>
@@ -180,57 +180,57 @@ header('Location: profil.php');
                                     <input type="text" class="form-control" value="<?php echo $result[16]; ?>" name="student_birthcountry">
                                     <label for="">Niveau d'études</label>
                                         <select name="student_educationallevel">
-                                            <option value="BAC">
+                                            <option value="BAC" <?php if($result[19] == "BAC") echo " selected='selected'";?>>
                                                 BAC
                                             </option>
-                                            <option value="BAC+1">
+                                            <option value="BAC+1"<?php if($result[19] == "BAC+1") echo " selected='selected'";?>>
                                                 BAC+1
                                             </option>
-                                            <option value="BAC+2">
+                                            <option value="BAC+2"<?php if($result[19] == "BAC+2") echo " selected='selected'";?>>
                                                 BAC+2
                                             </option>
-                                            <option value="BAC+3">
+                                            <option value="BAC+3"<?php if($result[19] == "BAC+3") echo " selected='selected'";?>>
                                                 BAC+3
                                             </option>
-                                            <option value="BAC+4">
+                                            <option value="BAC+4"<?php if($result[19] == "BAC4") echo " selected='selected'";?>>
                                                 BAC+4
                                             </option>
-                                            <option value="BAC+5">
+                                            <option value="BAC+5"<?php if($result[19] == "BAC+5") echo " selected='selected'";?>>
                                                 BAC+5
                                             </option>
-                                            <option value="BAC+6">
+                                            <option value="BAC+6"<?php if($result[19] == "BAC+6") echo " selected='selected'";?>>
                                                 BAC+6
                                             </option>
-                                            <option value="BAC+7">
+                                            <option value="BAC+7"<?php if($result[19] == "BAC+7") echo " selected='selected'";?>>
                                                 BAC+7
                                             </option>
-                                            <option value="BAC+8">
+                                            <option value="BAC+8"<?php if($result[19] == "BAC+8") echo " selected='selected'";?>>
                                                 BAC+8
                                             </option>
                                         </select>
                                     <label for="">Origine</label>
                                     <input type="text" class="form-control" value="<?php echo $result[20]; ?>" name="student_origin">
                                     <label name="student_grantholder" for="">Bourse</label></br>
-                                    <input id="oui" class="with-gap" name="student_grantholder" type="radio" value="1"/>
+                                    <input id="oui" class="with-gap" name="student_grantholder" type="radio" value="1"<?php if($result[21] == "1") echo "checked ='ckecked'";?>/>
                                     <label class="button" for="oui">Oui</label>                       
-                                    <input id="non" class="with-gap" name="student_grantholder" type="radio" value="0"/>  
+                                    <input id="non" class="with-gap" name="student_grantholder" type="radio" value="0"/<?php if($result[21] == "0") echo "checked ='ckecked'";?>>
                                     <label class="button" for="non">Non</label> </br>
                                     <label for="">Groupe</label>
-                                    <input type="text" class="form-control" value="<?php echo $result[24]; ?>" name="student_group">
+                                    <input type="text" class="form-control" value="<?php if ($result[24] != "0") echo $result[24]; ?>" name="student_group">
                                     <label for="">Commentaires</label>
                                     <input type="text" class="form-control" value="<?php echo $result[23]; ?>" name="student_comment">
                                     <label>Type de formation</label>
                                         <select name="student_status">
-                                            <option value="FI">
+                                            <option value="FI" <?php if($result[18] == "FI") echo " selected='selected'";?>>
                                                 FI
                                             </option>
-                                            <option value="FA">
+                                            <option value="FA" <?php if($result[18] == "FA") echo " selected='selected'";?>>
                                                 FA
                                             </option>
-                                            <option value="FC">
+                                            <option value="FC"<?php if($result[18] == "FC") echo " selected='selected'";?>>
                                                 FC
                                             </option>
-                                            <option value="CP">
+                                            <option value="CP"<?php if($result[18] == "CP") echo " selected='selected'";?>>
                                                 CP
                                             </option>
                                         </select>
