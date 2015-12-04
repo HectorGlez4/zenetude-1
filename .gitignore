@@ -2,3 +2,7 @@
 
 #Pour ne pas envoyer les fichiers créés automatiquement avec un ~ à la fin
 *~
+
+#ignore les pdf générés
+php/view/trombinoscope.pdf
+php/view/feuille_emargement.pdf
