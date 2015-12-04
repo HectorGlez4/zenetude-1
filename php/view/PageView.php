@@ -505,7 +505,6 @@ include_once '../model/db.php';
 		        	echo '
 			    	<div class="col s12 m8">
 		                <div class="card-panel teal" id="bloc2">
-
 		                    <div class="card-title"> <h3>Profil</h3></div>';
 		                    if ((isset($userInfos['infoUser']['user_firstname']) || $userInfos['infoUser']['user_firstname'] != "") && (isset($userInfos['infoUser']['user_name']) || $userInfos['infoUser']['user_name'] != ""))
 	                            echo '<div class="card-header"><h2>'.$userInfos['infoUser']['user_firstname'].' '.$userInfos['infoUser']['user_name'].'</h2></div>';

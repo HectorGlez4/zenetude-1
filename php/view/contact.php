@@ -20,6 +20,7 @@
 
         <?php
             $pageController -> controlConnexion();
+            $pageController -> controlContact();
             $pageView -> showHead();
             $pageController -> controlHeader();
             $pageController -> controlDynamicMenu();
@@ -34,7 +35,7 @@
                     <div class="card-panel teal" id="bloc2">
                         <div class="card-title"> <h3>Contact</h3></div>
                         <?php
-                        $pageController -> controlContact($db);
+                        $pageView -> showContact($_SESSION, $db);
                         ?>
                         <p></p>
                     </div>

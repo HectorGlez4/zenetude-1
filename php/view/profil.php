@@ -6,6 +6,7 @@
     include_once('./PageView.php');
     include_once('../controller/PageController.php');
     include_once('../model/db.php');
+    include_once('../model/AccountModel.php');
 
 
     $pageController = new PageController();
