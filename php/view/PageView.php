@@ -452,7 +452,6 @@ include_once '../model/db.php';
         }
 
 		public function showProfilInformations($userInfos, $rf = false){
-			var_dump($userInfos);
 			if(!$rf) {
 	    	echo '
 		    	<div class="col s12 m8">
