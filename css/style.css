@@ -270,3 +270,11 @@ input, select{
 .supp{
 	float: right;
 }
+
+.right{
+	float: right;
+}
+
+.card-panel>ul{
+	padding-bottom: 30px;
+}
