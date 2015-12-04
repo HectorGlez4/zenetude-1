@@ -13,7 +13,7 @@ ini_set('display_errors', 1);
 		echo "<script>alert('Vous avez refuser l\'accès au réseau social !');</script>";
 	}
 
-	include_once('./PageView.php');
+	include_once('./pageview.php');
 	include_once('../controller/PageController.php');
 
 	$pageController = new PageController();
