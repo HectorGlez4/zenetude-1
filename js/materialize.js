@@ -6333,12 +6333,12 @@ DatePicker.defaults = (function( prefix ) {
     return {
 
         // The title label to use for the month nav buttons
-        labelMonthNext: 'Next month',
-        labelMonthPrev: 'Previous month',
+        labelMonthNext: 'Mois suivant',
+        labelMonthPrev: 'Mois précédent',
 
         // The title label to use for the dropdown selectors
-        labelMonthSelect: 'Select a month',
-        labelYearSelect: 'Select a year',
+        labelMonthSelect: 'Selectionner un mois',
+        labelYearSelect: 'Selectionner une année',
 
         // Months and weekdays
         monthsFull: [ 'Janvier', 'Fevrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Decembre' ],
