@@ -23,6 +23,10 @@ $idUser = $_SESSION['infoUser']['user_id'];
         $request->execute();
         $result2 = $request->fetchAll();
 
+        $request = $db->prepare('SELECT * FROM User WHERE user_id = '.$idUser);
+        $request->execute();
+        $result4 = $request->fetch();
+
 
 
 if (isset($_POST['student_update']) ) //SI LE FORMULAIRE A ETE ENVOYE
@@ -50,6 +54,10 @@ $student_group=$_POST['student_group'];
 $training_description=$_POST['training_description'];
 $student_educationallevel=$_POST['student_educationallevel'];
 $student_grantholder=$_POST['student_grantholder'];
+$user_name=$_POST['user_name'];
+$user_firstname=$_POST['user_firstname'];
+$user_civility=$_POST['user_civility'];
+
 
         $request = $db->prepare('SELECT training_id FROM Training WHERE description = "'.$training_description.'"');
         $request->execute();
@@ -76,7 +84,10 @@ $values = array($student_personalemail,
                 $student_group,
                 $training_id,
                 $student_educationallevel,
-                $student_grantholder);
+                $student_grantholder,
+                $user_name,
+                $user_firstname,
+                $user_civility);
 
     foreach ($values as $key => $value) {
         if (empty($value)) {
@@ -111,7 +122,36 @@ student_educationallevel = '$values[19]',
 student_grantholder = '$values[20]'
 WHERE user_id='$idUser'");
 
-$userInfos['infoStudent']['student_personalemail'] = $values[0];
+$update2 = $db->query("UPDATE User SET
+user_name = '$values[21]',
+user_firstname = '$values[22]',
+user_civility = '$values[23]'
+WHERE user_id='$idUser'");
+
+$_SESSION['infoStudent']['student_personalemail'] = $values[0];
+$_SESSION['infoStudent']['student_phone'] = $values[1];
+$_SESSION['infoStudent']['student_mobile'] = $values[2];
+$_SESSION['infoStudent']['student_address1'] = $values[3];
+$_SESSION['infoStudent']['student_address2'] = $values[4];
+$_SESSION['infoStudent']['student_zipcode'] = $values[5];
+$_SESSION['infoStudent']['student_city'] = $values[6];
+$_SESSION['infoStudent']['student_country'] = $values[7];
+$_SESSION['infoStudent']['student_nationality'] = $values[8];
+$_SESSION['infoStudent']['student_birthdate'] = $values[9];
+$_SESSION['infoStudent']['student_birtharea'] = $values[10];
+$_SESSION['infoStudent']['student_birthcountry'] = $values[11];
+$_SESSION['infoStudent']['student_status'] = $values[12];
+$_SESSION['infoStudent']['student_educationallevel'] = $values[13];
+$_SESSION['infoStudent']['student_origin'] = $values[14];
+$_SESSION['infoStudent']['student_comment'] = $values[15];
+$_SESSION['infoStudent']['student_group'] = $values[16];
+$_SESSION['infoStudent']['student_birthcity'] = $values[17];
+$_SESSION['infoStudent']['training_id'] = $values[18];
+$_SESSION['infoStudent']['student_educationallevel'] = $values[19];
+$_SESSION['infoStudent']['student_grantholder'] = $values[20];
+$_SESSION['infoUser']['user_name'] = $values[21];
+$_SESSION['infoUser']['user_firstname'] = $values[22];
+$_SESSION['infoUser']['user_civility'] = $values[23];
 
 header('Location: profil.php');
 }
@@ -138,6 +178,22 @@ header('Location: profil.php');
                             <div class="form-group">
                             <input type="hidden" class="form-control" value="<?php echo $_SESSION['infoUser']['user_id']; ?>" name="user_id">
                                 <div class="col s6">
+                                    <label for="">Nom</label>
+                                    <input type="text" class="form-control" value="<?php echo $result4[3];?>" name="user_name">
+                                    <label for="">Prénom</label>
+                                    <input type="text" class="form-control" value="<?php echo $result4[4];?>" name="user_firstname">
+                                    <label>Civilité</label>
+                                        <select name="user_civility">
+                                            <option value="Monsieur" <?php if($result4[5] == "Monsieur") echo " selected='selected'";?>>
+                                                Monsieur
+                                            </option>
+                                            <option value="Madame" <?php if($result4[5] == "Madame") echo " selected='selected'";?>>
+                                                Madame
+                                            </option>
+                                            <option value="Mademoiselle"<?php if($result4[5] == "Mademoiselle") echo " selected='selected'";?>>
+                                                Mademoiselle
+                                            </option>
+                                        </select>
                                     <label for="">Mail</label>
                                     <input type="email" class="form-control" value="<?php echo $result[4]; ?>" name="student_personalemail">
                                     <label for="">Telephone</label>
@@ -172,7 +228,7 @@ header('Location: profil.php');
                                 </div>
                                 <div class="col s6">
                                     <label for="">Date de naissance</label>
-                                    <input type="date" class="form-control datepicker" value="<?php if($result[13] != "0000-00-00") echo $result[13]; ?>" name="student_birthday">
+                                    <input type="date" class="form-control datepicker" value="<?php echo $result[13]; ?>" name="student_birthday">
                                     <label for="">Ville de naissance</label>
                                     <input type="text" class="form-control" value="<?php echo $result[14]; ?>" name="student_birthcity">
                                     <label for="">Region de naissance</label>

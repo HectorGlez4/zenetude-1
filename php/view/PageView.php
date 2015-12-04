@@ -481,7 +481,7 @@ include_once '../model/db.php';
 			       		    echo '<li class="infos">Formation actuelle : '.$userInfos['infoTraining']['description'].'</li>';
                         if(isset($userInfos['infoStudent']['student_group']) && $userInfos['infoStudent']['student_group'] != 0)
                             echo '<li class="infos">Groupe : '.$userInfos['infoStudent']['student_group'].'</li>';
-                        if(isset($userInfos['infoStudent']['student_birthdate']) && $userInfos['infoStudent']['student_birthdate'] != "0000-00-00")
+                        if(isset($userInfos['infoStudent']['student_birthdate']) && $userInfos['infoStudent']['student_birthdate'] != "")
 						    echo '<li class="infos">Date de naissance : '.$userInfos['infoStudent']['student_birthdate'].'</li>';
                         if(isset($userInfos['infoStudent']['student_birthcity']) && $userInfos['infoStudent']['student_birthcity'] != "")
 						    echo '<li class="infos">Lieu de naissance : '.$userInfos['infoStudent']['student_birthcity'].'</li>';
@@ -494,7 +494,6 @@ include_once '../model/db.php';
                         if(isset($userInfos['infoStudent']['student_address2']) && $userInfos['infoStudent']['student_address2'] != "")
                             echo '<li class="infos">Adresse : '.$userInfos['infoStudent']['student_address2'].' '.$userInfos['infoStudent']['student_address1'].' '.$userInfos['infoStudent']['student_zipcode'].' '.$userInfos['infoStudent']['student_city'].'</li>';
 			     		echo '<li class="infos"><a class="right-align" href="gestion.php">Gérer mon compte</a></li>';
-			     		//if($userInfos['infoStudent']['training_id'] != '1')
 			     			echo '<li class="infos"><a class="right-align" href="contact.php">Contacter un responsable de formation</a></li>';
 			     		echo'
 			       	</ul></div>
