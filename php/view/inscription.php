@@ -4,7 +4,7 @@
     echo "<script>alert('Erreur d\'authentification !');</script>";
   }
   include_once('./pageview.php');
-  include_once('../controller/PageController.php');
+  include_once('../controller/pagecontroller.php');
 
   $pageController = new PageController();
   $pageView = new PageView();

@@ -2,7 +2,7 @@
 
 <?php   
 
-include(dirname(__FILE__).'/../model/DocumentsModel.php');
+include(dirname(__FILE__).'/../model/documentsmodel.php');
 
 $students = getStudentsByTrainingGroup($formation,$groupe);
 

@@ -4,9 +4,9 @@
         echo "<script>alert('Erreur d\'authentification !');</script>";
     }
     include_once('./pageview.php');
-    include_once('../controller/PageController.php');
+    include_once('../controller/pagecontroller.php');
     include_once('../model/db.php');
-    include_once('../model/AccountModel.php');
+    include_once('../model/accountmodel.php');
     
 
     $pageController = new PageController();
@@ -15,7 +15,7 @@
 
     $pageController -> controlConnexion();
     $pageController -> controlDocuments();
-  include(dirname(__FILE__).'/../model/DocumentsModel.php');
+  include(dirname(__FILE__).'/../model/documentsmodel.php');
 
   $studentsGroup = getStudentsGroup();
 

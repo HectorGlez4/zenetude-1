@@ -4,7 +4,7 @@
         echo "<script>alert('Erreur d\'authentification !');</script>";
     }
     include_once('./pageview.php');
-    include_once('../controller/PageController.php');
+    include_once('../controller/pagecontroller.php');
 
     $pageController = new PageController();
     $pageView = new PageView();
@@ -52,9 +52,9 @@
         </form><!-- Fin formulaire -->
         <?php
             if(isset($_POST['mail'])) {
-                include_once('../controller/AccountController.php');
-                include_once('../model/AccountModel.php');
-                include_once('./AccountView.php');
+                include_once('../controller/accountcontroller.php');
+                include_once('../model/accountmodel.php');
+                include_once('./accountview.php');
                 include_once('../../vendor/PHPMailer/PHPMailerAutoload.php');
                 include_once( '../model/db.php');
                 $accountController = new AccountController();

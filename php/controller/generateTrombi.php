@@ -4,7 +4,7 @@
     $formation = $_POST["formation"];
 
     ob_start();
-    include(dirname(__FILE__).'/../view/prepareTrombi.php');
+    include(dirname(__FILE__).'/../view/preparetrombi.php');
 
     $content = ob_get_clean();
 
