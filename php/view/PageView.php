@@ -522,8 +522,8 @@ include_once '../model/db.php';
 			          		if(isset($userInfos['infoUser']['user_civility']) && $userInfos['infoUser']['user_civility'] != "")
 			          			echo '<li class="infos">Civilité : '.$userInfos['infoUser']['user_civility'].'</li>';
 			          		echo '<li class="infos"><a class="right-align" href="gestion.php">Gérer mon compte</a></li>';
-			          		$nbGroupForRF = $db->query("SELECT count(training_id) FROM Student WHERE training_id IN (SELECT training_id FROM Training WHERE training_manager_id = '".$userInfos['infoRF']['training_manager_id']."')");
-			          		$result = $nbGroupForRF -> fetch();
+			          		$accountmodel = new AccountModel();
+							$result = $accountmodel -> controlDocuments();
 			          		if( $result[0] > 0){
 			          			echo '<li class="infos"><a class="right-align" href="documents.php">Documents pédagogiques</a></li>';
 			          		}

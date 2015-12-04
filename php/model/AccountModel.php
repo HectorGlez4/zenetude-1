@@ -110,26 +110,6 @@
 				<p>Ce message a été généré automatiquement. Merci de ne pas y répondre.</p>
 			";
 
-			/*$mailer = new PHPMailer();
-		        $mailer->IsSMTP();
-		        $mailer->SMTPDebug = 0;
-		        $mailer->SMTPAuth = true;
-		        $mailer->SMTPSecure = 'ssl';
-		        $mailer->Host = "smtp.gmail.com";
-		        $mailer->Port = 465;
-		        $mailer->IsHTML(true);
-				$mailer->charSet = "UTF-8"; 	
-		        $mailer->Username = "lpsilda2i@gmail.com";
-		        $mailer->Password = "Projet2015";
-		        $mailer->SetFrom("lpsilda2i@gmail.com");
-		        $mailer->AddAddress($userMail ,utf8_encode(""));
-		        $mailer->Subject ="Subject: =?UTF-8?B?".base64_encode("Réinitialisation du mot de passe | Zenetude")."?=";
-		        $mailer->Body = $body;
-		        if(!$mailer->Send())
-                    $accountView->showMessage(2);
-		        else
-                    $accountView->showMessage(3);*/
-
                 //Create a new PHPMailer instance
 				$mailer = new PHPMailer;
 				//Set who the message is to be sent from
@@ -168,6 +148,14 @@
             $result = $request -> fetch();
 
             return $result;
+ 		}
+
+ 		public function controlDocuments(){
+ 			$db = connect();
+ 			$nbGroupForRF = $db->query("SELECT count(training_id) FROM Student WHERE training_id IN (SELECT training_id FROM Training WHERE training_manager_id = '".$_SESSION['infoRF']['training_manager_id']."')");
+			$result = $nbGroupForRF -> fetch();
+
+			return $result;
  		}
 
 	}

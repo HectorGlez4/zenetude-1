@@ -6,13 +6,15 @@
     include_once('./PageView.php');
     include_once('../controller/PageController.php');
     include_once('../model/db.php');
+    include_once('../model/AccountModel.php');
     
 
     $pageController = new PageController();
     $pageView = new PageView();
     $db = connect();
 
-
+    $pageController -> controlConnexion();
+    $pageController -> controlDocuments();
   include(dirname(__FILE__).'/../model/DocumentsModel.php');
 
   $studentsGroup = getStudentsGroup();
@@ -23,7 +25,6 @@
     <body>
         
         <?php
-            $pageController -> controlConnexion();
             $pageView -> showHead();
             $pageController -> controlHeader();
             $pageController -> controlDynamicMenu();

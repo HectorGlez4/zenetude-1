@@ -33,6 +33,18 @@
 				echo '<script>document.location.href="../view/index.php"</script>';				
 		}
 
+		public function controlDocuments(){
+			$pageView = new PageView();
+			if(isset($_SESSION['infoUser']) && $_SESSION['infoUser']['user_type'] == 'Etudiant')
+				echo '<script>document.location.href="../view/index.php"</script>';
+			else{
+				$accountmodel = new AccountModel();
+				$result = $accountmodel -> controlDocuments();
+				if($result[0] == 0)
+					echo '<script>document.location.href="../view/index.php"</script>';
+			}	
+		}
+
 
 		/**
 			* Test if a session exists before show the index's description. 
