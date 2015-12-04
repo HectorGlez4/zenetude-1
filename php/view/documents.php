@@ -6,28 +6,29 @@
     include_once('./PageView.php');
     include_once('../controller/PageController.php');
     include_once('../model/db.php');
+    include_once('../model/AccountModel.php');
     
 
     $pageController = new PageController();
     $pageView = new PageView();
     $db = connect();
+
+    $pageController -> controlConnexion();
+    $pageController -> controlDocuments();
+  include(dirname(__FILE__).'/../model/DocumentsModel.php');
+
+  $studentsGroup = getStudentsGroup();
+
 ?>
   <!DOCTYPE html>
   <html>
     <body>
         
         <?php
-            $pageController -> controlConnexion();
             $pageView -> showHead();
             $pageController -> controlHeader();
             $pageController -> controlDynamicMenu();
-        
-
-  include(dirname(__FILE__).'/../model/DocumentsModel.php');
-
-  $studentsGroup = getStudentsGroupByTrainingGroup(1,1);
-?>
-
+        ?>
 
         <!-- CONTAINER -->
         <div class="container">
@@ -39,52 +40,31 @@
                       <div class="card-content center-align">
 
                         <?php
-                          $formation = $studentsGroup[0]["description"];
-                          $group = $studentsGroup[0]["student_group"];
+                            $description = null;
+                            for($i = 0 ; $i < count($studentsGroup) ; $i++)
+                            {
                         ?>
-
-                          <ul>
-                            <li><?php echo $formation ?></li>
-                            <li class="indent"><a href="documents.php/<?php echo $formation ?>/<?php echo $group ?>">Groupe <?php echo $group ?></a></li>
-                          </ul>
-
+                            <ul>
+                                <?php if($description != $studentsGroup[$i]['description']){?>
+                                    <li><?php echo $studentsGroup[$i]['description']?></li>
+                                <?php } $description = $studentsGroup[$i]['description'] ?>
+                                <li><a id="form-<?php echo $studentsGroup[$i]['training_id'];?>_group-<?php echo $studentsGroup[$i]['student_group'];?>" href="#" onclick="actualiserTrombi(<?php echo $studentsGroup[$i]['training_id'];?>, <?php echo $studentsGroup[$i]['student_group'];?>)">Groupe <?php echo $studentsGroup[$i]['student_group'];?></a></li>
+                            </ul>
                         <?php
-                        for($iX = 0; $iX < count($studentsGroup); ++$iX) {
-
-                          if (!($formation == $studentsGroup[$iX]["description"])) {
-                            $formation = $studentsGroup[$iX]["description"];
-                        ?>
-
-                          <ul>
-                            <li><?php echo $studentsGroup[$iX]["description"] ?></li>
-                          </ul>
-
-                        <?php
-                          }
-
-                          if (!($group == $studentsGroup[$iX]["student_group"])) {
-                            $group = $studentsGroup[$iX]["student_group"];
-                        ?>
-                        
-                          <ul>
-                            <li class="indent"><a href="documents.php/<?php echo $formation ?>/<?php echo $group ?>">Groupe <?php echo $group ?></a></li>
-                          </ul>
-
-                        <?php
-                          }
-                        }
+                            }
                         ?>
 
                       </div>
                   </div>
+
+                  <div class="card-panel teal" id="bloc1">
+                      <div class="card-header"> <h3>Documents</h3></div>
+                      <div id="docchoice" class="card-content center-align"></div>
+                  </div>
               </div>
               
               <!-- Trombinoscope picture -->
-              <div class="col m8 s12">
-                  <img src="../../img/trombinoscope-LP-SIL.jpg" alt="Trombi"/>
-                  <p><a href="../controller/documents/generateTrombi.php" target="_blank">Imprimer le trombinoscope</a></p>
-                  <p><a href="../controller/documents/generateSheet.php" target="_blank">Imprimer la feuille d'émargement</a></p>
-              </div>
+              <div id="trombi" class="col m8 s12"></div>
               
           </div>
         </div><!-- CONTAINER -->   

@@ -35,6 +35,9 @@ nav>.nav-wrapper>.hamburglar{
 	margin-top: 40px;
 	z-index: 30;
 }
+#noFormation{
+	
+}
 
 #page{
 	position: absolute;
@@ -232,10 +235,18 @@ footer{
 .indent {
 	text-indent: 40px;
 }
+
+.card-content {
+	padding-top: 0px;
+}
+
 .form-group{
 	padding: 30px;
 	margin: 0 auto;
 	width: 90%
+}
+.form-active{
+    font-weight: bold;
 }
 
 input, select{
