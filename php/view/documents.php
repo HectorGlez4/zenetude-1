@@ -16,7 +16,6 @@
   include(dirname(__FILE__).'/../model/DocumentsModel.php');
 
   $studentsGroup = getStudentsGroup();
-print_r($studentsGroup);
 
 ?>
   <!DOCTYPE html>
@@ -40,7 +39,7 @@ print_r($studentsGroup);
                       <div class="card-content center-align">
 
                         <?php
-                            $description;
+                            $description = null;
                             for($i = 0 ; $i < count($studentsGroup) ; $i++)
                             {
                         ?>
