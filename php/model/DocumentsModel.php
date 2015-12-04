@@ -31,7 +31,7 @@ function getStudentsByTrainingGroup($training_id = null, $student_group = null){
 } // getStudentsByTrainingGroup()
 
 
-function getStudentsGroupByTrainingGroup() {
+function getStudentsGroup() {
 
     $mysqli = new mysqli("mysql-maquetteprojet.alwaysdata.net", "114038_equipe1", "q}2[u9LE", "maquetteprojet_zenetude");
     if ($mysqli->connect_errno)
@@ -39,7 +39,7 @@ function getStudentsGroupByTrainingGroup() {
         echo "Echec lors de la connexion à MySQL : (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
     }
 
-    if ($result = $mysqli->query("SELECT student_group, description, Training.training_id AS 'training'
+    if ($result = $mysqli->query("SELECT student_group, description, Training.training_id
                                 FROM Student JOIN Training ON Student.training_id = Training.training_id
                                 WHERE Training.training_id <> 1
                                 ORDER BY description, student_group")) {

@@ -15,7 +15,8 @@
 
   include(dirname(__FILE__).'/../model/DocumentsModel.php');
 
-  $studentsGroup = getStudentsGroupByTrainingGroup();
+  $studentsGroup = getStudentsGroup();
+
   $get =  false;
   if(isset($_GET['f']) && isset($_GET['g']))
   {
@@ -36,7 +37,6 @@
             $pageController -> controlDynamicMenu();
         ?>
 
-
         <!-- CONTAINER -->
         <div class="container">
             <div class="row">
@@ -51,7 +51,7 @@
                             $group = $studentsGroup[0]["student_group"];
                             $formation_id = $studentsGroup[0]["training"];
 
-                            /*if (!empty($formation) || !empty($group)) {*/
+                            if ($formation != NULL || $formation != "" || $group != NULL || $group != ¨0) {
                         ?>
 
                                 <ul>
@@ -85,7 +85,7 @@
                         <?php
                                   }
                                 }
-                            //}
+                            }
                         ?>
 
                       </div>
