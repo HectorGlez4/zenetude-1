@@ -18,6 +18,14 @@
 
 		}
 
+		public function controlGestion(){
+			$pageView = new PageView();
+			if(isset($_SESSION['infoUser']) && $_SESSION['infoUser']['user_type'] == 'RF')
+				return true;
+			else
+				return false;
+		}
+
 		public function controlContact(){
 			$pageView = new PageView();
 			if(isset($_SESSION['infoUser']) && $_SESSION['infoUser']['user_type'] == 'RF')
