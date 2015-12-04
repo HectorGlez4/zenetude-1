@@ -39,7 +39,7 @@
                       <div class="card-content center-align">
 
                         <?php
-                            $description;
+                            $description = null;
                             for($i = 0 ; $i < count($studentsGroup) ; $i++)
                             {
                         ?>

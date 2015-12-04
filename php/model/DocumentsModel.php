@@ -38,14 +38,15 @@ function getStudentsGroup() {
     {
         echo "Echec lors de la connexion à MySQL : (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
     }
+    
 
     if ($result = $mysqli->query("SELECT DISTINCT student_group, description, Training.training_id
                                 FROM Student JOIN Training ON Student.training_id = Training.training_id
-                                WHERE Training.training_id <> 1
+                                WHERE Training.training_id <> 1 AND training_manager_id = '".$_SESSION['infoRF']['training_manager_id']."'
                                 ORDER BY description, student_group")) {
 
         for ($tablearesultat = array (); $row = $result->fetch_assoc(); $tablearesultat[] = $row);
 
         return $tablearesultat;
     }
-} // getStudentsGroupByTrainingGroup()
+} // getStudentsGroup()
