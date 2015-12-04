@@ -73,7 +73,9 @@
                 return false;
                 
             $db = connect();
-            $request = $db->prepare('SELECT * 
+
+
+            $request = $db->prepare('SELECT *
                                      FROM   Training_manager 
                                      WHERE  user_id = '.$id_user.'');
             if($request->execute())

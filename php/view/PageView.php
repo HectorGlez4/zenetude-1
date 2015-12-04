@@ -471,9 +471,9 @@ include_once '../model/db.php';
                             echo '<li class="infos">Civilité : '.$userInfos['infoUser']['user_civility'].'</li>';
                         if(isset($userInfos['infoTraining']['description']) && $userInfos['infoTraining']['description'] != "")
 			       		    echo '<li class="infos">Formation actuelle : '.$userInfos['infoTraining']['description'].'</li>';
-                        if(isset($userInfos['infoStudent']['student_group']) && $userInfos['infoStudent']['student_group'] == 0)
+                        if(isset($userInfos['infoStudent']['student_group']) && $userInfos['infoStudent']['student_group'] != 0)
                             echo '<li class="infos">Groupe : '.$userInfos['infoStudent']['student_group'].'</li>';
-                        if(isset($userInfos['infoStudent']['student_birthdate']) && $userInfos['infoStudent']['student_birthdate'] != "")
+                        if(isset($userInfos['infoStudent']['student_birthdate']) && $userInfos['infoStudent']['student_birthdate'] != "0000-00-00")
 						    echo '<li class="infos">Date de naissance : '.$userInfos['infoStudent']['student_birthdate'].'</li>';
                         if(isset($userInfos['infoStudent']['student_birthcity']) && $userInfos['infoStudent']['student_birthcity'] != "")
 						    echo '<li class="infos">Lieu de naissance : '.$userInfos['infoStudent']['student_birthcity'].'</li>';
@@ -524,7 +524,6 @@ include_once '../model/db.php';
 		            </div>';
 				}
 			}
-
 
 
 		public function showAdministration(){
@@ -646,11 +645,25 @@ include_once '../model/db.php';
 		            									 user_instituteemail='".stripcslashes($_POST['email'])."',
 		            									 user_type='".stripcslashes($_POST['statut'])."'
 		            									 WHERE user_id=".$id_register."");
-		            if(!$modif) {
-    					die('Requête invalide : ' . $db->errorInfo());
-		            }
-		            echo '<div class="ok">Profil du membre modifié avec succès. Redirection en cours...</div><script type="text/javascript"> window.setTimeout("location=(\'admin.php\');",3000) </script>';
-		        }
-		    }
-		}
-	}
+
+                    if($_POST['statut'] == "RF"){
+
+                        $del_student = $db->query("DELETE FROM Student WHERE user_id=".$id_register." ") or die ('Erreur :'.$db->errorInfo());
+
+                        $select_manager = $db->query("SELECT user_id FROM Training_manager WHERE user_id=".$id_register." ") or die ('Erreur :'.$db->errorInfo());
+
+                        if($statut_register == "Etudiant")
+                            $create_RF = $db->query("INSERT INTO Training_manager VALUES ('','$id_register') ") or die ('Erreur :' . $db->errorInfo());
+                    }
+
+                    if(!$modif) {
+
+                        die('Requête invalide : ' . $db->errorInfo()[2]);
+
+                    }
+                    echo '<div class="ok">Profil du membre modifié avec succès. Redirection en cours...</div><script type="text/javascript"> window.setTimeout("location=(\'admin.php\');",3000) </script>';
+                }
+            }
+        }
+    }
+

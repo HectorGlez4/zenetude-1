@@ -162,7 +162,7 @@ header('Location: profil.php');
                                             if ($value[0] !== NULL) {
                                                 echo "<option value=" . $value[0];
                                                 if( $value[0] == $result[2]) 
-                                                    echo " selected";
+                                                    echo " selected='selected'";
                                                 echo ">" . $value[0] . "</option>";
                                             }
                                         }
