@@ -126,6 +126,7 @@ header('Location: profil.php');
             $pageController -> controlDynamicMenu();
         ?>
 
+            
         <div class="container">
 
             <div class="row">
