@@ -5,14 +5,15 @@
 
 function actualiserTrombi(formation,groupe){
     $.ajax({
-        url: '../controller/documents/generateTrombi.php',
+        url: '../controller/generateTrombi.php',
         type: 'POST',
         data: 'formation='+formation+'&groupe='+groupe,
         dataType: 'json',
         success: function (JsonData, statut){
+
             if(JsonData.message=="success")
             {
-                var html = '<iframe src="../controller/documents/trombinoscope.pdf" width="100%" height="800px" ></iframe>';
+                var html = '<iframe src="trombinoscope.pdf" width="100%" height="800px" ></iframe>';
                 $('#trombi').html(html);
                 $('.form-active').removeClass("form-active");
                 $('#form-'+formation+'_group-'+groupe).addClass("form-active");
@@ -27,7 +28,7 @@ function actualiserTrombi(formation,groupe){
             }
         },
         error: function (resultat, statut, erreur){
-            alert("error");
+            alert("error12");
         }
 
     });
@@ -47,14 +48,14 @@ function imprimerDoc(doc, formation, groupe){
         var url = "feuille_emargement.pdf";
     }
     $.ajax({
-        url: '../controller/documents/generate'+doc+'.php',
+        url: '../controller/generate'+doc+'.php',
         type: 'POST',
         data: 'formation='+formation+'&groupe='+groupe,
         dataType: 'json',
         success: function (JsonData, statut){
             if(JsonData.message=="success")
             {
-                window.open('../controller/documents/'+url);
+                window.open(url);
             }
             else
             {

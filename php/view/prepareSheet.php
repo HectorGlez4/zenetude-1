@@ -1,8 +1,8 @@
-<link type="text/css" rel="stylesheet" href="../../../css/sheet.css"/>
+<link type="text/css" rel="stylesheet" href="../../css/sheet.css"/>
 
 <?php   
 
-include(dirname(__FILE__).'/../../model/DocumentsModel.php');
+include(dirname(__FILE__).'/../model/DocumentsModel.php');
 
 $students = getStudentsByTrainingGroup($formation, $groupe);
 
