@@ -68,8 +68,12 @@
                 {
                     $accountView->showMessage(4);
                 }
-                else
+
+                if($userR= $accountModel ->getUserEmail($_POST['mail']))
                 {
+                    $accountView->showMessage(6);
+                }
+                else{
                     $_POST["passe"] = sha1($_POST["passe"]);
                     $accountModel->addUser($_POST["mail"],  $_POST["passe"]);
                     header('Location: index.php');

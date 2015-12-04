@@ -23,6 +23,7 @@
             $pageView -> showHead();
             $pageController -> controlHeader();
             $pageController -> controlDynamicMenu();
+            
         ?>
 
 
