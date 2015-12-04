@@ -1,5 +1,8 @@
 <?php
     // get the HTML
+    $g = $_GET["g"];
+    $f = $_GET["f"];
+    
     ob_start();
     include(dirname(__FILE__).'/prepareTrombi.php');
 

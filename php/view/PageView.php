@@ -610,7 +610,7 @@ include_once '../model/db.php';
 		        echo '<div class="ok">Membre supprimé avec succès. Redirection en cours...</div><script type="text/javascript"> window.setTimeout("location=(\'admin.php\');",3000) </script>';
 			    }
 			}
-			if(isset($_POST['Envoyer'])){
+			if(isset($_POST['Modifier'])){
 			//Select users' firstname, lastname and email
 	            $data = $db->query("SELECT user_name, user_firstname, user_instituteemail FROM User") or die ('Erreur :'.$db->errorInfo());
 	            while($result1 = $data->fetch()){
