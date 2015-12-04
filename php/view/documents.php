@@ -16,7 +16,6 @@
   include(dirname(__FILE__).'/../model/DocumentsModel.php');
 
   $studentsGroup = getStudentsGroup();
-print_r($studentsGroup);
 
 ?>
   <!DOCTYPE html>
@@ -48,7 +47,7 @@ print_r($studentsGroup);
                                 <?php if($description != $studentsGroup[$i]['description']){?>
                                     <li><?php echo $studentsGroup[$i]['description']?></li>
                                 <?php } $description = $studentsGroup[$i]['description'] ?>
-                                <li><a href="#" onclick="actualiserTrombi(<?php echo $studentsGroup[$i]['training_id']?>, <?php echo $studentsGroup[$i]['student_group']?>)">Groupe <?php echo $studentsGroup[$i]['student_group']?></a></li>
+                                <li><a id="form-<?php echo $studentsGroup[$i]['training_id'];?>_group-<?php echo $studentsGroup[$i]['student_group'];?>" href="#" onclick="actualiserTrombi(<?php echo $studentsGroup[$i]['training_id'];?>, <?php echo $studentsGroup[$i]['student_group'];?>)">Groupe <?php echo $studentsGroup[$i]['student_group'];?></a></li>
                             </ul>
                         <?php
                             }

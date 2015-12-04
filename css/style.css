@@ -242,6 +242,9 @@ footer{
 	margin: 0 auto;
 	width: 90%
 }
+.form-active{
+    font-weight: bold;
+}
 
 input, select{
 	margin-bottom: 45px !important;

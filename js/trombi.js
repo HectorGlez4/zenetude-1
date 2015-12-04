@@ -14,6 +14,9 @@ function actualiserTrombi(formation,groupe){
             {
                 var html = '<iframe src="../controller/documents/trombinoscope.pdf" width="100%" height="800px" ></iframe>';
                 $('#trombi').html(html);
+                $('.form-active').removeClass("form-active");
+                $('#form-'+formation+'_group-'+groupe).addClass("form-active");
+
                 var html2 = '<p><a onclick="imprimerDoc(1,'+formation+','+groupe+');" href="#">Imprimer le trombinoscope</a></p>';
                 html2 += '<p><a onclick="imprimerDoc(2,'+formation+','+groupe+');" href="#">Imprimer la feuille d\'émargement</a></p>';
                 $('#docchoice').html(html2);
