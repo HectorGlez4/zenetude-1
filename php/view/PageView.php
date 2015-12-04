@@ -539,7 +539,7 @@ include_once '../model/db.php';
 			?>
 			<form name="form" method="POST">
 			<?php
-			$register = $db->query("SELECT user_id, user_name, user_firstname FROM User");
+			$register = $db->query("SELECT user_id, user_name, user_firstname, user_instituteemail FROM User WHERE user_id != 1");
 			if(count($register) > 0){
 				echo '<label for="register">Sélection du membre : </label>';
 				echo '<select id="register" name="register" size=1 onchange="javascript:submit(this)" >';
@@ -547,7 +547,8 @@ include_once '../model/db.php';
 				while ($result=$register -> fetch()) {
 					echo '<option value="'.$result['user_id'].'" ';
         			if(isset($_POST["register"]) && $_POST["register"]==$result['user_id']){echo "selected='selected'";}
-        			echo '>'.$result['user_firstname'].' '.$result['user_name'].'</option>';
+        			//echo '>'.$result['user_firstname'].' '.$result['user_name'].'</option>';
+					echo'>'.$result['user_instituteemail'].'</option>';
 					}
 				echo '</select>';
 			}
