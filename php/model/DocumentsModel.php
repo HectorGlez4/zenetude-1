@@ -41,6 +41,7 @@ function getStudentsGroupByTrainingGroup() {
 
     if ($result = $mysqli->query("SELECT student_group, description, Training.training_id AS 'training'
                                 FROM Student JOIN Training ON Student.training_id = Training.training_id
+                                WHERE Training.training_id <> 1
                                 ORDER BY description, student_group")) {
 
         for ($tablearesultat = array (); $row = $result->fetch_assoc(); $tablearesultat[] = $row);

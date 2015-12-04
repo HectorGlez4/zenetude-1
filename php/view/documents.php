@@ -1,5 +1,5 @@
 <?php
-session_start();
+    session_start();
     if (isset($_GET['erreur'])){
         echo "<script>alert('Erreur d\'authentification !');</script>";
     }
@@ -34,7 +34,7 @@ session_start();
             $pageView -> showHead();
             $pageController -> controlHeader();
             $pageController -> controlDynamicMenu();
-?>
+        ?>
 
 
         <!-- CONTAINER -->
