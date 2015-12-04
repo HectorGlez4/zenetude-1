@@ -15,14 +15,8 @@
 
   include(dirname(__FILE__).'/../model/DocumentsModel.php');
 
-  $studentsGroup = getStudentsGroupByTrainingGroup();
-  /*$get =  false;
-  if(isset($_GET['f']) && isset($_GET['g']))
-  {
-    $get = true;
-    $frm = $_GET['f'];
-    $grp = $_GET['g'];
-  }*/
+  $studentsGroup = getStudentsGroup();
+print_r($studentsGroup);
 
 ?>
   <!DOCTYPE html>
@@ -36,7 +30,6 @@
             $pageController -> controlDynamicMenu();
         ?>
 
-
         <!-- CONTAINER -->
         <div class="container">
             <div class="row">
@@ -47,12 +40,15 @@
                       <div class="card-content center-align">
 
                         <?php
+                            $description;
                             for($i = 0 ; $i < count($studentsGroup) ; $i++)
                             {
                         ?>
                             <ul>
-                                <li><?php echo $studentsGroup[$i]['description']?></li>
-                                <li><a href="#" onclick="actualiserTrombi(<?php echo $studentsGroup[$i]['training']?>, <?php echo $studentsGroup[$i]['student_group']?>)">Groupe <?php echo $studentsGroup[$i]['student_group']?></a></li>
+                                <?php if($description != $studentsGroup[$i]['description']){?>
+                                    <li><?php echo $studentsGroup[$i]['description']?></li>
+                                <?php } $description = $studentsGroup[$i]['description'] ?>
+                                <li><a href="#" onclick="actualiserTrombi(<?php echo $studentsGroup[$i]['training_id']?>, <?php echo $studentsGroup[$i]['student_group']?>)">Groupe <?php echo $studentsGroup[$i]['student_group']?></a></li>
                             </ul>
                         <?php
                             }
