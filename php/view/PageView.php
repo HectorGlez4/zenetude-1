@@ -416,35 +416,43 @@ include_once '../model/db.php';
 		}
 
 
-        public function showContact($db){
-            if (isset($_SESSION['infoUser']['user_id'])) {
+        public function showContact($userInfos, $db){
+            if (isset($userInfos['infoUser']['user_id'])) {
 
                 $request = $db->prepare('SELECT user_name,user_firstname,user_instituteemail
                                           FROM User U , Student S, Training T ,Training_manager TM
                                           WHERE S.training_id = T.training_id AND
                                           T.training_manager_id = TM.training_manager_id AND
-                                          TM.user_id = U.user_id AND S.user_id ='.$_SESSION['infoUser']['user_id']);
+                                          TM.user_id = U.user_id AND S.user_id ='.$userInfos['infoUser']['user_id']);
                 $request->execute();
                 $resul = $request->fetch();
             }
 
-            echo '<div class="card-header"><h2>'.$resul[1].' '.$resul[0].'</h2></div><ul>';
+            if ((isset($userInfos['infoUser']['user_firstname']) && $userInfos['infoUser']['user_firstname'] != "") && (isset($userInfos['infoUser']['user_name']) && $userInfos['infoUser']['user_name'] != ""))
+                echo '<div class="card-header"><h2>'.$userInfos['infoUser']['user_firstname'].' '.$userInfos['infoUser']['user_name'].'</h2></div>';
+			else if((isset($userInfos['infoUser']['user_firstname']) && $userInfos['infoUser']['user_firstname'] != "") && (!isset($userInfos['infoUser']['user_name']) && $userInfos['infoUser']['user_name'] == ""))
+				echo '<div class="card-header"><h2>'.$userInfos['infoUser']['user_firstname'].'</h2></div>';
+			else if((!isset($userInfos['infoUser']['user_firstname']) && $userInfos['infoUser']['user_firstname'] == "") && (isset($userInfos['infoUser']['user_name']) && $userInfos['infoUser']['user_name'] != ""))
+				echo '<div class="card-header"><h2>'.$userInfos['infoUser']['user_name'].'</h2></div>';
 
-            if(isset($resul[0])) {
-                echo '<li class="infos">Nom  : '.$resul[0].'</li>';}
+            if ((isset($resul[0]) && $resul[0] != "") || (isset($resul[1]) && $resul[1] != "") || (isset($resul[2]) && $resul[2] != "")){
+            	echo "<ul>";
+	            if(isset($resul[0]) && $resul[0] != "") {
+	                echo '<li class="infos">Nom  : '.$resul[0].'</li>';}
 
+	            if(isset($resul[1]) && $resul[1] != "") {
+	                echo '<li class="infos"> Prénom : '.$resul[1].'</li>';}
 
-            if(isset($resul[1])) {
-                echo '<li class="infos"> Prénom : '.$resul[1].'</li>';}
-
-
-            if(isset($resul[2])) {
-                echo '<li class="infos">Email personnel : '.$resul[2].'</li>';}
-
-
+	            if(isset($resul[2]) && $resul[2] != "") {
+	                echo '<li class="infos">Email personnel : '.$resul[2].'</li>';}
+	            echo "</ul>";
+	            }
+	        else
+	        	echo "<div id='noFormation'>Vous n'avez pas encore renseigné votre formation !</div></ br><a class='right-align' href='gestion.php'>Page gestion du profil</a>";
         }
 
 		public function showProfilInformations($userInfos, $rf = false){
+			var_dump($userInfos);
 			if(!$rf) {
 	    	echo '
 		    	<div class="col s12 m8">
@@ -486,7 +494,7 @@ include_once '../model/db.php';
                         if(isset($userInfos['infoStudent']['student_address2']) && $userInfos['infoStudent']['student_address2'] != "")
                             echo '<li class="infos">Adresse : '.$userInfos['infoStudent']['student_address2'].' '.$userInfos['infoStudent']['student_address1'].' '.$userInfos['infoStudent']['student_zipcode'].' '.$userInfos['infoStudent']['student_city'].'</li>';
 			     		echo '<li class="infos"><a class="right-align" href="gestion.php">Gérer mon compte</a></li>';
-			     		if($userInfos['infoStudent']['training_id'] != '1')
+			     		//if($userInfos['infoStudent']['training_id'] != '1')
 			     			echo '<li class="infos"><a class="right-align" href="contact.php">Contacter un responsable de formation</a></li>';
 			     		echo'
 			       	</ul></div>

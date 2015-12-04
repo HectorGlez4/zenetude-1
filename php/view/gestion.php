@@ -10,6 +10,7 @@
     $pageController = new PageController();
     $pageView = new PageView();
     $db = connect();
+    $pageController -> controlConnexion();
 
 $idUser = $_SESSION['infoUser']['user_id'];
     if(isset($idUser)) {

@@ -18,6 +18,21 @@
 
 		}
 
+		public function controlContact($db){
+			$pageView = new PageView();
+			if(isset($_SESSION['infoUser']) && $_SESSION['infoUser']['user_type'] == 'RF')
+				echo '<script>document.location.href="../view/index.php"</script>';
+			else
+				$pageView -> showContact($_SESSION, $db);
+		}
+
+		public function controlAdmin(){
+            $accountmodel = new AccountModel();
+            $result = $accountmodel -> controlAdministrator();
+			if(!(isset($_SESSION['infoUser']) && isset($result[0])))
+				echo '<script>document.location.href="../view/index.php"</script>';				
+		}
+
 
 		/**
 			* Test if a session exists before show the index's description. 

@@ -162,5 +162,13 @@
 
         }
 
+ 		public function controlAdministrator(){
+ 			$db = connect();
+            $request = $db->query('SELECT admin_id FROM Administrator WHERE user_id IN (SELECT user_id FROM User WHERE user_id ='.$_SESSION['infoUser']['user_id'].')');
+            $result = $request -> fetch();
+
+            return $result;
+ 		}
+
 	}
 

@@ -1,63 +1,60 @@
 <?php
-session_start();
-if (isset($_GET['erreur'])){
-    echo "<script>alert('Erreur d\'authentification !');</script>";
-}
-include_once('./PageView.php');
-include_once('../controller/PageController.php');
-include_once('../model/db.php');
+    session_start();
+    if (isset($_GET['erreur'])){
+        echo "<script>alert('Erreur d\'authentification !');</script>";
+    }
+    include_once('./PageView.php');
+    include_once('../controller/PageController.php');
+    include_once('../model/db.php');
 
-$pageController = new PageController();
-$pageView = new PageView();
-$db = connect();
+
+    $pageController = new PageController();
+    $pageView = new PageView();
+    $db = connect();
 
 ?>
-<!DOCTYPE html>
-<html>
-<body>
-
-
-<?php
-$pageView -> showHead();
-$pageController -> controlHeader();
-$pageController -> controlDynamicMenu();
-?>
-
-
-<div class="container">
-
-    <div class="row">
-
-        <div class="col s12 m8">
-            <div class="card-panel teal" id="bloc2">
-                <div class="card-title"> <h3>Contact</h3></div>
-                <?php
-                $pageView -> showContact($db);
-                ?>
-                <p></p>
-            </div>
-        </div>
-
-
+    <!DOCTYPE html>
+    <html>
+        <body>
 
 
         <?php
             $pageController -> controlConnexion();
-            $pageView->showCalendar();
-
+            $pageView -> showHead();
+            $pageController -> controlHeader();
+            $pageController -> controlDynamicMenu();
         ?>
 
-    </div>
 
-</div><!-- Fin container -->
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col s12 m8">
+                    <div class="card-panel teal" id="bloc2">
+                        <div class="card-title"> <h3>Contact</h3></div>
+                        <?php
+                        $pageController -> controlContact($db);
+                        ?>
+                        <p></p>
+                    </div>
+                </div>
+
+                <?php
+                    $pageView->showCalendar();
+                ?>
+
+            </div>
+
+        </div><!-- Fin container -->
 
 
-</div>
+        </div>
 
-<?php
-$pageView->showFooter();
-$pageView->showjavaLinks();
-?>
+        <?php
+            $pageView->showFooter();
+            $pageView->showjavaLinks();
+        ?>
 
-</body>
+        </body>
 </html>
