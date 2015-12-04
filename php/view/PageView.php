@@ -643,7 +643,7 @@ include_once '../model/db.php';
 		            									 user_instituteemail='".stripcslashes($_POST['email'])."',
 		            									 user_type='".stripcslashes($_POST['statut'])."'
 		            									 WHERE user_id=".$id_register."");
-
+                    // If you change a student in training manager then we delete the student in the Student table and add a new training manager in Training_manager table if there is not already.
                     if($_POST['statut'] == "RF"){
 
                         $del_student = $db->query("DELETE FROM Student WHERE user_id=".$id_register." ") or die ('Erreur :'.$db->errorInfo());
