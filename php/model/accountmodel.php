@@ -4,8 +4,7 @@
 
         public function getTrainingInformationsForUser($param, $userId) {
             $db = connect();
-            $request = $db->query('SELECT '.$param.' FROM Training WHERE training_id IN
-                                                                                        (SELECT training_id
+            $request = $db->query('SELECT '.$param.' FROM Training WHERE training_id IN(SELECT training_id
                                                                                          FROM Student
                                                                                          WHERE user_id = '.$userId.'
                                                                                         )
@@ -125,9 +124,9 @@
             $mailer->Subject ="Subject: =?UTF-8?B?".base64_encode("Réinitialisation du mot de passe | Zenetude")."?=";
             $mailer->Body = $body;
             if(!$mailer->Send())
-                $accountView->showMessage(2);
+                $accountView->showMessage("Une erreur est survenue !");
             else
-                $accountView->showMessage(3);
+                $accountView->showMessage("Votre mot de passe a été réinitialisé. Un message contenant le nouveau mot de passe vous à été envoyé.","ok","index.php");
 		}
 
 		/**
@@ -139,7 +138,7 @@
             $request0 = $db->query("SELECT user_id FROM User WHERE user_instituteemail = '$userMail'");
             $result0 = $request0->fetch();
             $id = $result0[0];
-            $request2 = $db->query('INSERT INTO Student (user_id, student_instituteemail, student_avatar, student_trombi) VALUES ("'.$id.'", "'.$userMail.'", "avatar.png", "avatar.png")');
+            $request2 = $db->query('INSERT INTO Student (user_id, student_instituteemail, student_avatar, student_trombi) VALUES ("'.$id.'", "'.$userMail.'", "../../img/avatar.png", "../../img/avatar.png")');
 
         }
 
@@ -166,12 +165,12 @@
             $mailer->Password = "Projet2015";
             $mailer->SetFrom("lpsilda2i@gmail.com");
             $mailer->AddAddress($userMail ,utf8_encode(""));
-            $mailer->Subject =/*"Subject: =?UTF-8?B?".*/base64_encode("Inscription au site Zenetude")."?=";
-            $mailer->Body = utf8_encode($body);
+            $mailer->Subject =/*"Subject: =?UTF-8?B?".*/base64_encode("Inscription au site Zenetude");
+            $mailer->Body = $body;
             if(!$mailer->Send())
-                $accountView->showMessage(2);
+                $accountView->showMessage("Une erreur est survenue !");
             else
-                $accountView->showMessage(3);
+                $accountView->showMessage("Inscription terminée.","ok","index.php");
         }
 
  		public function isAdministrator(){

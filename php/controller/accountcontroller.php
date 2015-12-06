@@ -14,7 +14,7 @@
 				$accountModel -> recoverPassword($_POST['mail']);
 			}
 			else
-				$accountView -> showMessage(1);
+				$accountView -> showMessage("Votre adresse e-mail est incorrecte.");
 		}
 
 
@@ -28,7 +28,7 @@
                 $_POST['mail'] = htmlspecialchars($_POST['mail']);
                 $_POST['pass'] = htmlspecialchars(sha1($_POST['pass']));
                 if ($userResult = $accountModel -> getUserPassword($_POST['mail'],  $_POST['pass'])){
-                    session_start();
+                    //session_start();
                     $_SESSION['infoUser'] = $userResult;
                  
                    	if($_SESSION['infoUser']['user_type'] == 'RF') {
@@ -41,11 +41,12 @@
                         $trainingResult = $accountModel->getTrainingInformationsForUser('description', $_SESSION['infoUser']['user_id']);
                         $_SESSION['infoTraining'] = $trainingResult;
                    	}
-                    header('Location: index.php');
+                    $accountView -> showMessage(null,"ok","index.php");
+                    //header('Location: index.php');
 
                 }
 				else{
-					$accountView -> showMessage(5);
+					$accountView -> showMessage("Erreur d'authentification !");
                 }
             }
         }
@@ -66,22 +67,20 @@
 
                 if($_POST["passe"] !=  $_POST["passe2"])
                 {
-                    $accountView->showMessage(4);
+                    $accountView->showMessage("Mot de passe non identique");
                 }
                 else if($userR= $accountModel ->getUserEmail($_POST['mail']))
                 {
-                    $accountView->showMessage(6);
+                    $accountView->showMessage("Adresse email existe déjà.");
                 }
                 else{
                     //$_POST["passe"] = sha1($_POST["passe"]);
                     $accountModel->addUser($_POST["mail"], sha1($_POST["passe"]));
                     $accountModel->sendEmail($_POST["mail"], $_POST["passe"]);
-                    header('Location: index.php');
                 }
-
             }
             else{
-                $accountView->showMessage(7);
+                $accountView->showMessage("Veuillez remplir le champs adresse email.");
             }
         }
 	}

@@ -108,7 +108,7 @@ else
         }
     }
 
-var_dump($values);
+//var_dump($values);
 if(!$rf)
     $update = $db->query("UPDATE Student SET 
     student_personalemail = '$values[3]',
@@ -167,7 +167,7 @@ $_SESSION['infoUser']['user_name'] = $values[0];
 $_SESSION['infoUser']['user_firstname'] = $values[1];
 $_SESSION['infoUser']['user_civility'] = $values[2];
 
-header('Location: profil.php');
+//header('Location: profil.php');
 }
 
 ?>
@@ -190,7 +190,7 @@ header('Location: profil.php');
                 <div class="col s12 m8">
                     <div class="card-panel teal" id="bloc2">
                     <div class="card-title"> <h3>Gestion du compte</h3></div>
-                    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" role="form" enctype="multipart/form-data">
+                    <form id="formula" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" role="form" enctype="multipart/form-data">
                             <div class="form-group">
                             <input type="hidden" class="form-control" value="<?php echo $_SESSION['infoUser']['user_id']; ?>" name="user_id">
 
@@ -236,7 +236,7 @@ header('Location: profil.php');
                                     </div>
                                     <div class="col s6">
                                     <?php } ?>
-                                    <label for="student_avatar">Modifier mot de passe</label>
+                                    <label for="student_mdp">Modifier mot de passe</label>
                                     <input type='password' placeholder="Ancien mot de passe" class="form-control" name='old_user_password' />
                                     <input type='password' placeholder="Nouveau mot de passe" class="form-control" name='new_user_password' />
                                     <input type='password' placeholder="Confirmer nouveau mot de passe" class="form-control" name='confirm_new_user_password' />
@@ -321,6 +321,7 @@ header('Location: profil.php');
                                             </select>
                                 </div>
                                         <?php } ?>
+                                <div id="result"></div><!-- Retour de l'erreur en json -->
                                 <input type="button" name="return" value="Retour" class="btn btn-primary" onclick="self.location.href='profil.php'">
                                 <button type="submit" name="student_update" class="btn btn-primary right">Enregistrer</button>
                     </div>  
