@@ -13,7 +13,6 @@
 
   $pageController = new PageController();
   $pageView = new PageView();
-  $accountController = new AccountController();
 
 ?>
   <!DOCTYPE html>
