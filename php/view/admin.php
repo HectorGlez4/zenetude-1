@@ -18,7 +18,7 @@
     <body>
         <?php
             $pageController -> controlConnexion();
-            $pageController -> controlAdmin();
+            $pageController -> controlAdministration();
             $pageView -> showHead();
             $pageController -> controlHeader();
             $pageController -> controlDynamicMenu();
@@ -29,7 +29,7 @@
                     <div class="card-panel teal" id="bloc2">
                         <div class="card-title"> <h3>Profil</h3></div>
                         <?php
-                            $pageView->showAdministration();
+                            $pageController -> controlShowAdministration();
                         ?>
                     </div>
                 </div>

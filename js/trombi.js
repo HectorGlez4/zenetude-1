@@ -28,7 +28,7 @@ function actualiserTrombi(formation,groupe){
             }
         },
         error: function (resultat, statut, erreur){
-            alert("error12");
+            alert("error");
         }
 
     });

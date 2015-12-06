@@ -45,7 +45,7 @@
 
                 }
 				else{
-					$accountView -> showMessage(5);	
+					$accountView -> showMessage(5);
                 }
             }
         }
@@ -55,10 +55,10 @@
 			* Test if informations given by the user before create a new user in the database. 
 		**/
         public function controlInscription() {
+            $accountView = new AccountView();
             if(!empty($_POST['mail']))
             {
                 $accountModel = new AccountModel();
-                $accountView = new AccountView();
 
                 $_POST["mail"] = htmlspecialchars($_POST["mail"]);
                 $_POST["passe"] = htmlspecialchars($_POST["passe"]);
@@ -68,17 +68,20 @@
                 {
                     $accountView->showMessage(4);
                 }
-
-                if($userR= $accountModel ->getUserEmail($_POST['mail']))
+                else if($userR= $accountModel ->getUserEmail($_POST['mail']))
                 {
                     $accountView->showMessage(6);
                 }
                 else{
-                    $_POST["passe"] = sha1($_POST["passe"]);
-                    $accountModel->addUser($_POST["mail"],  $_POST["passe"]);
+                    //$_POST["passe"] = sha1($_POST["passe"]);
+                    $accountModel->addUser($_POST["mail"], sha1($_POST["passe"]));
+                    $accountModel->sendEmail($_POST["mail"], $_POST["passe"]);
                     header('Location: index.php');
                 }
 
+            }
+            else{
+                $accountView->showMessage(7);
             }
         }
 	}
