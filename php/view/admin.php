@@ -3,10 +3,10 @@
     if (isset($_GET['erreur'])){
         echo "<script>alert('Erreur d\'authentification !');</script>";
     }
-    include_once('./PageView.php');
-    include_once('../controller/PageController.php');
+    include_once('./pageview.php');
+    include_once('../controller/pagecontroller.php');
     include_once('../model/db.php');
-    include_once('../model/AccountModel.php');
+    include_once('../model/accountmodel.php');
 
     $pageController = new PageController();
     $pageView = new PageView();
@@ -18,7 +18,7 @@
     <body>
         <?php
             $pageController -> controlConnexion();
-            $pageController -> controlAdmin();
+            $pageController -> controlAdministration();
             $pageView -> showHead();
             $pageController -> controlHeader();
             $pageController -> controlDynamicMenu();
@@ -29,7 +29,7 @@
                     <div class="card-panel teal" id="bloc2">
                         <div class="card-title"> <h3>Profil</h3></div>
                         <?php
-                            $pageView->showAdministration();
+                            $pageController -> controlShowAdministration();
                         ?>
                     </div>
                 </div>

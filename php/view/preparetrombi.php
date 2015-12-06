@@ -1,8 +1,8 @@
-<link type="text/css" rel="stylesheet" href="../../../css/trombi.css"/>
+<link type="text/css" rel="stylesheet" href="../../css/trombi.css"/>
 
 <?php   
 
-include(dirname(__FILE__).'/../../model/DocumentsModel.php');
+include(dirname(__FILE__).'/../model/documentsmodel.php');
 
 $students = getStudentsByTrainingGroup($formation,$groupe);
 
@@ -30,7 +30,7 @@ $students = getStudentsByTrainingGroup($formation,$groupe);
                     }
             ?>
                 <td style="width: 16%;height:3cm;">
-                    <img src="../../../img/avatar/<?php echo $students[$iX]["student_avatar"] === NULL ? $students[$iX]["student_avatar"] : "avatar.png" ?>" alt="trombi"  style="height:140px;">
+                    <img src="../../img/avatar/<?php echo $students[$iX]["student_avatar"] === NULL ? $students[$iX]["student_avatar"] : "avatar.png" ?>" alt="trombi"  style="height:140px;">
                     <p><?php echo utf8_encode($students[$iX]["user_name"]) . "<br/>" .
                      utf8_encode($students[$iX ]["user_firstname"]); ?></p>
                 </td>

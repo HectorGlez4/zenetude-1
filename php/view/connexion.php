@@ -8,9 +8,9 @@
 session_start();
 
 include_once( '../model/db.php');
-include_once('../controller/AccountController.php');
-include_once('../model/AccountModel.php');
-include_once('AccountView.php');
+include_once('../controller/accountcontroller.php');
+include_once('../model/accountmodel.php');
+include_once('accountview.php');
 $accountController = new AccountController();
 $accountController->controlConnection();
 

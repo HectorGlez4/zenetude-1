@@ -3,9 +3,10 @@
     if (isset($_GET['erreur'])){
         echo "<script>alert('Erreur d\'authentification !');</script>";
     }
-    include_once('./PageView.php');
-    include_once('../controller/PageController.php');
+    include_once('./pageview.php');
+    include_once('../controller/pagecontroller.php');
     include_once('../model/db.php');
+    include_once('../model/accountmodel.php');
 
 
     $pageController = new PageController();
@@ -35,7 +36,7 @@
                     <div class="card-panel teal" id="bloc2">
                         <div class="card-title"> <h3>Contact</h3></div>
                         <?php
-                        $pageView -> showContact($_SESSION, $db);
+                        $pageController -> controlShowContact();
                         ?>
                         <p></p>
                     </div>

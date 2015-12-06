@@ -35,9 +35,7 @@ nav>.nav-wrapper>.hamburglar{
 	margin-top: 40px;
 	z-index: 30;
 }
-#noFormation{
-	
-}
+
 
 #page{
 	position: absolute;
@@ -269,4 +267,12 @@ input, select{
 
 .supp{
 	float: right;
+}
+
+.right{
+	float: right;
+}
+
+.card-panel>ul{
+	padding-bottom: 30px;
 }

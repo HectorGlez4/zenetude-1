@@ -3,10 +3,10 @@
     if (isset($_GET['erreur'])){
         echo "<script>alert('Erreur d\'authentification !');</script>";
     }
-    include_once('./PageView.php');
-    include_once('../controller/PageController.php');
+    include_once('./pageview.php');
+    include_once('../controller/pagecontroller.php');
     include_once('../model/db.php');
-    include_once('../model/AccountModel.php');
+    include_once('../model/accountmodel.php');
     
 
     $pageController = new PageController();
@@ -15,7 +15,7 @@
 
     $pageController -> controlConnexion();
     $pageController -> controlDocuments();
-  include(dirname(__FILE__).'/../model/DocumentsModel.php');
+  include(dirname(__FILE__).'/../model/documentsmodel.php');
 
   $studentsGroup = getStudentsGroup();
 
@@ -41,16 +41,20 @@
 
                         <?php
                             $description = null;
-                            for($i = 0 ; $i < count($studentsGroup) ; $i++)
+                            for ($i = 0 ; $i < count($studentsGroup) ; $i++)
                             {
                         ?>
                             <ul>
-                                <?php if($description != $studentsGroup[$i]['description']){?>
+                            <?php
+                                if ($description != $studentsGroup[$i]['description'] && $studentsGroup[$i]['student_group'] != 0) { ?>
                                     <li><?php echo $studentsGroup[$i]['description']?></li>
-                                <?php } $description = $studentsGroup[$i]['description'] ?>
-                                <li><a id="form-<?php echo $studentsGroup[$i]['training_id'];?>_group-<?php echo $studentsGroup[$i]['student_group'];?>" href="#" onclick="actualiserTrombi(<?php echo $studentsGroup[$i]['training_id'];?>, <?php echo $studentsGroup[$i]['student_group'];?>)">Groupe <?php echo $studentsGroup[$i]['student_group'];?></a></li>
+                            <?php }
+                                $description = $studentsGroup[$i]['description'];
+                                if ($studentsGroup[$i]['student_group'] != 0) { ?>
+                                    <li><a id="form-<?php echo $studentsGroup[$i]['training_id'];?>_group-<?php echo $studentsGroup[$i]['student_group'];?>" href="#" onclick="actualiserTrombi(<?php echo $studentsGroup[$i]['training_id'];?>, <?php echo $studentsGroup[$i]['student_group'];?>)">Groupe <?php echo $studentsGroup[$i]['student_group'];?></a></li>
                             </ul>
                         <?php
+                                }
                             }
                         ?>
 

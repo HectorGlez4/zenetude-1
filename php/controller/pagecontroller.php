@@ -11,11 +11,23 @@
 
 		public function controlProfilInformations() {
 			$pageView = new PageView();
-			if(isset($_SESSION['infoUser']) && $_SESSION['infoUser']['user_type'] == 'RF')
-				$pageView -> showProfilInformations($_SESSION, true);
+			$result = 0;
+			if(isset($_SESSION['infoUser']) && $_SESSION['infoUser']['user_type'] == 'RF'){
+				$accountmodel = new AccountModel();
+				$result = $accountmodel -> nbDocuments();
+				$pageView -> showProfilInformations($_SESSION, true, $result);
+			}
 			else
-				$pageView -> showProfilInformations($_SESSION, false);
+				$pageView -> showProfilInformations($_SESSION, false, $result);
 
+		}
+
+		public function controlGestion(){
+			$pageView = new PageView();
+			if(isset($_SESSION['infoUser']) && $_SESSION['infoUser']['user_type'] == 'RF')
+				return true;
+			else
+				return false;
 		}
 
 		public function controlContact(){
@@ -24,11 +36,27 @@
 				echo '<script>document.location.href="../view/index.php"</script>';
 		}
 
-		public function controlAdmin(){
+		public function controlShowContact(){
+			$pageView = new PageView();
+			$accountmodel = new AccountModel();
+			$result = $accountmodel -> infoMyTrainingManager();
+			$pageView -> showContact($_SESSION, $result);
+		}
+
+		public function controlAdministration(){
             $accountmodel = new AccountModel();
-            $result = $accountmodel -> controlAdministrator();
+            $result = $accountmodel -> isAdministrator();
 			if(!(isset($_SESSION['infoUser']) && isset($result[0])))
 				echo '<script>document.location.href="../view/index.php"</script>';				
+		}
+
+		public function controlShowAdministration(){
+			$pageView = new PageView();
+			$accountmodel = new AccountModel();
+			$allUser = $accountmodel -> recupAllUser();
+			//$allInfoUserSelect = $accountmodel -> recupAllInfoUserSelect();
+
+			$pageView -> showAdministration($allUser/*, $allInfoUserSelect*/);
 		}
 
 		public function controlDocuments(){
@@ -37,7 +65,7 @@
 				echo '<script>document.location.href="../view/index.php"</script>';
 			else{
 				$accountmodel = new AccountModel();
-				$result = $accountmodel -> controlDocuments();
+				$result = $accountmodel -> nbDocuments();
 				if($result[0] == 0)
 					echo '<script>document.location.href="../view/index.php"</script>';
 			}	
@@ -100,7 +128,7 @@
 		}
 
 		public function uploadPhoto() {
-			if(!empty($_POST['student_avatar'])) {
+
 				    if (isset($_FILES['student_avatar'])) {
 	            $maxsize = 5000000000;
 	            $maxwidth = 1024;
@@ -123,11 +151,10 @@
 	            	$userInfos['infoStudent']['student_avatar'] = $fichier;
 	            }
         	}
-        }
 	}
 
 		public function modifyPassword() {
-			include_once('./AccountView.php');
+			include_once('./accountview.php');
 			$accountView = new AccountView();
 			if (!empty($_POST['old_user_password']) && !empty($_POST['new_user_password']) && !empty($_POST['confirm_new_user_password'])) {
 				$session = $_SESSION['infoUser']['user_id'];
