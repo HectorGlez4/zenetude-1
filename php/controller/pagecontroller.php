@@ -147,7 +147,7 @@
 	            if ($resultat) {
 	            	$db = connect();
 	            	$update = $db->query("UPDATE Student SET student_avatar = '$fichier' where user_id = '$session'");
-	            	$userInfos['infoStudent']['student_avatar'] = $fichier;
+	            	$_SESSION['infoStudent']['student_avatar'] = $fichier;
 	            }
         	}
         }
@@ -172,7 +172,7 @@
 	            if ($resultat) {
 	            	$db = connect();
 	            	$update = $db->query("UPDATE Student SET student_trombi = '$fichier' where user_id = '$session'");
-	            	$userInfos['infoStudent']['student_trombi'] = $fichier;
+	            	$_SESSION['infoStudent']['student_trombi'] = $fichier;
 	            }
         	}
         }
