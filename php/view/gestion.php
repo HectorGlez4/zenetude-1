@@ -32,6 +32,9 @@ $idUser = $_SESSION['infoUser']['user_id'];
 if (isset($_POST['student_update']) ) //SI LE FORMULAIRE A ETE ENVOYE
 {
 
+$pageController -> uploadPhoto();
+$pageController -> modifyPassword();
+
 $user_id=$_POST['user_id'];
 $student_personalemail=$_POST['student_personalemail'];
 $student_phone=$_POST['student_phone'];
@@ -57,6 +60,7 @@ $student_grantholder=$_POST['student_grantholder'];
 $user_name=$_POST['user_name'];
 $user_firstname=$_POST['user_firstname'];
 $user_civility=$_POST['user_civility'];
+
 
 
         $request = $db->prepare('SELECT training_id FROM Training WHERE description = "'.$training_description.'"');
@@ -96,7 +100,6 @@ $values = array($student_personalemail,
         $values[$key] = $value;
     }
 }
-var_dump($values);
 
 $update = $db->query("UPDATE Student SET 
 student_personalemail = '$values[0]',
@@ -165,6 +168,7 @@ header('Location: profil.php');
             $pageView -> showHead();
             $pageController -> controlHeader();
             $pageController -> controlDynamicMenu();
+
         ?>
 
             
@@ -175,10 +179,12 @@ header('Location: profil.php');
                 <div class="col s12 m8">
                     <div class="card-panel teal" id="bloc2">
                     <div class="card-title"> <h3>Gestion du compte</h3></div>
-                    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" role="form">
+                    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" role="form" enctype="multipart/form-data">
                             <div class="form-group">
                             <input type="hidden" class="form-control" value="<?php echo $_SESSION['infoUser']['user_id']; ?>" name="user_id">
                                 <div class="col s6">
+                                    <label for="student_avatar">Photo</label>
+                                    <input type='file' class="form-control" name='student_avatar' />
                                     <label for="">Nom</label>
                                     <input type="text" class="form-control" value="<?php echo $result4[3];?>" name="user_name">
                                     <label for="">Prénom</label>
@@ -198,9 +204,9 @@ header('Location: profil.php');
                                     <label for="">Mail</label>
                                     <input type="email" class="form-control" value="<?php echo $result[4]; ?>" name="student_personalemail">
                                     <label for="">Telephone</label>
-                                    <input type="text" class="form-control" value="<?php echo $result[5]; ?>" name="student_phone">
+                                    <input type="tel" pattern = '[0-9]{10}' placeholder ='+33 (ex : 477845989)' maxlength = '10' class="form-control" value="<?php echo $result[5]; ?>" name="student_phone">
                                     <label for="">Portable</label>
-                                    <input type="text" class="form-control" value="<?php echo $result[6]; ?>" name="student_mobile">
+                                    <input type="tel" pattern = '[0-9]{10}' placeholder ='+33 (ex : 647845989)' maxlength = '10' class="form-control" value="<?php echo $result[6]; ?>" name="student_mobile">
                                     <label for="">Adresse 1</label>
                                     <input type="text" class="form-control" value="<?php echo $result[7]; ?>" name="student_address1">
                                     <label for="">Adresse 2</label>
@@ -228,6 +234,11 @@ header('Location: profil.php');
                                     </select>
                                 </div>
                                 <div class="col s6">
+                                    <label for="student_avatar">Modifier mot de passe</label>
+                                    <input type='password' placeholder="Ancien mot de passe" class="form-control" name='old_user_password' />
+                                    <input type='password' placeholder="Nouveau mot de passe" class="form-control" name='new_user_password' />
+                                    <input type='password' placeholder="Confirmer nouveau mot de passe" class="form-control" name='confirm_new_user_password' />
+
                                     <label for="">Date de naissance</label>
                                     <input type="date" class="form-control datepicker" value="<?php echo $result[13]; ?>" name="student_birthday">
                                     <label for="">Ville de naissance</label>

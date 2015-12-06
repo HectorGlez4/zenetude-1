@@ -336,13 +336,12 @@ include_once '../model/db.php';
 							$pic = "../../img/avatar/avatar.png";
 						}
 						else{
-							$pic = "../../img/avatar/".$userInfos['infoStudent']['student_avatar'];
-
+							$pic = $userInfos['infoStudent']['student_avatar'];
 						}
 
 					?>
 
-					<img src="<?php echo $pic; ?>" alt="avatar" class="circle responsive-img"/><br/>
+					<img src="<?php var_dump($pic); ?>" alt="avatar" class="circle responsive-img"/><br/>
 					<?php 
 
 						if((isset($userInfos['infoUser']['user_firstname']) || $userInfos['infoUser']['user_firstname'] != "") && (isset($userInfos['infoUser']['user_name']) || $userInfos['infoUser']['user_name'] != ""))

@@ -16,5 +16,7 @@
                 header('Location: index.php?erreur=true');
             else if($num ==6)
                 echo "Votre adresse e-mail existe d&eacutej&agrave. ";
+            else if($num ==7)
+                echo "Ancien mot de passe incorrect. ";
 		}
 	}
