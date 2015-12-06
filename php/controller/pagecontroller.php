@@ -127,33 +127,55 @@
 				$pageView -> showScrollMenu(false, $_SESSION);
 		}
 
-		public function uploadPhoto() {
-			if(!empty($_POST['student_avatar'])) {
-				if (isset($_FILES['student_avatar'])) {
-		            $maxsize = 5000000000;
-		            $maxwidth = 1024;
-		            $maxheight = 1024;
-		            $extensions_valides = array( 'jpg' , 'jpeg' , 'gif' , 'png' );
-		            $extension_upload = strtolower(  substr(  strrchr($_FILES['student_avatar']['name'], '.')  ,1)  );
-		            $image_sizes = getimagesize($_FILES['student_avatar']['tmp_name']);
-		            //var_dump($_FILES['student_avatar']['tmp_name']);
+		public function uploadPhoto(){
+			if (isset($_FILES['student_avatar'])) {
+	            $maxsize = 5000000000;
+	            $maxwidth = 1024;
+	            $maxheight = 1024;
+	            $extensions_valides = array( 'jpg' , 'jpeg' , 'gif' , 'png' );
+	            $extension_upload = strtolower(  substr(  strrchr($_FILES['student_avatar']['name'], '.')  ,1)  );
+	            //$image_sizes = getimagesize($_FILES['student_avatar']['tmp_name']);
 
-		            if ($_FILES['student_avatar']['error'] > 0) echo "Erreur lors du transfert";
-		            if ($_FILES['student_avatar']['size'] > $maxsize) echo "Le fichier est trop gros";
-		            if ( in_array($extension_upload,$extensions_valides) ) echo "Extension correcte";
-		            if ($image_sizes[0] > $maxwidth OR $image_sizes[1] > $maxheight) echo "Image trop grande";
+	            if ($_FILES['student_avatar']['error'] > 0) echo "Erreur lors du transfert";
+	            if ($_FILES['student_avatar']['size'] > $maxsize) echo "Le fichier est trop gros";
+	            if ( in_array($extension_upload,$extensions_valides) ) echo "Extension correcte";
+	            //if ($image_sizes[0] > $maxwidth OR $image_sizes[1] > $maxheight) echo "Image trop grande";
 
-		            $fichier='../../img/avatar/'.uniqid().".$extension_upload";
-		            $session = $_SESSION['infoUser']['user_id'];
-		            $resultat = move_uploaded_file($_FILES['student_avatar']['tmp_name'],$fichier);
-		            if ($resultat) {
-		            	$db = connect();
-		            	$update = $db->query("UPDATE Student SET student_avatar = '$fichier' where user_id = '$session'");
-		            	$userInfos['infoStudent']['student_avatar'] = $fichier;
-		            }
-        		}
+	            $fichier='../../img/avatar/'.uniqid().".$extension_upload";
+	            $session = $_SESSION['infoUser']['user_id'];
+	            $resultat = move_uploaded_file($_FILES['student_avatar']['tmp_name'],$fichier);
+	            if ($resultat) {
+	            	$db = connect();
+	            	$update = $db->query("UPDATE Student SET student_avatar = '$fichier' where user_id = '$session'");
+	            	$userInfos['infoStudent']['student_avatar'] = $fichier;
+	            }
         	}
-		}
+        }
+
+        public function uploadTrombi(){
+			if (isset($_FILES['student_trombi'])) {
+	            $maxsize = 5000000000;
+	            $maxwidth = 1024;
+	            $maxheight = 1024;
+	            $extensions_valides = array( 'jpg' , 'jpeg' , 'gif' , 'png' );
+	            $extension_upload = strtolower(  substr(  strrchr($_FILES['student_trombi']['name'], '.')  ,1)  );
+	            //$image_sizes = getimagesize($_FILES['student_trombi']['tmp_name']);
+
+	            if ($_FILES['student_trombi']['error'] > 0) echo "Erreur lors du transfert";
+	            if ($_FILES['student_trombi']['size'] > $maxsize) echo "Le fichier est trop gros";
+	            if ( in_array($extension_upload,$extensions_valides) ) echo "Extension correcte";
+	            //if ($image_sizes[0] > $maxwidth OR $image_sizes[1] > $maxheight) echo "Image trop grande";
+
+	            $fichier='../../img/trombinoscope/'.uniqid().".$extension_upload";
+	            $session = $_SESSION['infoUser']['user_id'];
+	            $resultat = move_uploaded_file($_FILES['student_trombi']['tmp_name'],$fichier);
+	            if ($resultat) {
+	            	$db = connect();
+	            	$update = $db->query("UPDATE Student SET student_trombi = '$fichier' where user_id = '$session'");
+	            	$userInfos['infoStudent']['student_trombi'] = $fichier;
+	            }
+        	}
+        }
 
 		public function modifyPassword() {
 			include_once('./accountview.php');
@@ -165,11 +187,10 @@
 	      		$request->execute();
 	        	$mdp = $request->fetch();
 
-	        	//var_dump($mdp[0]);
+
 				$old_user_password=$_POST['old_user_password'];
 				$new_user_password=$_POST['new_user_password'];
 				$confirm_new_user_password=$_POST['confirm_new_user_password'];
-				//var_dump(sha1($old_user_password));
 				$crypt_old_user_password = sha1($old_user_password);
 				if ($crypt_old_user_password != $mdp[0])
 					$accountView->showMessage("Mot de passe actuel incorrect.");

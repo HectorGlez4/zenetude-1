@@ -41,7 +41,7 @@
               <label for="email">Entrer l'adresse email de récupération </label>
             </div>
           </div><!-- fin email -->
-
+          <div id="result"></div><!-- Retour de l'erreur en json -->
         </div><!-- Fin contenu card -->
 
           <!-- bouton s'inscrire -->
@@ -50,7 +50,6 @@
           </div>
 
         </form><!-- Fin formulaire -->
-        <div id="result"></div><!-- Retour de l'erreur en json -->
       </div><!-- Fin card -->
   </div>
 

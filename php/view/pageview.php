@@ -41,7 +41,7 @@ include_once '../model/db.php';
 				              	<label for="passe2">Confirmer votre mot de passe <em>*</em></label>
 				            </div>
 			          	</div><!-- fin confirmation mot de passe -->
-
+			          	<div id="result"></div><!-- Retour de l'erreur en json -->
 		        	</div><!-- Fin contenu card -->
 		        	
 
@@ -290,7 +290,7 @@ include_once '../model/db.php';
 			          </div><!-- fin mot de passe -->
 			
 			        </div><!-- Fin contenu card -->
-					<div id="result" class ="message1"></div><!-- Retour de l'erreur en json -->
+					<div id="result"></div><!-- Retour de l'erreur en json -->
 			        <div class="card-action  center-align bouton-connection">
 				        <input class="btn connexion" type="submit" value="Se connecter" />
 			        </div>
@@ -300,7 +300,6 @@ include_once '../model/db.php';
 						?>
 					</div>
 			        </form><!-- Fin formulaire -->
-			        <div id="result"></div><!-- Retour de l'erreur en json -->
 			        <p class="connexion"><a href="inscription.php" class="left">S'inscrire</a><a href="recuperation.php" class="right">Mot de passe oublié</a></p>
 		      	</div>
     		</div>

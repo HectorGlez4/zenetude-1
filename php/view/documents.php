@@ -11,6 +11,7 @@
 
     $pageController = new PageController();
     $pageView = new PageView();
+    $accountmodel = new AccountModel();
     $db = connect();
 
     $pageController -> controlConnexion();
@@ -18,7 +19,6 @@
   include(dirname(__FILE__).'/../model/documentsmodel.php');
 
   $studentsGroup = getStudentsGroup();
-
 ?>
   <!DOCTYPE html>
   <html>

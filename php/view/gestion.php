@@ -35,6 +35,7 @@ if (isset($_POST['student_update']) ) //SI LE FORMULAIRE A ETE ENVOYE
 {
 
 $pageController -> uploadPhoto();
+$pageController -> uploadTrombi();
 $pageController -> modifyPassword();
 
 $user_id=$_POST['user_id'];
@@ -108,7 +109,6 @@ else
         }
     }
 
-//var_dump($values);
 if(!$rf)
     $update = $db->query("UPDATE Student SET 
     student_personalemail = '$values[3]',
@@ -167,7 +167,7 @@ $_SESSION['infoUser']['user_name'] = $values[0];
 $_SESSION['infoUser']['user_firstname'] = $values[1];
 $_SESSION['infoUser']['user_civility'] = $values[2];
 
-//header('Location: profil.php');
+header('Location: profil.php');
 }
 
 ?>
@@ -190,13 +190,11 @@ $_SESSION['infoUser']['user_civility'] = $values[2];
                 <div class="col s12 m8">
                     <div class="card-panel teal" id="bloc2">
                     <div class="card-title"> <h3>Gestion du compte</h3></div>
-                    <form id="formula" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" role="form" enctype="multipart/form-data">
+                    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" role="form" enctype="multipart/form-data">
                             <div class="form-group">
                             <input type="hidden" class="form-control" value="<?php echo $_SESSION['infoUser']['user_id']; ?>" name="user_id">
 
-                                <div class="col s6">
-                                    <label for="student_avatar">Photo</label>
-                                    <input type='file' class="form-control" name='student_avatar' />
+                                <!-- <div class="col s6"> -->
                                 <?php if (!$rf){ ?>
                                 <div class="col s6"><?php } ?>
                                     <label for="">Nom</label>
@@ -216,8 +214,16 @@ $_SESSION['infoUser']['user_civility'] = $values[2];
                                             </option>
                                         </select>
                                     <?php if (!$rf){ ?>
+                                        <label for="student_avatar">Avatar</label>
+                                        <input type='file' class="form-control" name='student_avatar' />
+                                        <label for="student_trombi">Photo du trombinoscope</label>
+                                        <input type='file' class="form-control" name='student_avatar' />
+                                        <label for="">Modifier mot de passe</label>
+                                        <input type='password' placeholder="Ancien mot de passe" class="form-control" name='old_user_password' />
+                                        <input type='password' placeholder="Nouveau mot de passe" class="form-control" name='new_user_password' />
+                                        <input type='password' placeholder="Confirmer nouveau mot de passe" class="form-control" name='confirm_new_user_password' />
                                         <label for="">Mail</label>
-                                        <input type="email" class="form-control" value="<?php echo $result[4]; ?>" name="student_personalemail">
+                                        <input type="email" class="form-control validate" value="<?php echo $result[4]; ?>" name="student_personalemail">
                                         <label for="">Telephone</label>
                                         <input type="tel" pattern = '[0-9]{10}' placeholder ='+33 (ex : 477845989)' maxlength = '10' class="form-control" value="<?php echo $result[5]; ?>" name="student_phone">
                                         <label for="">Portable</label>
@@ -228,19 +234,15 @@ $_SESSION['infoUser']['user_civility'] = $values[2];
                                         <input type="text" class="form-control" value="<?php echo $result[8]; ?>" name="student_address2">
                                         <label for="">Code postal</label>
                                         <input type="text" class="form-control" value="<?php echo $result[9]; ?>" name="student_zipcode" maxlength="5">
-                                        <label for="">Ville</label>
-                                        <input type="text" class="form-control" value="<?php echo $result[10]; ?>" name="student_city">
-                                        <label for="">Pays</label>
-                                        <input type="text" class="form-control" value="<?php echo $result[11]; ?>" name="student_country">
                                     <?php if (!$rf){ ?>
                                     </div>
                                     <div class="col s6">
                                     <?php } ?>
-                                    <label for="student_mdp">Modifier mot de passe</label>
-                                    <input type='password' placeholder="Ancien mot de passe" class="form-control" name='old_user_password' />
-                                    <input type='password' placeholder="Nouveau mot de passe" class="form-control" name='new_user_password' />
-                                    <input type='password' placeholder="Confirmer nouveau mot de passe" class="form-control" name='confirm_new_user_password' />
-                                        <label for="">Nationalité</label>
+                                    <label for="">Ville</label>
+                                    <input type="text" class="form-control" value="<?php echo $result[10]; ?>" name="student_city">
+                                    <label for="">Pays</label>
+                                    <input type="text" class="form-control" value="<?php echo $result[11]; ?>" name="student_country">
+                                    <label for="">Nationalité</label>
                                         <input type="text" class="form-control" value="<?php echo $result[12]; ?>" name="student_nationality">
                                         <label>Formation actuelle</label>
                                         <select name="training_description">
