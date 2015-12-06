@@ -108,7 +108,7 @@ else
         }
     }
 
-var_dump($values);
+
 if(!$rf)
     $update = $db->query("UPDATE Student SET 
     student_personalemail = '$values[3]',

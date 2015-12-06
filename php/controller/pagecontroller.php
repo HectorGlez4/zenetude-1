@@ -163,11 +163,9 @@
 	      		$request->execute();
 	        	$mdp = $request->fetch();
 
-	        	var_dump($mdp[0]);
 				$old_user_password=$_POST['old_user_password'];
 				$new_user_password=$_POST['new_user_password'];
 				$confirm_new_user_password=$_POST['confirm_new_user_password'];
-				var_dump(sha1($old_user_password));
 				$crypt_old_user_password = sha1($old_user_password);
 				if ($crypt_old_user_password != $mdp[0])
 					$accountView->showMessage(7);
