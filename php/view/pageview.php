@@ -72,8 +72,6 @@ include_once '../model/db.php';
 		<script src="../../js/clndr.js"></script>
 		<script src="../../js/site.js"></script>
         <script src="../../js/trombi.js"></script>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
-        <script type="text/javascript" src="../../js/showmessage.js"></script>
 		<script type="text/javascript" src="../../js/fonctions.js"></script>
 		<script type="text/javascript">
 

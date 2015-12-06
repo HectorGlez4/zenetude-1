@@ -6333,26 +6333,26 @@ DatePicker.defaults = (function( prefix ) {
     return {
 
         // The title label to use for the month nav buttons
-        labelMonthNext: 'Mois suivant',
-        labelMonthPrev: 'Mois précédent',
+        labelMonthNext: 'Next month',
+        labelMonthPrev: 'Previous month',
 
         // The title label to use for the dropdown selectors
-        labelMonthSelect: 'Selectionner un mois',
-        labelYearSelect: 'Selectionner une année',
+        labelMonthSelect: 'Select a month',
+        labelYearSelect: 'Select a year',
 
         // Months and weekdays
-        monthsFull: [ 'Janvier', 'Fevrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Decembre' ],
-        monthsShort: [ 'Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Ju', 'Juil', 'Aout', 'Sep', 'Oct', 'Nov', 'Dec' ],
-        weekdaysFull: [ 'Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi' ],
-        weekdaysShort: [ 'Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam' ],
+        monthsFull: [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ],
+        monthsShort: [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ],
+        weekdaysFull: [ 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' ],
+        weekdaysShort: [ 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat' ],
 
         // Materialize modified
-        weekdaysLetter: [ 'D', 'L', 'M', 'M', 'J', 'V', 'S' ],
+        weekdaysLetter: [ 'S', 'M', 'T', 'W', 'T', 'F', 'S' ],
 
         // Today and clear
-        today: "Aujourd'hui",
-        clear: 'Vider',
-        close: 'Fermer',
+        today: 'Today',
+        clear: 'Clear',
+        close: 'Close',
 
         // The format to show on the `input` element
         format: 'd mmmm, yyyy',
