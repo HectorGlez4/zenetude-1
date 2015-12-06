@@ -236,7 +236,9 @@ header('Location: profil.php');
                                     </div>
                                     <div class="col s6">
                                     <?php } ?>
+
                                     <label for="">Modifier mot de passe</label>
+
                                     <input type='password' placeholder="Ancien mot de passe" class="form-control" name='old_user_password' />
                                     <input type='password' placeholder="Nouveau mot de passe" class="form-control" name='new_user_password' />
                                     <input type='password' placeholder="Confirmer nouveau mot de passe" class="form-control" name='confirm_new_user_password' />
