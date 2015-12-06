@@ -9,7 +9,7 @@ include_once '../model/db.php';
 			<!-- Debut card -->
 	      	<div class="card-panel inscription col m4 push-m4 s12 center-align">
 	        <!-- Formulaire -->
-		        <form class="col formulaire s10 push-s1" action="valider.php" method="POST" onsubmit="">
+		        <form id="formula" class="col formulaire s10 push-s1" action="valider.php" method="POST">
 
 		          	<!-- Titre de la carte -->
 		          	<div class="card-header"> <h2>Inscription</h2></div>
@@ -21,15 +21,15 @@ include_once '../model/db.php';
 				          <!-- email -->
 			          	<div class="row">
 			       	 		<div class="input-field col s12">
-			              		<input id="email" type="email" class="validate" name="mail">
-			             	 	<label for="email">Adresse email <em>*</em></label>
+			              		<input id="mail" type="email" class="validate" name="mail" required="required" >
+			             	 	<label for="mail">Adresse email <em>*</em></label>
 			            	</div>
 			          	</div><!-- fin email -->
 
 				          <!-- mot de passe -->
 			          	<div class="row">
 				            <div class="input-field col s12">
-				              	<input id="passe" type="password" class="validate" name="passe">
+				              	<input id="passe" type="password" class="validate" name="passe" required="required">
 				             	<label for="passe">Mot de passe <em>*</em></label>
 				            </div>
 			          	</div><!-- fin mot de passe -->
@@ -37,19 +37,21 @@ include_once '../model/db.php';
 			      		<!-- confirmation mot de passe -->
 			          	<div class="row">
 				            <div class="input-field col s12">
-				              	<input id="passe2" type="password" class="validate" name="passe2">
-				              	<label for="passe2">Confirmer votre mot de passe</label>
+				              	<input id="passe2" type="password" class="validate" name="passe2" required="required">
+				              	<label for="passe2">Confirmer votre mot de passe <em>*</em></label>
 				            </div>
 			          	</div><!-- fin confirmation mot de passe -->
 
 		        	</div><!-- Fin contenu card -->
+		        	
 
 			          <!-- bouton s'inscrire -->
 			        <div class="card-action bouton-connection">  
-			            <input class="btn center-align" type="submit" value="S'inscrire" />
+			            <input class="btn center-align" type="submit" value="S'inscrire"/>
 			        </div>
 
 		        </form><!-- Fin formulaire -->
+		        <div id="result"></div>
 	      	</div><!-- Fin card -->
 		<?php
 		}
@@ -70,6 +72,8 @@ include_once '../model/db.php';
 		<script src="../../js/clndr.js"></script>
 		<script src="../../js/site.js"></script>
         <script src="../../js/trombi.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+        <script type="text/javascript" src="../../js/showmessage.js"></script>
 		<script type="text/javascript" src="../../js/fonctions.js"></script>
 		<script type="text/javascript">
 
@@ -519,12 +523,11 @@ include_once '../model/db.php';
 			}
 
 
-		public function showAdministration(){
+		public function showAdministration($register/*, $selection*/){
 			$db = connect();
 			?>
 			<form name="form" method="POST">
 			<?php
-			$register = $db->query("SELECT user_id, user_name, user_firstname, user_instituteemail FROM User WHERE user_id != 1");
 			if(count($register) > 0){
 				echo '<label for="register">Sélection du membre : </label>';
 				echo '<select id="register" name="register" size=1 onchange="javascript:submit(this)" >';
@@ -534,7 +537,7 @@ include_once '../model/db.php';
         			if(isset($_POST["register"]) && $_POST["register"]==$result['user_id']){echo "selected='selected'";}
         			//echo '>'.$result['user_firstname'].' '.$result['user_name'].'</option>';
 					echo'>'.$result['user_instituteemail'].'</option>';
-					}
+				}
 				echo '</select>';
 			}
 		    //Select all register
@@ -589,7 +592,7 @@ include_once '../model/db.php';
 		    $supprime_membre = $db->query("DELETE FROM User WHERE user_id = ".$_GET['supmembre']."");
 		    //If errors
 			    if (!$supprime_membre) {
-	                die('Requête invalide : ' . $db->errorInfo());
+	                die('Requête invalide : ' . $db->errorInfo()[1]);
 	            }
 	            else{
 		        //Informations and redirect

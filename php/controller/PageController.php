@@ -43,11 +43,20 @@
 			$pageView -> showContact($_SESSION, $result);
 		}
 
-		public function controlAdmin(){
+		public function controlAdministration(){
             $accountmodel = new AccountModel();
             $result = $accountmodel -> isAdministrator();
 			if(!(isset($_SESSION['infoUser']) && isset($result[0])))
 				echo '<script>document.location.href="../view/index.php"</script>';				
+		}
+
+		public function controlShowAdministration(){
+			$pageView = new PageView();
+			$accountmodel = new AccountModel();
+			$allUser = $accountmodel -> recupAllUser();
+			//$allInfoUserSelect = $accountmodel -> recupAllInfoUserSelect();
+
+			$pageView -> showAdministration($allUser/*, $allInfoUserSelect*/);
 		}
 
 		public function controlDocuments(){

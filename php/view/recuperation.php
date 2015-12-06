@@ -25,7 +25,7 @@
       <!-- Debut card -->
       <div class="card-panel inscription col m4 push-m4 s12 center-align">
         <!-- Formulaire -->
-        <form class="col formulaire s10 push-s1" action="./recuperation.php" method="POST" onsubmit="">
+        <form class="col formulaire s10 push-s1" action="recuperation.php" method="POST" onsubmit="">
 
           <!-- Titre de la carte -->
           <div class="card-header header-small"> <h2>Récupération de mot de passe</h2></div>
@@ -37,7 +37,7 @@
           <!-- email -->
           <div class="row">
             <div class="input-field col s12">
-              <input id="email" type="email" class="validate" name="mail">
+              <input id="email" type="email" class="validate" name="mail" required="required" autofocus>
               <label for="email">Entrer l'adresse email de récupération </label>
             </div>
           </div><!-- fin email -->

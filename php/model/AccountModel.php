@@ -88,7 +88,6 @@
 			* Generate a new password an update it in the database. Then, a mail is automaticaly send to the user.
 		**/
 		public function recoverPassword($userMail) {
-            var_dump($userMail);
 	    	$accountView = new AccountView();
 
             $string = "";
@@ -100,33 +99,35 @@
 
             $db = connect();
 
-            $request = $db->query('UPDATE User SET user_password = "'.$string.'" WHERE user_instituteemail = "'.$userMail.'"');
+            $request = $db->query('UPDATE User SET user_password = "'.sha1($string).'" WHERE user_instituteemail = "'.$userMail.'"');
 			$body = "
 				<h1>Réinitialisation du mot de passe</h1>
 				<hr />
 				<p>Bonjour, votre mot de passe a été réinitialisé.</p>
-				<p>Votre nouveau mot de passe est : <a href='http://139.124.187.191/cedric/web/index.php'>$string</a></p>
-				<hr />
+                <p>Votre nouveau mot de passe est : <a href='http://maquetteprojet.alwaysdata.net/zenetude-1/php/view/'>$string</a></p>
+ 				<hr />
 				<p>Ce message a été généré automatiquement. Merci de ne pas y répondre.</p>
 			";
 
-                //Create a new PHPMailer instance
-				$mailer = new PHPMailer;
-				//Set who the message is to be sent from
-				$mailer->setFrom('Zenetude', 'First Last');
-				//Set who the message is to be sent to
-				$mailer->addAddress($userMail, '');
-				//Set the subject line
-				$mailer->Subject = 'PHPMailer mail() test';
-				$mailer->isHTML(true);
-				//Replace the plain text body with one created manually
-				 $mailer->Body = utf8_decode($body);
-				//send the message, check for errors
-				if (!$mailer->send()) {
-				    echo "Mailer Error: " . $mailer->ErrorInfo;
-				} else {
-				    echo "Message sent!";
-				}
+            $mailer = new PHPMailer();
+            $mailer->IsSMTP();
+            $mailer->SMTPDebug = 0;
+            $mailer->SMTPAuth = true;
+            $mailer->SMTPSecure = 'ssl';
+            $mailer->Host = "smtp.gmail.com";
+            $mailer->Port = 465;
+            $mailer->IsHTML(true);
+            $mailer->charSet = "UTF-8";
+            $mailer->Username = "lpsilda2i@gmail.com";
+            $mailer->Password = "Projet2015";
+            $mailer->SetFrom("lpsilda2i@gmail.com");
+            $mailer->AddAddress($userMail ,utf8_encode(""));
+            $mailer->Subject ="Subject: =?UTF-8?B?".base64_encode("Réinitialisation du mot de passe | Zenetude")."?=";
+            $mailer->Body = $body;
+            if(!$mailer->Send())
+                $accountView->showMessage(2);
+            else
+                $accountView->showMessage(3);
 		}
 
 		/**
@@ -142,6 +143,37 @@
 
         }
 
+        public function sendEmail($userMail){
+            $accountView = new AccountView();
+            $body = "
+               <p>Bienvenue !! vous êtes inscrit sur la page Zenetude.</p>
+               <p> Votre identifiant : ".$_POST['mail']."</p>
+               <p>Votre mot de passe : ".$_POST['passe']."</p>
+               <p>Accédez au site : <a href='http://maquetteprojet.alwaysdata.net/zenetude-1/php/view/'>Zenetude</a></p>
+               <hr/>
+               <p>Ce message a été généré automatiquement. Merci de ne pas y répondre.</p>
+           ";
+            $mailer = new PHPMailer();
+            $mailer->IsSMTP();
+            $mailer->SMTPDebug = 0;
+            $mailer->SMTPAuth = true;
+            $mailer->SMTPSecure = 'ssl';
+            $mailer->Host = "smtp.gmail.com";
+            $mailer->Port = 465;
+            $mailer->IsHTML(true);
+            $mailer->charSet = "UTF-8";
+            $mailer->Username = "lpsilda2i@gmail.com";
+            $mailer->Password = "Projet2015";
+            $mailer->SetFrom("lpsilda2i@gmail.com");
+            $mailer->AddAddress($userMail ,utf8_encode(""));
+            $mailer->Subject =/*"Subject: =?UTF-8?B?".*/base64_encode("Inscription au site Zenetude")."?=";
+            $mailer->Body = utf8_encode($body);
+            if(!$mailer->Send())
+                $accountView->showMessage(2);
+            else
+                $accountView->showMessage(3);
+        }
+
  		public function isAdministrator(){
  			$db = connect();
             $request = $db->query('SELECT admin_id FROM Administrator WHERE user_id IN (SELECT user_id FROM User WHERE user_id ='.$_SESSION['infoUser']['user_id'].')');
@@ -149,6 +181,20 @@
 
             return $result;
  		}
+
+        public function recupAllUser(){
+            $db = connect();
+            $request = $db->query("SELECT user_id, user_name, user_firstname, user_instituteemail FROM User WHERE user_id != 1");
+
+            return $request; 
+        }
+
+        public function recupAllInfoUserSelect(){
+            $db = connect();
+            $request = $db->query("SELECT user_id, user_name, user_firstname, user_instituteemail, user_type  FROM User WHERE user_id='".$_POST['register']."'");
+
+            return $request;
+        }
 
  		public function nbDocuments(){
  			$db = connect();
@@ -172,4 +218,3 @@
         }
 
 	}
-
