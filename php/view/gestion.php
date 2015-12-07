@@ -89,9 +89,9 @@ if(!$rf)
                     $student_status,
                     $student_educationallevel,
                     $student_origin,
-                    $student_birthcity,
                     $student_comment,
                     $student_group,
+                    $student_birthcity,
                     $training_id,
                     $student_educationallevel,
                     $student_grantholder
