@@ -103,25 +103,26 @@
 				<h1>Réinitialisation du mot de passe</h1>
 				<hr />
 				<p>Bonjour, votre mot de passe a été réinitialisé.</p>
-                <p>Votre nouveau mot de passe est : <a href='http://maquetteprojet.alwaysdata.net/zenetude-1/php/view/'>$string</a></p>
+                <p>Votre nouveau mot de passe est : <a href='http://zenetude.esy.es/php/view/'>$string</a></p>
  				<hr />
 				<p>Ce message a été généré automatiquement. Merci de ne pas y répondre.</p>
 			";
 
             $mailer = new PHPMailer();
-            $mailer->IsSMTP();
-            $mailer->SMTPDebug = 0;
-            $mailer->SMTPAuth = true;
-            $mailer->SMTPSecure = 'ssl';
-            $mailer->Host = "smtp.gmail.com";
-            $mailer->Port = 465;
+            $mailer->CharSet = "utf-8";
             $mailer->IsHTML(true);
-            $mailer->charSet = "UTF-8";
-            $mailer->Username = "lpsilda2i@gmail.com";
-            $mailer->Password = "Projet2015";
-            $mailer->SetFrom("lpsilda2i@gmail.com");
-            $mailer->AddAddress($userMail ,utf8_encode(""));
-            $mailer->Subject ="Subject: =?UTF-8?B?".base64_encode("Réinitialisation du mot de passe | Zenetude")."?=";
+            // De qui vient le message, e-mail puis nom
+            $mailer->From = "noreply@zenetude.esy.es";
+            $mailer->FromName = "Noreply - Zenetude";
+             
+            // Définition du sujet/objet
+            $mailer->Subject = "Zenetude - Nouveau mot de passe";
+             
+ 
+
+
+            $mailer->AddAddress($userMail);
+            //$mailer->Subject ="Subject: =?UTF-8?B?".base64_encode("Réinitialisation du mot de passe | Zenetude")."?=";
             $mailer->Body = $body;
             if(!$mailer->Send())
                 $accountView->showMessage("Une erreur est survenue !");
@@ -148,24 +149,23 @@
                <p>Bienvenue !! vous êtes inscrit sur la page Zenetude.</p>
                <p> Votre identifiant : ".$_POST['mail']."</p>
                <p>Votre mot de passe : ".$_POST['passe']."</p>
-               <p>Accédez au site : <a href='http://maquetteprojet.alwaysdata.net/zenetude-1/php/view/'>Zenetude</a></p>
+               <p>Accédez au site : <a href='http://zenetude.esy.es/php/view/'>Zenetude</a></p>
                <hr/>
                <p>Ce message a été généré automatiquement. Merci de ne pas y répondre.</p>
            ";
+        
+
             $mailer = new PHPMailer();
-            $mailer->IsSMTP();
-            $mailer->SMTPDebug = 0;
-            $mailer->SMTPAuth = true;
-            $mailer->SMTPSecure = 'ssl';
-            $mailer->Host = "smtp.gmail.com";
-            $mailer->Port = 465;
+            $mailer->CharSet = "utf-8";
             $mailer->IsHTML(true);
-            $mailer->charSet = "UTF-8";
-            $mailer->Username = "lpsilda2i@gmail.com";
-            $mailer->Password = "Projet2015";
-            $mailer->SetFrom("lpsilda2i@gmail.com");
-            $mailer->AddAddress($userMail ,utf8_encode(""));
-            $mailer->Subject =/*"Subject: =?UTF-8?B?".*/base64_encode("Inscription au site Zenetude");
+            $mailer->From = "noreply@zenetude.esy.es";
+            $mailer->FromName = "Noreply - Zenetude";
+         
+            // Définition du sujet/objet
+            $mailer->Subject = "Zenetude - Inscription";
+
+            $mailer->AddAddress($userMail);
+            //$mailer->Subject =/*"Subject: =?UTF-8?B?".*/base64_encode("Inscription au site Zenetude");
             $mailer->Body = $body;
             if(!$mailer->Send())
                 $accountView->showMessage("Une erreur est survenue !");
