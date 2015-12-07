@@ -141,7 +141,7 @@
 	            if ( in_array($extension_upload,$extensions_valides) ) echo "Extension correcte";
 	            //if ($image_sizes[0] > $maxwidth OR $image_sizes[1] > $maxheight) echo "Image trop grande";
 
-	            $fichier='../../img/avatar/'.uniqid().".$extension_upload";
+	            $fichier='../../img/avatar/'.$_SESSION['infoStudent']['student_id'].".$extension_upload";
 	            $session = $_SESSION['infoUser']['user_id'];
 	            $resultat = move_uploaded_file($_FILES['student_avatar']['tmp_name'],$fichier);
 	            if ($resultat) {

@@ -35,7 +35,7 @@ if (isset($_POST['student_update']) ) //SI LE FORMULAIRE A ETE ENVOYE
 {
 
 $pageController -> uploadPhoto();
-$pageController -> uploadTrombi();
+//$pageController -> uploadTrombi();
 $pageController -> modifyPassword();
 
 $user_id=$_POST['user_id'];
@@ -214,10 +214,10 @@ header('Location: profil.php');
                                             </option>
                                         </select>
                                     <?php if (!$rf){ ?>
-                                        <label for="student_avatar">Avatar</label>
-                                        <input type='file' class="form-control" name='student_avatar' />
-                                        <label for="student_trombi">Photo du trombinoscope</label>
-                                        <input type='file' class="form-control" name='student_avatar' />
+                                        <label for="student_avatar">Avatar</label><br />
+                                        <input type='file' class="form-control" name='student_avatar' /><br />
+                                        <!-- <label for="student_trombi">Photo du trombinoscope</label><br />
+                                        <input type='file' class="form-control" name='student_avatar' /><br /> -->
                                         <label for="">Modifier mot de passe</label>
                                         <input type='password' placeholder="Ancien mot de passe" class="form-control" name='old_user_password' />
                                         <input type='password' placeholder="Nouveau mot de passe" class="form-control" name='new_user_password' />
