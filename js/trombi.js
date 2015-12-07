@@ -5,7 +5,7 @@
 
 function actualiserTrombi(formation,groupe){
     $.ajax({
-        url: '../controller/generateTrombi.php',
+        url: '../controller/generatetrombi.php',
         type: 'POST',
         data: 'formation='+formation+'&groupe='+groupe,
         dataType: 'json',
@@ -39,12 +39,12 @@ function actualiserTrombi(formation,groupe){
 function imprimerDoc(doc, formation, groupe){
     if(doc == 1)
     {
-        doc = "Trombi";
+        doc = "trombi";
         var url = "trombinoscope.pdf";
     }
     else if(doc == 2)
     {
-        doc = "Sheet";
+        doc = "sheet";
         var url = "feuille_emargement.pdf";
     }
     $.ajax({
