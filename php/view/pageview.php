@@ -562,6 +562,7 @@ include_once '../model/db.php';
 				        <input type="text" id="user_firstname" name="user_firstname" maxlength="20" value="<?php echo htmlspecialchars($firstname_register);?>" /></br>
 				        <label for="user_firstname">Prénom</label>
 		        	</div>
+		        	
 		        </div>
 
 		        <div class="row">
@@ -578,25 +579,50 @@ include_once '../model/db.php';
 		        </select>
 
 		        <button class="btn" type="submit" name="Modifier">Modifier</button>
-				<a class="btn supp" href="admin.php?supmembre=<?php echo $id_register;?>">Supprimer</a>
+				<a class="btn supp" href="admin.php?supmembre=<?= $id_register.'&amp;statutmember='.$statut_register;?>">Supprimer</a>
 		    </form>
-
 				<?php
-				}
+ 				}
 			}
 		    //Delete register
 		    if(isset($_GET['supmembre'])){
+		    	//Delete register on database if Etudiant
+		    	$supprime_membre = null;
+		    	$is_training_enable = false;
+		    	if($_GET['statutmember'] == "Etudiant"){
+		    		$supprime_membre_student = $db->query("DELETE FROM Student WHERE user_id = ".$_GET['supmembre']."");
+		    		if ($supprime_membre_student)
+		    			$supprime_membre = $db->query(" DELETE FROM User WHERE user_id = ".$_GET['supmembre']."");
+		    	}
 		    //Delete register on database
-		    $supprime_membre = $db->query("DELETE FROM User WHERE user_id = ".$_GET['supmembre']."");
+		    //$supprime_membre = $db->query("DELETE FROM User WHERE user_id = ".$_GET['supmembre']."");
 		    //If errors
-			    if (!$supprime_membre) {
+		    	else{
+		    		$istraining = $db->query("SELECT count(training_id) AS training_id FROM Training WHERE training_manager_id IN (SELECT training_manager_id FROM Training_manager WHERE user_id = ".$_GET['supmembre'].")");
+		    		$istraining2 = $istraining -> fetch();
+		    		if(0 == $istraining2['training_id']){
+		    			$supprime_membre_rf = $db->query("DELETE FROM Training_manager WHERE user_id = ".$_GET['supmembre']."");
+		    			if ($supprime_membre_rf){
+		    				$supprime_membre = $db->query(" DELETE FROM User WHERE user_id = ".$_GET['supmembre']."");
+		    			}
+		    		}
+		    		else{
+		    			$is_training_enable = true;
+		    		}
+		    	}
+		    	if ($is_training_enable){
+		    		echo '<div class="ok">Ce responsable de formation ne peut être supprimé car il est responsable d\'une formation.</div>';
+		    		$is_training_enable = false;
+		    	}
+			    else if (!$supprime_membre){
 	                die('Requête invalide : ' . $db->errorInfo()[1]);
 	            }
 	            else{
 		        //Informations and redirect
 		        echo '<div class="ok">Membre supprimé avec succès. Redirection en cours...</div><script type="text/javascript"> window.setTimeout("location=(\'admin.php\');",3000) </script>';
 			    }
-			}
+		    }
+			//}
 			if(isset($_POST['Envoyer'])){
 			//Select users' firstname, lastname and email
 	            $data = $db->query("SELECT user_name, user_firstname, user_instituteemail FROM User") or die ('Erreur :'.$db->errorInfo());
@@ -654,7 +680,7 @@ include_once '../model/db.php';
 
                     if(!$modif) {
 
-                        die('Requête invalide : ' . $db->errorInfo()[2]);
+                        die('Requête invalide : ' . $db->errorInfo()[1]);
 
                     }
                     echo '<div class="ok">Profil du membre modifié avec succès. Redirection en cours...</div><script type="text/javascript"> window.setTimeout("location=(\'admin.php\');",3000) </script>';
