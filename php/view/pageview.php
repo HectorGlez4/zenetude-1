@@ -218,7 +218,7 @@ include_once '../model/db.php';
 			?>
 			<nav>
 	 		 	<div class="nav-wrapper">
-				    <a href="./index.php" class="brand-logo"><img src="../../img/logo.svg" alt="logo du site"></a>
+				    <a href="./index.php" class="brand-logo"><img class="logo-svg" src="../../img/logo.svg" alt="logo du site"></a>
 				    <img src="../../img/name.png" alt="Zenetude, titre du site">
 				    <div id="hamburger2" class="hamburglar is-closed">
 
@@ -266,40 +266,43 @@ include_once '../model/db.php';
 		        <div class="card-panel teal" id="aside1">
 		          <div class="card-header"> <h2>Connexion</h2></div>
 
-                  <!-- Formulaire -->
-			        <form id="formula" class="col s10 push-s1" action="connexion.php" method="POST">
-			
-			
-			          <!-- Contenu card -->
-			         <div >
-			
-			          <!-- email -->
-			          <div class="row">
-			            <div class="input-field col s12">
-			              <input id="email" type="email" class="validate" name="mail">
-			              <label for="email">Email</label>
-			            </div>
-			          </div><!-- fin email -->
-			
-			          <!-- mot de passe -->
-			          <div class="row">
-			            <div class="input-field col s12">
-			              <input id="passe" type="password" class="validate" name="pass">
-			              <label for="passe">Mot de passe</label>
-			            </div>
-			          </div><!-- fin mot de passe -->
-			
-			        </div><!-- Fin contenu card -->
-					<div id="result"></div><!-- Retour de l'erreur en json -->
-			        <div class="card-action  center-align bouton-connection">
-				        <input class="btn connexion" type="submit" value="Se connecter" />
-			        </div>
-			        <div id="socialmedia">
-						<?php
-							include('socialmedia.php');
-						?>
-					</div>
-			        </form><!-- Fin formulaire -->
+                  	<!-- Formulaire -->
+	                  <div class="formula">
+				        <form id="formula" class="col s10 push-s1" action="connexion.php" method="POST">
+				
+				
+				          <!-- Contenu card -->
+				         <div >
+				
+				          <!-- email -->
+				          <div class="row">
+				            <div class="input-field col s12">
+				              <input id="email" type="email" class="validate" name="mail">
+				              <label for="email">Email</label>
+				            </div>
+				          </div><!-- fin email -->
+				
+				          <!-- mot de passe -->
+				          <div class="row">
+				            <div class="input-field col s12">
+				              <input id="passe" type="password" class="validate" name="pass">
+				              <label for="passe">Mot de passe</label>
+				            </div>
+				          </div><!-- fin mot de passe -->
+				
+				        </div><!-- Fin contenu card -->
+						<div id="result"></div><!-- Retour de l'erreur en json -->
+				        <div class="card-action  center-align bouton-connection">
+					        <input class="btn connexion" type="submit" value="Se connecter" />
+				        </div>
+				        <div id="socialmedia">
+							<?php
+								include('socialmedia.php');
+							?>
+						</div>
+				        </form>
+				    </div>
+				    <!-- Fin formulaire -->
 			        <p class="connexion"><a href="inscription.php" class="left">S'inscrire</a><a href="recuperation.php" class="right">Mot de passe oublié</a></p>
 		      	</div>
     		</div>
