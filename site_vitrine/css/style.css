@@ -30,6 +30,10 @@ p {
   margin-top: 5%;
 }
 
+.justify{
+  text-align: justify;
+}
+
 #logo-container img{
   height: 60px;
   margin-top: 2px;
