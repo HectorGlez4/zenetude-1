@@ -15,9 +15,9 @@
  * limitations under the License.
  */
 
-require_once 'io/Google_HttpRequest.php';
-require_once 'io/Google_CurlIO.php';
-require_once 'io/Google_REST.php';
+require_once 'Google_HttpRequest.php';
+require_once 'Google_CurlIO.php';
+require_once 'Google_REST.php';
 
 /**
  * Abstract IO class
