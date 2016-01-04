@@ -1,13 +1,13 @@
 <?php
     error_reporting(E_ALL);
-    require 'vendor/autoload.php';
-    require 'vendor/PHPMailer/PHPMailerAutoload.php';
+    require '../../vendor/autoload.php';
+    require '../../vendor/PHPMailer/PHPMailerAutoload.php';
     //Set default timezone
     date_default_timezone_set('Europe/Paris');
     //Function take back data from agenda ADE
     $ch = curl_init();
     //Number of day the data come from
-    $nbDays = 7;
+    $nbDays = 3;
     //ADE Agenda's id (6445 = lp sil da2i)
     $ressource = 6445;
     //Agenda's URL where data come from
@@ -65,8 +65,8 @@
                 $full_name = explode(' ', $parameter);
                 
                 //Save first and last name into 2 var
-                $last_name = strtolower($full_name[0]) . "</br>";
-                $first_name = strtolower($full_name[1]) . "</br>";
+                $last_name = strtolower($full_name[0]);
+                $first_name = strtolower($full_name[1]);
 
                 $content ='<html>
                             <head>
