@@ -1,7 +1,7 @@
 <?php
     error_reporting(E_ALL);
-    require 'vendor/autoload.php';
-    require 'vendor/PHPMailer/PHPMailerAutoload.php';
+    require '../../vendor/autoload.php';
+    require '../../vendor/PHPMailer/PHPMailerAutoload.php';
     //Set default timezone
     date_default_timezone_set('Europe/Paris');
     //Function take back data from agenda ADE
