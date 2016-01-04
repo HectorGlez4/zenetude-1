@@ -19,6 +19,8 @@ nav{
 
 nav .brand-logo{
 	color: #000;
+	left: inherit;
+	transform: inherit;
 }
 
 nav ul a{
@@ -34,6 +36,10 @@ nav>.nav-wrapper>.hamburglar{
 	float: right;
 	margin-top: 40px;
 	z-index: 30;
+}
+
+.logo-svg{
+	width: 40%;
 }
 
 
@@ -202,8 +208,15 @@ footer{
 /*1029 px pour le calendrier*/
 @media screen and (max-width: 995px) {
 	nav .brand-logo{
-		left: 100px;
 		color: #000;
+	}
+
+	.card-panel{
+		font-size: 90%;
+	}
+
+	h2{
+		font-size: 180%;
 	}
 }
 
