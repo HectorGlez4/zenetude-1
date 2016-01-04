@@ -74,6 +74,9 @@ include_once '../model/db.php';
         <script src="../../js/trombi.js"></script>
 		<script type="text/javascript" src="../../js/fonctions.js"></script>
 		<script type="text/javascript">
+		$(document).ready(function() {
+			$('select').material_select();
+		});
 		//$(document).ready(function(){showMessage();});
 
 		 $(function(){
