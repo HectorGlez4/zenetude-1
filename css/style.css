@@ -19,6 +19,13 @@ nav{
 
 nav .brand-logo{
 	color: #000;
+	height: 200px;
+	left: inherit;
+	transform: inherit;
+}
+
+.logo-svg{
+	height: 200px;
 }
 
 nav ul a{
@@ -35,7 +42,6 @@ nav>.nav-wrapper>.hamburglar{
 	margin-top: 40px;
 	z-index: 30;
 }
-
 
 #page{
 	position: absolute;
@@ -202,12 +208,39 @@ footer{
 /*1029 px pour le calendrier*/
 @media screen and (max-width: 995px) {
 	nav .brand-logo{
-		left: 100px;
 		color: #000;
+	}
+
+	.card-panel{
+		font-size: 90%;
+	}
+
+	h2{
+		font-size: 180%;
 	}
 }
 
-@media screen and (max-width: 860px) {
+@media screen and (max-width: 890px) {
+	.col{
+		width: 100% !important;
+	}
+
+	h2{
+		font-size: 240%;
+	}
+
+	.card-panel{
+		font-size: 100%;
+	}
+
+	.row .col.push-s1{
+		left: 0 !important;
+	}
+
+	.formula{
+		padding-left: 30px;
+		padding-right: 30px;
+	}
 }
 
 /**********************/
