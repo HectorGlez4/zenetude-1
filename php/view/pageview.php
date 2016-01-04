@@ -76,6 +76,10 @@ include_once '../model/db.php';
 		<script type="text/javascript">
 		//$(document).ready(function(){showMessage();});
 
+		$(document).ready(function() {
+			$('select').material_select();
+		});
+
 		 $(function(){
 		   $(window).scroll(function () {//Au scroll dans la fenetre on déclenche la fonction
 		      if ($(this).scrollTop() > 200) { //si on a défilé de plus de 200px du haut vers le bas
