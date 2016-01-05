@@ -128,6 +128,7 @@
 		}
 
 		public function uploadPhoto(){
+			$accountmodel = new AccountModel();
 			if (isset($_FILES['student_avatar'])) {
 	            $maxsize = 2097152;
 				$extensions_valides =  array('gif','png' ,'jpg', 'jpeg');
@@ -136,7 +137,7 @@
 				$extension_upload = strtolower(  substr(  strrchr($_FILES['student_avatar']['name'], '.')  ,1)  );
 
 			if ($_FILES['student_avatar']['error'] > 0) {
-					echo 'erreur error';
+					echo 'error';
 				} elseif (($_FILES['student_avatar']['size'] >= $maxsize) || ($_FILES["student_avatar"]["size"] == 0)) {
 					echo 'erreur size';
 				}
@@ -149,8 +150,7 @@
 		            $session = $_SESSION['infoUser']['user_id'];
 		            $resultat = move_uploaded_file($_FILES['student_avatar']['tmp_name'],$fichier);
 		            if ($resultat) {
-		            	$db = connect();
-		            	$update = $db->query("UPDATE Student SET student_avatar = '$fichier' where user_id = '$session'");
+		            	$accountmodel -> addAvatar($fichier, $session);
 		            	$_SESSION['infoStudent']['student_avatar'] = $fichier;
 		            }
 	            }
@@ -158,6 +158,7 @@
         }
 
         public function uploadTrombi(){
+        	$accountmodel = new AccountModel();
 			if (isset($_FILES['student_trombi'])) {
 	            $maxsize = 2097152;
 				$extensions_valides =  array('gif','png' ,'jpg', 'jpeg');
@@ -166,7 +167,7 @@
 				$extension_upload = strtolower(  substr(  strrchr($_FILES['student_trombi']['name'], '.')  ,1)  );
 
 			if ($_FILES['student_trombi']['error'] > 0) {
-					echo 'erreur error';
+					echo 'error';
 				} elseif (($_FILES['student_trombi']['size'] >= $maxsize) || ($_FILES["student_trombi"]["size"] == 0)) {
 					echo 'erreur size';
 				}
@@ -179,8 +180,7 @@
 		            $session = $_SESSION['infoUser']['user_id'];
 		            $resultat = move_uploaded_file($_FILES['student_trombi']['tmp_name'],$fichier);
 		            if ($resultat) {
-		            	$db = connect();
-		            	$update = $db->query("UPDATE Student SET student_trombi = '$fichier' where user_id = '$session'");
+		            	$accountmodel -> addTrombi($fichier, $session);
 		            	$_SESSION['infoStudent']['student_trombi'] = $fichier;
 		            }
 	            }
@@ -188,14 +188,13 @@
         }
 
 		public function modifyPassword() {
-			include_once('./accountview.php');
 			$accountView = new AccountView();
+			$accountmodel = new AccountModel();
+			include_once('./accountview.php');
 			if (!empty($_POST['old_user_password']) && !empty($_POST['new_user_password']) && !empty($_POST['confirm_new_user_password'])) {
 				$session = $_SESSION['infoUser']['user_id'];
-				$db = connect();
-				$request = $db->prepare('SELECT user_password FROM User WHERE user_id = '.$session);
-	      		$request->execute();
-	        	$mdp = $request->fetch();
+
+	        	$mdp = $accountmodel -> getUserPassword($session);
 
 				$old_user_password=$_POST['old_user_password'];
 				$new_user_password=$_POST['new_user_password'];
@@ -207,7 +206,7 @@
 					$accountView->showMessage("Mot de passe non identique");
 				else {
 					$crypt_new_user_password = sha1($new_user_password);
-					$update = $db->query("UPDATE User SET user_password = '$crypt_new_user_password' where user_id = '$session'");
+					$accountmodel -> updateUserPassword($crypt_new_user_password, $session);
 				}
 			}
 		}
