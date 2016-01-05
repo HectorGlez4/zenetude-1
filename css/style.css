@@ -26,6 +26,7 @@ nav .brand-logo{
 
 .logo-svg{
 	height: 200px;
+
 }
 
 nav ul a{
@@ -41,6 +42,11 @@ nav>.nav-wrapper>.hamburglar{
 	float: right;
 	margin-top: 40px;
 	z-index: 30;
+}
+
+nav>.nav-wrapper>img{
+	width: 45%;
+	max-width: 450px;
 }
 
 #page{
@@ -217,6 +223,10 @@ footer{
 
 	h2{
 		font-size: 180%;
+	}
+
+	.logo-svg{
+		width: 90%;
 	}
 }
 

@@ -75,7 +75,7 @@
                 }
                 else{
                     //$_POST["passe"] = sha1($_POST["passe"]);
-                    $accountModel->addUser($_POST["mail"], sha1($_POST["passe"]));
+                    $accountModel->addUser($_POST["mail"], $_POST["firstname"], $_POST["lastname"], sha1($_POST["passe"]));
                     $accountModel->sendEmail($_POST["mail"], $_POST["passe"]);
                 }
             }
