@@ -127,9 +127,11 @@
 
 		// get the token from connection object
 		$request_token = $connection->getRequestToken(OAUTH_CALLBACK);
-        //var_dump($request_token);
+        var_dump($request_token);
 
-        }catch ()
+        }catch (OAuthException $e){
+            $e->getMessage();
+        }
 
 
 		// if request_token exists then get the token and secret and store in the session
