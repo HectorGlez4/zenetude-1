@@ -646,7 +646,7 @@ include_once '../model/db.php';
 			    }
 		    }
 			//}
-			if(isset($_POST['Envoyer'])){
+			if(isset($_POST['Modifier'])){
 			//Select users' firstname, lastname and email
 	            $data = $db->query("SELECT user_name, user_firstname, user_instituteemail FROM User") or die ('Erreur :'.$db->errorInfo());
 	            while($result1 = $data->fetch()){
@@ -667,7 +667,7 @@ include_once '../model/db.php';
 		        if(empty($_POST['user_name'])){
 		            echo '<div class="erreur">Veuillez saisir un nom!</div>';
 		        }
-		        if(empty($_POST['user_firstname'])){
+		        else if(empty($_POST['user_firstname'])){
 		            echo '<div class="erreur">Veuillez saisir un prénom!</div>';
 		        }
 		        //If email empty
