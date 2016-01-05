@@ -129,25 +129,30 @@
 
 		public function uploadPhoto(){
 			if (isset($_FILES['student_avatar'])) {
-	            $maxsize = 5000000000;
-	            $maxwidth = 1024;
-	            $maxheight = 1024;
-	            $extensions_valides = array( 'jpg' , 'jpeg' , 'gif' , 'png' );
-	            $extension_upload = strtolower(  substr(  strrchr($_FILES['student_avatar']['name'], '.')  ,1)  );
-	            //$image_sizes = getimagesize($_FILES['student_avatar']['tmp_name']);
+	            $maxsize = 2097152;
+				$extensions_valides =  array('gif','png' ,'jpg', 'jpeg');
+				$filename = $_FILES['student_avatar']['name'];
+				$ext = pathinfo($filename, PATHINFO_EXTENSION);
+				$extension_upload = strtolower(  substr(  strrchr($_FILES['student_avatar']['name'], '.')  ,1)  );
 
-	            if ($_FILES['student_avatar']['error'] > 0) echo "Erreur lors du transfert";
-	            if ($_FILES['student_avatar']['size'] > $maxsize) echo "Le fichier est trop gros";
-	            if ( in_array($extension_upload,$extensions_valides) ) echo "Extension correcte";
-	            //if ($image_sizes[0] > $maxwidth OR $image_sizes[1] > $maxheight) echo "Image trop grande";
+			if ($_FILES['student_avatar']['error'] > 0) {
+					echo 'erreur error';
+				} elseif (($_FILES['student_avatar']['size'] >= $maxsize) || ($_FILES["student_avatar"]["size"] == 0)) {
+					echo 'erreur size';
+				}
+				elseif (!in_array($ext,$extensions_valides)) {
+					echo 'erreur extension';
+				}
 
-	            $fichier='../../img/avatar/'.$_SESSION['infoStudent']['student_id'].".$extension_upload";
-	            $session = $_SESSION['infoUser']['user_id'];
-	            $resultat = move_uploaded_file($_FILES['student_avatar']['tmp_name'],$fichier);
-	            if ($resultat) {
-	            	$db = connect();
-	            	$update = $db->query("UPDATE Student SET student_avatar = '$fichier' where user_id = '$session'");
-	            	$_SESSION['infoStudent']['student_avatar'] = $fichier;
+				else {
+		            $fichier='../../img/avatar/'.$_SESSION['infoStudent']['student_id'].".$extension_upload";
+		            $session = $_SESSION['infoUser']['user_id'];
+		            $resultat = move_uploaded_file($_FILES['student_avatar']['tmp_name'],$fichier);
+		            if ($resultat) {
+		            	$db = connect();
+		            	$update = $db->query("UPDATE Student SET student_avatar = '$fichier' where user_id = '$session'");
+		            	$_SESSION['infoStudent']['student_avatar'] = $fichier;
+		            }
 	            }
         	}
         }
