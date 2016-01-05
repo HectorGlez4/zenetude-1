@@ -80,7 +80,7 @@ include_once '../model/db.php';
 		?>
 		<!--Import jQuery before materialize.js-->
 		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-		<script type="text/javascript" src="../../js/materialize.js"></script>
+		<script type="text/javascript" src="../../js/materialize.min.js"></script>
 		<script type="text/javascript" src="../../js/showmessage.js"></script>
 		<script type="text/javascript" src="../../js/menu.js"></script>
 		<script src="../../js/underscore-min.js"></script>
@@ -91,6 +91,10 @@ include_once '../model/db.php';
 		<script type="text/javascript" src="../../js/fonctions.js"></script>
 		<script type="text/javascript">
 		//$(document).ready(function(){showMessage();});
+
+		$(document).ready(function() {
+			$('select').material_select();
+		});
 
 		 $(function(){
 		   $(window).scroll(function () {//Au scroll dans la fenetre on déclenche la fonction
@@ -224,7 +228,7 @@ include_once '../model/db.php';
 			if(!$connect) {?>
 			<nav>
 	 		 	<div class="nav-wrapper">
-				    <a href="./index.php" class="brand-logo"><img src="../../img/logo.png" alt="logo du site"></a>
+				    <a href="./index.php" class="brand-logo"><img class="logo-svg" src="../../img/logo.svg" alt="logo du site"></a>
 				    <img src="../../img/name.png" alt="Zenetude, titre du site">
 		  		</div>
 			</nav>
@@ -234,7 +238,7 @@ include_once '../model/db.php';
 			?>
 			<nav>
 	 		 	<div class="nav-wrapper">
-				    <a href="./index.php" class="brand-logo"><img src="../../img/logo.png" alt="logo du site"></a>
+				    <a href="./index.php" class="brand-logo"><img class="logo-svg" src="../../img/logo.svg" alt="logo du site"></a>
 				    <img src="../../img/name.png" alt="Zenetude, titre du site">
 				    <div id="hamburger2" class="hamburglar is-closed">
 
@@ -282,40 +286,43 @@ include_once '../model/db.php';
 		        <div class="card-panel teal" id="aside1">
 		          <div class="card-header"> <h2>Connexion</h2></div>
 
-                  <!-- Formulaire -->
-			        <form id="formula" class="col s10 push-s1" action="connexion.php" method="POST">
-			
-			
-			          <!-- Contenu card -->
-			         <div >
-			
-			          <!-- email -->
-			          <div class="row">
-			            <div class="input-field col s12">
-			              <input id="email" type="email" class="validate" name="mail">
-			              <label for="email">Email</label>
-			            </div>
-			          </div><!-- fin email -->
-			
-			          <!-- mot de passe -->
-			          <div class="row">
-			            <div class="input-field col s12">
-			              <input id="passe" type="password" class="validate" name="pass">
-			              <label for="passe">Mot de passe</label>
-			            </div>
-			          </div><!-- fin mot de passe -->
-			
-			        </div><!-- Fin contenu card -->
-					<div id="result"></div><!-- Retour de l'erreur en json -->
-			        <div class="card-action  center-align bouton-connection">
-				        <input class="btn connexion" type="submit" value="Se connecter" />
-			        </div>
-			        <div id="socialmedia">
-						<?php
-							include('socialmedia.php');
-						?>
-					</div>
-			        </form><!-- Fin formulaire -->
+                  	<!-- Formulaire -->
+	                  <div class="formula">
+				        <form id="formula" class="col s10 push-s1" action="connexion.php" method="POST">
+				
+				
+				          <!-- Contenu card -->
+				         <div >
+				
+				          <!-- email -->
+				          <div class="row">
+				            <div class="input-field col s12">
+				              <input id="email" type="email" class="validate" name="mail">
+				              <label for="email">Email</label>
+				            </div>
+				          </div><!-- fin email -->
+				
+				          <!-- mot de passe -->
+				          <div class="row">
+				            <div class="input-field col s12">
+				              <input id="passe" type="password" class="validate" name="pass">
+				              <label for="passe">Mot de passe</label>
+				            </div>
+				          </div><!-- fin mot de passe -->
+				
+				        </div><!-- Fin contenu card -->
+						<div id="result"></div><!-- Retour de l'erreur en json -->
+				        <div class="card-action  center-align bouton-connection">
+					        <input class="btn connexion" type="submit" value="Se connecter" />
+				        </div>
+				        <div id="socialmedia">
+							<?php
+								include('socialmedia.php');
+							?>
+						</div>
+				        </form>
+				    </div>
+				    <!-- Fin formulaire -->
 			        <p class="connexion"><a href="inscription.php" class="left">S'inscrire</a><a href="recuperation.php" class="right">Mot de passe oublié</a></p>
 		      	</div>
     		</div>
@@ -336,7 +343,7 @@ include_once '../model/db.php';
 			if(!$connect) {?>
 			<nav id="scroll-nav">
 		  		<div class="nav-wrapper">
-		    		<a href="" class="brand-logo"><img src="../../img/logo.png" alt="logo du site"></a>
+		    		<a href="" class="brand-logo"><img src="../../img/logo.svg" alt="logo du site"></a>
 		    		<img src="../../img/name.png" alt="Zenetude, titre du site">
 		 	 	</div>
 			</nav>
@@ -397,7 +404,7 @@ include_once '../model/db.php';
 			</nav>
 			<nav id="scroll-nav">
 		  		<div class="nav-wrapper">
-		    		<a href="" class="brand-logo"><img src="../../img/logo.png" alt="logo du site"></a>
+		    		<a href="" class="brand-logo"><img src="../../img/logo.svg" alt="logo du site"></a>
 		    		<img src="../../img/name.png" alt="Zenetude, titre du site">
 		    		<div id="hamburger" class="hamburglar is-closed">
 		    			<div class="burger-icon">

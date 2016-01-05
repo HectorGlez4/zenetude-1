@@ -27,13 +27,13 @@ $apiConfig = array(
     // OAuth2 Settings, you can get these keys at https://code.google.com/apis/console
     'oauth2_client_id' => '657801969546-b1fgtiurlrsbj3t8l8o1a1ioghpuiep0.apps.googleusercontent.com',
     'oauth2_client_secret' => 'B54pUp6AxMJ5TxPA-tXPLMj0',
-    'oauth2_redirect_uri' => 'http://localhost/zenetude-1/php/view/socialmedia.php',
+    'oauth2_redirect_uri' => 'http://zenetude.esy.es/php/view/socialmedia.php',
 
     // The developer key, you get this at https://code.google.com/apis/console
     'developer_key' => '',
-  
+
     // Site name to show in the Google's OAuth 1 authentication screen.
-    'site_name' => 'localhost/zenetude-1',
+    'site_name' => 'http://zenetude.esy.es',
 
     // Which Authentication, Storage and HTTP IO classes to use.
     'authClass'    => 'Google_OAuth2',
