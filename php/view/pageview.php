@@ -106,6 +106,21 @@ include_once '../model/db.php';
 		   });
 		 });
 
+//		$('.datepicker').pickadate({
+//			labelMonthNext: 'Mois suivant',
+//			labelMonthPrev: 'Mois précédent',
+//			labelMonthSelect: 'Selectionner le mois',
+//			labelYearSelect: "Selectionner l'annee",
+//			monthsFull: [ 'Janvier', 'Febrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre' ],
+//			monthsShort: [ 'Jan', 'Feb', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sep', 'Oct', 'Nov', 'Dec' ],
+//			weekdaysFull: [ 'Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi' ],
+//			weekdaysShort: [ 'Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam' ],
+//			weekdaysLetter: [ 'D', 'L', 'M', 'M', 'J', 'V', 'S' ],
+//			today: "Aujourd'hui",
+//			clear: 'Effacer',
+//			close: 'Fermer'
+//		});
+
 		window.onload=ajuste;
 			function ajuste(){
 			document.getElementById('aside1').style.minHeight=document.getElementById('bloc1').offsetHeight+"px";
@@ -284,44 +299,44 @@ include_once '../model/db.php';
 			if(!$connect) {?>
 			<div class="col s12 m4">
 		        <div class="card-panel teal" id="aside1">
-		          <div class="card-header"> <h2>Connexion</h2></div>
+					<div class="card-header"> <h2>Connexion</h2></div>
 
-                  	<!-- Formulaire -->
-	                  <div class="formula">
-				        <form id="formula" class="col s10 push-s1" action="connexion.php" method="POST">
-				
-				
-				          <!-- Contenu card -->
-				         <div >
-				
-				          <!-- email -->
-				          <div class="row">
-				            <div class="input-field col s12">
-				              <input id="email" type="email" class="validate" name="mail">
-				              <label for="email">Email</label>
-				            </div>
-				          </div><!-- fin email -->
-				
-				          <!-- mot de passe -->
-				          <div class="row">
-				            <div class="input-field col s12">
-				              <input id="passe" type="password" class="validate" name="pass">
-				              <label for="passe">Mot de passe</label>
-				            </div>
-				          </div><!-- fin mot de passe -->
-				
-				        </div><!-- Fin contenu card -->
-						<div id="result"></div><!-- Retour de l'erreur en json -->
-				        <div class="card-action  center-align bouton-connection">
-					        <input class="btn connexion" type="submit" value="Se connecter" />
-				        </div>
-				        <div id="socialmedia">
-							<?php
+					<!-- Formulaire -->
+					<div class="formula">
+						<form id="formula" class="col s10 push-s1" action="connexion.php" method="POST">
+
+
+							<!-- Contenu card -->
+							<div>
+
+								<!-- email -->
+								<div class="row">
+									<div class="input-field col s12">
+										<input id="email" type="email" class="validate" name="mail">
+										<label for="email">Email</label>
+									</div>
+								</div><!-- fin email -->
+
+								<!-- mot de passe -->
+								<div class="row">
+									<div class="input-field col s12">
+										<input id="passe" type="password" class="validate" name="pass">
+										<label for="passe">Mot de passe</label>
+									</div>
+								</div><!-- fin mot de passe -->
+
+							</div><!-- Fin contenu card -->
+							<div id="result"></div><!-- Retour de l'erreur en json -->
+							<div class="card-action  center-align bouton-connection">
+								<input class="btn connexion" type="submit" value="Se connecter" />
+							</div>
+							<div id="socialmedia">
+								<?php
 								include('socialmedia.php');
-							?>
-						</div>
-				        </form>
-				    </div>
+								?>
+							</div>
+						</form>
+					</div>
 				    <!-- Fin formulaire -->
 			        <p class="connexion"><a href="inscription.php" class="left">S'inscrire</a><a href="recuperation.php" class="right">Mot de passe oublié</a></p>
 		      	</div>
@@ -463,7 +478,7 @@ include_once '../model/db.php';
 	            echo "</ul>";
 	            }
 	        else
-	        	echo "<div id='noFormation'>Vous n'avez pas encore renseigné votre formation !</div></ br><a class='right-align' href='gestion.php'>Page gestion du profil</a>";
+	        	echo "<div id='noFormation'>Vous n'avez pas encore renseigné votre formation !</div></br><a class='right-align' href='gestion.php'>Page gestion du profil</a>";
         }
 
 
