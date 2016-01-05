@@ -16,9 +16,10 @@
 
     $pageController -> controlConnexion();
     $pageController -> controlDocuments();
-  include(dirname(__FILE__).'/../model/documentsmodel.php');
+    include(dirname(__FILE__).'/../model/documentsmodel.php');
 
-  $studentsGroup = getStudentsGroup();
+    $studentsGroup = getStudentsGroup();
+    //print_r($studentsGroup);
 ?>
   <!DOCTYPE html>
   <html>
@@ -41,6 +42,7 @@
 
                         <?php
                             $description = null;
+                            $student_group = null;
                             for ($i = 0 ; $i < count($studentsGroup) ; $i++)
                             {
                         ?>
@@ -50,7 +52,8 @@
                                     <li><?php echo $studentsGroup[$i]['description']?></li>
                             <?php }
                                 $description = $studentsGroup[$i]['description'];
-                                if ($studentsGroup[$i]['student_group'] != 0) { ?>
+                                if ($studentsGroup[$i]['student_group'] != $student_group && $studentsGroup[$i]['student_group'] != 0) {
+                                    $student_group = $studentsGroup[$i]['student_group']; ?>
                                     <li><a id="form-<?php echo $studentsGroup[$i]['training_id'];?>_group-<?php echo $studentsGroup[$i]['student_group'];?>" href="#" onclick="actualiserTrombi(<?php echo $studentsGroup[$i]['training_id'];?>, <?php echo $studentsGroup[$i]['student_group'];?>)">Groupe <?php echo $studentsGroup[$i]['student_group'];?></a></li>
                             </ul>
                         <?php
