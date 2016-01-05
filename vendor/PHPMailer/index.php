@@ -8,7 +8,7 @@ require './PHPMailerAutoload.php';
 //Create a new PHPMailer instance
 $mail = new PHPMailer;
 //Set who the message is to be sent from
-$mail->setFrom('dydynaruto@hotmail.fr', 'First Last');
+$mail->setFrom('noreply@zenetude.esy.es', 'First Last');
 //Set an alternative reply-to address
 /*$mail->addReplyTo('replyto@example.com', 'First Last');*/
 //Set who the message is to be sent to

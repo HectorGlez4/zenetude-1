@@ -6,5 +6,3 @@
     include_once( '../model/db.php');
     $accountController = new AccountController();
     $accountController->controlInscription();
-
-

@@ -128,65 +128,73 @@
 		}
 
 		public function uploadPhoto(){
+			$accountmodel = new AccountModel();
 			if (isset($_FILES['student_avatar'])) {
-	            $maxsize = 5000000000;
-	            $maxwidth = 1024;
-	            $maxheight = 1024;
-	            $extensions_valides = array( 'jpg' , 'jpeg' , 'gif' , 'png' );
-	            $extension_upload = strtolower(  substr(  strrchr($_FILES['student_avatar']['name'], '.')  ,1)  );
-	            //$image_sizes = getimagesize($_FILES['student_avatar']['tmp_name']);
+	            $maxsize = 2097152;
+				$extensions_valides =  array('gif','png' ,'jpg', 'jpeg');
+				$filename = $_FILES['student_avatar']['name'];
+				$ext = pathinfo($filename, PATHINFO_EXTENSION);
+				$extension_upload = strtolower(  substr(  strrchr($_FILES['student_avatar']['name'], '.')  ,1)  );
 
-	            if ($_FILES['student_avatar']['error'] > 0) echo "Erreur lors du transfert";
-	            if ($_FILES['student_avatar']['size'] > $maxsize) echo "Le fichier est trop gros";
-	            if ( in_array($extension_upload,$extensions_valides) ) echo "Extension correcte";
-	            //if ($image_sizes[0] > $maxwidth OR $image_sizes[1] > $maxheight) echo "Image trop grande";
+			if ($_FILES['student_avatar']['error'] > 0) {
+					echo 'error';
+				} elseif (($_FILES['student_avatar']['size'] >= $maxsize) || ($_FILES["student_avatar"]["size"] == 0)) {
+					echo 'erreur size';
+				}
+				elseif (!in_array($ext,$extensions_valides)) {
+					echo 'erreur extension';
+				}
 
-	            $fichier='../../img/avatar/'.$_SESSION['infoStudent']['student_id'].".$extension_upload";
-	            $session = $_SESSION['infoUser']['user_id'];
-	            $resultat = move_uploaded_file($_FILES['student_avatar']['tmp_name'],$fichier);
-	            if ($resultat) {
-	            	$db = connect();
-	            	$update = $db->query("UPDATE Student SET student_avatar = '$fichier' where user_id = '$session'");
-	            	$_SESSION['infoStudent']['student_avatar'] = $fichier;
+				else {
+		            $fichier='../../img/avatar/'.$_SESSION['infoStudent']['student_id'].".$extension_upload";
+		            $session = $_SESSION['infoUser']['user_id'];
+		            $resultat = move_uploaded_file($_FILES['student_avatar']['tmp_name'],$fichier);
+		            if ($resultat) {
+		            	$accountmodel -> addAvatar($fichier, $session);
+		            	$_SESSION['infoStudent']['student_avatar'] = $fichier;
+		            }
 	            }
         	}
         }
 
         public function uploadTrombi(){
+        	$accountmodel = new AccountModel();
 			if (isset($_FILES['student_trombi'])) {
-	            $maxsize = 5000000000;
-	            $maxwidth = 1024;
-	            $maxheight = 1024;
-	            $extensions_valides = array( 'jpg' , 'jpeg' , 'gif' , 'png' );
-	            $extension_upload = strtolower(  substr(  strrchr($_FILES['student_trombi']['name'], '.')  ,1)  );
-	            //$image_sizes = getimagesize($_FILES['student_trombi']['tmp_name']);
+	            $maxsize = 2097152;
+				$extensions_valides =  array('gif','png' ,'jpg', 'jpeg');
+				$filename = $_FILES['student_trombi']['name'];
+				$ext = pathinfo($filename, PATHINFO_EXTENSION);
+				$extension_upload = strtolower(  substr(  strrchr($_FILES['student_trombi']['name'], '.')  ,1)  );
 
-	            if ($_FILES['student_trombi']['error'] > 0) echo "Erreur lors du transfert";
-	            if ($_FILES['student_trombi']['size'] > $maxsize) echo "Le fichier est trop gros";
-	            if ( in_array($extension_upload,$extensions_valides) ) echo "Extension correcte";
-	            //if ($image_sizes[0] > $maxwidth OR $image_sizes[1] > $maxheight) echo "Image trop grande";
+			if ($_FILES['student_trombi']['error'] > 0) {
+					echo 'error';
+				} elseif (($_FILES['student_trombi']['size'] >= $maxsize) || ($_FILES["student_trombi"]["size"] == 0)) {
+					echo 'erreur size';
+				}
+				elseif (!in_array($ext,$extensions_valides)) {
+					echo 'erreur extension';
+				}
 
-	            $fichier='../../img/trombinoscope/'.uniqid().".$extension_upload";
-	            $session = $_SESSION['infoUser']['user_id'];
-	            $resultat = move_uploaded_file($_FILES['student_trombi']['tmp_name'],$fichier);
-	            if ($resultat) {
-	            	$db = connect();
-	            	$update = $db->query("UPDATE Student SET student_trombi = '$fichier' where user_id = '$session'");
-	            	$_SESSION['infoStudent']['student_trombi'] = $fichier;
+				else {
+		            $fichier='../../img/trombi/'.$_SESSION['infoStudent']['student_id'].".$extension_upload";
+		            $session = $_SESSION['infoUser']['user_id'];
+		            $resultat = move_uploaded_file($_FILES['student_trombi']['tmp_name'],$fichier);
+		            if ($resultat) {
+		            	$accountmodel -> addTrombi($fichier, $session);
+		            	$_SESSION['infoStudent']['student_trombi'] = $fichier;
+		            }
 	            }
         	}
         }
 
 		public function modifyPassword() {
-			include_once('./accountview.php');
 			$accountView = new AccountView();
+			$accountmodel = new AccountModel();
+			include_once('./accountview.php');
 			if (!empty($_POST['old_user_password']) && !empty($_POST['new_user_password']) && !empty($_POST['confirm_new_user_password'])) {
 				$session = $_SESSION['infoUser']['user_id'];
-				$db = connect();
-				$request = $db->prepare('SELECT user_password FROM User WHERE user_id = '.$session);
-	      		$request->execute();
-	        	$mdp = $request->fetch();
 
+	        	$mdp = $accountmodel -> getUserPassword($session);
 
 				$old_user_password=$_POST['old_user_password'];
 				$new_user_password=$_POST['new_user_password'];
@@ -198,7 +206,7 @@
 					$accountView->showMessage("Mot de passe non identique");
 				else {
 					$crypt_new_user_password = sha1($new_user_password);
-					$update = $db->query("UPDATE User SET user_password = '$crypt_new_user_password' where user_id = '$session'");
+					$accountmodel -> updateUserPassword($crypt_new_user_password, $session);
 				}
 			}
 		}

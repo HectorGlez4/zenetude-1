@@ -7,6 +7,8 @@ include(dirname(__FILE__).'/../model/documentsmodel.php');
 $students = getStudentsByTrainingGroup($formation,$groupe);
 $ns = count($students);
 
+//var_dump($students);
+
 //include(dirname(__FILE__).'/students.php');
 ?>
 
