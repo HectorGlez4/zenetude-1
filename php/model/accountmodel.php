@@ -47,12 +47,25 @@
 			* Get all informations of a user selected by its mail and its password. 
 			* This function is used for test connection for now if a password exits for a mail in the datebase.
 		**/
-        public function getUserPassword($userMail, $userPassword) {
+        public function getUserByPassword($userMail, $userPassword) {
             $db = connect();
             $request = $db->query('SELECT * FROM User WHERE user_instituteemail = "'.$userMail.'" AND user_password = "'.$userPassword.'"');
             $result = $request->fetch();
             return $result;
         }
+
+        /**
+         * Get the user password
+         **/
+
+        public function getUserPassword($session) {
+            $db = connect();
+            $request = $db->prepare('SELECT user_password FROM User WHERE user_id = '.$session);
+            $request->execute();
+            $result = $request->fetch();
+            return $result;
+        }
+
         /**
          * Get the user email to check if it's already on the database.
          **/
@@ -212,6 +225,33 @@
                                       WHERE S.training_id = T.training_id AND
                                       T.training_manager_id = TM.training_manager_id AND
                                       TM.user_id = U.user_id AND S.user_id ='.$_SESSION['infoUser']['user_id']);
+            $request->execute();
+            $result = $request->fetch();
+
+            return $result;
+        }
+
+        public function addAvatar($fichier, $session){
+            $db = connect();
+            $request = $db->prepare("UPDATE Student SET student_avatar = '$fichier' where user_id = '$session'");
+            $request->execute();
+            $result = $request->fetch();
+
+            return $result;
+        }
+
+        public function addTrombi($fichier, $session){
+            $db = connect();
+            $request = $db->prepare("UPDATE Student SET student_trombi = '$fichier' where user_id = '$session'");
+            $request->execute();
+            $result = $request->fetch();
+
+            return $result;
+        }
+
+        public function updateUserPassword($password, $session){
+            $db = connect();
+            $request = $db->prepare("UPDATE User SET user_password = '$password' where user_id = '$session'");
             $request->execute();
             $result = $request->fetch();
 

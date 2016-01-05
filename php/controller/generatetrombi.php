@@ -17,12 +17,18 @@
         //$html2pdf->pdf->SetProtection(array('print'), 'spipu');
         $html2pdf->writeHTML($content, isset($_GET['vuehtml']));
         $html2pdf->Output('../view/trombinoscope.pdf', 'F');
+        header('Cache-Control: no-cache, must-revalidate');
+   	    header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+        header('Content-type: application/json');
         echo json_encode([
             'message' => "success",
             'success' => true
         ]);
     }
     catch(HTML2PDF_exception $e) {
+		header('Cache-Control: no-cache, must-revalidate');
+   	    header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+        header('Content-type: application/json');
         echo json_encode([
             'message' => "erreur",
             'success' => false
