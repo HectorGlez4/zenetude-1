@@ -27,7 +27,7 @@
                 $accountModel = new AccountModel();
                 $_POST['mail'] = htmlspecialchars($_POST['mail']);
                 $_POST['pass'] = htmlspecialchars(sha1($_POST['pass']));
-                if ($userResult = $accountModel -> getUserPassword($_POST['mail'],  $_POST['pass'])){
+                if ($userResult = $accountModel -> getUserByPassword($_POST['mail'],  $_POST['pass'])){
                     //session_start();
                     $_SESSION['infoUser'] = $userResult;
                  
