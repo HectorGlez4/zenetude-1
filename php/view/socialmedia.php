@@ -98,7 +98,6 @@
 	define('CONSUMER_SECRET', 'BEGyzam5iYaaBTKc7KaunoEEZFk7QNG9FSJOe4vXKr0gQ2Q19T');
 	define('OAUTH_CALLBACK', 'http://zenetude.esy.es/php/view/index.php');
 
-
 	if(isset($_GET['logout'])){
 		//unset the session
 		session_unset();
@@ -109,17 +108,41 @@
 	// 2. if user session not enabled get the login url
 	if(!isset($_SESSION['data']) && !isset($_GET['oauth_token'])) {
 		// create a new twitter connection object
-		$connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET);
+
+
+
+
+        try{
+		    $connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET);
+        }catch (OAuthException $e){
+            $e->getMessage();
+        }
+
+
+
+
+
+
+        try{
+
 		// get the token from connection object
 		$request_token = $connection->getRequestToken(OAUTH_CALLBACK);
+        var_dump($request_token);
+
+        }catch (OAuthException $e){
+            $e->getMessage();
+        }
+
+
 		// if request_token exists then get the token and secret and store in the session
-		if($request_token){
+		if(isset($request_token)){
 			$token = $request_token['oauth_token'];
 			$_SESSION['request_token'] = $token ;
 			$_SESSION['request_token_secret'] = $request_token['oauth_token_secret'];
 			// get the login url from getauthorizeurl method
 			$login_url = $connection->getAuthorizeURL($token);
-		}
+
+        }
 	}
 	// 3. if its a callback url
 	if(isset($_GET['oauth_token'])){
@@ -129,7 +152,7 @@
 		$access_token = $connection->getAccessToken($_REQUEST['oauth_verifier']);
 		if($access_token){
 			// create another connection object with access token
-			$connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $access_token['oauth_token'], $access_token	['oauth_token_secret']);
+			$connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $access_token['oauth_token'], $access_token['oauth_token_secret']);
 			// set the parameters array with attributes include_entities false
 			$params = array('include_entities'=>'true', 'include_email'=>'true');
 			// get the data
@@ -148,6 +171,7 @@
 	if(isset($login_url) && !isset($_SESSION['data'])){
 		echo '<a id="twitterimg" href="'.$login_url.'"><img src="../../img/TwitterLogo.png" alt="Se connecter avec Twitter" ></a>';
 	}
+
 	//__________________________________________END TWITTER___________________________________
 	//__________________________________________BEGIN GOOGLE +___________________________________
 
