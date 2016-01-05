@@ -447,7 +447,7 @@ include_once '../model/db.php';
 	            echo "</ul>";
 	            }
 	        else
-	        	echo "<div id='noFormation'>Vous n'avez pas encore renseigné votre formation !</div></ br><a class='right-align' href='gestion.php'>Page gestion du profil</a>";
+	        	echo "<div id='noFormation'>Vous n'avez pas encore renseigné votre formation !</div></br><a class='right-align' href='gestion.php'>Page gestion du profil</a>";
         }
 
 
