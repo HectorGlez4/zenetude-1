@@ -125,7 +125,7 @@
             //$mailer->Subject ="Subject: =?UTF-8?B?".base64_encode("Réinitialisation du mot de passe | Zenetude")."?=";
             $mailer->Body = $body;
             if(!$mailer->Send())
-                $accountView->showMessage("Une erreur est survenue !");
+                $accountView->showMessage("erreur mot de passe !");
             else
                 $accountView->showMessage("Votre mot de passe a été réinitialisé. Un message contenant le nouveau mot de passe vous à été envoyé.","ok","index.php");
 		}
@@ -133,9 +133,9 @@
 		/**
 			* Add a new user to the database.
 		**/
-        public function addUser($userMail, $userPassword) {
+        public function addUser($userMail, $userfirstname, $userlastname, $userPassword) {
             $db = connect();
-            $request = $db->query('INSERT INTO User (user_password, user_instituteemail) VALUES ("'.$userPassword.'", "'.$userMail.'")');
+            $request = $db->query('INSERT INTO User (user_password, user_firstname, user_name, user_instituteemail) VALUES ("'.$userPassword.'", "'.$userfirstname.'", "'.$userlastname.'", "'.$userMail.'")');
             $request0 = $db->query("SELECT user_id FROM User WHERE user_instituteemail = '$userMail'");
             $result0 = $request0->fetch();
             $id = $result0[0];
@@ -168,7 +168,7 @@
             //$mailer->Subject =/*"Subject: =?UTF-8?B?".*/base64_encode("Inscription au site Zenetude");
             $mailer->Body = $body;
             if(!$mailer->Send())
-                $accountView->showMessage("Une erreur est survenue !");
+                $accountView->showMessage("Erreur d'envoie du mail !");
             else
                 $accountView->showMessage("Inscription terminée.","ok","index.php");
         }

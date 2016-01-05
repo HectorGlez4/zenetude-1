@@ -26,6 +26,22 @@ include_once '../model/db.php';
 			            	</div>
 			          	</div><!-- fin email -->
 
+			          		<!-- Nom -->
+			          	<div class="row">
+			       	 		<div class="input-field col s12">
+			              		<input id="lastname" type="text" class="validate" name="lastname" required="required">
+			             	 	<label for="lastname">Nom <em>*</em></label>
+			            	</div>
+			          	</div><!-- Nom -->
+
+			          		<!-- Prenom -->
+			          	<div class="row">
+			       	 		<div class="input-field col s12">
+			              		<input id="firstname" type="text" class="validate" name="firstname" required="required">
+			             	 	<label for="firstname">Prénom <em>*</em></label>
+			            	</div>
+			          	</div><!-- Prenom -->
+
 				          <!-- mot de passe -->
 			          	<div class="row">
 				            <div class="input-field col s12">
