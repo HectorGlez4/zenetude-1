@@ -46,7 +46,7 @@
                         ?>
                             <ul>
                             <?php
-                                if ($description != $studentsGroup[$i]['description'] && $studentsGroup[$i]['student_group'] != 0) { ?>
+                                if ($description != $studentsGroup[$i]['description'] && $studentsGroup[$i]['student_group'] !== 0) { ?>
                                     <li><?php echo $studentsGroup[$i]['description']?></li>
                             <?php }
                                 $description = $studentsGroup[$i]['description'];
