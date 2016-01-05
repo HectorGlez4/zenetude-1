@@ -216,8 +216,8 @@ header('Location: profil.php');
                                     <?php if (!$rf){ ?>
                                         <label for="student_avatar">Avatar</label><br />
                                         <input type='file' class="form-control" name='student_avatar' /><br />
-                                        <!-- <label for="student_trombi">Photo du trombinoscope</label><br />
-                                        <input type='file' class="form-control" name='student_avatar' /><br /> -->
+                                        <label for="student_trombi">Photo du trombinoscope</label><br />
+                                        <input type='file' class="form-control" name='student_avatar' /><br />
                                         <label for="">Modifier mot de passe</label>
                                         <input type='password' placeholder="Ancien mot de passe" class="form-control" name='old_user_password' />
                                         <input type='password' placeholder="Nouveau mot de passe" class="form-control" name='new_user_password' />
