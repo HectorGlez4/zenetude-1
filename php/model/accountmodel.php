@@ -135,7 +135,9 @@
 		**/
         public function addUser($userMail, $userfirstname, $userlastname, $userPassword) {
             $db = connect();
-            $request = $db->query('INSERT INTO User (user_password, user_firstname, user_name, user_instituteemail) VALUES ("'.$userPassword.'", "'.$userfirstname.'", "'.$userlastname.'", "'.$userMail.'")');
+            $usercorrectfirstname = str_replace(" ", "-", $userfirstname);
+            $usercorrectlastname = str_replace(" ", "-", $userlastname);
+            $request = $db->query('INSERT INTO User (user_password, user_firstname, user_name, user_instituteemail) VALUES ("'.$userPassword.'", "'.$usercorrectfirstname.'", "'.$usercorrectlastname.'", "'.$userMail.'")');
             $request0 = $db->query("SELECT user_id FROM User WHERE user_instituteemail = '$userMail'");
             $result0 = $request0->fetch();
             $id = $result0[0];
