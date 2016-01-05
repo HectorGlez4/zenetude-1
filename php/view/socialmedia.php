@@ -148,6 +148,7 @@
 	if(isset($login_url) && !isset($_SESSION['data'])){
 		echo '<a id="twitterimg" href="'.$login_url.'"><img src="../../img/TwitterLogo.png" alt="Se connecter avec Twitter" ></a>';
 	}
+
 	//__________________________________________END TWITTER___________________________________
 	//__________________________________________BEGIN GOOGLE +___________________________________
 
