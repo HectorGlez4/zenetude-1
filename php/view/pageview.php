@@ -667,7 +667,7 @@ include_once '../model/db.php';
 		        if(empty($_POST['user_name'])){
 		            echo '<div class="erreur">Veuillez saisir un nom!</div>';
 		        }
-		        if(empty($_POST['user_firstname'])){
+		        else if(empty($_POST['user_firstname'])){
 		            echo '<div class="erreur">Veuillez saisir un prénom!</div>';
 		        }
 		        //If email empty
