@@ -182,7 +182,7 @@ header('Location: profil.php');
 
         ?>
 
-            
+        <div id="filtre"></div>    
         <div class="container">
 
             <div class="row">

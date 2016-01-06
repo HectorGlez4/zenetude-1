@@ -24,6 +24,7 @@
       $pageController -> controlHeader();
       $pageController -> controlDynamicMenu();
       ?>
+    <div id="filtre"></div>
     <!-- CONTAINER -->
     <div class="container-fluid">
 

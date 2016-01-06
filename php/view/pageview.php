@@ -210,7 +210,7 @@ include_once '../model/db.php';
 		**/
 		public function showHeader($connect) {
 			if(!$connect) {?>
-			<nav>
+			<nav id="nav">
 	 		 	<div class="nav-wrapper">
 				    <a href="./index.php" class="brand-logo"><img class="logo-svg" src="../../img/logo.svg" alt="logo du site"></a>
 				    <img src="../../img/name.png" alt="Zenetude, titre du site">
@@ -220,7 +220,7 @@ include_once '../model/db.php';
 			}
 			else {
 			?>
-			<nav>
+			<nav id="nav">
 	 		 	<div class="nav-wrapper">
 				    <a href="./index.php" class="brand-logo"><img class="logo-svg" src="../../img/logo.svg" alt="logo du site"></a>
 				    <img src="../../img/name.png" alt="Zenetude, titre du site">
