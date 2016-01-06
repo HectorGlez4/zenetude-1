@@ -2,6 +2,7 @@
     error_reporting(E_ALL);
     require '../../vendor/autoload.php';
     require '../../vendor/PHPMailer/PHPMailerAutoload.php';
+    include_once '../model/ademodel.php';
     include_once '../model/db.php';
     //Set default timezone
     date_default_timezone_set('Europe/Paris');
@@ -93,12 +94,7 @@
                 //Set an alternative reply-to address
                 /*$mail->addReplyTo('replyto@example.com', 'First Last');*/
                 //Connect to database
-                $db = connect();         
-            
-                //$request = $db -> prepare('SELECT user_instituteemail FROM User WHERE user_firstname = "dylan" AND user_name = "prudhomme"');
-                $request = $db -> prepare('SELECT user_instituteemail FROM User WHERE user_firstname = "'. $first_name . '" AND user_name = "' . $last_name . '"');
-                $request -> execute();
-                $results = $request -> fetchAll();
+                $results->recupEmailRf($first_name, $last_name);
                 foreach ($results as $result) {
                     //Save mail receive
                     $mailbd = $result[0];
