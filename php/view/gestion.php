@@ -35,8 +35,8 @@ $result4 = $request->fetch();
 
 
 
-if (isset($_POST['student_update']) ) //SI LE FORMULAIRE A ETE ENVOYE
-{
+    if (isset($_POST['student_update']) ) //SI LE FORMULAIRE A ETE ENVOYE
+    {
 
     $pageController -> uploadPhoto();
     $pageController -> uploadTrombi();
@@ -74,47 +74,49 @@ if (isset($_POST['student_update']) ) //SI LE FORMULAIRE A ETE ENVOYE
         $result3 = $request->fetchAll();
         $training_id = $result3[0][0];
     }
-    if(!$rf)
-        $values = array($user_name,
-            $user_firstname,
-            $user_civility,
-            $student_personalemail,
-            $student_phone,
-            $student_mobile,
-            $student_address1,
-            $student_address2,
-            $student_zipcode,
-            $student_city,
-            $student_country,
-            $student_nationality,
-            $student_birthday,
-            $student_birtharea,
-            $student_birthcountry,
-            $student_status,
-            $student_educationallevel,
-            $student_origin,
-            $student_comment,
-            $student_group,
-            $student_birthcity,
-            $training_id,
-            $student_educationallevel,
-            $student_grantholder
-            );
+
+    if(!$rf){
+        $values = array(htmlspecialchars($user_name),
+                        htmlspecialchars($user_firstname),
+                        htmlspecialchars($user_civility),
+                        htmlspecialchars($student_personalemail),
+                        htmlspecialchars($student_phone),
+                        htmlspecialchars($student_mobile),
+                        htmlspecialchars($student_address1),
+                        htmlspecialchars($student_address2),
+                        htmlspecialchars($student_zipcode),
+                        htmlspecialchars($student_city),
+                        htmlspecialchars($student_country),
+                        htmlspecialchars($student_nationality),
+                        htmlspecialchars($student_birthday),
+                        htmlspecialchars($student_birtharea),
+                        htmlspecialchars($student_birthcountry),
+                        htmlspecialchars($student_status),
+                        htmlspecialchars($student_educationallevel),
+                        htmlspecialchars($student_origin),
+                        htmlspecialchars($student_comment),
+                        htmlspecialchars($student_group),
+                        htmlspecialchars($student_birthcity),
+                        htmlspecialchars($training_id),
+                        htmlspecialchars($student_educationallevel),
+                        htmlspecialchars($student_grantholder)
+                        );
+    }
     else
         $values = array($user_name,
-            $user_firstname,
-            $user_civility);
+                        $user_firstname,
+                        $user_civility);
 
-    foreach ($values as $key => $value) {
-        if (empty($value)) {
-            $values[$key] = null;
-        } else {
-            $values[$key] = $value;
+        foreach ($values as $key => $value) {
+            if (empty($value)) {
+                $values[$key] = null;
+            } else {
+                $values[$key] = $value;
+            }
         }
-    }
-
-    if(!$rf)
-        $update = $db->query("UPDATE Student SET 
+    if(!$rf){
+        if ($_SESSION['infoTraining']['training_max_group'] >= $values[19] ) {
+            $update = $db->query("UPDATE Student SET 
             student_personalemail = '$values[3]',
             student_phone = '$values[4]',
             student_mobile = '$values[5]',
@@ -137,42 +139,44 @@ if (isset($_POST['student_update']) ) //SI LE FORMULAIRE A ETE ENVOYE
             student_educationallevel = '$values[22]',
             student_grantholder = '$values[23]'
             WHERE user_id='$idUser'");
+        }
+    }
 
-$update2 = $db->query("UPDATE User SET
+    $update2 = $db->query("UPDATE User SET
     user_name = '$values[0]',
     user_firstname = '$values[1]',
     user_civility = '$values[2]'
     WHERE user_id='$idUser'");
 
-if(!$rf){
-    $_SESSION['infoStudent']['student_personalemail'] = $values[3];
-    $_SESSION['infoStudent']['student_phone'] = $values[4];
-    $_SESSION['infoStudent']['student_mobile'] = $values[5];
-    $_SESSION['infoStudent']['student_address1'] = $values[6];
-    $_SESSION['infoStudent']['student_address2'] = $values[7];
-    $_SESSION['infoStudent']['student_zipcode'] = $values[8];
-    $_SESSION['infoStudent']['student_city'] = $values[9];
-    $_SESSION['infoStudent']['student_country'] = $values[10];
-    $_SESSION['infoStudent']['student_nationality'] = $values[11];
-    $_SESSION['infoStudent']['student_birthdate'] = $values[12];
-    $_SESSION['infoStudent']['student_birtharea'] = $values[13];
-    $_SESSION['infoStudent']['student_birthcountry'] = $values[14];
-    $_SESSION['infoStudent']['student_status'] = $values[15];
-    $_SESSION['infoStudent']['student_educationallevel'] = $values[16];
-    $_SESSION['infoStudent']['student_origin'] = $values[17];
-    $_SESSION['infoStudent']['student_comment'] = $values[18];
-    $_SESSION['infoStudent']['student_group'] = $values[19];
-    $_SESSION['infoStudent']['student_birthcity'] = $values[20];
-    $_SESSION['infoStudent']['training_id'] = $values[21];
-    $_SESSION['infoStudent']['student_educationallevel'] = $values[22];
-    $_SESSION['infoStudent']['student_grantholder'] = $values[23];
-}
-$_SESSION['infoUser']['user_name'] = $values[0];
-$_SESSION['infoUser']['user_firstname'] = $values[1];
-$_SESSION['infoUser']['user_civility'] = $values[2];
+    if(!$rf){
+        $_SESSION['infoStudent']['student_personalemail'] = $values[3];
+        $_SESSION['infoStudent']['student_phone'] = $values[4];
+        $_SESSION['infoStudent']['student_mobile'] = $values[5];
+        $_SESSION['infoStudent']['student_address1'] = $values[6];
+        $_SESSION['infoStudent']['student_address2'] = $values[7];
+        $_SESSION['infoStudent']['student_zipcode'] = $values[8];
+        $_SESSION['infoStudent']['student_city'] = $values[9];
+        $_SESSION['infoStudent']['student_country'] = $values[10];
+        $_SESSION['infoStudent']['student_nationality'] = $values[11];
+        $_SESSION['infoStudent']['student_birthdate'] = $values[12];
+        $_SESSION['infoStudent']['student_birtharea'] = $values[13];
+        $_SESSION['infoStudent']['student_birthcountry'] = $values[14];
+        $_SESSION['infoStudent']['student_status'] = $values[15];
+        $_SESSION['infoStudent']['student_educationallevel'] = $values[16];
+        $_SESSION['infoStudent']['student_origin'] = $values[17];
+        $_SESSION['infoStudent']['student_comment'] = $values[18];
+        $_SESSION['infoStudent']['student_group'] = $values[19];
+        $_SESSION['infoStudent']['student_birthcity'] = $values[20];
+        $_SESSION['infoStudent']['training_id'] = $values[21];
+        $_SESSION['infoStudent']['student_educationallevel'] = $values[22];
+        $_SESSION['infoStudent']['student_grantholder'] = $values[23];
+    }
+    $_SESSION['infoUser']['user_name'] = $values[0];
+    $_SESSION['infoUser']['user_firstname'] = $values[1];
+    $_SESSION['infoUser']['user_civility'] = $values[2];
 
-header('Location: profil.php');
-}
+    header('Location: profil.php');
+    }
 
 ?>
 <!DOCTYPE html>
@@ -180,12 +184,12 @@ header('Location: profil.php');
     <body>
 
         <?php
-        $pageView -> showHead();
-        $pageController -> controlHeader();
-        $pageController -> controlDynamicMenu();
-
+            $pageView -> showHead();
+            $pageController -> controlHeader();
+            $pageController -> controlDynamicMenu();
         ?>
 
+        <div id="filtre"></div>
 
         <div class="container">
             <div class="row">
@@ -223,11 +227,11 @@ header('Location: profil.php');
                                 <div class="row">
                                     <div class="col s6">
                                         <label for="">Telephone</label>
-                                        <input type="tel" pattern = '[0-9]{10}' placeholder ='+33 (ex : 477845989)' maxlength = '10' class="form-control" value="<?php echo $result[5]; ?>" name="student_phone">
+                                        <input type="tel" pattern = '[0-9]{10}' placeholder ='0412345678' maxlength = '10' class="form-control" value="<?php echo $result[5]; ?>" name="student_phone">
                                     </div>
                                     <div class="col s6">
                                         <label for="">Portable</label>
-                                        <input type="tel" pattern = '[0-9]{10}' placeholder ='+33 (ex : 677845989)' maxlength = '10' class="form-control" value="<?php echo $result[6]; ?>" name="student_mobile">
+                                        <input type="tel" pattern = '[0-9]{10}' placeholder ='0612345678' maxlength = '10' class="form-control" value="<?php echo $result[6]; ?>" name="student_mobile">
                                     </div>
                                 </div>
                                 <div class="row">

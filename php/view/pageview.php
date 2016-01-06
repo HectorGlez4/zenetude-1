@@ -106,6 +106,21 @@ include_once '../model/db.php';
 		   });
 		 });
 
+//		$('.datepicker').pickadate({
+//			labelMonthNext: 'Mois suivant',
+//			labelMonthPrev: 'Mois précédent',
+//			labelMonthSelect: 'Selectionner le mois',
+//			labelYearSelect: "Selectionner l'annee",
+//			monthsFull: [ 'Janvier', 'Febrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre' ],
+//			monthsShort: [ 'Jan', 'Feb', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sep', 'Oct', 'Nov', 'Dec' ],
+//			weekdaysFull: [ 'Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi' ],
+//			weekdaysShort: [ 'Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam' ],
+//			weekdaysLetter: [ 'D', 'L', 'M', 'M', 'J', 'V', 'S' ],
+//			today: "Aujourd'hui",
+//			clear: 'Effacer',
+//			close: 'Fermer'
+//		});
+
 		window.onload=ajuste;
 			function ajuste(){
 			document.getElementById('aside1').style.minHeight=document.getElementById('bloc1').offsetHeight+"px";
@@ -226,7 +241,7 @@ include_once '../model/db.php';
 		**/
 		public function showHeader($connect) {
 			if(!$connect) {?>
-			<nav>
+			<nav id="nav">
 	 		 	<div class="nav-wrapper">
 				    <a href="./index.php" class="brand-logo"><img class="logo-svg" src="../../img/logo.svg" alt="logo du site"></a>
 				    <img src="../../img/name.png" alt="Zenetude, titre du site">
@@ -236,7 +251,7 @@ include_once '../model/db.php';
 			}
 			else {
 			?>
-			<nav>
+			<nav id="nav">
 	 		 	<div class="nav-wrapper">
 				    <a href="./index.php" class="brand-logo"><img class="logo-svg" src="../../img/logo.svg" alt="logo du site"></a>
 				    <img src="../../img/name.png" alt="Zenetude, titre du site">
@@ -284,44 +299,44 @@ include_once '../model/db.php';
 			if(!$connect) {?>
 			<div class="col s12 m4">
 		        <div class="card-panel teal" id="aside1">
-		          <div class="card-header"> <h2>Connexion</h2></div>
+					<div class="card-header"> <h2>Connexion</h2></div>
 
-                  	<!-- Formulaire -->
-	                  <div class="formula">
-				        <form id="formula" class="col s10 push-s1" action="connexion.php" method="POST">
-				
-				
-				          <!-- Contenu card -->
-				         <div >
-				
-				          <!-- email -->
-				          <div class="row">
-				            <div class="input-field col s12">
-				              <input id="email" type="email" class="validate" name="mail">
-				              <label for="email">Email</label>
-				            </div>
-				          </div><!-- fin email -->
-				
-				          <!-- mot de passe -->
-				          <div class="row">
-				            <div class="input-field col s12">
-				              <input id="passe" type="password" class="validate" name="pass">
-				              <label for="passe">Mot de passe</label>
-				            </div>
-				          </div><!-- fin mot de passe -->
-				
-				        </div><!-- Fin contenu card -->
-						<div id="result"></div><!-- Retour de l'erreur en json -->
-				        <div class="card-action  center-align bouton-connection">
-					        <input class="btn connexion" type="submit" value="Se connecter" />
-				        </div>
-				        <div id="socialmedia">
-							<?php
+					<!-- Formulaire -->
+					<div class="formula">
+						<form id="formula" class="col s10 push-s1" action="connexion.php" method="POST">
+
+
+							<!-- Contenu card -->
+							<div>
+
+								<!-- email -->
+								<div class="row">
+									<div class="input-field col s12">
+										<input id="email" type="email" class="validate" name="mail">
+										<label for="email">Email</label>
+									</div>
+								</div><!-- fin email -->
+
+								<!-- mot de passe -->
+								<div class="row">
+									<div class="input-field col s12">
+										<input id="passe" type="password" class="validate" name="pass">
+										<label for="passe">Mot de passe</label>
+									</div>
+								</div><!-- fin mot de passe -->
+
+							</div><!-- Fin contenu card -->
+							<div id="result"></div><!-- Retour de l'erreur en json -->
+							<div class="card-action  center-align bouton-connection">
+								<input class="btn connexion" type="submit" value="Se connecter" />
+							</div>
+							<div id="socialmedia">
+								<?php
 								include('socialmedia.php');
-							?>
-						</div>
-				        </form>
-				    </div>
+								?>
+							</div>
+						</form>
+					</div>
 				    <!-- Fin formulaire -->
 			        <p class="connexion"><a href="inscription.php" class="left">S'inscrire</a><a href="recuperation.php" class="right">Mot de passe oublié</a></p>
 		      	</div>
@@ -343,7 +358,7 @@ include_once '../model/db.php';
 			if(!$connect) {?>
 			<nav id="scroll-nav">
 		  		<div class="nav-wrapper">
-		    		<a href="" class="brand-logo"><img src="../../img/logo.svg" alt="logo du site"></a>
+		    		<a href="index.php" class="brand-logo"><img src="../../img/logo.svg" alt="logo du site"></a>
 		    		<img src="../../img/name.png" alt="Zenetude, titre du site">
 		 	 	</div>
 			</nav>
@@ -404,7 +419,7 @@ include_once '../model/db.php';
 			</nav>
 			<nav id="scroll-nav">
 		  		<div class="nav-wrapper">
-		    		<a href="" class="brand-logo"><img src="../../img/logo.svg" alt="logo du site"></a>
+		    		<a href="index.php" class="brand-logo"><img src="../../img/logo.svg" alt="logo du site"></a>
 		    		<img src="../../img/name.png" alt="Zenetude, titre du site">
 		    		<div id="hamburger" class="hamburglar is-closed">
 		    			<div class="burger-icon">
@@ -440,6 +455,44 @@ include_once '../model/db.php';
 			<?php
 			}
 		}
+
+		public function showRecuperation(){ ?>
+			<!-- CONTAINER -->
+			<div class="container container-fluid">
+
+			<div class="row">
+			  <!-- Debut card -->
+			  <div class="card-panel inscription col m4 push-m4 s12 center-align">
+				<!-- Formulaire -->
+				<form id="formula" class="col formulaire s10 push-s1" action="validationrecuperation.php" method="POST" onsubmit="">
+
+				  <!-- Titre de la carte -->
+				  <div class="card-header header-small"> <h2>Récupération de mot de passe</h2></div>
+				  <!-- Fin titre -->
+
+				  <!-- Contenu card -->
+				  <div class="card-content">
+
+				  <!-- email -->
+				  <div class="row">
+					<div class="input-field col s12">
+					  <input id="email" type="email" class="validate" name="mail" required="required">
+					  <label for="email">Entrer l'adresse email de récupération </label>
+					</div>
+				  </div><!-- fin email -->
+				  <div id="result"></div><!-- Retour de l'erreur en json -->
+				</div><!-- Fin contenu card -->
+
+				  <!-- bouton s'inscrire -->
+				  <div class="card-action bouton-connection">
+					<input class="btn center-align" type="submit" value="Valider" />
+				  </div>
+
+				</form><!-- Fin formulaire -->
+			  </div><!-- Fin card -->
+		  </div>
+		</div>
+		<?php }
 
 
         public function showContact($userInfos, $result){

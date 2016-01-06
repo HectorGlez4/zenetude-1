@@ -39,6 +39,26 @@ p {
   margin-top: 2px;
 }
 
+#zenetude img{
+  width: 85%;
+  height: 85%;
+}
+
+#community img{
+  width: 65%;
+  height: 65%;
+}
+
+#qui{
+  padding-top: 64px;
+  padding-bottom: 64px;
+}
+
+#zenetude{
+  padding-top: 64px;
+  padding-bottom: 64px;
+}
+
 @media only screen and (max-width : 992px) {
   .parallax-container .section {
     position: absolute;
@@ -64,7 +84,6 @@ p {
   padding: 0 15px;
 }
 .icon-block .material-icons {
-  font-size: inherit;
   color: #7bba42
 }
 
