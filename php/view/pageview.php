@@ -161,7 +161,9 @@ include_once '../model/db.php';
 		**/
 		public function showFooter() {
 			?>
-			<footer></footer>
+			<footer>
+				<p>Copyright &copy 2016 Licence Professionnelle Systèmes Informatiques et Logiciels et Développement et Administration Internet et Intranet. Tous droits réservés</p>
+			</footer>
 			<?php
 		}
 
@@ -209,6 +211,7 @@ include_once '../model/db.php';
 				<!--Import profil.css-->
 				<link type="text/css" rel="stylesheet" href="../../css/profil.css"/>
 
+				<link rel="stylesheet" type="text/css" href="../../css/index.css"/>
 
 				<!-- CALENDAR -->
 			  	<link rel="stylesheet" href="../../css/clndr.css" type="text/css" />
