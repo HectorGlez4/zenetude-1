@@ -713,20 +713,20 @@ include_once '../model/db.php';
                         $re = $select_training->fetch();
                         //if the trainer has responsability in formation, we do not change his type
                         if ($re){
-                            echo "<script>alert('de trainig mana a etud avec form');</script>";
-                            $modif = $db->query("UPDATE User SET user_name='".stripcslashes($_POST['user_name'])."',
-		            									 user_firstname='".stripcslashes($_POST['user_firstname'])."',
-		            									 user_instituteemail='".stripcslashes($_POST['email'])."'
-		            									 WHERE user_id=$id_register");
+
+                            $modif = $db->query('UPDATE User SET user_name="'.htmlspecialchars($_POST['user_name']).'",
+		            									 user_firstname="'.htmlspecialchars($_POST['user_firstname']).'",
+		            									 user_instituteemail="'.htmlspecialchars($_POST['email']).'"
+		            									 WHERE user_id='.$id_register.'');
                             $changementToRF = false;
 
                         }else{
-                            echo "<script>alert('de trainig mana a etud sans form');</script>";
-                            $modif = $db->query("UPDATE User SET user_name='".stripcslashes($_POST['user_name'])."',
-		            									 user_firstname='".stripcslashes($_POST['user_firstname'])."',
-		            									 user_instituteemail='".stripcslashes($_POST['email'])."',
-		            									 user_type='".stripcslashes($_POST['statut'])."'
-		            									 WHERE user_id=$id_register");
+
+                            $modif = $db->query('UPDATE User SET user_name="'.htmlspecialchars($_POST['user_name']).'",
+		            									 user_firstname="'.htmlspecialchars($_POST['user_firstname']).'",
+		            									 user_instituteemail="'.htmlspecialchars($_POST['email']).'",
+		            									 user_type="'.htmlspecialchars($_POST['statut']).'"
+		            									 WHERE user_id='.$id_register.'');
 
                             //else we can change his type
                             $modif1 = $db->query("DELETE FROM Training_manager WHERE user_id=$id_register") or die ('Erreur :'.$db->errorInfo());
@@ -738,21 +738,21 @@ include_once '../model/db.php';
 
                     }elseif($_POST['statut'] == "RF" && $statut_register == "Etudiant") {
 
-                        $modif = $db->query("UPDATE User SET user_name='".stripcslashes($_POST['user_name'])."',
-		            									 user_firstname='".stripcslashes($_POST['user_firstname'])."',
-		            									 user_instituteemail='".stripcslashes($_POST['email'])."',
-		            									 user_type='".stripcslashes($_POST['statut'])."'
-		            									 WHERE user_id=$id_register");
+                        $modif = $db->query('UPDATE User SET user_name="'.htmlspecialchars($_POST['user_name']).'",
+		            									 user_firstname="'.htmlspecialchars($_POST['user_firstname']).'",
+		            									 user_instituteemail="'.htmlspecialchars($_POST['email']).'",
+		            									 user_type="'.htmlspecialchars($_POST['statut']).'"
+		            									 WHERE user_id='.$id_register.'');
 
                         $modif1 = $db->query("DELETE FROM Student WHERE user_id=$id_register") or die ('Erreur :'.$db->errorInfo());
 
                         $modif2 = $db->query("INSERT INTO Training_manager (user_id) VALUES ($id_register)") or die ('Erreur :' . $db->errorInfo());
 
                     }else{
-                        $modif = $db->query("UPDATE User SET user_name='".stripcslashes($_POST['user_name'])."',
-		            									 user_firstname='".stripcslashes($_POST['user_firstname'])."',
-		            									 user_instituteemail='".stripcslashes($_POST['email'])."'
-		            									 WHERE user_id=$id_register");
+                        $modif = $db->query('UPDATE User SET user_name="'.htmlspecialchars($_POST['user_name']).'",
+		            									 user_firstname="'.htmlspecialchars($_POST['user_firstname']).'",
+		            									 user_instituteemail="'.htmlspecialchars($_POST['email']).'"
+		            									 WHERE user_id='.$id_register.'');
                     }
 
 
