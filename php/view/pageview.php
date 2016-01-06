@@ -358,7 +358,7 @@ include_once '../model/db.php';
 			if(!$connect) {?>
 			<nav id="scroll-nav">
 		  		<div class="nav-wrapper">
-		    		<a href="" class="brand-logo"><img src="../../img/logo.svg" alt="logo du site"></a>
+		    		<a href="index.php" class="brand-logo"><img src="../../img/logo.svg" alt="logo du site"></a>
 		    		<img src="../../img/name.png" alt="Zenetude, titre du site">
 		 	 	</div>
 			</nav>
@@ -419,7 +419,7 @@ include_once '../model/db.php';
 			</nav>
 			<nav id="scroll-nav">
 		  		<div class="nav-wrapper">
-		    		<a href="" class="brand-logo"><img src="../../img/logo.svg" alt="logo du site"></a>
+		    		<a href="index.php" class="brand-logo"><img src="../../img/logo.svg" alt="logo du site"></a>
 		    		<img src="../../img/name.png" alt="Zenetude, titre du site">
 		    		<div id="hamburger" class="hamburglar is-closed">
 		    			<div class="burger-icon">
