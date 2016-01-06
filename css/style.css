@@ -205,6 +205,10 @@ nav>.nav-wrapper>img{
 	margin-bottom: 0 !important;
 }
 
+textarea {
+  resize: none;
+}
+
 footer{
 	height:300px;
 	background-color: #385e2d;
@@ -253,6 +257,12 @@ footer{
 	}
 }
 
+.image-upload img{
+	width: 70%;
+	padding-top: 6%;
+	padding-bottom: 4%;
+}
+
 /**********************/
 /** PAGE INSCRIPTION **/
 /**********************/
@@ -282,7 +292,9 @@ footer{
 }
 
 .form-group{
-	padding: 30px;
+	padding-top: 20px;
+	padding-left: 20px;
+	padding-right: 20px;
 	margin: 0 auto;
 	width: 90%
 }
@@ -305,7 +317,9 @@ input, select{
 }
 
 .card-panel form{
-	padding: 50px;
+	padding-top: 50px;
+	padding-left: 50px;
+	padding-right: 50px;
 }
 
 .supp{
@@ -318,4 +332,8 @@ input, select{
 
 .card-panel>ul{
 	padding-bottom: 30px;
+}
+
+.btnbot {
+	margin-top: 30px;
 }
