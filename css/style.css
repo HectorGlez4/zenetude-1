@@ -15,6 +15,8 @@ nav{
 	padding: 20px;
 	padding-left: 40px;
 	padding-right: 40px;
+	position: fixed;
+	top: 0;
 }
 
 nav .brand-logo{
@@ -34,7 +36,7 @@ nav ul a{
 }
 
 nav>.nav-wrapper>img{
-	margin-left: 35%;
+	margin-left: 33.5%;
 	margin-top: 30px;
 }
 
@@ -47,6 +49,16 @@ nav>.nav-wrapper>.hamburglar{
 nav>.nav-wrapper>img{
 	width: 45%;
 	max-width: 450px;
+}
+
+#filtre{
+	background-color: black;
+	top:0;
+	position: fixed;
+	width: 100%;
+	z-index: 1;
+	visibility: hidden;
+	opacity: 0.3;
 }
 
 #page{
@@ -116,6 +128,7 @@ nav>.nav-wrapper>img{
 	padding: 30px;
 	padding-left: 40px;
 	padding-right: 40px;
+	margin-top: 200px;
 }
 
 .color{
@@ -205,6 +218,10 @@ nav>.nav-wrapper>img{
 	margin-bottom: 0 !important;
 }
 
+textarea {
+  resize: none;
+}
+
 footer{
 	height:300px;
 	background-color: #385e2d;
@@ -227,6 +244,10 @@ footer{
 
 	.logo-svg{
 		width: 90%;
+	}
+
+	#scroll-nav>.nav-wrapper>img{
+		margin-left: 32%;
 	}
 }
 
@@ -251,6 +272,12 @@ footer{
 		padding-left: 30px;
 		padding-right: 30px;
 	}
+}
+
+.image-upload img{
+	width: 70%;
+	padding-top: 6%;
+	padding-bottom: 4%;
 }
 
 /**********************/
@@ -282,7 +309,9 @@ footer{
 }
 
 .form-group{
-	padding: 30px;
+	padding-top: 20px;
+	padding-left: 20px;
+	padding-right: 20px;
 	margin: 0 auto;
 	width: 90%
 }
@@ -305,7 +334,9 @@ input, select{
 }
 
 .card-panel form{
-	padding: 50px;
+	padding-top: 50px;
+	padding-left: 50px;
+	padding-right: 50px;
 }
 
 .supp{
@@ -318,4 +349,8 @@ input, select{
 
 .card-panel>ul{
 	padding-bottom: 30px;
+}
+
+.btnbot {
+	margin-top: 30px;
 }
