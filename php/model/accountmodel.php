@@ -47,12 +47,25 @@
 			* Get all informations of a user selected by its mail and its password. 
 			* This function is used for test connection for now if a password exits for a mail in the datebase.
 		**/
-        public function getUserPassword($userMail, $userPassword) {
+        public function getUserByPassword($userMail, $userPassword) {
             $db = connect();
             $request = $db->query('SELECT * FROM User WHERE user_instituteemail = "'.$userMail.'" AND user_password = "'.$userPassword.'"');
             $result = $request->fetch();
             return $result;
         }
+
+        /**
+         * Get the user password
+         **/
+
+        public function getUserPassword($session) {
+            $db = connect();
+            $request = $db->prepare('SELECT user_password FROM User WHERE user_id = '.$session);
+            $request->execute();
+            $result = $request->fetch();
+            return $result;
+        }
+
         /**
          * Get the user email to check if it's already on the database.
          **/
@@ -125,7 +138,7 @@
             //$mailer->Subject ="Subject: =?UTF-8?B?".base64_encode("Réinitialisation du mot de passe | Zenetude")."?=";
             $mailer->Body = $body;
             if(!$mailer->Send())
-                $accountView->showMessage("Une erreur est survenue !");
+                $accountView->showMessage("erreur mot de passe !");
             else
                 $accountView->showMessage("Votre mot de passe a été réinitialisé. Un message contenant le nouveau mot de passe vous à été envoyé.","ok","index.php");
 		}
@@ -133,9 +146,11 @@
 		/**
 			* Add a new user to the database.
 		**/
-        public function addUser($userMail, $userPassword) {
+        public function addUser($userMail, $userfirstname, $userlastname, $userPassword) {
             $db = connect();
-            $request = $db->query('INSERT INTO User (user_password, user_instituteemail) VALUES ("'.$userPassword.'", "'.$userMail.'")');
+            $usercorrectfirstname = str_replace(" ", "-", $userfirstname);
+            $usercorrectlastname = str_replace(" ", "-", $userlastname);
+            $request = $db->query('INSERT INTO User (user_password, user_firstname, user_name, user_instituteemail) VALUES ("'.$userPassword.'", "'.$usercorrectfirstname.'", "'.$usercorrectlastname.'", "'.$userMail.'")');
             $request0 = $db->query("SELECT user_id FROM User WHERE user_instituteemail = '$userMail'");
             $result0 = $request0->fetch();
             $id = $result0[0];
@@ -168,7 +183,7 @@
             //$mailer->Subject =/*"Subject: =?UTF-8?B?".*/base64_encode("Inscription au site Zenetude");
             $mailer->Body = $body;
             if(!$mailer->Send())
-                $accountView->showMessage("Une erreur est survenue !");
+                $accountView->showMessage("Erreur d'envoie du mail !");
             else
                 $accountView->showMessage("Inscription terminée.","ok","index.php");
         }
@@ -210,6 +225,33 @@
                                       WHERE S.training_id = T.training_id AND
                                       T.training_manager_id = TM.training_manager_id AND
                                       TM.user_id = U.user_id AND S.user_id ='.$_SESSION['infoUser']['user_id']);
+            $request->execute();
+            $result = $request->fetch();
+
+            return $result;
+        }
+
+        public function addAvatar($fichier, $session){
+            $db = connect();
+            $request = $db->prepare("UPDATE Student SET student_avatar = '$fichier' where user_id = '$session'");
+            $request->execute();
+            $result = $request->fetch();
+
+            return $result;
+        }
+
+        public function addTrombi($fichier, $session){
+            $db = connect();
+            $request = $db->prepare("UPDATE Student SET student_trombi = '$fichier' where user_id = '$session'");
+            $request->execute();
+            $result = $request->fetch();
+
+            return $result;
+        }
+
+        public function updateUserPassword($password, $session){
+            $db = connect();
+            $request = $db->prepare("UPDATE User SET user_password = '$password' where user_id = '$session'");
             $request->execute();
             $result = $request->fetch();
 

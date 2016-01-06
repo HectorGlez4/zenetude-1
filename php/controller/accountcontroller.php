@@ -27,7 +27,7 @@
                 $accountModel = new AccountModel();
                 $_POST['mail'] = htmlspecialchars($_POST['mail']);
                 $_POST['pass'] = htmlspecialchars(sha1($_POST['pass']));
-                if ($userResult = $accountModel -> getUserPassword($_POST['mail'],  $_POST['pass'])){
+                if ($userResult = $accountModel -> getUserByPassword($_POST['mail'],  $_POST['pass'])){
                     //session_start();
                     $_SESSION['infoUser'] = $userResult;
                  
@@ -75,7 +75,7 @@
                 }
                 else{
                     //$_POST["passe"] = sha1($_POST["passe"]);
-                    $accountModel->addUser($_POST["mail"], sha1($_POST["passe"]));
+                    $accountModel->addUser($_POST["mail"], $_POST["firstname"], $_POST["lastname"], sha1($_POST["passe"]));
                     $accountModel->sendEmail($_POST["mail"], $_POST["passe"]);
                 }
             }

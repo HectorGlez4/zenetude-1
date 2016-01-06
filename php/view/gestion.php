@@ -6,9 +6,13 @@
     include_once('./pageview.php');
     include_once('../controller/pagecontroller.php');
     include_once('../model/db.php');
+    include_once('../model/accountmodel.php');
+    include_once('../view/accountview.php');
 
+    $accountmodel = new AccountModel();
     $pageController = new PageController();
     $pageView = new PageView();
+    $accountView = new AccountView();
     $db = connect();
     $pageController -> controlConnexion();
 
@@ -35,7 +39,7 @@ if (isset($_POST['student_update']) ) //SI LE FORMULAIRE A ETE ENVOYE
 {
 
 $pageController -> uploadPhoto();
-//$pageController -> uploadTrombi();
+$pageController -> uploadTrombi();
 $pageController -> modifyPassword();
 
 $user_id=$_POST['user_id'];
@@ -203,21 +207,15 @@ header('Location: profil.php');
                                     <input type="text" class="form-control" value="<?php echo $result4[4];?>" name="user_firstname">
                                     <label>Civilité</label>
                                         <select name="user_civility">
-                                            <option value="Monsieur" <?php if($result4[5] == "Monsieur") echo " selected='selected'";?>>
-                                                Monsieur
-                                            </option>
-                                            <option value="Madame" <?php if($result4[5] == "Madame") echo " selected='selected'";?>>
-                                                Madame
-                                            </option>
-                                            <option value="Mademoiselle"<?php if($result4[5] == "Mademoiselle") echo " selected='selected'";?>>
-                                                Mademoiselle
-                                            </option>
+                                            <option value="Monsieur" <?php if($result4[5] == "Monsieur") echo " selected='selected'";?>>Monsieur</option>
+                                            <option value="Madame" <?php if($result4[5] == "Madame") echo " selected='selected'";?>>Madame</option>
+                                            <option value="Mademoiselle"<?php if($result4[5] == "Mademoiselle") echo " selected='selected'";?>>Mademoiselle</option>
                                         </select>
                                     <?php if (!$rf){ ?>
                                         <label for="student_avatar">Avatar</label><br />
                                         <input type='file' class="form-control" name='student_avatar' /><br />
-                                        <!-- <label for="student_trombi">Photo du trombinoscope</label><br />
-                                        <input type='file' class="form-control" name='student_avatar' /><br /> -->
+                                        <label for="student_trombi">Photo du trombinoscope</label><br />
+                                        <input type='file' class="form-control" name='student_trombi' /><br />
                                         <label for="">Modifier mot de passe</label>
                                         <input type='password' placeholder="Ancien mot de passe" class="form-control" name='old_user_password' />
                                         <input type='password' placeholder="Nouveau mot de passe" class="form-control" name='new_user_password' />
@@ -267,37 +265,19 @@ header('Location: profil.php');
                                         <input type="text" class="form-control" value="<?php echo $result[16]; ?>" name="student_birthcountry">
                                         <label for="">Niveau d'études</label>
                                             <select name="student_educationallevel">
-                                                <option value="BAC" <?php if($result[19] == "BAC") echo " selected='selected'";?>>
-                                                    BAC
-                                                </option>
-                                                <option value="BAC+1"<?php if($result[19] == "BAC+1") echo " selected='selected'";?>>
-                                                    BAC+1
-                                                </option>
-                                                <option value="BAC+2"<?php if($result[19] == "BAC+2") echo " selected='selected'";?>>
-                                                    BAC+2
-                                                </option>
-                                                <option value="BAC+3"<?php if($result[19] == "BAC+3") echo " selected='selected'";?>>
-                                                    BAC+3
-                                                </option>
-                                                <option value="BAC+4"<?php if($result[19] == "BAC4") echo " selected='selected'";?>>
-                                                    BAC+4
-                                                </option>
-                                                <option value="BAC+5"<?php if($result[19] == "BAC+5") echo " selected='selected'";?>>
-                                                    BAC+5
-                                                </option>
-                                                <option value="BAC+6"<?php if($result[19] == "BAC+6") echo " selected='selected'";?>>
-                                                    BAC+6
-                                                </option>
-                                                <option value="BAC+7"<?php if($result[19] == "BAC+7") echo " selected='selected'";?>>
-                                                    BAC+7
-                                                </option>
-                                                <option value="BAC+8"<?php if($result[19] == "BAC+8") echo " selected='selected'";?>>
-                                                    BAC+8
-                                                </option>
+                                                <option value="BAC" <?php if($result[19] == "BAC") echo " selected='selected'";?>>BAC</option>
+                                                <option value="BAC+1"<?php if($result[19] == "BAC+1") echo " selected='selected'";?>>BAC+1</option>
+                                                <option value="BAC+2"<?php if($result[19] == "BAC+2") echo " selected='selected'";?>>BAC+2</option>
+                                                <option value="BAC+3"<?php if($result[19] == "BAC+3") echo " selected='selected'";?>>BAC+3</option>
+                                                <option value="BAC+4"<?php if($result[19] == "BAC4") echo " selected='selected'";?>>BAC+4</option>
+                                                <option value="BAC+5"<?php if($result[19] == "BAC+5") echo " selected='selected'";?>>BAC+5</option>
+                                                <option value="BAC+6"<?php if($result[19] == "BAC+6") echo " selected='selected'";?>>BAC+6</option>
+                                                <option value="BAC+7"<?php if($result[19] == "BAC+7") echo " selected='selected'";?>>BAC+7</option>
+                                                <option value="BAC+8"<?php if($result[19] == "BAC+8") echo " selected='selected'";?>>BAC+8</option>
                                             </select>
                                         <label for="">Origine</label>
                                         <input type="text" class="form-control" value="<?php echo $result[20]; ?>" name="student_origin">
-                                        <label name="student_grantholder" for="">Bourse</label></br>
+                                        <label name="student_grantholder" for="">Boursier</label></br>
                                         <input id="oui" class="with-gap" name="student_grantholder" type="radio" value="1"<?php if($result[21] == "1") echo "checked ='ckecked'";?>/>
                                         <label class="button" for="oui">Oui</label>                       
                                         <input id="non" class="with-gap" name="student_grantholder" type="radio" value="0"/<?php if($result[21] == "0") echo "checked ='ckecked'";?>>
@@ -308,18 +288,10 @@ header('Location: profil.php');
                                         <input type="text" class="form-control" value="<?php echo $result[23]; ?>" name="student_comment">
                                         <label>Type de formation</label>
                                             <select name="student_status">
-                                                <option value="FI" <?php if($result[18] == "FI") echo " selected='selected'";?>>
-                                                    FI
-                                                </option>
-                                                <option value="FA" <?php if($result[18] == "FA") echo " selected='selected'";?>>
-                                                    FA
-                                                </option>
-                                                <option value="FC"<?php if($result[18] == "FC") echo " selected='selected'";?>>
-                                                    FC
-                                                </option>
-                                                <option value="CP"<?php if($result[18] == "CP") echo " selected='selected'";?>>
-                                                    CP
-                                                </option>
+                                                <option value="FI" <?php if($result[18] == "FI") echo " selected='selected'";?>>FI</option>
+                                                <option value="FA" <?php if($result[18] == "FA") echo " selected='selected'";?>>FA</option>
+                                                <option value="FC"<?php if($result[18] == "FC") echo " selected='selected'";?>>FC</option>
+                                                <option value="CP"<?php if($result[18] == "CP") echo " selected='selected'";?>>CP</option>
                                             </select>
                                 </div>
                                         <?php } ?>

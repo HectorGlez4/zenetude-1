@@ -19,8 +19,14 @@ nav{
 
 nav .brand-logo{
 	color: #000;
+	height: 200px;
 	left: inherit;
 	transform: inherit;
+}
+
+.logo-svg{
+	height: 200px;
+
 }
 
 nav ul a{
@@ -38,10 +44,10 @@ nav>.nav-wrapper>.hamburglar{
 	z-index: 30;
 }
 
-.logo-svg{
-	width: 40%;
+nav>.nav-wrapper>img{
+	width: 45%;
+	max-width: 450px;
 }
-
 
 #page{
 	position: absolute;
@@ -218,9 +224,33 @@ footer{
 	h2{
 		font-size: 180%;
 	}
+
+	.logo-svg{
+		width: 90%;
+	}
 }
 
-@media screen and (max-width: 860px) {
+@media screen and (max-width: 890px) {
+	.col{
+		width: 100% !important;
+	}
+
+	h2{
+		font-size: 240%;
+	}
+
+	.card-panel{
+		font-size: 100%;
+	}
+
+	.row .col.push-s1{
+		left: 0 !important;
+	}
+
+	.formula{
+		padding-left: 30px;
+		padding-right: 30px;
+	}
 }
 
 /**********************/
