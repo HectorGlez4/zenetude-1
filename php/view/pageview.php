@@ -26,6 +26,22 @@ include_once '../model/db.php';
 			            	</div>
 			          	</div><!-- fin email -->
 
+			          		<!-- Nom -->
+			          	<div class="row">
+			       	 		<div class="input-field col s12">
+			              		<input id="lastname" type="text" class="validate" name="lastname" required="required">
+			             	 	<label for="lastname">Nom <em>*</em></label>
+			            	</div>
+			          	</div><!-- Nom -->
+
+			          		<!-- Prenom -->
+			          	<div class="row">
+			       	 		<div class="input-field col s12">
+			              		<input id="firstname" type="text" class="validate" name="firstname" required="required">
+			             	 	<label for="firstname">Prénom <em>*</em></label>
+			            	</div>
+			          	</div><!-- Prenom -->
+
 				          <!-- mot de passe -->
 			          	<div class="row">
 				            <div class="input-field col s12">
@@ -89,6 +105,21 @@ include_once '../model/db.php';
 		      }
 		   });
 		 });
+
+//		$('.datepicker').pickadate({
+//			labelMonthNext: 'Mois suivant',
+//			labelMonthPrev: 'Mois précédent',
+//			labelMonthSelect: 'Selectionner le mois',
+//			labelYearSelect: "Selectionner l'annee",
+//			monthsFull: [ 'Janvier', 'Febrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre' ],
+//			monthsShort: [ 'Jan', 'Feb', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sep', 'Oct', 'Nov', 'Dec' ],
+//			weekdaysFull: [ 'Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi' ],
+//			weekdaysShort: [ 'Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam' ],
+//			weekdaysLetter: [ 'D', 'L', 'M', 'M', 'J', 'V', 'S' ],
+//			today: "Aujourd'hui",
+//			clear: 'Effacer',
+//			close: 'Fermer'
+//		});
 
 		window.onload=ajuste;
 			function ajuste(){
@@ -268,44 +299,44 @@ include_once '../model/db.php';
 			if(!$connect) {?>
 			<div class="col s12 m4">
 		        <div class="card-panel teal" id="aside1">
-		          <div class="card-header"> <h2>Connexion</h2></div>
+					<div class="card-header"> <h2>Connexion</h2></div>
 
-                  	<!-- Formulaire -->
-	                  <div class="formula">
-				        <form id="formula" class="col s10 push-s1" action="connexion.php" method="POST">
-				
-				
-				          <!-- Contenu card -->
-				         <div >
-				
-				          <!-- email -->
-				          <div class="row">
-				            <div class="input-field col s12">
-				              <input id="email" type="email" class="validate" name="mail">
-				              <label for="email">Email</label>
-				            </div>
-				          </div><!-- fin email -->
-				
-				          <!-- mot de passe -->
-				          <div class="row">
-				            <div class="input-field col s12">
-				              <input id="passe" type="password" class="validate" name="pass">
-				              <label for="passe">Mot de passe</label>
-				            </div>
-				          </div><!-- fin mot de passe -->
-				
-				        </div><!-- Fin contenu card -->
-						<div id="result"></div><!-- Retour de l'erreur en json -->
-				        <div class="card-action  center-align bouton-connection">
-					        <input class="btn connexion" type="submit" value="Se connecter" />
-				        </div>
-				        <div id="socialmedia">
-							<?php
+					<!-- Formulaire -->
+					<div class="formula">
+						<form id="formula" class="col s10 push-s1" action="connexion.php" method="POST">
+
+
+							<!-- Contenu card -->
+							<div>
+
+								<!-- email -->
+								<div class="row">
+									<div class="input-field col s12">
+										<input id="email" type="email" class="validate" name="mail">
+										<label for="email">Email</label>
+									</div>
+								</div><!-- fin email -->
+
+								<!-- mot de passe -->
+								<div class="row">
+									<div class="input-field col s12">
+										<input id="passe" type="password" class="validate" name="pass">
+										<label for="passe">Mot de passe</label>
+									</div>
+								</div><!-- fin mot de passe -->
+
+							</div><!-- Fin contenu card -->
+							<div id="result"></div><!-- Retour de l'erreur en json -->
+							<div class="card-action  center-align bouton-connection">
+								<input class="btn connexion" type="submit" value="Se connecter" />
+							</div>
+							<div id="socialmedia">
+								<?php
 								include('socialmedia.php');
-							?>
-						</div>
-				        </form>
-				    </div>
+								?>
+							</div>
+						</form>
+					</div>
 				    <!-- Fin formulaire -->
 			        <p class="connexion"><a href="inscription.php" class="left">S'inscrire</a><a href="recuperation.php" class="right">Mot de passe oublié</a></p>
 		      	</div>
@@ -447,7 +478,7 @@ include_once '../model/db.php';
 	            echo "</ul>";
 	            }
 	        else
-	        	echo "<div id='noFormation'>Vous n'avez pas encore renseigné votre formation !</div></ br><a class='right-align' href='gestion.php'>Page gestion du profil</a>";
+	        	echo "<div id='noFormation'>Vous n'avez pas encore renseigné votre formation !</div></br><a class='right-align' href='gestion.php'>Page gestion du profil</a>";
         }
 
 
@@ -630,11 +661,11 @@ include_once '../model/db.php';
 			    }
 		    }
 			//}
-			if(isset($_POST['Envoyer'])){
+			if(isset($_POST['Modifier'])){
 			//Select users' firstname, lastname and email
 	            $data = $db->query("SELECT user_name, user_firstname, user_instituteemail FROM User") or die ('Erreur :'.$db->errorInfo());
 	            while($result1 = $data->fetch()){
-	                //If the element submit is different of the element store in databse, change element
+	                //If the element submit is different of the element stored in databse, change element
 	                //and if the element has is the same as an other element in the databse, user get information
 	                if(($_POST['user_name']!=$name_register) && ($_POST['user_name']==$result1['user_name'])){
 	                    echo '<div class="erreur">Ce pseudo « '.$_POST['user_name'].' » est utilisé!</div>'; return false;
@@ -651,7 +682,7 @@ include_once '../model/db.php';
 		        if(empty($_POST['user_name'])){
 		            echo '<div class="erreur">Veuillez saisir un nom!</div>';
 		        }
-		        if(empty($_POST['user_firstname'])){
+		        else if(empty($_POST['user_firstname'])){
 		            echo '<div class="erreur">Veuillez saisir un prénom!</div>';
 		        }
 		        //If email empty
@@ -668,29 +699,73 @@ include_once '../model/db.php';
 		        }
 		        //If all correct, changes send 
 		        else{
-		            $modif = $db->query("UPDATE User SET user_name='".stripcslashes($_POST['user_name'])."',
-		            									 user_firstname='".stripcslashes($_POST['user_firstname'])."',
-		            									 user_instituteemail='".stripcslashes($_POST['email'])."',
-		            									 user_type='".stripcslashes($_POST['statut'])."'
-		            									 WHERE user_id=".$id_register."");
+                    $changementToRF = true;
 
-                    // If you change a student in training manager then we delete the student in the Student table and add a new training manager in Training_manager table if there is not already.
-                    if($_POST['statut'] == "RF"){
 
-                        $del_student = $db->query("DELETE FROM Student WHERE user_id=".$id_register." ") or die ('Erreur :'.$db->errorInfo());
+                    //if we want to turn a training manager into a student
+                    if($_POST['statut'] == "Etudiant" && $statut_register == "RF"){
 
-                        $select_manager = $db->query("SELECT user_id FROM Training_manager WHERE user_id=".$id_register." ") or die ('Erreur :'.$db->errorInfo());
+                        $select_trainer_id_from_user = $db->query("SELECT training_manager_id FROM Training_manager WHERE user_id = $id_register");
+                        $id_trainer = $select_trainer_id_from_user->fetch();
 
-                        if($statut_register == "Etudiant")
-                            $create_RF = $db->query("INSERT INTO Training_manager VALUES ('','$id_register') ") or die ('Erreur :' . $db->errorInfo());
+
+                        $select_training = $db->query("SELECT * FROM Training WHERE training_manager_id = $id_trainer[0]");
+                        $re = $select_training->fetch();
+                        //if the trainer has responsability in formation, we do not change his type
+                        if ($re){
+
+                            $modif = $db->query('UPDATE User SET user_name="'.htmlspecialchars($_POST['user_name']).'",
+		            									 user_firstname="'.htmlspecialchars($_POST['user_firstname']).'",
+		            									 user_instituteemail="'.htmlspecialchars($_POST['email']).'"
+		            									 WHERE user_id='.$id_register.'');
+                            $changementToRF = false;
+
+                        }else{
+
+                            $modif = $db->query('UPDATE User SET user_name="'.htmlspecialchars($_POST['user_name']).'",
+		            									 user_firstname="'.htmlspecialchars($_POST['user_firstname']).'",
+		            									 user_instituteemail="'.htmlspecialchars($_POST['email']).'",
+		            									 user_type="'.htmlspecialchars($_POST['statut']).'"
+		            									 WHERE user_id='.$id_register.'');
+
+                            //else we can change his type
+                            $modif1 = $db->query("DELETE FROM Training_manager WHERE user_id=$id_register") or die ('Erreur :'.$db->errorInfo());
+                            $modif2 = $db->query("INSERT INTO Student (user_id, student_instituteemail) VALUES ($id_register, '".stripcslashes($_POST['email'])."')");
+                        }
+
+
+
+
+                    }elseif($_POST['statut'] == "RF" && $statut_register == "Etudiant") {
+
+                        $modif = $db->query('UPDATE User SET user_name="'.htmlspecialchars($_POST['user_name']).'",
+		            									 user_firstname="'.htmlspecialchars($_POST['user_firstname']).'",
+		            									 user_instituteemail="'.htmlspecialchars($_POST['email']).'",
+		            									 user_type="'.htmlspecialchars($_POST['statut']).'"
+		            									 WHERE user_id='.$id_register.'');
+
+                        $modif1 = $db->query("DELETE FROM Student WHERE user_id=$id_register") or die ('Erreur :'.$db->errorInfo());
+
+                        $modif2 = $db->query("INSERT INTO Training_manager (user_id) VALUES ($id_register)") or die ('Erreur :' . $db->errorInfo());
+
+                    }else{
+                        $modif = $db->query('UPDATE User SET user_name="'.htmlspecialchars($_POST['user_name']).'",
+		            									 user_firstname="'.htmlspecialchars($_POST['user_firstname']).'",
+		            									 user_instituteemail="'.htmlspecialchars($_POST['email']).'"
+		            									 WHERE user_id='.$id_register.'');
                     }
 
-                    if(!$modif) {
 
+                    if(!$modif)
                         die('Requête invalide : ' . $db->errorInfo()[1]);
 
+
+                    if ($changementToRF){
+                        echo '<div class="ok">Profil du membre modifié avec succès. Redirection en cours...</div><script type="text/javascript"> window.setTimeout("location=(\'admin.php\');",3000) </script>';
+
+                    }else{
+                        echo '<div class="ok">Profil du membre modifié à l\'exception du type. Redirection en cours...</div><script type="text/javascript"> window.setTimeout("location=(\'admin.php\');",3000) </script>';
                     }
-                    echo '<div class="ok">Profil du membre modifié avec succès. Redirection en cours...</div><script type="text/javascript"> window.setTimeout("location=(\'admin.php\');",3000) </script>';
                 }
             }
         }

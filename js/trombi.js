@@ -13,7 +13,7 @@ function actualiserTrombi(formation,groupe){
 
             if(JsonData.message=="success")
             {
-                var html = '<iframe src="trombinoscope.pdf" width="100%" height="800px" ></iframe>';
+                var html = '<iframe src="trombinoscope'+formation+'_'+groupe+'.pdf" width="100%" height="800px" ></iframe>';
                 $('#trombi').html(html);
                 $('.form-active').removeClass("form-active");
                 $('#form-'+formation+'_group-'+groupe).addClass("form-active");
