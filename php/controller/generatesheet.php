@@ -16,7 +16,7 @@
         $html2pdf->pdf->SetDisplayMode('fullpage');
         //$html2pdf->pdf->SetProtection(array('print'), 'spipu');
         $html2pdf->writeHTML($content, isset($_GET['vuehtml']));
-        $html2pdf->Output('../view/feuille_emargement.pdf', 'F');
+        $html2pdf->Output('../view/feuille_emargement'.$formation.'_'.$groupe.'.pdf', 'F');
         echo json_encode([
             'message' => "success",
             'success' => true

@@ -36,8 +36,7 @@ $ns = count($students);
                                     {
                                         echo $students[$iX]["student_trombi"];
                                     } else echo "../../img/avatar/avatar.png" ?>" alt="trombi"  style="height:140px;">
-                    <p><?php echo utf8_encode($students[$iX]["user_name"]) . "<br/>" .
-                     utf8_encode($students[$iX ]["user_firstname"]); ?></p>
+                    <p><?php echo $students[$iX]["user_name"]."<br/>".$students[$iX ]["user_firstname"]; ?></p>
                 </td>
 
             <?php
