@@ -7,7 +7,7 @@
     include_once('../controller/pagecontroller.php');
     include_once('../model/db.php');
     include_once('../model/accountmodel.php');
-    include_once('../view/accountView.php');
+    include_once('../view/accountview.php');
 
     $accountmodel = new AccountModel();
     $pageController = new PageController();
