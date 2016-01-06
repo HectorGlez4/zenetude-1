@@ -27,7 +27,7 @@
             $pageController -> controlDynamicMenu();
         ?>
 
-
+        <div id="filtre"></div>
         <div class="container">
 
             <div class="row">
