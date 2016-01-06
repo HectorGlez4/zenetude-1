@@ -20,7 +20,7 @@
         ?>
     <div id="filtre"></div>
     <!-- CONTAINER -->
-    <div class="container-fluid">
+    <div class="container container-fluid">
 
     <div class="row">
       <!-- Debut card -->
@@ -53,12 +53,12 @@
         </form><!-- Fin formulaire -->
       </div><!-- Fin card -->
   </div>
+</div><!-- FIN CONTAINER -->
 
     <?php
         $pageView->showFooter();
         $pageView->showjavaLinks();
     ?>
-</div><!-- FIN CONTAINER -->
     
 </body>
 </html>

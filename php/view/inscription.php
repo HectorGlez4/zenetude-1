@@ -26,7 +26,7 @@
       ?>
     <div id="filtre"></div>
     <!-- CONTAINER -->
-    <div class="container-fluid">
+    <div class="container container-fluid">
 
     <!--<div id="content">
         <h2>Inscription</h2>
