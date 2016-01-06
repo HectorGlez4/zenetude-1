@@ -1,5 +1,4 @@
 <link type="text/css" rel="stylesheet" href="../../css/sheet.css"/>
-
 <?php   
 
 include(dirname(__FILE__).'/../model/documentsmodel.php');
@@ -37,8 +36,8 @@ $students = getStudentsByTrainingGroup($formation, $groupe);
             {
            	?>
             <tr>
-                <td style="width: 35%; text-align: left"><?php echo utf8_encode($students[$iX]["user_name"]); ?></td>
-                <td style="width: 20%; text-align: left"><?php echo utf8_encode($students[$iX]["user_firstname"]); ?></td>
+                <td style="width: 35%; text-align: left"><?php echo $students[$iX]["user_name"]; ?></td>
+                <td style="width: 20%; text-align: left"><?php echo $students[$iX]["user_firstname"]; ?></td>
                 <td style="width: 45%; text-align: right"></td>
             </tr>
             <?php }?>
