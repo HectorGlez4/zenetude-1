@@ -133,7 +133,6 @@
 
 		// get the token from connection object
 		$request_token = $connection->getRequestToken(OAUTH_CALLBACK);
-        //var_dump($request_token);
 
         }catch (OAuthException $e){
             $e->getMessage();
