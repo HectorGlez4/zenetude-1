@@ -12,8 +12,4 @@
     $facebookapikey = '964858956897131';
     $facebookapisecret = '71288f027be5865883840deae6ca288c';
 
-
-    //Google OAuth
-    $googleapikey = '620733540979-q1jbsbprun39f54b3sh48rqops0pl1sq.apps.googleusercontent.com';
-    $googleapisecret = '8QaAGjvGB3wnsMZ3hfHBJCQY';
 ?>

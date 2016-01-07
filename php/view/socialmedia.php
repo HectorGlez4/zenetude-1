@@ -89,7 +89,7 @@
 	}else{
 
         //L'hébergeur (Hostinger) bloque les requêtes CURL sortantes
-        echo "<img onclick='alert('Connexion à Facebook impossible');' src='../../img/FacebookLogo.png' alt='Se connecter avec Facebook'>";
+        echo "<img onclick=\"alert('Connexion à Facebook impossible');\" src='../../img/FacebookLogo.png' alt='Se connecter avec Facebook'>";
 
 
         //Si l'hébergeur ne bloque pas les requêtes CURL sortantes
@@ -176,7 +176,7 @@
 	if(isset($login_url) && !isset($_SESSION['data'])){
 
         //L'hébergeur (Hostinger) bloque les requêtes CURL sortantes
-        echo "<img onclick='alert('Connexion à Twitter impossible');' csrc='../../img/TwitterLogo.png' alt='Se connecter avec Twitter'>";
+        echo "<img onclick=\"alert('Connexion à Twitter impossible');\" src='../../img/TwitterLogo.png' alt='Se connecter avec Twitter'>";
 
 
         //Si l'hébergeur ne bloque pas les requêtes CURL sortantes
