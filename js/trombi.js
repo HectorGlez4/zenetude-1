@@ -55,7 +55,7 @@ function imprimerDoc(doc, formation, groupe){
         success: function (JsonData, statut){
             if(JsonData.message=="success")
             {
-                window.open(url);
+                window.open(url, '_blank');
             }
             else
             {

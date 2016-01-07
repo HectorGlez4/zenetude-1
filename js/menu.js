@@ -40,7 +40,7 @@
 
     var menu = $('#menu');
     var page = $('#page');
-    open = true;
+    var open = true;
 
     trigger.click(function () {
       menuopen();
