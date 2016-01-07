@@ -15,10 +15,10 @@ $students = getStudentsByTrainingGroup($formation, $groupe);
         <h4>ANNEE 2015/2016</h4><br>
         <h4 class="center"><?php echo $students[0]["description"] ?></h4>
         <h5 class="center"><?php echo count($students)?> ÉTUDIANTS</h5><br>
-        <table class="noneborder" style="width:100%"><tr><td style="width: 60%"><h4 >ENSEIGNANT :</h4></td><td style="width: 40%"><h4 >DATE</h4></td> </tr> </table>
+        <table class="noneborder" style="width:100%"><tr><td style="width: 60%"><h4 >ENSEIGNANT :</h4></td><td style="width: 40%"><h4 >DATE :</h4></td> </tr> </table>
         <br>
-        <h4>Cours: de &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; H à
-         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; H</h4><br>
+        <h4>Cours: de &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; H &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; à
+         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; H</h4><br>
         <table cellspacing="0" style="width: 100%; border: solid 1px black; text-align: center; ">
             <tr>
                 

@@ -1,7 +1,12 @@
 <?php
 	class AccountModel {
 
-
+        /**
+        * Get training's information using user id
+        * @param $param str contains the attribute needed
+        * @param $userId int contains the user id
+        * @return request's result
+        */
         public function getTrainingInformationsForUser($param, $userId) {
             $db = connect();
             $request = $db->query('SELECT '.$param.' FROM Training WHERE training_id IN(SELECT training_id
@@ -14,7 +19,10 @@
         }
 
 		/**
-			* Get user's informations about an user.
+		* Get user's informations about an user.
+        * @param $param str contains the attribute needed
+        * @param $mail str contains the user mail adress
+        * @return request's result
 		**/
 		public  function getDataUser($param, $mail) {
             $db = connect();
@@ -24,7 +32,10 @@
         }
 
 		/**
-			* Get student's informations (a parameter) about an student selected by its id.
+        * Get student's informations (an attribute) about a student selected by its id.
+        * @param $param str contains the attribute needed
+        * @param $userId int contains the user id
+        * @return request's result
 		**/
 		public function getDataStudent($param, $userId) {
 			$db = connect();
@@ -34,7 +45,10 @@
 		}
 
 		/**
-			* Get training manager's informations about an training manager selected by its id.
+         * Get training manager's informations about an training manager selected by its id.
+         * @param $param str contains the attribute needed
+         * @param $userId int contains the user id
+         * @return request's result
 		**/
 		public function getDataTrainingManager($param, $userId) {
 			$db = connect();
@@ -44,8 +58,11 @@
 		}		
 
 		/**
-			* Get all informations of a user selected by its mail and its password. 
-			* This function is used for test connection for now if a password exits for a mail in the datebase.
+         * Get all informations of an user selected by its mail and its password.
+         * This function is used for test connection for now if a password exits for a mail in the datebase.
+         * @param $userMail str contains the user mail adress
+         * @param $userPassword str contains the user's cripted password
+         * @return request's result
 		**/
         public function getUserByPassword($userMail, $userPassword) {
             $db = connect();
@@ -55,12 +72,13 @@
         }
 
         /**
-         * Get the user password
+         * Get the user's cripted password
+         * @param $userId int contains the user id
+         * @return request's result
          **/
-
-        public function getUserPassword($session) {
+        public function getUserPassword($userId) {
             $db = connect();
-            $request = $db->prepare('SELECT user_password FROM User WHERE user_id = '.$session);
+            $request = $db->prepare('SELECT user_password FROM User WHERE user_id = '.$userId);
             $request->execute();
             $result = $request->fetch();
             return $result;
@@ -68,8 +86,9 @@
 
         /**
          * Get the user email to check if it's already on the database.
+         * @param $userMail str contains the user mail adress
+         * @return request's result
          **/
-
         public function getUserEmail($userMail) {
             $db = connect();
             $request = $db->query('SELECT * FROM User WHERE user_instituteemail = "'.$userMail.'"');
@@ -78,14 +97,15 @@
         }
         
         /**
-            * Return true if the user is a training manager.
+         * Return true if the user is a training manager.
+         * @param $id_user int contains the user id
+         * @return boolean
         **/
         public function isTrainingManager($id_user = null){
             if($id_user == null)
                 return false;
                 
             $db = connect();
-
 
             $request = $db->prepare('SELECT *
                                      FROM   Training_manager 
@@ -97,7 +117,8 @@
         }
 
 		/**
-			* Generate a new password an update it in the database. Then, a mail is automaticaly send to the user.
+         * Generate a new password an update it in the database. Then, a mail is automaticaly send to the user.
+         * @param $userMail str contains the user mail adress
 		**/
 		public function recoverPassword($userMail) {
 	    	$accountView = new AccountView();
@@ -144,7 +165,11 @@
 		}
 
 		/**
-			* Add a new user to the database.
+         * Add a new user to the database.
+         * @param $userMail str contains the user's id
+         * @param $userfirstname str contains the user first name
+         * @param $userlastname str contains the user last name
+         * @param $userPassword str contains the user's cripted password
 		**/
         public function addUser($userMail, $userfirstname, $userlastname, $userPassword) {
             $db = connect();
@@ -158,6 +183,10 @@
 
         }
 
+        /**
+         * Send an e-mail to the user's mail ardess
+         * @param $userMail str contains the user mail adress
+         */
         public function sendEmail($userMail){
             $accountView = new AccountView();
             $body = "
@@ -168,7 +197,6 @@
                <hr/>
                <p>Ce message a été généré automatiquement. Merci de ne pas y répondre.</p>
            ";
-        
 
             $mailer = new PHPMailer();
             $mailer->CharSet = "utf-8";
@@ -188,6 +216,10 @@
                 $accountView->showMessage("Inscription terminée.","ok","index.php");
         }
 
+        /**
+         * Check if the user is an administrator using session data $_SESSION['infoUser']['user_id']
+         * @return user's admin_id
+         */
  		public function isAdministrator(){
  			$db = connect();
             $request = $db->query('SELECT admin_id FROM Administrator WHERE user_id IN (SELECT user_id FROM User WHERE user_id ='.$_SESSION['infoUser']['user_id'].')');
@@ -196,6 +228,10 @@
             return $result;
  		}
 
+        /**
+         * Get user_id, user_name, user_firstname, user_instituteemail of all users
+         * @return request's result
+         */
         public function recupAllUser(){
             $db = connect();
             $request = $db->query("SELECT user_id, user_name, user_firstname, user_instituteemail FROM User WHERE user_id != 1");
@@ -203,6 +239,10 @@
             return $request; 
         }
 
+        /**
+         * Get user_id, user_name, user_firstname, user_instituteemail, user_type of the user where id is in $_POST['register']
+         * @return request's result
+         */
         public function recupAllInfoUserSelect(){
             $db = connect();
             $request = $db->query("SELECT user_id, user_name, user_firstname, user_instituteemail, user_type  FROM User WHERE user_id='".$_POST['register']."'");
@@ -210,6 +250,10 @@
             return $request;
         }
 
+        /**
+         * Count the number of training of the training manager where there is at least one student
+         * @return request's result
+         */
  		public function nbDocuments(){
  			$db = connect();
  			$nbGroupForRF = $db->query("SELECT count(training_id) FROM Student WHERE training_id IN (SELECT training_id FROM Training WHERE training_manager_id = '".$_SESSION['infoRF']['training_manager_id']."')");
@@ -218,6 +262,10 @@
 			return $result;
  		}
 
+        /**
+         * Get user's name, firstname and instituteemail using $_SESSION['infoUser']['user_id']
+         * @return request's result
+         */
         public function infoMyTrainingManager(){
             $db = connect();
             $request = $db->prepare('SELECT user_name,user_firstname,user_instituteemail
@@ -231,27 +279,45 @@
             return $result;
         }
 
-        public function addAvatar($fichier, $session){
+        /**
+         * Update student avatar path in DB
+         * @param $fichier str contains picture's path
+         * @param $userId int contains the user id
+         * @return request's result
+         */
+        public function addAvatar($fichier, $userId){
             $db = connect();
-            $request = $db->prepare("UPDATE Student SET student_avatar = '$fichier' where user_id = '$session'");
+            $request = $db->prepare("UPDATE Student SET student_avatar = '$fichier' where user_id = '$userId'");
             $request->execute();
             $result = $request->fetch();
 
             return $result;
         }
 
-        public function addTrombi($fichier, $session){
+        /**
+         * Update the student's picture's path of the trombinoscope in DB
+         * @param $fichier str contains picture's path
+         * @param $userId int contains the user id
+         * @return request's result
+         */
+        public function addTrombi($fichier, $userId){
             $db = connect();
-            $request = $db->prepare("UPDATE Student SET student_trombi = '$fichier' where user_id = '$session'");
+            $request = $db->prepare("UPDATE Student SET student_trombi = '$fichier' where user_id = '$userId'");
             $request->execute();
             $result = $request->fetch();
 
             return $result;
         }
 
-        public function updateUserPassword($password, $session){
+        /**
+         * Update the user's cripted password
+         * @param $password str contains the cripted password
+         * @param $userId int contains the user id
+         * @return mixed
+         */
+        public function updateUserPassword($password, $userId){
             $db = connect();
-            $request = $db->prepare("UPDATE User SET user_password = '$password' where user_id = '$session'");
+            $request = $db->prepare("UPDATE User SET user_password = '$password' where user_id = '$userId'");
             $request->execute();
             $result = $request->fetch();
 

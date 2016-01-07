@@ -1,3 +1,4 @@
+
 <?php
 /**
  * Created by PhpStorm.
@@ -11,6 +12,7 @@ function connect()
 
 		$db = new PDO('mysql:host=mysql.hostinger.fr;dbname=u384123345_zen', "u384123345_zen13", "q}2[u9LE", array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
 		return $db;
+
 	}
 	catch(PDOException $e){
 		$e->getMessage();
