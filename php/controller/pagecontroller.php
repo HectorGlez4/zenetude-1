@@ -136,7 +136,7 @@
 				$ext = pathinfo($filename, PATHINFO_EXTENSION);
 				$extension_upload = strtolower(  substr(  strrchr($_FILES['student_avatar']['name'], '.')  ,1)  );
 
-			if ($_FILES['student_avatar']['error'] > 0) {
+				if ($_FILES['student_avatar']['error'] > 0) {
 					echo 'error';
 				} elseif (($_FILES['student_avatar']['size'] >= $maxsize) || ($_FILES["student_avatar"]["size"] == 0)) {
 					echo 'erreur size';
