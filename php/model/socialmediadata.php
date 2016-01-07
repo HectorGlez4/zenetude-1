@@ -8,6 +8,11 @@ ini_set('display_errors', 1);
 include_once 'db.php';
 include_once '../model/accountmodel.php';
 
+/**
+ * Connect the user if he's connected on facebook and if his mail adress is in the DB
+ * @param $email str contains the user's mail adress
+ * @param $picture strcontains the picture path
+ */
 function addDataFacebook($email, $picture){
 	$co = connect();
     $data = $co->query("SELECT * FROM Student WHERE student_instituteemail = '$email' OR student_personalemail = '$email'");
@@ -38,10 +43,11 @@ function addDataFacebook($email, $picture){
 	}
 }
 
-
-
-
-
+/**
+ * Connect the user if he's connected on google and if his mail adress is in the DB
+ * @param $email str contains the user's mail adress
+ * @param $picture strcontains the picture path
+ */
 function addDataGoogle($email, $picture){
 	$co = connect();
     $data = $co->query("SELECT * FROM Student WHERE student_instituteemail = '$email' OR student_personalemail = '$email'");
@@ -70,8 +76,11 @@ function addDataGoogle($email, $picture){
 	
 }
 
-
-
+/**
+ * Connect the user if he's connected on twitter and if his mail adress is in the DB
+ * @param $email str contains the user's mail adress
+ * @param $picture strcontains the picture path
+ */
 function addDataTwitter($email, $picture){
 	$co = connect();
     $data = $co->query("SELECT * FROM Student WHERE student_instituteemail = '$email' OR student_personalemail = '$email'");

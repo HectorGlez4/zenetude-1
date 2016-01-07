@@ -1,9 +1,11 @@
 <?php
 
 /**
-* @Params int training_id, int student_group
-* fonction qui récupère les étudiants correspondant au groupe voulu et renvoie cette liste sous form de tableau indexé
-**/
+ * Get students using training id and student group
+ * @param int $training_id contains the training id
+ * @param int $student_group contains the student group
+ * @return array|bool|null
+ */
 function getStudentsByTrainingGroup($training_id = null, $student_group = null){
 
     if($training_id == null || $student_group == null)
@@ -27,7 +29,10 @@ function getStudentsByTrainingGroup($training_id = null, $student_group = null){
     
 } // getStudentsByTrainingGroup()
 
-
+/**
+ * Get student groups of the training manager's training(s) using $_SESSION['infoRF']['training_manager_id']
+ * @return array|null
+ */
 function getStudentsGroup() {
 
     include_once('db.php');

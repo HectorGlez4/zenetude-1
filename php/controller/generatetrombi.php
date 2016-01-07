@@ -16,7 +16,7 @@
         $html2pdf->pdf->SetDisplayMode('fullpage');
         //$html2pdf->pdf->SetProtection(array('print'), 'spipu');
         $html2pdf->writeHTML($content);
-        $html2pdf->Output('../view/trombinoscope'.$formation._.$groupe.'.pdf', 'F');
+        $html2pdf->Output('../view/trombinoscope'.$formation.'_'.$groupe.'.pdf', 'F');
 
         echo json_encode([
             'message' => "success",
