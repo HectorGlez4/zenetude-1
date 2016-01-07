@@ -2,7 +2,7 @@
 include_once '../model/db.php';
 	class PageView {
 		/**
-			* Show the inscription's form.
+        * Show the inscription's form.
 		**/
 		public function showInscriptionForm() {
 		?>
@@ -71,10 +71,8 @@ include_once '../model/db.php';
 		<?php
 		}
 
-
-
 		/**
-			* Include all javascript's links needed by the pages.
+        * Include all javascript's links needed by the pages.
 		**/
 		public function showJavaLinks() {
 		?>
@@ -132,7 +130,8 @@ include_once '../model/db.php';
 
 
 		/**
-			* Show the first part of description in the index's page.
+        * Show the first part of description in the index's page.
+        * @param array $userInfos Information about the user.
 		**/
 		public function showIndexDescription($connect) {
 			if(!$connect) {
@@ -172,7 +171,7 @@ include_once '../model/db.php';
 
 
 		/**
-			* Show the footer.
+        * Show the footer.
 		**/
 		public function showFooter() {
 			?>
@@ -182,7 +181,7 @@ include_once '../model/db.php';
 
 
 		/**
-			* Show the calendar.
+        * Show the calendar.
 		**/
 		public function showCalendar() {
 			?>
@@ -204,7 +203,7 @@ include_once '../model/db.php';
 
 
 		/**
-			* Include the head needed by pages
+        * Include the head needed by pages
 		**/
 		public function showHead() {
 			?>
@@ -237,7 +236,8 @@ include_once '../model/db.php';
 
 
 		/**
-			* Show the header.
+        * Show the header.
+        * @param bool $connect if the user is connected.
 		**/
 		public function showHeader($connect) {
 			if(!$connect) {?>
@@ -293,7 +293,8 @@ include_once '../model/db.php';
 
 
 		/**
-			* Show the static menu.
+        * Show the static menu.
+        * @param bool $connect if the user is connected.
 		**/
 		public function showMenu($connect) {
 			if(!$connect) {?>
@@ -350,10 +351,11 @@ include_once '../model/db.php';
 		}
 
 
-		
-		/**
-			* Show the dynamic menu bar. 
-		**/
+        /**
+         * @param bool $connect If the user is connected.
+         * @param array $userInfos Information about the user.
+         * @param bool $rf If the user is a training manager.
+         */
 		public function showScrollMenu($connect, $userInfos, $rf = false) {
 			if(!$connect) {?>
 			<nav id="scroll-nav">
@@ -456,6 +458,9 @@ include_once '../model/db.php';
 			}
 		}
 
+        /**
+         * Show the form of the recuperation of password.
+         */
 		public function showRecuperation(){ ?>
 			<!-- CONTAINER -->
 			<div class="container container-fluid">
@@ -495,6 +500,12 @@ include_once '../model/db.php';
 		<?php }
 
 
+           /**
+         * Show the differents contacts possibles for an utilisator.
+         * @param array $userInfos The informations about the user.
+         * @param array $result The informations about the training manager associated with the user.
+         *
+         */
         public function showContact($userInfos, $result){
             if ((isset($userInfos['infoUser']['user_firstname']) && $userInfos['infoUser']['user_firstname'] != "") && (isset($userInfos['infoUser']['user_name']) && $userInfos['infoUser']['user_name'] != ""))
                 echo '<div class="card-header"><h2>'.$userInfos['infoUser']['user_firstname'].' '.$userInfos['infoUser']['user_name'].'</h2></div>';
@@ -519,7 +530,12 @@ include_once '../model/db.php';
 	        	echo "<div id='noFormation'>Vous n'avez pas encore renseigné votre formation !</div></br><a class='right-align' href='gestion.php'>Page gestion du profil</a>";
         }
 
-
+        /**
+         * Show the differents informations about the profil of the user.
+         * @param array $userInfos The informations about the user.
+         * @param bool $rf If the user is a training manager.
+         * @param array $result Informations about educational documents associated with the user.
+         */
 		public function showProfilInformations($userInfos, $rf = false, $result){
 			if(!$rf) {
 	    	echo '
@@ -596,7 +612,10 @@ include_once '../model/db.php';
 				}
 			}
 
-
+        /**
+         * Show the administration.
+         * @param array $register All information about users.
+         */
 		public function showAdministration($register/*, $selection*/){
 			$db = connect();
 			?>
@@ -694,7 +713,7 @@ include_once '../model/db.php';
 	                die('Requête invalide : ' . $db->errorInfo()[1]);
 	            }
 	            else{
-		        //Informations and redirect
+		        //Information and redirect
 		        echo '<div class="ok">Membre supprimé avec succès. Redirection en cours...</div><script type="text/javascript"> window.setTimeout("location=(\'admin.php\');",3000) </script>';
 			    }
 		    }
