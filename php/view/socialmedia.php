@@ -10,6 +10,11 @@
 		header('Location: index.php?refus=true');
 	}
 
+    if (isset($_GET['error_code'])){
+        session_destroy();
+        header('Location: index.php?failure=true');
+    }
+
 	include_once '../model/socialmediadata.php';
     include_once '../../secure/config.php';
 
