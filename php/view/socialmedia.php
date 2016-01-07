@@ -6,6 +6,7 @@
 
 
 	if ((isset($_GET['error'])) || (isset($_GET['denied']))){
+        session_destroy();
 		header('Location: index.php?refus=true');
 	}
 
@@ -55,8 +56,6 @@
 	//1.Start Session
 
 	//2.Use app id,secret and redirect url
-	//$app_id = '1207370725956552';
-	//$app_secret = '1b83b246d8f61a10d05879a692494c63';
     $app_id = $facebookapikey;
     $app_secret = $facebookapisecret;
 	$redirect_url='http://zenetude.esy.es/php/view/index.php';
@@ -64,7 +63,7 @@
 	//3.Initialize application, create helper object and get fb sess
 	FacebookSession::setDefaultApplication($app_id,$app_secret);
 	$helper = new FacebookRedirectLoginHelper($redirect_url);
-	//$email = $helper->getLoginUrl(['email']);
+
 	$sess = $helper->getSessionFromRedirect();
 	$_SESSION['sessFacebook'] = $sess;
 
@@ -76,7 +75,6 @@
 		$request = new FacebookRequest($sess, 'GET', '/me?fields=id,first_name,last_name,email');
 		// from response get graph object
 		$response = $request->execute();
-		//$graph = $response->getGraphObject(GraphUser::className())->asArray();
 		$graph = $response->getGraphObject(GraphUser::className());
 		// use graph object methods to get user details
 		$email = $graph->getProperty('email');
@@ -104,8 +102,7 @@
 	require_once('../../vendor/TwitterOauth/OAuth.php');
 	require_once('../../vendor/TwitterOauth/twitteroauth.php');
 
-	//define('CONSUMER_KEY', 'nlOVxx4qz4DDWYFlSPWlbsZWO');
-	//define('CONSUMER_SECRET', 'BEGyzam5iYaaBTKc7KaunoEEZFk7QNG9FSJOe4vXKr0gQ2Q19T');
+
     define('CONSUMER_KEY', $twitterapikey);
     define('CONSUMER_SECRET', $twitterapisecret);
 	define('OAUTH_CALLBACK', 'http://zenetude.esy.es/php/view/index.php');
@@ -235,7 +232,6 @@
 		$authUrl = $client->createAuthUrl();
 
 	}
-	
 
 
 	if(isset($authUrl)) {
