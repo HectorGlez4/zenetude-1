@@ -1,4 +1,7 @@
 <?php
+
+include_once '../../../secure/config.php';
+
 /*
  * Copyright 2010 Google Inc.
  *
@@ -25,8 +28,10 @@ $apiConfig = array(
     'application_name' => 'Zenetude',
 
     // OAuth2 Settings, you can get these keys at https://code.google.com/apis/console
-    'oauth2_client_id' => '657801969546-b1fgtiurlrsbj3t8l8o1a1ioghpuiep0.apps.googleusercontent.com',
-    'oauth2_client_secret' => 'B54pUp6AxMJ5TxPA-tXPLMj0',
+    //'oauth2_client_id' => '657801969546-b1fgtiurlrsbj3t8l8o1a1ioghpuiep0.apps.googleusercontent.com',
+    'oauth2_client_id' => $googleapikey,
+    //'oauth2_client_secret' => 'B54pUp6AxMJ5TxPA-tXPLMj0',
+    'oauth2_client_secret' => $googleapisecret,
     'oauth2_redirect_uri' => 'http://zenetude.esy.es/php/view/index.php',
 
     // The developer key, you get this at https://code.google.com/apis/console
