@@ -167,13 +167,9 @@
 		function compress_image($src, $dest , $quality) {
 			$info = getimagesize($src);
   
-		    if ($info['mime'] == 'image/jpeg') 
+		    if ($info['mime'] == 'image/jpeg')
 		    {
 		        $image = imagecreatefromjpeg($src);
-		    }
-		    elseif ($info['mime'] == 'image/gif') 
-		    {
-		        $image = imagecreatefromgif($src);
 		    }
 		    elseif ($info['mime'] == 'image/png') 
 		    {
@@ -189,7 +185,6 @@
   
     		//return destination file
     		return $dest;
-
 		}
 
 		/**
@@ -211,7 +206,7 @@
 
 				if ($_FILES['student_avatar']['error'] > 0) {
 					//$accountView -> showMessage("C'est l'erreur 1.");
-					$erreur += 1;
+					//$erreur += 1;
 					echo 'error';
 				}
 				else if (($_FILES['student_avatar']['size'] >= $maxsize) || ($_FILES["student_avatar"]["size"] == 0)) {
@@ -232,6 +227,7 @@
 		            if ($resultat) {
 		            	$accountmodel -> addAvatar($fichier, $session);
 		            	$_SESSION['infoStudent']['student_avatar'] = $fichier;
+		            	if ($extension_upload !== 'gif')
 		            	$PageController -> compress_image($fichier, $fichier, 50);
 		            }
 	            }
@@ -258,7 +254,7 @@
 
 				if ($_FILES['student_trombi']['error'] > 0) {
 					//echo 'error';
-					$erreur += 1;
+					//$erreur += 1;
 				} else if (($_FILES['student_trombi']['size'] >= $maxsize) || ($_FILES["student_trombi"]["size"] == 0)) {
 					//$accountView -> showMessage("Le poids de la photo du trombinoscope est trop grosse (max : 2 Mo).");
 					echo 'erreur size';
@@ -277,6 +273,7 @@
 		            if ($resultat) {
 		            	$accountmodel -> addTrombi($fichier, $session);
 		            	$_SESSION['infoStudent']['student_trombi'] = $fichier;
+		            	if ($extension_upload !== 'gif')
 		            	$PageController -> compress_image($fichier, $fichier, 50);
 		            }
 	            }
