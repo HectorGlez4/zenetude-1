@@ -248,7 +248,8 @@ footer{
 	}
 
 	.logo-svg{
-		width: 90%;
+		width: inherit;
+		height: 90%;
 	}
 
 	#scroll-nav>.nav-wrapper>img{
@@ -277,6 +278,11 @@ footer{
 		padding-left: 30px;
 		padding-right: 30px;
 	}
+
+	.logo-svg{
+		width: inherit;
+		height: 80%;
+	}
 }
 
 @media screen and (max-width: 700px) {
@@ -286,7 +292,7 @@ footer{
 
 	.brand-logo-responsive{
 		display: block;
-		width: 250px;
+		width: 180px;
 		float: left;
 	}
 
@@ -315,7 +321,7 @@ footer{
 
 	.brand-logo-responsive{
 		display: block;
-		width: 200px;
+		width: 160px;
 		float: left;
 	}
 
