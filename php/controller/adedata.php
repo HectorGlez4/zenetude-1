@@ -90,7 +90,8 @@
                 //Create a new PHPMailer instance
                 $mail = new PHPMailer;
                 //Set who the message is to be sent from
-                $mail->setFrom('Zenetude', '');
+                $mail->From = "noreply@zenetude.esy.es";
+                $mail->FromName = "Noreply - Zenetude";
                 //Set an alternative reply-to address
                 /*$mail->addReplyTo('replyto@example.com', 'First Last');*/
                 //Connect to database
