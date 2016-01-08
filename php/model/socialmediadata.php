@@ -61,7 +61,7 @@ function addDataGoogle($email, $picture){
     $data = $co->query("SELECT * FROM Student WHERE student_instituteemail = '$email' OR student_personalemail = '$email'");
     $res = $data->fetch();
 
-    if (count($res) != 0){
+    if ($res){
 		$accountModel = new AccountModel();
 		$_SESSION['infoStudent'] = $res;
         $_SESSION['infoStudent']['student_avatar'] = $picture;
@@ -83,9 +83,9 @@ function addDataGoogle($email, $picture){
 		
 	}else{
         session_destroy();
-        $accountview = new AccountView();
-        $accountview->showMessage('Veuillez vous inscrire avant de vous connecter', 'ok', "index.php");
-        //echo '<script>document.location.href="index.php"</script>';
+        //$accountview = new AccountView();
+        //$accountview->showMessage('Veuillez vous inscrire avant de vous connecter', 'ok',);
+        echo '<script>document.location.href="index.php?errors=true"</script>';
 	}
 	
 }
