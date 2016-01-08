@@ -928,7 +928,7 @@ include_once '../model/db.php';
 						</div>
 						<div class='col s6'>
 							<label for='training_manager'>Choisir un responsable de formation</label>
-							<select id='list_training_managers' name='list_training_managers' size=1>";
+							<select id='list_training_managers' placeholder='Ex : DUT-NOMDELAFORMATION' name='list_training_managers' size=1>";
 				while ($result_training_managers = $list_training_manager->fetch()) {
 					echo "<option value='" .$result_training_managers['user_id'] ."'>".$result_training_managers['user_instituteemail']. "</option>";
 				}
@@ -948,7 +948,7 @@ include_once '../model/db.php';
 						</div>
 						<div class='col s6'>
 							<label for='add_training_max_group'>Nombres de groupes de la formation</label>
-							<input type='number' id='add_training_max_group' min='1' class='form-control' name='addTrainingMaxGroup'>
+							<input type='number' id='add_training_max_group' min='1' class='form-control' name='addTrainingMaxGroup' value=1>
 						</div>
 					</div>
 					<button class='btn' type='submit' name='Ajouter'>Ajouter</button>
