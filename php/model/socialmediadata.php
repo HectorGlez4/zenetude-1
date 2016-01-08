@@ -84,8 +84,8 @@ function addDataGoogle($email, $picture){
 	}else{
         session_destroy();
         $accountview = new AccountView();
-        $accountview->showMessage('Veuillez vous inscrire avant de vous connecter', 'ok');
-        echo '<script>document.location.href="index.php"</script>';
+        $accountview->showMessage('Veuillez vous inscrire avant de vous connecter', 'ok', "index.php");
+        //echo '<script>document.location.href="index.php"</script>';
 	}
 	
 }
