@@ -222,13 +222,14 @@
 				else {
 			 		//$accountView->showMessage("on passe par la", "ok", "gestion.php");
 		            $fichier='../../img/avatar/'.$_SESSION['infoStudent']['student_id'].".$extension_upload";
+		            unlink($_SESSION['infoUserStudent']['student_avatar']);
 		            $session = $_SESSION['infoUser']['user_id'];
 		            $resultat = move_uploaded_file($_FILES['student_avatar']['tmp_name'],$fichier);
 		            if ($resultat) {
 		            	$accountmodel -> addAvatar($fichier, $session);
 		            	$_SESSION['infoStudent']['student_avatar'] = $fichier;
 		            	if ($extension_upload !== 'gif')
-		            	$PageController -> compress_image($fichier, $fichier, 50);
+		            		$PageController -> compress_image($fichier, $fichier, 50);
 		            }
 	            }
         	}
@@ -268,6 +269,7 @@
 
 				else {
 		            $fichier='../../img/trombi/'.$_SESSION['infoStudent']['student_id'].".$extension_upload";
+		            unlink($_SESSION['infoStudent']['student_trombi']);
 		            $session = $_SESSION['infoUser']['user_id'];
 		            $resultat = move_uploaded_file($_FILES['student_trombi']['tmp_name'],$fichier);
 		            if ($resultat) {
