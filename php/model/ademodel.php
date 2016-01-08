@@ -3,8 +3,8 @@
 
         /**
          * Get training manager's institute mail adress
-         * @param $first_name str constains the training manager's first name
-         * @param $last_name str constains the training manager's last name
+         * @param $first_name string constains the training manager's first name
+         * @param $last_name string constains the training manager's last name
          * @return array request result
          */
 		public function recupEmailRf($first_name, $last_name){

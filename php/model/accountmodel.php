@@ -3,7 +3,7 @@
 
         /**
         * Get training's information using user id
-        * @param $param str contains the attribute needed
+        * @param $param string contains the attribute needed
         * @param $userId int contains the user id
         * @return request's result
         */
@@ -20,8 +20,8 @@
 
 		/**
 		* Get user's informations about an user.
-        * @param $param str contains the attribute needed
-        * @param $mail str contains the user mail adress
+        * @param $param string contains the attribute needed
+        * @param $mail string contains the user mail adress
         * @return request's result
 		**/
 		public  function getDataUser($param, $mail) {
@@ -33,7 +33,7 @@
 
 		/**
         * Get student's informations (an attribute) about a student selected by its id.
-        * @param $param str contains the attribute needed
+        * @param $param string contains the attribute needed
         * @param $userId int contains the user id
         * @return request's result
 		**/
@@ -46,7 +46,7 @@
 
 		/**
          * Get training manager's informations about an training manager selected by its id.
-         * @param $param str contains the attribute needed
+         * @param $param string contains the attribute needed
          * @param $userId int contains the user id
          * @return request's result
 		**/
@@ -60,8 +60,8 @@
 		/**
          * Get all informations of an user selected by its mail and its password.
          * This function is used for test connection for now if a password exits for a mail in the datebase.
-         * @param $userMail str contains the user mail adress
-         * @param $userPassword str contains the user's cripted password
+         * @param $userMail string contains the user mail adress
+         * @param $userPassword string contains the user's cripted password
          * @return request's result
 		**/
         public function getUserByPassword($userMail, $userPassword) {
@@ -86,7 +86,7 @@
 
         /**
          * Get the user email to check if it's already on the database.
-         * @param $userMail str contains the user mail adress
+         * @param $userMail string contains the user mail adress
          * @return request's result
          **/
         public function getUserEmail($userMail) {
@@ -139,7 +139,7 @@
 
 		/**
          * Generate a new password an update it in the database. Then, a mail is automaticaly send to the user.
-         * @param $userMail str contains the user mail adress
+         * @param $userMail string contains the user mail adress
 		**/
 		public function recoverPassword($userMail) {
 	    	$accountView = new AccountView();
@@ -183,10 +183,10 @@
 
 		/**
          * Add a new user to the database.
-         * @param $userMail str contains the user's id
-         * @param $userfirstname str contains the user first name
-         * @param $userlastname str contains the user last name
-         * @param $userPassword str contains the user's cripted password
+         * @param $userMail string contains the user's id
+         * @param $userfirstname string contains the user first name
+         * @param $userlastname string contains the user last name
+         * @param $userPassword string contains the user's cripted password
 		**/
         public function addUser($userMail, $userfirstname, $userlastname, $userPassword) {
             $db = connect();
@@ -202,7 +202,7 @@
 
         /**
          * Send an e-mail to the user's mail ardess
-         * @param $userMail str contains the user mail adress
+         * @param $userMail string contains the user mail adress
          */
         public function sendEmail($userMail){
             $accountView = new AccountView();
@@ -266,6 +266,7 @@
 
             return $request;
         }
+
 
         public function uploadInfoUser(){
             $accountView = new AccountView();
@@ -434,7 +435,7 @@
 
         /**
          * Update student avatar path in DB
-         * @param $fichier str contains picture's path
+         * @param $fichier string contains picture's path
          * @param $userId int contains the user id
          * @return request's result
          */
@@ -449,7 +450,7 @@
 
         /**
          * Update the student's picture's path of the trombinoscope in DB
-         * @param $fichier str contains picture's path
+         * @param $fichier string contains picture's path
          * @param $userId int contains the user id
          * @return request's result
          */
@@ -464,7 +465,7 @@
 
         /**
          * Update the user's cripted password
-         * @param $password str contains the cripted password
+         * @param $password string contains the cripted password
          * @param $userId int contains the user id
          * @return mixed
          */

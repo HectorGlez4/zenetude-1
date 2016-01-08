@@ -3,7 +3,7 @@
 
 
 		/**
-			* Test if the mail address given by the user exists in the database. 
+			* Test if the mail address given by the user exists in the database.
 		**/
 		public function	controlRecoverPassword() {
 			$accountModel = new AccountModel();

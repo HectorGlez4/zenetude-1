@@ -2,7 +2,11 @@
  * Created by v13000737 on 03/12/15.
  */
 
-
+/**
+ * Display the wanted trombinoscope on document.php using AJAX
+ * @param formation int contains the training id
+ * @param groupe int contains the student group
+ */
 function actualiserTrombi(formation,groupe){
     $.ajax({
         url: '../controller/generatetrombi.php',
@@ -33,9 +37,13 @@ function actualiserTrombi(formation,groupe){
 
     });
 }
-//../controller/documents/generateTrombi.php?f=<?php echo $frm ?>&g=<?php echo $grp ?>
-//../controller/documents/generateSheet.php?f=<?php echo $frm ?>&g=<?php echo $grp ?>
 
+/**
+ * Open a new tab with the wanted pdf document for printing
+ * @param doc string contains "trombi" or "sheet" according to the wanted document
+ * @param formation int contains the training id
+ * @param groupe int contains the student group
+ */
 function imprimerDoc(doc, formation, groupe){
     if(doc == 1)
     {
@@ -47,6 +55,8 @@ function imprimerDoc(doc, formation, groupe){
         doc = "sheet";
         var url = "feuille_emargement"+formation+"_"+groupe+".pdf";
     }
+    else
+        alert("error: unknown document");
     $.ajax({
         url: '../controller/generate'+doc+'.php',
         type: 'POST',

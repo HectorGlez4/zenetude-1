@@ -1,6 +1,9 @@
 <?php
 	class PageController {
 
+        /**
+         * Test if the visitor is connected, Else, he's redirected to the index.
+         **/
         public function controlConnexion() {
             if(!isset($_SESSION['infoUser'])) {
                 echo '<script>document.location.href="../view/index.php"</script>';
@@ -8,7 +11,9 @@
             }
         }
 
-
+        /**
+         * Test if the visitor is connected and shows the form of modification for a training manager or a student.
+         **/
 		public function controlProfilInformations() {
 			$pageView = new PageView();
 			$result = 0;
@@ -22,7 +27,11 @@
 
 		}
 
-		public function controlGestion(){
+        /**
+         * Test if the visitor is connected and if the visitor is a training manager.
+         * @return bool
+         */
+		public function controlGestion() {
 			$pageView = new PageView();
 			$accountmodel = new AccountModel();
 			if(isset($_SESSION['infoUser']) && $_SESSION['infoUser']['user_type'] == 'RF') {
@@ -39,12 +48,18 @@
 			}
 		}
 
+        /**
+         * Test if the mail address given by the user is connected and if he is a training manager. if yes, the visitor is redirected to the index page.
+         **/
 		public function controlContact(){
 			$pageView = new PageView();
 			if(isset($_SESSION['infoUser']) && $_SESSION['infoUser']['user_type'] == 'RF')
 				echo '<script>document.location.href="../view/index.php"</script>';
 		}
 
+        /**
+         * Show the possible contacts.
+         **/
 		public function controlShowContact(){
 			$pageView = new PageView();
 			$accountmodel = new AccountModel();
@@ -52,6 +67,9 @@
 			$pageView -> showContact($_SESSION, $result);
 		}
 
+        /**
+         * Test if the visitor is connected and if he's an administrator.
+         **/
 		public function controlAdministration(){
             $accountmodel = new AccountModel();
             $result = $accountmodel -> isAdministrator();
@@ -59,6 +77,9 @@
 				echo '<script>document.location.href="../view/index.php"</script>';				
 		}
 
+        /**
+         * Show the administration.
+         **/
 		public function controlShowAdministration(){
 			$pageView = new PageView();
 			$accountmodel = new AccountModel();
@@ -68,6 +89,9 @@
 			$pageView -> showAdministration($allUser/*, $allInfoUserSelect*/);
 		}
 
+        /**
+         * Test if the visitor is connected and if he's a training manager and return the documents. Else, return to the index page.
+         **/
 		public function controlDocuments(){
 			$pageView = new PageView();
 			if(isset($_SESSION['infoUser']) && $_SESSION['infoUser']['user_type'] == 'Etudiant')
@@ -82,7 +106,7 @@
 
 
 		/**
-			* Test if a session exists before show the index's description. 
+        * Test if a session exists before show the index's descriptions.
 		**/
 		public function controlIndexDescription() {
 			$pageView = new PageView();
@@ -94,7 +118,7 @@
 
 
 		/**
-			* Test if a session exists before show the header. 
+        * Test if a session exists before show the header.
 		**/
 		public function controlHeader() {
 			$pageView = new PageView();
@@ -106,7 +130,7 @@
 
 
 		/**
-			* Test if a session exists before show the static menu. 
+        * Test if a session exists before show the static menu.
 		**/
 		public function controlMenu() {
 			$pageView = new PageView();
@@ -121,7 +145,7 @@
 
 
 		/**
-			* Test if a session exists before show the dynamic menu bar. 
+        * Test if a session exists before show the dynamic menu bar.
 		**/
 		public function controlDynamicMenu() {
 			$pageView = new PageView();
@@ -136,6 +160,10 @@
 				$pageView -> showScrollMenu(false, $_SESSION);
 		}
 
+
+		/**
+		 * Compress an picture.
+		 **/
 		function compress_image($src, $dest , $quality) {
 			$info = getimagesize($src);
   
@@ -164,6 +192,9 @@
 
 		}
 
+		/**
+		 * Add an avatar in the database.
+		 **/
 		public function uploadPhoto(){
 			$accountmodel = new AccountModel();
 			$PageController = new PageController();
@@ -180,17 +211,17 @@
 
 				if ($_FILES['student_avatar']['error'] > 0) {
 					//$accountView -> showMessage("C'est l'erreur 1.");
-					//$erreur += 1;
+					$erreur += 1;
 					echo 'error';
 				}
 				else if (($_FILES['student_avatar']['size'] >= $maxsize) || ($_FILES["student_avatar"]["size"] == 0)) {
 					//$accountView -> showMessage("Le poids de l'avatar est trop lourd (max : 2 Mo).");
-					//$erreur += 1;
+					$erreur += 1;
 					echo 'erreur size';
 				}
 				else if (!in_array($ext,$extensions_valides)) {
 					//$accountView -> showMessage("Mauvaise extension pour l'avatar.");
-					//$erreur += 1;
+					$erreur += 1;
 					echo 'erreur extension';
 				}
 				else {
@@ -209,6 +240,9 @@
 			return $erreur;
         }
 
+        /**
+         * Upload a group photo to the database.
+         **/
         public function uploadTrombi(){
         	$accountmodel = new AccountModel();
         	$PageController = new PageController();
@@ -224,6 +258,7 @@
 
 				if ($_FILES['student_trombi']['error'] > 0) {
 					//echo 'error';
+					$erreur += 1;
 				} else if (($_FILES['student_trombi']['size'] >= $maxsize) || ($_FILES["student_trombi"]["size"] == 0)) {
 					//$accountView -> showMessage("Le poids de la photo du trombinoscope est trop grosse (max : 2 Mo).");
 					echo 'erreur size';
@@ -249,6 +284,9 @@
 			return $erreur;
         }
 
+        /**
+         * Tests before modify the password.
+         **/
 		public function modifyPassword() {
 			$accountView = new AccountView();
 			$accountmodel = new AccountModel();
