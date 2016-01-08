@@ -319,6 +319,14 @@ footer{
 		float: left;
 	}
 
+	#scroll-nav>.nav-wrapper>img{
+		width: 150px;
+	}
+
+}
+
+@media screen and (max-width: 350px) {
+
 }
 
 .image-upload img{
