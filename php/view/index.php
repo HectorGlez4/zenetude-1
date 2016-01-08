@@ -18,6 +18,7 @@
 
 
     if (isset($_GET['noniscr'])){
+
         echo "<script>alert('Veuillez vous inscrire avant de vous connecter !');</script>";
     }
 
