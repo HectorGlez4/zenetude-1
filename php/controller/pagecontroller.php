@@ -308,7 +308,7 @@
 				}
 				else {
 					$crypt_new_user_password = sha1($new_user_password);
-					//$accountmodel -> updateUserPassword($crypt_new_user_password, $session);
+					$accountmodel -> updateUserPassword($crypt_new_user_password, $session);
 				}
 			}
 			else {
