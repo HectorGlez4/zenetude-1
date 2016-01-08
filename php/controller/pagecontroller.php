@@ -211,17 +211,17 @@
 
 				if ($_FILES['student_avatar']['error'] > 0) {
 					//$accountView -> showMessage("C'est l'erreur 1.");
-					//$erreur += 1;
+					$erreur += 1;
 					echo 'error';
 				}
 				else if (($_FILES['student_avatar']['size'] >= $maxsize) || ($_FILES["student_avatar"]["size"] == 0)) {
 					//$accountView -> showMessage("Le poids de l'avatar est trop lourd (max : 2 Mo).");
-					//$erreur += 1;
+					$erreur += 1;
 					echo 'erreur size';
 				}
 				else if (!in_array($ext,$extensions_valides)) {
 					//$accountView -> showMessage("Mauvaise extension pour l'avatar.");
-					//$erreur += 1;
+					$erreur += 1;
 					echo 'erreur extension';
 				}
 				else {
@@ -258,6 +258,7 @@
 
 				if ($_FILES['student_trombi']['error'] > 0) {
 					//echo 'error';
+					$erreur += 1;
 				} else if (($_FILES['student_trombi']['size'] >= $maxsize) || ($_FILES["student_trombi"]["size"] == 0)) {
 					//$accountView -> showMessage("Le poids de la photo du trombinoscope est trop grosse (max : 2 Mo).");
 					echo 'erreur size';
