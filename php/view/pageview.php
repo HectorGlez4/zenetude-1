@@ -104,21 +104,6 @@ include_once '../model/db.php';
 		   });
 		 });
 
-//		$('.datepicker').pickadate({
-//			labelMonthNext: 'Mois suivant',
-//			labelMonthPrev: 'Mois précédent',
-//			labelMonthSelect: 'Selectionner le mois',
-//			labelYearSelect: "Selectionner l'annee",
-//			monthsFull: [ 'Janvier', 'Febrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre' ],
-//			monthsShort: [ 'Jan', 'Feb', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sep', 'Oct', 'Nov', 'Dec' ],
-//			weekdaysFull: [ 'Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi' ],
-//			weekdaysShort: [ 'Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam' ],
-//			weekdaysLetter: [ 'D', 'L', 'M', 'M', 'J', 'V', 'S' ],
-//			today: "Aujourd'hui",
-//			clear: 'Effacer',
-//			close: 'Fermer'
-//		});
-
 		window.onload=ajuste;
 			function ajuste(){
 			document.getElementById('aside1').style.minHeight=document.getElementById('bloc1').offsetHeight+"px";
@@ -175,7 +160,9 @@ include_once '../model/db.php';
 		**/
 		public function showFooter() {
 			?>
-			<footer></footer>
+			<footer>
+				<p>Copyright &copy 2016 Licence Professionnelle Systèmes Informatiques et Logiciels et Développement et Administration Internet et Intranet. Tous droits réservés</p>
+			</footer>
 			<?php
 		}
 
@@ -223,6 +210,7 @@ include_once '../model/db.php';
 				<!--Import profil.css-->
 				<link type="text/css" rel="stylesheet" href="../../css/profil.css"/>
 
+				<link rel="stylesheet" type="text/css" href="../../css/index.css"/>
 
 				<!-- CALENDAR -->
 			  	<link rel="stylesheet" href="../../css/clndr.css" type="text/css" />
@@ -403,7 +391,6 @@ include_once '../model/db.php';
 							echo 'Groupe '.$userInfos['infoStudent']['student_group'].'<br />';
 					?>
 					<li><a class="color" href="profil.php">Mon compte</a></li>
-					<li><a class="color" href="../model/deconnect.php">Déconnexion</a></li>
 
 					<?php
 						$db=connect();
@@ -417,6 +404,9 @@ include_once '../model/db.php';
 							}
 						}
 					?>
+
+					<li><a class="color" href="../model/deconnect.php">Déconnexion</a></li>
+
 				</ul>
 			</nav>
 			<nav id="scroll-nav">
@@ -500,7 +490,7 @@ include_once '../model/db.php';
 		<?php }
 
 
-           /**
+		/**
          * Show the differents contacts possibles for an utilisator.
          * @param array $userInfos The informations about the user.
          * @param array $result The informations about the training manager associated with the user.
@@ -530,12 +520,263 @@ include_once '../model/db.php';
 	        	echo "<div id='noFormation'>Vous n'avez pas encore renseigné votre formation !</div></br><a class='right-align' href='gestion.php'>Page gestion du profil</a>";
         }
 
-        /**
-         * Show the differents informations about the profil of the user.
-         * @param array $userInfos The informations about the user.
-         * @param bool $rf If the user is a training manager.
-         * @param array $result Informations about educational documents associated with the user.
-         */
+
+		/**
+		 *
+		 * @param $rf
+		 * @param $result
+		 * @param $result2
+		 * @param $result4
+		 */
+		public function showGestion($rf, $result, $result2, $result4){ ?>
+
+			<form id="formula1" action="validationgestion.php" method="POST" enctype="multipart/form-data">
+				<?php if (!$rf){ ?>
+				<div class="form-group">
+					<input type="hidden" class="form-control" value="<?php echo $_SESSION['infoUser']['user_id']; ?>" name="user_id">
+					<div class="row">
+						<div class="col s6">
+							<label for="">Nom</label>
+							<input type="text" class="form-control" value="<?php echo $result4[3];?>" name="user_name">
+						</div>
+						<div class="col s6">
+							<label for="">Prénom</label>
+							<input type="text" class="form-control" value="<?php echo $result4[4];?>" name="user_firstname">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col s6">
+							<label>Civilité</label>
+							<select name="user_civility">
+								<option value="Monsieur" <?php if($result4[5] == "Monsieur") echo " selected='selected'";?>>Monsieur</option>
+								<option value="Madame" <?php if($result4[5] == "Madame") echo " selected='selected'";?>>Madame</option>
+								<option value="Mademoiselle"<?php if($result4[5] == "Mademoiselle") echo " selected='selected'";?>>Mademoiselle</option>
+							</select>
+						</div>
+						<div class="col s6">
+							<label for="">Mail personnel</label>
+							<input type="email" class="form-control validate" value="<?php echo $result[4]; ?>" name="student_personalemail">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col s6">
+							<label for="">Telephone</label>
+							<input type="tel" pattern = '[0-9]{10}' placeholder ='0412345678' maxlength = '10' class="form-control" value="<?php echo $result[5]; ?>" name="student_phone">
+						</div>
+						<div class="col s6">
+							<label for="">Portable</label>
+							<input type="tel" pattern = '[0-9]{10}' placeholder ='0612345678' maxlength = '10' class="form-control" value="<?php echo $result[6]; ?>" name="student_mobile">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col s6">
+							<label for="">Adresse 1</label>
+							<input type="text" class="form-control" value="<?php echo $result[7]; ?>" name="student_address1">
+						</div>
+						<div class="col s6">
+							<label for="">Adresse 2</label>
+							<input type="text" class="form-control" value="<?php echo $result[8]; ?>" name="student_address2">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col s6">
+							<label for="">Code postal</label>
+							<input type="text" class="form-control" value="<?php echo $result[9]; ?>" name="student_zipcode" maxlength="5">
+						</div>
+						<div class="col s6">
+							<label for="">Ville</label>
+							<input type="text" class="form-control" value="<?php echo $result[10]; ?>" name="student_city">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col s6">
+							<label for="">Pays</label>
+							<input type="text" class="form-control" value="<?php echo $result[11]; ?>" name="student_country">
+						</div>
+						<div class="col s6">
+							<label for="">Nationalité</label>
+							<input type="text" class="form-control" value="<?php echo $result[12]; ?>" name="student_nationality">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col s6">
+							<label for="">Date de naissance</label>
+							<input type="date" class="form-control datepicker" value="<?php echo $result[13]; ?>" name="student_birthday">
+						</div>
+						<div class="col s6">
+							<label for="">Ville de naissance</label>
+							<input type="text" class="form-control" value="<?php echo $result[14]; ?>" name="student_birthcity">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col s6">
+							<label for="">Region de naissance</label>
+							<input type="text" class="form-control" value="<?php echo $result[15]; ?>" name="student_birtharea">
+						</div>
+						<div class="col s6">
+							<label for="">Pays de naissance</label>
+							<input type="text" class="form-control" value="<?php echo $result[16]; ?>" name="student_birthcountry">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col s6">
+							<label for="">Origine</label>
+							<input type="text" class="form-control" value="<?php echo $result[20]; ?>" name="student_origin">
+						</div>
+						<div class="col s6">
+							<label for="">Niveau d'études</label>
+							<select name="student_educationallevel">
+								<option value="BAC" <?php if($result[19] == "BAC") echo " selected='selected'";?>>BAC</option>
+								<option value="BAC+1"<?php if($result[19] == "BAC+1") echo " selected='selected'";?>>BAC+1</option>
+								<option value="BAC+2"<?php if($result[19] == "BAC+2") echo " selected='selected'";?>>BAC+2</option>
+								<option value="BAC+3"<?php if($result[19] == "BAC+3") echo " selected='selected'";?>>BAC+3</option>
+								<option value="BAC+4"<?php if($result[19] == "BAC4") echo " selected='selected'";?>>BAC+4</option>
+								<option value="BAC+5"<?php if($result[19] == "BAC+5") echo " selected='selected'";?>>BAC+5</option>
+								<option value="BAC+6"<?php if($result[19] == "BAC+6") echo " selected='selected'";?>>BAC+6</option>
+								<option value="BAC+7"<?php if($result[19] == "BAC+7") echo " selected='selected'";?>>BAC+7</option>
+								<option value="BAC+8"<?php if($result[19] == "BAC+8") echo " selected='selected'";?>>BAC+8</option>
+							</select>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col s6">
+							<label>Formation actuelle</label>
+							<select name="training_description">
+								<?php
+									foreach ($result2 as $value) {
+										if ($value[0] !== NULL) {
+											echo "<option value=" . $value[0];
+											if( $value[1] == $result[2])
+												echo " selected='selected'";
+											echo ">" . $value[0] . "</option>";
+										}
+									}
+								?>
+							</select>
+						</div>
+						<div class="col s6">
+							<label name="student_grantholder" for="">Boursier</label></br>
+							<input id="oui" class="with-gap" name="student_grantholder" type="radio" value="1"<?php if($result[21] == "1") echo "checked ='ckecked'";?>/>
+							<label class="button" for="oui">Oui</label>
+							<input id="non" class="with-gap" name="student_grantholder" type="radio" value="0"/<?php if($result[21] == "0") echo "checked ='ckecked'";?>>
+							<label class="button" for="non">Non</label> </br>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col s6">
+							<label for="">Groupe</label>
+							<input type="text" class="form-control" value="<?php if ($result[24] != "0") echo $result[24]; ?>" name="student_group">
+						</div>
+						<div class="col s6">
+							<label>Type de formation</label>
+							<select name="student_status">
+							<option value="FI" <?php if($result[18] == "FI") echo " selected='selected'";?>>FI</option>
+							<option value="FA" <?php if($result[18] == "FA") echo " selected='selected'";?>>FA</option>
+							<option value="FC"<?php if($result[18] == "FC") echo " selected='selected'";?>>FC</option>
+							<option value="CP"<?php if($result[18] == "CP") echo " selected='selected'";?>>CP</option>
+							</select>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col s6">
+							<label>Votre photo de profil</label>
+							<div class="image-upload">
+								<label for="student_avatar">
+								<img src="<?php echo $_SESSION['infoStudent']['student_avatar']; ?>"/>
+								</label>
+								<div class="file-field input-field">
+									<div class="btn">
+										<span>Avatar</span>
+										<input type="file">
+									</div>
+									<div class="file-path-wrapper">
+										<input id="student_avatar" type="file" name="student_avatar"/>
+										<input class="file-path validate" type="text">
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col s6">
+							<label>Votre photo du trombinoscope</label>
+							<div class="image-upload">
+								<label for="student_trombi">
+								<img src="<?php echo $_SESSION['infoStudent']['student_trombi']; ?>"/>
+								</label>
+								<div class="file-field input-field">
+									<div class="btn">
+										<span>Photo</span>
+										<input type="file">
+									</div>
+									<div class="file-path-wrapper">
+										<input id="student_trombi" type="file" name='student_trombi'/>
+										<input class="file-path validate" type="text">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col s12">
+							 <label for="">Modifier mot de passe</label>
+							<input type='password' placeholder="Ancien mot de passe" class="form-control" name='old_user_password' />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col s12">
+					<input type='password' placeholder="Nouveau mot de passe" class="form-control" name='new_user_password' />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col s12">
+							<input type='password' placeholder="Confirmer nouveau mot de passe" class="form-control" name='confirm_new_user_password' />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col s12">
+							<label for="">Commentaires</label>
+							<textarea name="student_comment" rows="10" cols="10"><?php echo $result[23]; ?></textarea>
+						</div>
+					</div>
+				<?php } else {?>
+					<div class="form-group">
+						<div class="row">
+							<div class="col s12">
+								<label for="">Nom</label>
+								<input type="text" class="form-control" value="<?php echo $result4[3];?>" name="user_name">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col s12">
+								<label for="">Prénom</label>
+								<input type="text" class="form-control" value="<?php echo $result4[4];?>" name="user_firstname">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col s12">
+								<label>Civilité</label>
+									<select name="user_civility">
+										<option value="Monsieur" <?php if($result4[5] == "Monsieur") echo " selected='selected'";?>>Monsieur</option>
+										<option value="Madame" <?php if($result4[5] == "Madame") echo " selected='selected'";?>>Madame</option>
+										<option value="Mademoiselle"<?php if($result4[5] == "Mademoiselle") echo " selected='selected'";?>>Mademoiselle</option>
+									</select>
+							</div>
+						</div>
+				<?php } ?>
+					<div id="result"></div><!-- Retour de l'erreur en json -->
+					<input type="button" name="return" value="Retour" class="btn btn-primary btnbot" onclick="self.location.href='profil.php'">
+					<button type="submit" name="student_update" class="btn btn-primary right btnbot">Enregistrer</button>
+				</div>
+			</form>
+
+		<?php }
+
+
+		/**
+		 * Show the differents informations about the profil of the user.
+		 * @param array $userInfos The informations about the user.
+		 * @param bool $rf If the user is a training manager.
+		 * @param array $result Informations about educational documents associated with the user.
+		 */
 		public function showProfilInformations($userInfos, $rf = false, $result){
 			if(!$rf) {
 	    	echo '
@@ -673,6 +914,18 @@ include_once '../model/db.php';
 			        <option value="RF" <?php if($statut_register == "RF") echo "selected='selected'";?>>Responsable de Formation</option>
 		        </select>
 
+		       	<?php 
+		        	if ($statut_register == "RF") {
+						$trainings = $db->query("SELECT training_id, description FROM Training WHERE description IS NOT NULL");
+						echo '<label for="training_manager">Formation</label>';
+						echo "<select id='list_trainings' name='list_trainings' size=1>";
+						while ($result_trainings = $trainings->fetch()) {
+							echo "<option value='".$result_trainings['training_id'] ."'>".$result_trainings['description']. "</option>";
+						}
+						echo "</select>";
+					}
+				?>
+
 		        <button class="btn" type="submit" name="Modifier">Modifier</button>
 				<a class="btn supp" href="admin.php?supmembre=<?= $id_register.'&amp;statutmember='.$statut_register;?>">Supprimer</a>
 		    </form>
@@ -735,6 +988,9 @@ include_once '../model/db.php';
 	                    echo '<div class="erreur">Cet email « '.$_POST['email'].' » est utilisé!</div>'; return false;
 	                }
 				}
+
+				
+
 				//If first and last name empty
 		        if(empty($_POST['user_name'])){
 		            echo '<div class="erreur">Veuillez saisir un nom!</div>';

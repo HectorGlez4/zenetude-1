@@ -7,6 +7,7 @@ ini_set('display_errors', 1);
  */
 include_once 'db.php';
 include_once '../model/accountmodel.php';
+include_once '../view/accountview.php';
 
 /**
  * Connect the user if he's connected on facebook and if his mail adress is in the DB
@@ -40,7 +41,12 @@ function addDataFacebook($email, $picture){
 
 		print_r($co->errorInfo());
 		header('Location: index.php');
-	}
+
+	}else{
+        $accountview = new AccountView();
+        $accountview->showMessage('Veuillez vous inscrire avant de vous connecter.', '', 'index.php');
+
+    }
 }
 
 /**
@@ -72,6 +78,10 @@ function addDataGoogle($email, $picture){
 		print_r($co->errorInfo());
 		header('Location: index.php');
 		
+	}else{
+		$accountview = new AccountView();
+        $accountview->showMessage('Veuillez vous inscrire avant de vous connecter.', '', 'index.php');
+
 	}
 	
 }
@@ -105,7 +115,12 @@ function addDataTwitter($email, $picture){
 		print_r($co->errorInfo());
 		//header('Location: index.php');
 		echo '<script>document.location.href="index.php"</script>';
-	}
+
+	}else{
+        $accountview = new AccountView();
+        $accountview->showMessage('Veuillez vous inscrire avant de vous connecter.', '', 'index.php');
+
+    }
 
 	
        

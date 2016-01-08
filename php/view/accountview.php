@@ -16,6 +16,7 @@
             $retour['msg'] = $msg;
             $retour['send'] = $send;
             $retour['redirection'] = $redirection;
+			$_SESSION['msg']=true;
             echo json_encode($retour);
 			
 		}
