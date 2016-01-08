@@ -343,7 +343,7 @@
             }
             $idUser = $_SESSION['infoUser']['user_id'];
             if(!$rf){
-                if ($_SESSION['infoTraining']['training_max_group'] >= $values[19] ) {
+                if ($_SESSION['infoTraining']['training_max_group'] >= $values[17]  || empty($values[17]) || $values[17] == NULL  ) {
                     $update = $db->query("UPDATE Student SET
                     student_personalemail = '$values[1]',
                     student_phone = '$values[2]',
@@ -398,7 +398,6 @@
                 $_SESSION['infoStudent']['student_grantholder'] = $values[21];
             }
             $_SESSION['infoUser']['user_civility'] = $values[0];
-
 
             //$accountView->showMessage(null, "ok", "profil.php");
             header('Location: profil.php');
