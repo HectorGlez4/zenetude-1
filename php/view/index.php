@@ -11,6 +11,16 @@
 		echo "<script>alert('Vous avez refuser l\'accès au réseau social !');</script>";
 	}
 
+    if (isset($_GET['failure'])){
+        session_destroy();
+        echo "<script>alert('Une erreur s\'est produite. Veuillez réessayer ultérieurement');</script>";
+    }
+
+	if (isset($_GET['errors'])){
+		session_destroy();
+		echo "<script>alert('Veuillez vous inscrire avant de vous connecter');</script>";
+	}
+
 	include_once('./pageview.php');
 	include_once('../controller/pagecontroller.php');
 

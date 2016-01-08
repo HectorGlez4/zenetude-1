@@ -7,6 +7,7 @@ ini_set('display_errors', 1);
  */
 include_once 'db.php';
 include_once '../model/accountmodel.php';
+include_once '../view/accountview.php';
 
 /**
  * Connect the user if he's connected on facebook and if his mail adress is in the DB
@@ -23,14 +24,13 @@ function addDataFacebook($email, $picture){
 		$accountModel = new AccountModel();
 		//echo "<script>alert('');</script>";
 		$_SESSION['infoStudent'] = $res;
+        $_SESSION['infoStudent']['student_avatar'] = $picture;
 	    $id = $res['user_id'];
 		$idstu = $res['student_id'];
 		$pourlasess = $co->query("SELECT * FROM User WHERE user_id = $id");
 		$lesdonnees = $pourlasess->fetch();
 
 		$_SESSION['infoUser'] = $lesdonnees;
-		$_SESSION['image'] = $picture;
-
 
 						
         $trainingResult = $accountModel->getTrainingInformationsForUser('description', $_SESSION['infoUser']['user_id']);
@@ -38,9 +38,17 @@ function addDataFacebook($email, $picture){
 
         $co->query("UPDATE Student SET student_avatar = '$picture' WHERE `student_id` = $idstu");
 
+
 		print_r($co->errorInfo());
 		header('Location: index.php');
-	}
+
+	}else{
+        session_destroy();
+        $accountview = new AccountView();
+        $accountview->showMessage('Veuillez vous inscrire avant de vous connecter', 'ok');
+        echo '<script>document.location.href="index.php"</script>';
+
+    }
 }
 
 /**
@@ -53,9 +61,10 @@ function addDataGoogle($email, $picture){
     $data = $co->query("SELECT * FROM Student WHERE student_instituteemail = '$email' OR student_personalemail = '$email'");
     $res = $data->fetch();
 
-    if (count($res) != 0){
+    if ($res){
 		$accountModel = new AccountModel();
 		$_SESSION['infoStudent'] = $res;
+        $_SESSION['infoStudent']['student_avatar'] = $picture;
 	    $id = $res['user_id'];
 		$idstu = $res['student_id'];
 		$pourlasess = $co->query("SELECT * FROM User WHERE user_id = $id");
@@ -72,6 +81,11 @@ function addDataGoogle($email, $picture){
 		print_r($co->errorInfo());
 		header('Location: index.php');
 		
+	}else{
+        session_destroy();
+        //$accountview = new AccountView();
+        //$accountview->showMessage('Veuillez vous inscrire avant de vous connecter', 'ok',);
+        echo '<script>document.location.href="index.php?errors=true"</script>';
 	}
 	
 }
@@ -89,6 +103,7 @@ function addDataTwitter($email, $picture){
     if (count($res) != 0){
 		$accountModel = new AccountModel();
 		$_SESSION['infoStudent'] = $res;
+        $_SESSION['infoStudent']['student_avatar'] = $picture;
 	    $id = $res['user_id'];
 		$idstu = $res['student_id'];
 		$pourlasess = $co->query("SELECT * FROM User WHERE user_id = $id");
@@ -105,7 +120,14 @@ function addDataTwitter($email, $picture){
 		print_r($co->errorInfo());
 		//header('Location: index.php');
 		echo '<script>document.location.href="index.php"</script>';
-	}
+
+	}else{
+        session_destroy();
+        $accountview = new AccountView();
+        $accountview->showMessage('Veuillez vous inscrire avant de vous connecter', 'ok');
+		echo '<script>document.location.href="index.php"</script>';
+
+    }
 
 	
        

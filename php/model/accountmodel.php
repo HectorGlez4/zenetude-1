@@ -67,7 +67,25 @@
         public function getUserByPassword($userMail, $userPassword) {
             $db = connect();
             $request = $db->query('SELECT * FROM User WHERE user_instituteemail = "'.$userMail.'" AND user_password = "'.$userPassword.'"');
-            $result = $request->fetch();
+            $result = $request->fetch(PDO::FETCH_ASSOC);
+            return $result;
+        }
+
+        /**
+         * Get user_id, user_name, user_firstname and user_instituteemail of the wanted user using his user_id
+         * @param int $userId contains the user id
+         * @return array contains user's principal informations
+         */
+        public function getUserById($userId = null){
+            if($userId == null)
+                return false;
+
+            $db = connect();
+            $request = $db->query('SELECT user_id, user_name, user_firstname, user_instituteemail
+                                   FROM User
+                                   WHERE user_id = "'.$userId.'"');
+            $result = $request->fetch(PDO::FETCH_ASSOC);
+
             return $result;
         }
 
@@ -116,6 +134,27 @@
                 return false;
         }
 
+        public function getInfoStudent(){
+            $db = connect();
+            $request = $db->prepare('SELECT * FROM Student WHERE user_id = '.$_SESSION['infoUser']['user_id']);
+            $request->execute();
+            return $result = $request->fetch();
+        }
+
+        public function getDescritpionTraining(){
+            $db = connect();
+            $request = $db->prepare('SELECT description, training_id FROM Training');
+            $request->execute();
+            return $result = $request->fetchAll();
+        }
+
+        public function getAllInfoUser(){
+            $db = connect();
+            $request = $db->prepare('SELECT * FROM User WHERE user_id = '.$_SESSION['infoUser']['user_id']);
+            $request->execute();
+            return $result4 = $request->fetch();
+        }
+
 		/**
          * Generate a new password an update it in the database. Then, a mail is automaticaly send to the user.
          * @param $userMail string contains the user mail adress
@@ -137,7 +176,7 @@
 				<h1>Réinitialisation du mot de passe</h1>
 				<hr />
 				<p>Bonjour, votre mot de passe a été réinitialisé.</p>
-                <p>Votre nouveau mot de passe est : <a href='http://zenetude.esy.es/php/view/'>$string</a></p>
+                <p>Votre nouveau mot de passe est : <a href='http://zenetude.esy.es'>$string</a></p>
  				<hr />
 				<p>Ce message a été généré automatiquement. Merci de ne pas y répondre.</p>
 			";
@@ -151,15 +190,11 @@
              
             // Définition du sujet/objet
             $mailer->Subject = "Zenetude - Nouveau mot de passe";
-             
- 
-
-
             $mailer->AddAddress($userMail);
             //$mailer->Subject ="Subject: =?UTF-8?B?".base64_encode("Réinitialisation du mot de passe | Zenetude")."?=";
             $mailer->Body = $body;
             if(!$mailer->Send())
-                $accountView->showMessage("erreur mot de passe !");
+                $accountView->showMessage("Erreur mot de passe !");
             else
                 $accountView->showMessage("Votre mot de passe a été réinitialisé. Un message contenant le nouveau mot de passe vous à été envoyé.","ok","index.php");
 		}
@@ -170,17 +205,21 @@
          * @param $userfirstname string contains the user first name
          * @param $userlastname string contains the user last name
          * @param $userPassword string contains the user's cripted password
+         * @return int contains the user id of the new user
 		**/
         public function addUser($userMail, $userfirstname, $userlastname, $userPassword) {
             $db = connect();
             $usercorrectfirstname = str_replace(" ", "-", $userfirstname);
             $usercorrectlastname = str_replace(" ", "-", $userlastname);
-            $request = $db->query('INSERT INTO User (user_password, user_firstname, user_name, user_instituteemail) VALUES ("'.$userPassword.'", "'.$usercorrectfirstname.'", "'.$usercorrectlastname.'", "'.$userMail.'")');
-            $request0 = $db->query("SELECT user_id FROM User WHERE user_instituteemail = '$userMail'");
-            $result0 = $request0->fetch();
-            $id = $result0[0];
-            $request2 = $db->query('INSERT INTO Student (user_id, student_instituteemail, student_avatar, student_trombi) VALUES ("'.$id.'", "'.$userMail.'", "../../img/avatar.png", "../../img/avatar.png")');
+            $db->query('INSERT INTO User (user_password, user_firstname, user_name, user_instituteemail)
+                        VALUES ("'.$userPassword.'", "'.$usercorrectfirstname.'", "'.$usercorrectlastname.'", "'.$userMail.'")');
+            $request0 = $db->query("SELECT user_id
+                                    FROM User
+                                    WHERE user_instituteemail = '$userMail'");
+            $db->query('INSERT INTO Student (user_id, student_instituteemail, student_avatar, student_trombi)
+                        VALUES ("'.$id.'", "'.$userMail.'", "../../img/avatar.png", "../../img/avatar.png")');
 
+            return $request0->fetch(PDO::FETCH_ASSOC);
         }
 
         /**
@@ -193,7 +232,7 @@
                <p>Bienvenue !! vous êtes inscrit sur la page Zenetude.</p>
                <p> Votre identifiant : ".$_POST['mail']."</p>
                <p>Votre mot de passe : ".$_POST['passe']."</p>
-               <p>Accédez au site : <a href='http://zenetude.esy.es/php/view/'>Zenetude</a></p>
+               <p>Accédez au site : <a href='http://zenetude.esy.es'>Zenetude</a></p>
                <hr/>
                <p>Ce message a été généré automatiquement. Merci de ne pas y répondre.</p>
            ";
@@ -211,7 +250,7 @@
             //$mailer->Subject =/*"Subject: =?UTF-8?B?".*/base64_encode("Inscription au site Zenetude");
             $mailer->Body = $body;
             if(!$mailer->Send())
-                $accountView->showMessage("Erreur d'envoie du mail !");
+                $accountView->showMessage("Erreur d'envoie du mail de récapitulation ! Mais l'inscription a réussie.");
             else
                 $accountView->showMessage("Inscription terminée.","ok","index.php");
         }
@@ -248,6 +287,142 @@
             $request = $db->query("SELECT user_id, user_name, user_firstname, user_instituteemail, user_type  FROM User WHERE user_id='".$_POST['register']."'");
 
             return $request;
+        }
+
+
+        public function uploadInfoUser(){
+            $accountView = new AccountView();
+            $db = connect();
+            if(isset($_SESSION['infoUser']) && $_SESSION['infoUser']['user_type'] == 'RF')
+                $rf = true;
+            else
+                $rf = false;
+            $user_id=$_POST['user_id'];
+            $user_civility=$_POST['user_civility'];
+            if(!$rf) {
+                $student_personalemail=$_POST['student_personalemail'];
+                $student_phone=$_POST['student_phone'];
+                $student_mobile=$_POST['student_mobile'];
+                $student_address1=$_POST['student_address1'];
+                $student_address2=$_POST['student_address2'];
+                $student_zipcode=$_POST['student_zipcode'];
+                $student_city=$_POST['student_city'];
+                $student_country=$_POST['student_country'];
+                $student_nationality=$_POST['student_nationality'];
+                $student_birthday=$_POST['student_birthday'];
+                $student_birtharea=$_POST['student_birtharea'];
+                $student_birthcountry=$_POST['student_birthcountry'];
+                $student_status=$_POST['student_status'];
+                $student_educationallevel=$_POST['student_educationallevel'];
+                $student_origin=$_POST['student_origin'];
+                $student_birthcity=$_POST['student_birthcity'];
+                $student_comment=$_POST['student_comment'];
+                $student_group=$_POST['student_group'];
+                $training_description=$_POST['training_description'];
+                $student_educationallevel=$_POST['student_educationallevel'];
+                $student_grantholder=$_POST['student_grantholder'];
+
+                $request = $db->prepare('SELECT training_id FROM Training WHERE description = "'.$training_description.'"');
+                $request->execute();
+                $result3 = $request->fetchAll();
+                $training_id = $result3[0][0];
+            }
+
+            if(!$rf){
+                $values = array(htmlspecialchars($user_civility),
+                    htmlspecialchars($student_personalemail),
+                    htmlspecialchars($student_phone),
+                    htmlspecialchars($student_mobile),
+                    htmlspecialchars($student_address1),
+                    htmlspecialchars($student_address2),
+                    htmlspecialchars($student_zipcode),
+                    htmlspecialchars($student_city),
+                    htmlspecialchars($student_country),
+                    htmlspecialchars($student_nationality),
+                    htmlspecialchars($student_birthday),
+                    htmlspecialchars($student_birtharea),
+                    htmlspecialchars($student_birthcountry),
+                    htmlspecialchars($student_status),
+                    htmlspecialchars($student_educationallevel),
+                    htmlspecialchars($student_origin),
+                    htmlspecialchars($student_comment),
+                    htmlspecialchars($student_group),
+                    htmlspecialchars($student_birthcity),
+                    htmlspecialchars($training_id),
+                    htmlspecialchars($student_educationallevel),
+                    htmlspecialchars($student_grantholder)
+                );
+            }
+            else
+                $values = array($user_civility);
+
+            foreach ($values as $key => $value) {
+                if (empty($value)) {
+                    $values[$key] = null;
+                } else {
+                    $values[$key] = $value;
+                }
+            }
+            $idUser = $_SESSION['infoUser']['user_id'];
+            if(!$rf){
+                if ($_SESSION['infoTraining']['training_max_group'] >= $values[17]  || empty($values[17]) || $values[17] == NULL  ) {
+                    $update = $db->query("UPDATE Student SET
+                    student_personalemail = '$values[1]',
+                    student_phone = '$values[2]',
+                    student_mobile = '$values[3]',
+                    student_address1 = '$values[4]',
+                    student_address2 = '$values[5]',
+                    student_zipcode = '$values[6]',
+                    student_city = '$values[7]',
+                    student_country = '$values[8]',
+                    student_nationality = '$values[9]',
+                    student_birthdate = '$values[10]',
+                    student_birtharea = '$values[11]',
+                    student_birthcountry = '$values[12]',
+                    student_status = '$values[13]',
+                    student_educationallevel = '$values[14]',
+                    student_origin = '$values[15]',
+                    student_comment = '$values[16]',
+                    student_group = '$values[17]',
+                    student_birthcity = '$values[18]',
+                    training_id = '$values[19]',
+                    student_educationallevel = '$values[20]',
+                    student_grantholder = '$values[21]'
+                    WHERE user_id='$idUser'");
+                }
+            }
+
+            $update2 = $db->query("UPDATE User SET
+            user_civility = '$values[0]'
+            WHERE user_id='$idUser'");
+
+            if(!$rf){
+                $_SESSION['infoStudent']['student_personalemail'] = $values[1];
+                $_SESSION['infoStudent']['student_phone'] = $values[2];
+                $_SESSION['infoStudent']['student_mobile'] = $values[3];
+                $_SESSION['infoStudent']['student_address1'] = $values[4];
+                $_SESSION['infoStudent']['student_address2'] = $values[5];
+                $_SESSION['infoStudent']['student_zipcode'] = $values[6];
+                $_SESSION['infoStudent']['student_city'] = $values[7];
+                $_SESSION['infoStudent']['student_country'] = $values[8];
+                $_SESSION['infoStudent']['student_nationality'] = $values[9];
+                $_SESSION['infoStudent']['student_birthdate'] = $values[10];
+                $_SESSION['infoStudent']['student_birtharea'] = $values[11];
+                $_SESSION['infoStudent']['student_birthcountry'] = $values[12];
+                $_SESSION['infoStudent']['student_status'] = $values[13];
+                $_SESSION['infoStudent']['student_educationallevel'] = $values[14];
+                $_SESSION['infoStudent']['student_origin'] = $values[15];
+                $_SESSION['infoStudent']['student_comment'] = $values[16];
+                $_SESSION['infoStudent']['student_group'] = $values[17];
+                $_SESSION['infoStudent']['student_birthcity'] = $values[18];
+                $_SESSION['infoStudent']['training_id'] = $values[19];
+                $_SESSION['infoStudent']['student_educationallevel'] = $values[20];
+                $_SESSION['infoStudent']['student_grantholder'] = $values[21];
+            }
+            $_SESSION['infoUser']['user_civility'] = $values[0];
+
+            //$accountView->showMessage(null, "ok", "profil.php");
+            header('Location: profil.php');
         }
 
         /**
