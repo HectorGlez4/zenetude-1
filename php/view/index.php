@@ -18,7 +18,6 @@
 
 
     if (isset($_GET['noniscr'])){
-        session_unset();
         echo "<script>alert('Veuillez vous inscrire avant de vous connecter !');</script>";
     }
 

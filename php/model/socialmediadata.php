@@ -43,6 +43,7 @@ function addDataFacebook($email, $picture){
 		header('Location: index.php');
 
 	}else{
+		session_unset();
         header('Location: index.php?noninscr=true');
 
     }
@@ -79,6 +80,7 @@ function addDataGoogle($email, $picture){
 		header('Location: index.php');
 		
 	}else{
+		session_unset();
         header('Location: index.php?noninscr=true');
 
 	}
@@ -117,6 +119,7 @@ function addDataTwitter($email, $picture){
 		echo '<script>document.location.href="index.php"</script>';
 
 	}else{
+		session_unset();
         header('Location: index.php?noninscr=true');
 
     }
