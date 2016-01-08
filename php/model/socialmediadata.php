@@ -58,7 +58,7 @@ function addDataGoogle($email, $picture){
     $data = $co->query("SELECT * FROM Student WHERE student_instituteemail = '$email' OR student_personalemail = '$email'");
     $res = $data->fetch();
 
-    if (count($res) != 0){
+    if ($res){
 		$accountModel = new AccountModel();
 		$_SESSION['infoStudent'] = $res;
         $_SESSION['infoStudent']['student_avatar'] = $picture;
@@ -80,6 +80,7 @@ function addDataGoogle($email, $picture){
 		
 	}else{
         header('Location: index.php?noninscr=true');
+
 	}
 	
 }
