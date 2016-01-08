@@ -853,16 +853,21 @@ include_once '../model/db.php';
 			<form name="form" method="POST">
 			<?php
 			if(count($register) > 0){
-				echo '<label for="register">Sélection du membre : </label>';
-				echo '<select id="register" name="register" size=1 onchange="javascript:submit(this)" >';
-				echo '<option value = "default" selected>Sélectionner l\'utilisateur</option>';
+				echo "<span>Modifier les informations d'un utilisateur : </span>
+					<div class='row'>
+						<div class='col s12'>
+							<label for='register'>Sélection du membre : </label>
+								<select id='register' name='register' size=1 onchange='javascript:submit(this)' >
+									<option value = 'default' selected>Sélectionner l'utilisateur</option>";
 				while ($result=$register -> fetch()) {
 					echo '<option value="'.$result['user_id'].'" ';
         			if(isset($_POST["register"]) && $_POST["register"]==$result['user_id']){echo "selected='selected'";}
         			//echo '>'.$result['user_firstname'].' '.$result['user_name'].'</option>';
 					echo'>'.$result['user_instituteemail'].'</option>';
 				}
-				echo '</select>';
+						echo "</select></br>
+						</div>
+					</div>";
 			}
 		    //Select all register
 			if (isset($_POST['register'])) {
@@ -902,25 +907,86 @@ include_once '../model/db.php';
 		        <select id="statut" name="statut">
 			        <option value="Etudiant" <?php if($statut_register == "Etudiant") echo "selected='selected'";?>>Etudiant</option>
 			        <option value="RF" <?php if($statut_register == "RF") echo "selected='selected'";?>>Responsable de Formation</option>
-		        </select>
+		        </select></br>
 
-		       	<?php 
+		        <?php
+		        	$isAdmin = $db->query('SELECT admin_id FROM Administrator WHERE user_id ="'.$resultat['user_id'].'"');
+		        	$result_isAdmin = $isAdmin->fetch();
+		        	//$result_isAdmin = $isAdmin->fetch();
 		        	if ($statut_register == "RF") {
-						$trainings = $db->query("SELECT training_id, description FROM Training WHERE description IS NOT NULL");
-						echo '<label for="training_manager">Formation</label>';
-						echo "<select id='list_trainings' name='list_trainings' size=1>";
-						while ($result_trainings = $trainings->fetch()) {
-							echo "<option value='".$result_trainings['training_id'] ."'>".$result_trainings['description']. "</option>";
-						}
-						echo "</select>";
-					}
-				?>
+		        		?>
+		        			<label name="is_admin" for="">Administrateur</label></br>
+                            <input id="oui" class="with-gap" name="is_admin" type="radio" value="1"<?php if($result_isAdmin['admin_id']) {echo "checked";}?>/>
+                            <label class="button" for="oui">Oui</label>                       
+                            <input id="non" class="with-gap" name="is_admin" type="radio" value="0"<?php if(!$result_isAdmin['admin_id']){echo "checked";}?>>
+                            <label class="button" for="non">Non</label> </br>
+                        <?php
+		        	}
+		        ?>
 
 		        <button class="btn" type="submit" name="Modifier">Modifier</button>
 				<a class="btn supp" href="admin.php?supmembre=<?= $id_register.'&amp;statutmember='.$statut_register;?>">Supprimer</a>
+
 		    </form>
 				<?php
  				}
+			}else{
+				$list_training_manager = $db->query("SELECT Training_manager.user_id, user_instituteemail FROM User, Training_manager WHERE User.user_id = Training_manager.user_id AND user_instituteemail IS NOT NULL");
+				echo "<span>Ajouter une formation : </span>
+					<div class='row'>
+						<div class='col s6'>
+							<label for='add_training'>Nom de la formation</label>
+							<input type='text' class='form-control' name='addTraining'>
+						</div>
+						<div class='col s6'>
+							<label for='training_manager'>Choisir un responsable de formation</label>
+							<select id='list_training_managers' name='list_training_managers' size=1>";
+				while ($result_training_managers = $list_training_manager->fetch()) {
+					echo "<option value='" .$result_training_managers['user_id'] ."'>".$result_training_managers['user_instituteemail']. "</option>";
+				}
+						echo "</select>
+						</div>
+					</div>";
+
+				$departments = $db->query("SELECT departement_id, departement_name FROM Departement WHERE departement_name IS NOT NULL");
+				echo "<div class='row'>
+						<div class='col s6'>
+							<label for='departments'>Choisir un département</label>
+							<select id='list_departments' name='list_departments' size=1>";
+				while ($result_departments = $departments->fetch()) {
+					echo "<option value='" .$result_departments['departement_id'] ."'>". $result_departments['departement_name']. "</option>";
+				}
+						echo "</select>
+						</div>
+						<div class='col s6'>
+							<label for='add_training_max_group'>Nombres de groupes de la formation</label>
+							<input type='number' id='add_training_max_group' min='1' class='form-control' name='addTrainingMaxGroup'>
+						</div>
+					</div>
+					<button class='btn' type='submit' name='Ajouter'>Ajouter</button>
+				</form>";
+			}
+			if (isset($_POST['Ajouter'])) {
+				/*if((isset($_POST['addTraining'])) && (isset($_POST['list_training_managers'])) && (isset($_POST['list_departments'])) && (isset($_POST['training_max_group']))){*/
+				if (($_POST['addTraining'] != "") && ($_POST['list_training_managers'] != "") && ($_POST['list_departments'] != "") && ($_POST['addTrainingMaxGroup'] != "")) {
+					$currentTrainingManagerId = $db->query('SELECT training_manager_id FROM Training_manager, User WHERE Training_manager.user_id = User.user_id AND User.user_id ="' . $_POST['list_training_managers'] . '"');
+					$currentDepartmentId = $db->query('SELECT Departement.departement_id FROM Departement, Training, Training_manager, User WHERE Training_manager.user_id = User.user_id AND Training.training_manager_id = Training_manager.training_manager_id AND Training.departement_id = Departement.departement_id AND Departement.departement_id ="' . $_POST['list_departments'] . '"');
+					$DId = $currentDepartmentId->fetch();
+					$TId = $currentTrainingManagerId->fetch();
+					$good_description = strtoupper($_POST['addTraining']);
+					$verif = $db->query('SELECT training_id FROM Training WHERE description ="'.$good_description.'"');
+					$result_verif = $verif->fetch();
+					if ($result_verif) {
+						echo "<p>Formation déjà existante</p>";
+					}
+					else{
+						$addTraining = $db->query('INSERT INTO Training (training_manager_id, departement_id, description, training_max_group) VALUES ("'.htmlspecialchars($TId['training_manager_id']).'","'.htmlspecialchars($DId['departement_id']).'","'.htmlspecialchars($good_description).'","'.htmlspecialchars($_POST['addTrainingMaxGroup']).'")');
+						echo '<div class="ok">Formation enregistré avec succés. Redirection en cours...</div><script type="text/javascript"> window.setTimeout("location=(\'admin.php\');",3000) </script>';
+					}				
+				}
+				else{
+					echo "<p>Veuillez remplir tous les champs</p>";
+				}
 			}
 		    //Delete register
 		    if(isset($_GET['supmembre'])){
@@ -956,7 +1022,7 @@ include_once '../model/db.php';
 	                die('Requête invalide : ' . $db->errorInfo()[1]);
 	            }
 	            else{
-		        //Information and redirect
+		        //Informations and redirect
 		        echo '<div class="ok">Membre supprimé avec succès. Redirection en cours...</div><script type="text/javascript"> window.setTimeout("location=(\'admin.php\');",3000) </script>';
 			    }
 		    }
@@ -978,9 +1044,6 @@ include_once '../model/db.php';
 	                    echo '<div class="erreur">Cet email « '.$_POST['email'].' » est utilisé!</div>'; return false;
 	                }
 				}
-
-				
-
 				//If first and last name empty
 		        if(empty($_POST['user_name'])){
 		            echo '<div class="erreur">Veuillez saisir un nom!</div>';
@@ -1056,12 +1119,17 @@ include_once '../model/db.php';
 		            									 user_firstname="'.htmlspecialchars($_POST['user_firstname']).'",
 		            									 user_instituteemail="'.htmlspecialchars($_POST['email']).'"
 		            									 WHERE user_id='.$id_register.'');
+                        if ($result_isAdmin && $_POST['is_admin'] == 0) {
+                        	$supAdmin = $db->query("DELETE FROM Administrator WHERE user_id =". $id_register)  or die ('Erreur :'.$db->errorInfo());
+                        }
+                        elseif (!$result_isAdmin && $_POST['is_admin'] == 1) {
+                        	$addAdmin = $db->query("INSERT INTO Administrator (user_id) VALUES (".$id_register.")")  or die ('Erreur :'.$db->errorInfo());
+                        }
                     }
 
 
                     if(!$modif)
                         die('Requête invalide : ' . $db->errorInfo()[1]);
-
 
                     if ($changementToRF){
                         echo '<div class="ok">Profil du membre modifié avec succès. Redirection en cours...</div><script type="text/javascript"> window.setTimeout("location=(\'admin.php\');",3000) </script>';
