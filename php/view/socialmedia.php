@@ -6,9 +6,17 @@
 
 
 	if ((isset($_GET['error'])) || (isset($_GET['denied']))){
+        session_destroy();
 		header('Location: index.php?refus=true');
 	}
+
+    if (isset($_GET['error_code'])){
+        session_destroy();
+        header('Location: index.php?failure=true');
+    }
+
 	include_once '../model/socialmediadata.php';
+    include_once '../../secure/config.php';
 
 
 	//_______________________________________BEGIN FACEBOOK_______________________________________________
@@ -53,14 +61,14 @@
 	//1.Start Session
 
 	//2.Use app id,secret and redirect url
-	$app_id = '1207370725956552';
-	$app_secret = '1b83b246d8f61a10d05879a692494c63';
+    $app_id = $facebookapikey;
+    $app_secret = $facebookapisecret;
 	$redirect_url='http://zenetude.esy.es/php/view/index.php';
 
 	//3.Initialize application, create helper object and get fb sess
 	FacebookSession::setDefaultApplication($app_id,$app_secret);
 	$helper = new FacebookRedirectLoginHelper($redirect_url);
-	//$email = $helper->getLoginUrl(['email']);
+
 	$sess = $helper->getSessionFromRedirect();
 	$_SESSION['sessFacebook'] = $sess;
 
@@ -72,7 +80,6 @@
 		$request = new FacebookRequest($sess, 'GET', '/me?fields=id,first_name,last_name,email');
 		// from response get graph object
 		$response = $request->execute();
-		//$graph = $response->getGraphObject(GraphUser::className())->asArray();
 		$graph = $response->getGraphObject(GraphUser::className());
 		// use graph object methods to get user details
 		$email = $graph->getProperty('email');
@@ -84,8 +91,14 @@
 
 	}else{
 
-		echo '<a href="'.$helper->getLoginUrl(array('scope' => 'email')).'"><img src="../../img/FacebookLogo.png" alt="Se connecter avec Facebook""></a>';
-	}
+        //L'hébergeur (Hostinger) bloque les requêtes CURL sortantes
+        echo "<img onclick=\"alert('Connexion à Facebook impossible');\" src='../../img/FacebookLogo.png' alt='Se connecter avec Facebook'>";
+
+
+        //Si l'hébergeur ne bloque pas les requêtes CURL sortantes
+        //echo '<a href="'.$helper->getLoginUrl(array('scope' => 'email')).'"><img src="../../img/FacebookLogo.png" alt="Se connecter avec Facebook""></a>';
+
+    }
 
 	//__________________________________________END FACEBOOK___________________________________
 	//__________________________________________BEGIN TWITTER___________________________________
@@ -94,8 +107,9 @@
 	require_once('../../vendor/TwitterOauth/OAuth.php');
 	require_once('../../vendor/TwitterOauth/twitteroauth.php');
 
-	define('CONSUMER_KEY', 'nlOVxx4qz4DDWYFlSPWlbsZWO');
-	define('CONSUMER_SECRET', 'BEGyzam5iYaaBTKc7KaunoEEZFk7QNG9FSJOe4vXKr0gQ2Q19T');
+
+    define('CONSUMER_KEY', $twitterapikey);
+    define('CONSUMER_SECRET', $twitterapisecret);
 	define('OAUTH_CALLBACK', 'http://zenetude.esy.es/php/view/index.php');
 
 	if(isset($_GET['logout'])){
@@ -110,17 +124,11 @@
 		// create a new twitter connection object
 
 
-
-
         try{
 		    $connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET);
         }catch (OAuthException $e){
             $e->getMessage();
         }
-
-
-
-
 
 
         try{
@@ -168,8 +176,15 @@
 	}
 
 	if(isset($login_url) && !isset($_SESSION['data'])){
-		echo '<a id="twitterimg" href="'.$login_url.'"><img src="../../img/TwitterLogo.png" alt="Se connecter avec Twitter" ></a>';
-	}
+
+        //L'hébergeur (Hostinger) bloque les requêtes CURL sortantes
+        echo "<img onclick=\"alert('Connexion à Twitter impossible');\" src='../../img/TwitterLogo.png' alt='Se connecter avec Twitter'>";
+
+
+        //Si l'hébergeur ne bloque pas les requêtes CURL sortantes
+        //echo '<a id="twitterimg" href="'.$login_url.'"><img src="../../img/TwitterLogo.png" alt="Se connecter avec Twitter" ></a>';
+
+    }
 
 	//__________________________________________END TWITTER___________________________________
 	//__________________________________________BEGIN GOOGLE +___________________________________
@@ -222,7 +237,6 @@
 		$authUrl = $client->createAuthUrl();
 
 	}
-	
 
 
 	if(isset($authUrl)) {

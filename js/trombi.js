@@ -40,12 +40,12 @@ function imprimerDoc(doc, formation, groupe){
     if(doc == 1)
     {
         doc = "trombi";
-        var url = "trombinoscope.pdf";
+        var url = "trombinoscope"+formation+"_"+groupe+".pdf";
     }
     else if(doc == 2)
     {
         doc = "sheet";
-        var url = "feuille_emargement.pdf";
+        var url = "feuille_emargement"+formation+"_"+groupe+".pdf";
     }
     $.ajax({
         url: '../controller/generate'+doc+'.php',
@@ -55,7 +55,7 @@ function imprimerDoc(doc, formation, groupe){
         success: function (JsonData, statut){
             if(JsonData.message=="success")
             {
-                window.open(url);
+                window.open(url, '_blank');
             }
             else
             {
