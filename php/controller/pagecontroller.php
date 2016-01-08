@@ -167,13 +167,9 @@
 		function compress_image($src, $dest , $quality) {
 			$info = getimagesize($src);
   
-		    if ($info['mime'] == 'image/jpeg') 
+		    if ($info['mime'] == 'image/jpeg')
 		    {
 		        $image = imagecreatefromjpeg($src);
-		    }
-		    elseif ($info['mime'] == 'image/gif') 
-		    {
-		        $image = imagecreatefromgif($src);
 		    }
 		    elseif ($info['mime'] == 'image/png') 
 		    {
@@ -189,7 +185,6 @@
   
     		//return destination file
     		return $dest;
-
 		}
 
 		/**
@@ -232,6 +227,7 @@
 		            if ($resultat) {
 		            	$accountmodel -> addAvatar($fichier, $session);
 		            	$_SESSION['infoStudent']['student_avatar'] = $fichier;
+		            	if ($extension_upload !== 'gif')
 		            	$PageController -> compress_image($fichier, $fichier, 50);
 		            }
 	            }
@@ -277,6 +273,7 @@
 		            if ($resultat) {
 		            	$accountmodel -> addTrombi($fichier, $session);
 		            	$_SESSION['infoStudent']['student_trombi'] = $fichier;
+		            	if ($extension_upload !== 'gif')
 		            	$PageController -> compress_image($fichier, $fichier, 50);
 		            }
 	            }
