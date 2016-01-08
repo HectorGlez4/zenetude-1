@@ -2,7 +2,7 @@
 include_once '../model/db.php';
 	class PageView {
 		/**
-			* Show the inscription's form.
+        * Show the inscription's form.
 		**/
 		public function showInscriptionForm() {
 		?>
@@ -71,10 +71,8 @@ include_once '../model/db.php';
 		<?php
 		}
 
-
-
 		/**
-			* Include all javascript's links needed by the pages.
+        * Include all javascript's links needed by the pages.
 		**/
 		public function showJavaLinks() {
 		?>
@@ -117,7 +115,8 @@ include_once '../model/db.php';
 
 
 		/**
-			* Show the first part of description in the index's page.
+        * Show the first part of description in the index's page.
+        * @param array $userInfos Information about the user.
 		**/
 		public function showIndexDescription($connect) {
 			if(!$connect) {
@@ -157,7 +156,7 @@ include_once '../model/db.php';
 
 
 		/**
-			* Show the footer.
+        * Show the footer.
 		**/
 		public function showFooter() {
 			?>
@@ -169,7 +168,7 @@ include_once '../model/db.php';
 
 
 		/**
-			* Show the calendar.
+        * Show the calendar.
 		**/
 		public function showCalendar() {
 			?>
@@ -191,7 +190,7 @@ include_once '../model/db.php';
 
 
 		/**
-			* Include the head needed by pages
+        * Include the head needed by pages
 		**/
 		public function showHead() {
 			?>
@@ -225,7 +224,8 @@ include_once '../model/db.php';
 
 
 		/**
-			* Show the header.
+        * Show the header.
+        * @param bool $connect if the user is connected.
 		**/
 		public function showHeader($connect) {
 			if(!$connect) {?>
@@ -281,7 +281,8 @@ include_once '../model/db.php';
 
 
 		/**
-			* Show the static menu.
+        * Show the static menu.
+        * @param bool $connect if the user is connected.
 		**/
 		public function showMenu($connect) {
 			if(!$connect) {?>
@@ -338,10 +339,11 @@ include_once '../model/db.php';
 		}
 
 
-		
-		/**
-			* Show the dynamic menu bar. 
-		**/
+        /**
+         * @param bool $connect If the user is connected.
+         * @param array $userInfos Information about the user.
+         * @param bool $rf If the user is a training manager.
+         */
 		public function showScrollMenu($connect, $userInfos, $rf = false) {
 			if(!$connect) {?>
 			<nav id="scroll-nav">
@@ -389,7 +391,6 @@ include_once '../model/db.php';
 							echo 'Groupe '.$userInfos['infoStudent']['student_group'].'<br />';
 					?>
 					<li><a class="color" href="profil.php">Mon compte</a></li>
-					<li><a class="color" href="../model/deconnect.php">Déconnexion</a></li>
 
 					<?php
 						$db=connect();
@@ -403,6 +404,9 @@ include_once '../model/db.php';
 							}
 						}
 					?>
+
+					<li><a class="color" href="../model/deconnect.php">Déconnexion</a></li>
+
 				</ul>
 			</nav>
 			<nav id="scroll-nav">
@@ -444,6 +448,9 @@ include_once '../model/db.php';
 			}
 		}
 
+        /**
+         * Show the form of the recuperation of password.
+         */
 		public function showRecuperation(){ ?>
 			<!-- CONTAINER -->
 			<div class="container container-fluid">
@@ -483,6 +490,12 @@ include_once '../model/db.php';
 		<?php }
 
 
+		/**
+         * Show the differents contacts possibles for an utilisator.
+         * @param array $userInfos The informations about the user.
+         * @param array $result The informations about the training manager associated with the user.
+         *
+         */
         public function showContact($userInfos, $result){
             if ((isset($userInfos['infoUser']['user_firstname']) && $userInfos['infoUser']['user_firstname'] != "") && (isset($userInfos['infoUser']['user_name']) && $userInfos['infoUser']['user_name'] != ""))
                 echo '<div class="card-header"><h2>'.$userInfos['infoUser']['user_firstname'].' '.$userInfos['infoUser']['user_name'].'</h2></div>';
@@ -507,22 +520,20 @@ include_once '../model/db.php';
 	        	echo "<div id='noFormation'>Vous n'avez pas encore renseigné votre formation !</div></br><a class='right-align' href='gestion.php'>Page gestion du profil</a>";
         }
 
+
+		/**
+		 *
+		 * @param $rf
+		 * @param $result
+		 * @param $result2
+		 * @param $result4
+		 */
 		public function showGestion($rf, $result, $result2, $result4){ ?>
 
 			<form id="formula1" action="validationgestion.php" method="POST" enctype="multipart/form-data">
 				<?php if (!$rf){ ?>
 				<div class="form-group">
 					<input type="hidden" class="form-control" value="<?php echo $_SESSION['infoUser']['user_id']; ?>" name="user_id">
-					<div class="row">
-						<div class="col s6">
-							<label for="">Nom</label>
-							<input type="text" class="form-control" value="<?php echo $result4[3];?>" name="user_name">
-						</div>
-						<div class="col s6">
-							<label for="">Prénom</label>
-							<input type="text" class="form-control" value="<?php echo $result4[4];?>" name="user_firstname">
-						</div>
-					</div>
 					<div class="row">
 						<div class="col s6">
 							<label>Civilité</label>
@@ -720,18 +731,6 @@ include_once '../model/db.php';
 					<div class="form-group">
 						<div class="row">
 							<div class="col s12">
-								<label for="">Nom</label>
-								<input type="text" class="form-control" value="<?php echo $result4[3];?>" name="user_name">
-							</div>
-						</div>
-						<div class="row">
-							<div class="col s12">
-								<label for="">Prénom</label>
-								<input type="text" class="form-control" value="<?php echo $result4[4];?>" name="user_firstname">
-							</div>
-						</div>
-						<div class="row">
-							<div class="col s12">
 								<label>Civilité</label>
 									<select name="user_civility">
 										<option value="Monsieur" <?php if($result4[5] == "Monsieur") echo " selected='selected'";?>>Monsieur</option>
@@ -749,6 +748,13 @@ include_once '../model/db.php';
 
 		<?php }
 
+
+		/**
+		 * Show the differents informations about the profil of the user.
+		 * @param array $userInfos The informations about the user.
+		 * @param bool $rf If the user is a training manager.
+		 * @param array $result Informations about educational documents associated with the user.
+		 */
 		public function showProfilInformations($userInfos, $rf = false, $result){
 			if(!$rf) {
 	    	echo '
@@ -825,23 +831,31 @@ include_once '../model/db.php';
 				}
 			}
 
-
+        /**
+         * Show the administration.
+         * @param array $register All information about users.
+         */
 		public function showAdministration($register/*, $selection*/){
 			$db = connect();
 			?>
 			<form name="form" method="POST">
 			<?php
 			if(count($register) > 0){
-				echo '<label for="register">Sélection du membre : </label>';
-				echo '<select id="register" name="register" size=1 onchange="javascript:submit(this)" >';
-				echo '<option value = "default" selected>Sélectionner l\'utilisateur</option>';
+				echo "<span>Modifier les informations d'un utilisateur : </span>
+					<div class='row'>
+						<div class='col s12'>
+							<label for='register'>Sélection du membre : </label>
+								<select id='register' name='register' size=1 onchange='javascript:submit(this)' >
+									<option value = 'default' selected>Sélectionner l'utilisateur</option>";
 				while ($result=$register -> fetch()) {
 					echo '<option value="'.$result['user_id'].'" ';
         			if(isset($_POST["register"]) && $_POST["register"]==$result['user_id']){echo "selected='selected'";}
         			//echo '>'.$result['user_firstname'].' '.$result['user_name'].'</option>';
 					echo'>'.$result['user_instituteemail'].'</option>';
 				}
-				echo '</select>';
+						echo "</select></br>
+						</div>
+					</div>";
 			}
 		    //Select all register
 			if (isset($_POST['register'])) {
@@ -881,13 +895,86 @@ include_once '../model/db.php';
 		        <select id="statut" name="statut">
 			        <option value="Etudiant" <?php if($statut_register == "Etudiant") echo "selected='selected'";?>>Etudiant</option>
 			        <option value="RF" <?php if($statut_register == "RF") echo "selected='selected'";?>>Responsable de Formation</option>
-		        </select>
+		        </select></br>
+
+		        <?php
+		        	$isAdmin = $db->query('SELECT admin_id FROM Administrator WHERE user_id ="'.$resultat['user_id'].'"');
+		        	$result_isAdmin = $isAdmin->fetch();
+		        	//$result_isAdmin = $isAdmin->fetch();
+		        	if ($statut_register == "RF") {
+		        		?>
+		        			<label name="is_admin" for="">Administrateur</label></br>
+                            <input id="oui" class="with-gap" name="is_admin" type="radio" value="1"<?php if($result_isAdmin['admin_id']) {echo "checked";}?>/>
+                            <label class="button" for="oui">Oui</label>                       
+                            <input id="non" class="with-gap" name="is_admin" type="radio" value="0"<?php if(!$result_isAdmin['admin_id']){echo "checked";}?>>
+                            <label class="button" for="non">Non</label> </br>
+                        <?php
+		        	}
+		        ?>
 
 		        <button class="btn" type="submit" name="Modifier">Modifier</button>
 				<a class="btn supp" href="admin.php?supmembre=<?= $id_register.'&amp;statutmember='.$statut_register;?>">Supprimer</a>
+
 		    </form>
 				<?php
  				}
+			}else{
+				$list_training_manager = $db->query("SELECT Training_manager.user_id, user_instituteemail FROM User, Training_manager WHERE User.user_id = Training_manager.user_id AND user_instituteemail IS NOT NULL");
+				echo "<span>Ajouter une formation : </span>
+					<div class='row'>
+						<div class='col s6'>
+							<label for='add_training'>Nom de la formation</label>
+							<input type='text' class='form-control' name='addTraining'>
+						</div>
+						<div class='col s6'>
+							<label for='training_manager'>Choisir un responsable de formation</label>
+							<select id='list_training_managers' placeholder='Ex : DUT-NOMDELAFORMATION' name='list_training_managers' size=1>";
+				while ($result_training_managers = $list_training_manager->fetch()) {
+					echo "<option value='" .$result_training_managers['user_id'] ."'>".$result_training_managers['user_instituteemail']. "</option>";
+				}
+						echo "</select>
+						</div>
+					</div>";
+
+				$departments = $db->query("SELECT departement_id, departement_name FROM Departement WHERE departement_name IS NOT NULL");
+				echo "<div class='row'>
+						<div class='col s6'>
+							<label for='departments'>Choisir un département</label>
+							<select id='list_departments' name='list_departments' size=1>";
+				while ($result_departments = $departments->fetch()) {
+					echo "<option value='" .$result_departments['departement_id'] ."'>". $result_departments['departement_name']. "</option>";
+				}
+						echo "</select>
+						</div>
+						<div class='col s6'>
+							<label for='add_training_max_group'>Nombres de groupes de la formation</label>
+							<input type='number' id='add_training_max_group' min='1' class='form-control' name='addTrainingMaxGroup' value=1>
+						</div>
+					</div>
+					<button class='btn' type='submit' name='Ajouter'>Ajouter</button>
+				</form>";
+			}
+			if (isset($_POST['Ajouter'])) {
+				/*if((isset($_POST['addTraining'])) && (isset($_POST['list_training_managers'])) && (isset($_POST['list_departments'])) && (isset($_POST['training_max_group']))){*/
+				if (($_POST['addTraining'] != "") && ($_POST['list_training_managers'] != "") && ($_POST['list_departments'] != "") && ($_POST['addTrainingMaxGroup'] != "")) {
+					$currentTrainingManagerId = $db->query('SELECT training_manager_id FROM Training_manager, User WHERE Training_manager.user_id = User.user_id AND User.user_id ="' . $_POST['list_training_managers'] . '"');
+					$currentDepartmentId = $db->query('SELECT Departement.departement_id FROM Departement, Training, Training_manager, User WHERE Training_manager.user_id = User.user_id AND Training.training_manager_id = Training_manager.training_manager_id AND Training.departement_id = Departement.departement_id AND Departement.departement_id ="' . $_POST['list_departments'] . '"');
+					$DId = $currentDepartmentId->fetch();
+					$TId = $currentTrainingManagerId->fetch();
+					$good_description = strtoupper($_POST['addTraining']);
+					$verif = $db->query('SELECT training_id FROM Training WHERE description ="'.$good_description.'"');
+					$result_verif = $verif->fetch();
+					if ($result_verif) {
+						echo "<p>Formation déjà existante</p>";
+					}
+					else{
+						$addTraining = $db->query('INSERT INTO Training (training_manager_id, departement_id, description, training_max_group) VALUES ("'.htmlspecialchars($TId['training_manager_id']).'","'.htmlspecialchars($DId['departement_id']).'","'.htmlspecialchars($good_description).'","'.htmlspecialchars($_POST['addTrainingMaxGroup']).'")');
+						echo '<div class="ok">Formation enregistré avec succés. Redirection en cours...</div><script type="text/javascript"> window.setTimeout("location=(\'admin.php\');",3000) </script>';
+					}				
+				}
+				else{
+					echo "<p>Veuillez remplir tous les champs</p>";
+				}
 			}
 		    //Delete register
 		    if(isset($_GET['supmembre'])){
@@ -1020,12 +1107,17 @@ include_once '../model/db.php';
 		            									 user_firstname="'.htmlspecialchars($_POST['user_firstname']).'",
 		            									 user_instituteemail="'.htmlspecialchars($_POST['email']).'"
 		            									 WHERE user_id='.$id_register.'');
+                        if ($result_isAdmin && $_POST['is_admin'] == 0) {
+                        	$supAdmin = $db->query("DELETE FROM Administrator WHERE user_id =". $id_register)  or die ('Erreur :'.$db->errorInfo());
+                        }
+                        elseif (!$result_isAdmin && $_POST['is_admin'] == 1) {
+                        	$addAdmin = $db->query("INSERT INTO Administrator (user_id) VALUES (".$id_register.")")  or die ('Erreur :'.$db->errorInfo());
+                        }
                     }
 
 
                     if(!$modif)
                         die('Requête invalide : ' . $db->errorInfo()[1]);
-
 
                     if ($changementToRF){
                         echo '<div class="ok">Profil du membre modifié avec succès. Redirection en cours...</div><script type="text/javascript"> window.setTimeout("location=(\'admin.php\');",3000) </script>';

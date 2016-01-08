@@ -11,7 +11,7 @@ include_once '../view/accountview.php';
 
 /**
  * Connect the user if he's connected on facebook and if his mail adress is in the DB
- * @param $email str contains the user's mail adress
+ * @param $email string contains the user's mail adress
  * @param $picture strcontains the picture path
  */
 function addDataFacebook($email, $picture){
@@ -53,7 +53,7 @@ function addDataFacebook($email, $picture){
 
 /**
  * Connect the user if he's connected on google and if his mail adress is in the DB
- * @param $email str contains the user's mail adress
+ * @param $email string contains the user's mail adress
  * @param $picture strcontains the picture path
  */
 function addDataGoogle($email, $picture){
@@ -92,8 +92,8 @@ function addDataGoogle($email, $picture){
 
 /**
  * Connect the user if he's connected on twitter and if his mail adress is in the DB
- * @param $email str contains the user's mail adress
- * @param $picture strcontains the picture path
+ * @param $email string contains the user's mail adress
+ * @param $picture string contains the picture path
  */
 function addDataTwitter($email, $picture){
 	$co = connect();
