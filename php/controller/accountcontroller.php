@@ -3,7 +3,7 @@
 
 
 		/**
-			* Test if the mail address given by the user exists in the database.
+			* Tests if the mail address given by the user exists in the database.
 		**/
 		public function	controlRecoverPassword() {
 			$accountModel = new AccountModel();
@@ -17,6 +17,9 @@
 				$accountView -> showMessage("Votre adresse e-mail est incorrecte.");
 		}
 
+        /**
+         * Validates if there aren't any errors at the image, the rombinoscope or the password.
+         **/
         public function controlGestion(){
             $pageController = new PageController();
             $erreur = $pageController -> uploadPhoto();
@@ -34,7 +37,7 @@
 
 
 		/**
-			* Test if the mail address and the password given by the user exist in the database. 
+			* Tests if the mail address and the password given by the user exist in the database.
 		**/
         public function controlConnection() {
 			$accountView = new AccountView();
@@ -64,7 +67,7 @@
 		
 
 		/**
-			* Test if informations given by the user before create a new user in the database. 
+			* Tests if the information given by the user before creating a new user in the database is correct.
 		**/
         public function controlInscription() {
             $accountView = new AccountView();

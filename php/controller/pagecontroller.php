@@ -2,7 +2,7 @@
 	class PageController {
 
         /**
-         * Test if the visitor is connected, Else, he's redirected to the index.
+         * Tests if the visitor is connected, Else, he's redirected to the index.
          **/
         public function controlConnexion() {
             if(!isset($_SESSION['infoUser'])) {
@@ -12,7 +12,7 @@
         }
 
         /**
-         * Test if the visitor is connected and shows the form of modification for a training manager or a student.
+         * Tests if the visitor is connected and shows the form of modification for a training manager or a student.
          **/
 		public function controlProfilInformations() {
 			$pageView = new PageView();
@@ -28,7 +28,7 @@
 		}
 
         /**
-         * Test if the visitor is connected and if the visitor is a training manager.
+         * Tests if the visitor is connected and if the visitor is a training manager.
          * @return bool
          */
 		public function controlGestion() {
@@ -49,7 +49,7 @@
 		}
 
         /**
-         * Test if the mail address given by the user is connected and if he is a training manager. if yes, the visitor is redirected to the index page.
+         * Tests if the mail address given by the user is connected and if he is a training manager. if yes, the visitor is redirected to the index page.
          **/
 		public function controlContact(){
 			$pageView = new PageView();
@@ -58,7 +58,7 @@
 		}
 
         /**
-         * Show the possible contacts.
+         * Shows the possible contacts.
          **/
 		public function controlShowContact(){
 			$pageView = new PageView();
@@ -68,7 +68,7 @@
 		}
 
         /**
-         * Test if the visitor is connected and if he's an administrator.
+         * Tests if the visitor is connected and if he's an administrator.
          **/
 		public function controlAdministration(){
             $accountmodel = new AccountModel();
@@ -78,7 +78,7 @@
 		}
 
         /**
-         * Show the administration.
+         * Shows the administration.
          **/
 		public function controlShowAdministration(){
 			$pageView = new PageView();
@@ -90,7 +90,7 @@
 		}
 
         /**
-         * Test if the visitor is connected and if he's a training manager and return the documents. Else, return to the index page.
+         * Tests if the visitor is connected and if he's a training manager and return the documents. Else, return to the index page.
          **/
 		public function controlDocuments(){
 			$pageView = new PageView();
@@ -106,7 +106,7 @@
 
 
 		/**
-        * Test if a session exists before show the index's descriptions.
+        * Tests if a session exists before showing the index's descriptions.
 		**/
 		public function controlIndexDescription() {
 			$pageView = new PageView();
@@ -118,7 +118,7 @@
 
 
 		/**
-        * Test if a session exists before show the header.
+        * Tests if a session exists before showing the header.
 		**/
 		public function controlHeader() {
 			$pageView = new PageView();
@@ -130,7 +130,7 @@
 
 
 		/**
-        * Test if a session exists before show the static menu.
+        * Tests if a session exists before showing the static menu.
 		**/
 		public function controlMenu() {
 			$pageView = new PageView();
@@ -145,7 +145,7 @@
 
 
 		/**
-        * Test if a session exists before show the dynamic menu bar.
+        * Tests if a session exists before showing the dynamic menu bar.
 		**/
 		public function controlDynamicMenu() {
 			$pageView = new PageView();
@@ -162,7 +162,7 @@
 
 
 		/**
-		 * Compress an picture.
+		 * Compresses a picture.
 		 **/
 		function compress_image($src, $dest , $quality) {
 			$info = getimagesize($src);
@@ -188,7 +188,7 @@
 		}
 
 		/**
-		 * Add an avatar in the database.
+		 * Adds an avatar in the database.
 		 **/
 		public function uploadPhoto(){
 			$accountmodel = new AccountModel();
@@ -238,7 +238,7 @@
         }
 
         /**
-         * Upload a group photo to the database.
+         * Uploads a group photo to the database.
          **/
         public function uploadTrombi(){
         	$accountmodel = new AccountModel();

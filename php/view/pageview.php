@@ -2,7 +2,7 @@
 include_once '../model/db.php';
 	class PageView {
 		/**
-        * Show the inscription's form.
+        * Shows the inscription's form.
 		**/
 		public function showInscriptionForm() {
 		?>
@@ -72,7 +72,7 @@ include_once '../model/db.php';
 		}
 
 		/**
-        * Include all javascript's links needed by the pages.
+        * Includes all javascript's links needed by the pages.
 		**/
 		public function showJavaLinks() {
 		?>
@@ -115,7 +115,7 @@ include_once '../model/db.php';
 
 
 		/**
-        * Show the first part of description in the index's page.
+        * Shows the first part of description in the index's page.
         * @param array $userInfos Information about the user.
 		**/
 		public function showIndexDescription($connect) {
@@ -156,7 +156,7 @@ include_once '../model/db.php';
 
 
 		/**
-        * Show the footer.
+        * Shows the footer.
 		**/
 		public function showFooter() {
 			?>
@@ -168,7 +168,7 @@ include_once '../model/db.php';
 
 
 		/**
-        * Show the calendar.
+        * Shows the calendar.
 		**/
 		public function showCalendar() {
 			?>
@@ -190,7 +190,7 @@ include_once '../model/db.php';
 
 
 		/**
-        * Include the head needed by pages
+        * Includes the head needed by pages
 		**/
 		public function showHead() {
 			?>
@@ -224,7 +224,7 @@ include_once '../model/db.php';
 
 
 		/**
-        * Show the header.
+        * Shows the header.
         * @param bool $connect if the user is connected.
 		**/
 		public function showHeader($connect) {
@@ -283,7 +283,7 @@ include_once '../model/db.php';
 
 
 		/**
-        * Show the static menu.
+        * Shows the static menu.
         * @param bool $connect if the user is connected.
 		**/
 		public function showMenu($connect) {
@@ -342,6 +342,7 @@ include_once '../model/db.php';
 
 
         /**
+         * Shows the scroll Menu.
          * @param bool $connect If the user is connected.
          * @param array $userInfos Information about the user.
          * @param bool $rf If the user is a training manager.
@@ -451,7 +452,7 @@ include_once '../model/db.php';
 		}
 
         /**
-         * Show the form of the recuperation of password.
+         * Shows the form of the recuperation of password.
          */
 		public function showRecuperation(){ ?>
 			<!-- CONTAINER -->
@@ -493,7 +494,7 @@ include_once '../model/db.php';
 
 
 		/**
-         * Show the differents contacts possibles for an utilisator.
+         * Shows the differents contacts possibles for an utilisator.
          * @param array $userInfos The informations about the user.
          * @param array $result The informations about the training manager associated with the user.
          *
@@ -524,7 +525,7 @@ include_once '../model/db.php';
 
 
 		/**
-		 *
+		 * Shows the management interface.
 		 * @param $rf
 		 * @param $result
 		 * @param $result2
@@ -752,7 +753,7 @@ include_once '../model/db.php';
 
 
 		/**
-		 * Show the differents informations about the profil of the user.
+		 * Shows the differents informations about the profil of the user.
 		 * @param array $userInfos The informations about the user.
 		 * @param bool $rf If the user is a training manager.
 		 * @param array $result Informations about educational documents associated with the user.
@@ -834,7 +835,7 @@ include_once '../model/db.php';
 			}
 
         /**
-         * Show the administration.
+         * Shows the administration.
          * @param array $register All information about users.
          */
 		public function showAdministration($register/*, $selection*/){
@@ -978,7 +979,7 @@ include_once '../model/db.php';
 					echo "<p>Veuillez remplir tous les champs</p>";
 				}
 			}
-		    //Delete register
+		    //Deletes register.
 		    if(isset($_GET['supmembre'])){
 		    	//Delete register on database if Etudiant
 		    	$supprime_membre = null;
@@ -988,7 +989,7 @@ include_once '../model/db.php';
 		    		if ($supprime_membre_student)
 		    			$supprime_membre = $db->query(" DELETE FROM User WHERE user_id = ".$_GET['supmembre']."");
 		    	}
-		    //Delete register on database
+		    //Deletes register on database.
 		    //$supprime_membre = $db->query("DELETE FROM User WHERE user_id = ".$_GET['supmembre']."");
 		    //If errors
 		    	else{
