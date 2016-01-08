@@ -87,6 +87,12 @@
                 {
                     $accountView->showMessage("Adresse email existe déjà.");
                 }
+                else if (preg_match('#[ÁÂÄàáâä@ÈÉÊËèéêë€ÌÍÎÏìíîïÒÓÔÖòóôöÙÚÛÜùúûüµŒœ]#', $_POST["firstname"]) != 0) {
+                    $accountView->showMessage("Les caractères spéciaux sont interdits");
+                }
+                else if (preg_match('#[ÁÂÄàáâä@ÈÉÊËèéêë€ÌÍÎÏìíîïÒÓÔÖòóôöÙÚÛÜùúûüµŒœ]#', $_POST["lastname"]) != 0) {
+                    $accountView->showMessage("Les caractères spéciaux sont interdits");
+                }
                 else{
                     //$_POST["passe"] = sha1($_POST["passe"]);
                     $accountModel->addUser($_POST["mail"], $_POST["firstname"], $_POST["lastname"], sha1($_POST["passe"]));
