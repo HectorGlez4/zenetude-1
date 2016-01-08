@@ -731,18 +731,6 @@ include_once '../model/db.php';
 					<div class="form-group">
 						<div class="row">
 							<div class="col s12">
-								<label for="">Nom</label>
-								<input type="text" class="form-control" value="<?php echo $result4[3];?>" name="user_name">
-							</div>
-						</div>
-						<div class="row">
-							<div class="col s12">
-								<label for="">Prénom</label>
-								<input type="text" class="form-control" value="<?php echo $result4[4];?>" name="user_firstname">
-							</div>
-						</div>
-						<div class="row">
-							<div class="col s12">
 								<label>Civilité</label>
 									<select name="user_civility">
 										<option value="Monsieur" <?php if($result4[5] == "Monsieur") echo " selected='selected'";?>>Monsieur</option>
