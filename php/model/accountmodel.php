@@ -267,6 +267,7 @@
             return $request;
         }
 
+
         public function uploadInfoUser(){
             $accountView = new AccountView();
             $db = connect();
