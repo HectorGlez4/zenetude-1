@@ -404,7 +404,6 @@ include_once '../model/db.php';
 							echo 'Groupe '.$userInfos['infoStudent']['student_group'].'<br />';
 					?>
 					<li><a class="color" href="profil.php">Mon compte</a></li>
-					<li><a class="color" href="../model/deconnect.php">Déconnexion</a></li>
 
 					<?php
 						$db=connect();
@@ -418,6 +417,9 @@ include_once '../model/db.php';
 							}
 						}
 					?>
+
+					<li><a class="color" href="../model/deconnect.php">Déconnexion</a></li>
+
 				</ul>
 			</nav>
 			<nav id="scroll-nav">
@@ -657,6 +659,18 @@ include_once '../model/db.php';
 			        <option value="RF" <?php if($statut_register == "RF") echo "selected='selected'";?>>Responsable de Formation</option>
 		        </select>
 
+		       	<?php 
+		        	if ($statut_register == "RF") {
+						$trainings = $db->query("SELECT training_id, description FROM Training WHERE description IS NOT NULL");
+						echo '<label for="training_manager">Formation</label>';
+						echo "<select id='list_trainings' name='list_trainings' size=1>";
+						while ($result_trainings = $trainings->fetch()) {
+							echo "<option value='".$result_trainings['training_id'] ."'>".$result_trainings['description']. "</option>";
+						}
+						echo "</select>";
+					}
+				?>
+
 		        <button class="btn" type="submit" name="Modifier">Modifier</button>
 				<a class="btn supp" href="admin.php?supmembre=<?= $id_register.'&amp;statutmember='.$statut_register;?>">Supprimer</a>
 		    </form>
@@ -719,6 +733,9 @@ include_once '../model/db.php';
 	                    echo '<div class="erreur">Cet email « '.$_POST['email'].' » est utilisé!</div>'; return false;
 	                }
 				}
+
+				
+
 				//If first and last name empty
 		        if(empty($_POST['user_name'])){
 		            echo '<div class="erreur">Veuillez saisir un nom!</div>';

@@ -127,8 +127,37 @@
 				$pageView -> showScrollMenu(false, $_SESSION);
 		}
 
+		function compress_image($src, $dest , $quality) {
+			$info = getimagesize($src);
+  
+		    if ($info['mime'] == 'image/jpeg') 
+		    {
+		        $image = imagecreatefromjpeg($src);
+		    }
+		    elseif ($info['mime'] == 'image/gif') 
+		    {
+		        $image = imagecreatefromgif($src);
+		    }
+		    elseif ($info['mime'] == 'image/png') 
+		    {
+		        $image = imagecreatefrompng($src);
+		    }
+		    else
+		    {
+		        die('Unknown image file format');
+		    }
+
+		    //compress and save file to jpg
+    		imagejpeg($image, $dest, $quality);
+  
+    		//return destination file
+    		return $dest;
+
+		}
+
 		public function uploadPhoto(){
 			$accountmodel = new AccountModel();
+			$PageController = new PageController();
 			if (isset($_FILES['student_avatar'])) {
 	            $maxsize = 2097152;
 				$extensions_valides =  array('gif','png' ,'jpg', 'jpeg');
@@ -152,6 +181,7 @@
 		            if ($resultat) {
 		            	$accountmodel -> addAvatar($fichier, $session);
 		            	$_SESSION['infoStudent']['student_avatar'] = $fichier;
+		            	$PageController -> compress_image($fichier, $fichier, 50);
 		            }
 	            }
         	}
@@ -159,9 +189,10 @@
 
         public function uploadTrombi(){
         	$accountmodel = new AccountModel();
+        	$PageController = new PageController();
 			if (isset($_FILES['student_trombi'])) {
 	            $maxsize = 2097152;
-				$extensions_valides =  array('gif','png' ,'jpg', 'jpeg');
+				$extensions_valides =  array('png' ,'jpg', 'jpeg');
 				$filename = $_FILES['student_trombi']['name'];
 				$ext = pathinfo($filename, PATHINFO_EXTENSION);
 				$extension_upload = strtolower(  substr(  strrchr($_FILES['student_trombi']['name'], '.')  ,1)  );
@@ -182,6 +213,7 @@
 		            if ($resultat) {
 		            	$accountmodel -> addTrombi($fichier, $session);
 		            	$_SESSION['infoStudent']['student_trombi'] = $fichier;
+		            	$PageController -> compress_image($fichier, $fichier, 50);
 		            }
 	            }
         	}
