@@ -43,10 +43,7 @@ function addDataFacebook($email, $picture){
 		header('Location: index.php');
 
 	}else{
-        session_destroy();
-        $accountview = new AccountView();
-        $accountview->showMessage('Veuillez vous inscrire avant de vous connecter', 'ok');
-        echo '<script>document.location.href="index.php"</script>';
+        header('Location: index.php?noninscr=true');
 
     }
 }
@@ -82,10 +79,7 @@ function addDataGoogle($email, $picture){
 		header('Location: index.php');
 		
 	}else{
-        session_destroy();
-        $accountview = new AccountView();
-        $accountview->showMessage('Veuillez vous inscrire avant de vous connecter', 'ok');
-        echo '<script>document.location.href="index.php"</script>';
+        header('Location: index.php?noninscr=true');
 	}
 	
 }
@@ -122,10 +116,7 @@ function addDataTwitter($email, $picture){
 		echo '<script>document.location.href="index.php"</script>';
 
 	}else{
-        session_destroy();
-        $accountview = new AccountView();
-        $accountview->showMessage('Veuillez vous inscrire avant de vous connecter', 'ok');
-		echo '<script>document.location.href="index.php"</script>';
+        header('Location: index.php?noninscr=true');
 
     }
 
