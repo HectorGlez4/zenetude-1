@@ -26,8 +26,12 @@ nav .brand-logo{
 	transform: inherit;
 }
 
+.brand-logo-responsive{
+	display: none;
+}
+
 .logo-svg{
-	height: 200px;
+	height: 180px;
 
 }
 
@@ -244,7 +248,8 @@ footer{
 	}
 
 	.logo-svg{
-		width: 90%;
+		width: inherit;
+		height: 90%;
 	}
 
 	#scroll-nav>.nav-wrapper>img{
@@ -273,6 +278,61 @@ footer{
 		padding-left: 30px;
 		padding-right: 30px;
 	}
+
+	.logo-svg{
+		width: inherit;
+		height: 80%;
+	}
+}
+
+@media screen and (max-width: 700px) {
+	nav .brand-logo{
+		display: none;
+	}
+
+	.brand-logo-responsive{
+		display: block;
+		width: 180px;
+		float: left;
+	}
+
+	.name-svg{
+		display: none;
+	}
+
+	#scroll-nav>.nav-wrapper>.brand-logo{
+		display: none;
+	}
+
+	#scroll-nav>.nav-wrapper>.name-svg{
+		display: block;
+		float: left;
+		margin-left: 0;
+	}
+
+	#scroll-nav>.nav-wrapper>img{
+		margin-left: 0;
+		padding-right: 20px;
+	}
+
+}
+
+@media screen and (max-width: 420px) {
+
+	.brand-logo-responsive{
+		display: block;
+		width: 160px;
+		float: left;
+	}
+
+	#scroll-nav>.nav-wrapper>img{
+		width: 150px;
+	}
+
+}
+
+@media screen and (max-width: 350px) {
+
 }
 
 .image-upload img{

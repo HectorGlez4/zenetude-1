@@ -232,7 +232,8 @@ include_once '../model/db.php';
 			<nav id="nav">
 	 		 	<div class="nav-wrapper">
 				    <a href="./index.php" class="brand-logo"><img class="logo-svg" src="../../img/logo.svg" alt="logo du site"></a>
-				    <img src="../../img/name.png" alt="Zenetude, titre du site">
+				    <a href="./index.php" class="brand-logo-responsive"><img class="logo-svg" src="../../img/logo2.svg" alt="logo du site"></a>
+				    <img class="name-svg"  src="../../img/name.png" alt="Zenetude, titre du site">
 		  		</div>
 			</nav>
 			<?php
@@ -242,7 +243,8 @@ include_once '../model/db.php';
 			<nav id="nav">
 	 		 	<div class="nav-wrapper">
 				    <a href="./index.php" class="brand-logo"><img class="logo-svg" src="../../img/logo.svg" alt="logo du site"></a>
-				    <img src="../../img/name.png" alt="Zenetude, titre du site">
+				    <a href="./index.php" class="brand-logo-responsive"><img class="logo-svg" src="../../img/logo2.svg" alt="logo du site"></a>
+				    <img class="name-svg"  src="../../img/name.png" alt="Zenetude, titre du site">
 				    <div id="hamburger2" class="hamburglar is-closed">
 
 					    <div class="burger-icon">
@@ -349,7 +351,7 @@ include_once '../model/db.php';
 			<nav id="scroll-nav">
 		  		<div class="nav-wrapper">
 		    		<a href="index.php" class="brand-logo"><img src="../../img/logo.svg" alt="logo du site"></a>
-		    		<img src="../../img/name.png" alt="Zenetude, titre du site">
+		    		<img class="name-svg" src="../../img/name.png" alt="Zenetude, titre du site">
 		 	 	</div>
 			</nav>
 		<?php
