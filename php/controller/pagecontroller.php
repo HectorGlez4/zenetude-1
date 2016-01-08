@@ -167,13 +167,9 @@
 		function compress_image($src, $dest , $quality) {
 			$info = getimagesize($src);
   
-		    if ($info['mime'] == 'image/jpeg') 
+		    if ($info['mime'] == 'image/jpeg')
 		    {
 		        $image = imagecreatefromjpeg($src);
-		    }
-		    elseif ($info['mime'] == 'image/gif') 
-		    {
-		        $image = imagecreatefromgif($src);
 		    }
 		    elseif ($info['mime'] == 'image/png') 
 		    {
@@ -189,7 +185,6 @@
   
     		//return destination file
     		return $dest;
-
 		}
 
 		/**
@@ -227,12 +222,14 @@
 				else {
 			 		//$accountView->showMessage("on passe par la", "ok", "gestion.php");
 		            $fichier='../../img/avatar/'.$_SESSION['infoStudent']['student_id'].".$extension_upload";
+		            unlink($_SESSION['infoUserStudent']['student_avatar']);
 		            $session = $_SESSION['infoUser']['user_id'];
 		            $resultat = move_uploaded_file($_FILES['student_avatar']['tmp_name'],$fichier);
 		            if ($resultat) {
 		            	$accountmodel -> addAvatar($fichier, $session);
 		            	$_SESSION['infoStudent']['student_avatar'] = $fichier;
-		            	$PageController -> compress_image($fichier, $fichier, 50);
+		            	if ($extension_upload !== 'gif')
+		            		$PageController -> compress_image($fichier, $fichier, 50);
 		            }
 	            }
         	}
@@ -272,11 +269,13 @@
 
 				else {
 		            $fichier='../../img/trombi/'.$_SESSION['infoStudent']['student_id'].".$extension_upload";
+		            unlink($_SESSION['infoStudent']['student_trombi']);
 		            $session = $_SESSION['infoUser']['user_id'];
 		            $resultat = move_uploaded_file($_FILES['student_trombi']['tmp_name'],$fichier);
 		            if ($resultat) {
 		            	$accountmodel -> addTrombi($fichier, $session);
 		            	$_SESSION['infoStudent']['student_trombi'] = $fichier;
+		            	if ($extension_upload !== 'gif')
 		            	$PageController -> compress_image($fichier, $fichier, 50);
 		            }
 	            }
