@@ -67,7 +67,25 @@
         public function getUserByPassword($userMail, $userPassword) {
             $db = connect();
             $request = $db->query('SELECT * FROM User WHERE user_instituteemail = "'.$userMail.'" AND user_password = "'.$userPassword.'"');
-            $result = $request->fetch();
+            $result = $request->fetch(PDO::FETCH_ASSOC);
+            return $result;
+        }
+
+        /**
+         * Get user_id, user_name, user_firstname and user_instituteemail of the wanted user using his user_id
+         * @param int $userId contains the user id
+         * @return array contains user's principal informations
+         */
+        public function getUserById($userId = null){
+            if($userId == null)
+                return false;
+
+            $db = connect();
+            $request = $db->query('SELECT user_id, user_name, user_firstname, user_instituteemail
+                                   FROM User
+                                   WHERE user_id = "'.$userId.'"');
+            $result = $request->fetch(PDO::FETCH_ASSOC);
+
             return $result;
         }
 
@@ -187,17 +205,21 @@
          * @param $userfirstname string contains the user first name
          * @param $userlastname string contains the user last name
          * @param $userPassword string contains the user's cripted password
+         * @return int contains the user id of the new user
 		**/
         public function addUser($userMail, $userfirstname, $userlastname, $userPassword) {
             $db = connect();
             $usercorrectfirstname = str_replace(" ", "-", $userfirstname);
             $usercorrectlastname = str_replace(" ", "-", $userlastname);
-            $request = $db->query('INSERT INTO User (user_password, user_firstname, user_name, user_instituteemail) VALUES ("'.$userPassword.'", "'.$usercorrectfirstname.'", "'.$usercorrectlastname.'", "'.$userMail.'")');
-            $request0 = $db->query("SELECT user_id FROM User WHERE user_instituteemail = '$userMail'");
-            $result0 = $request0->fetch();
-            $id = $result0[0];
-            $request2 = $db->query('INSERT INTO Student (user_id, student_instituteemail, student_avatar, student_trombi) VALUES ("'.$id.'", "'.$userMail.'", "../../img/avatar.png", "../../img/avatar.png")');
+            $db->query('INSERT INTO User (user_password, user_firstname, user_name, user_instituteemail)
+                        VALUES ("'.$userPassword.'", "'.$usercorrectfirstname.'", "'.$usercorrectlastname.'", "'.$userMail.'")');
+            $request0 = $db->query("SELECT user_id
+                                    FROM User
+                                    WHERE user_instituteemail = '$userMail'");
+            $db->query('INSERT INTO Student (user_id, student_instituteemail, student_avatar, student_trombi)
+                        VALUES ("'.$id.'", "'.$userMail.'", "../../img/avatar.png", "../../img/avatar.png")');
 
+            return $request0->fetch(PDO::FETCH_ASSOC);
         }
 
         /**

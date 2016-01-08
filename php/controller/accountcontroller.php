@@ -44,7 +44,7 @@
                 $_POST['pass'] = htmlspecialchars(sha1($_POST['pass']));
                 if ($userResult = $accountModel -> getUserByPassword($_POST['mail'],  $_POST['pass'])) {
                     $_SESSION['infoUser'] = $userResult;
-
+                    //print_r($userResult);
                     if ($_SESSION['infoUser']['user_type'] == 'RF') {
                         $rfResult = $accountModel->getDataTrainingManager('*', $_SESSION['infoUser']['user_id']);
                         $_SESSION['infoRF'] = $rfResult;
@@ -87,9 +87,16 @@
                 {
                     $accountView->showMessage("Adresse email existe déjà.");
                 }
+                else if (preg_match('#[ÁÂÄàáâä@ÈÉÊËèéêë€ÌÍÎÏìíîïÒÓÔÖòóôöÙÚÛÜùúûüµŒœ]#', $_POST["firstname"]) != 0) {
+                    $accountView->showMessage("Les caractères spéciaux sont interdits");
+                }
+                else if (preg_match('#[ÁÂÄàáâä@ÈÉÊËèéêë€ÌÍÎÏìíîïÒÓÔÖòóôöÙÚÛÜùúûüµŒœ]#', $_POST["lastname"]) != 0) {
+                    $accountView->showMessage("Les caractères spéciaux sont interdits");
+                }
                 else{
                     //$_POST["passe"] = sha1($_POST["passe"]);
-                    $accountModel->addUser($_POST["mail"], $_POST["firstname"], $_POST["lastname"], sha1($_POST["passe"]));
+                    $userId = $accountModel->addUser($_POST["mail"], $_POST["firstname"], $_POST["lastname"], sha1($_POST["passe"]));
+                    $_SESSION['infoUser'] = $accountModel->getUserById(intval($userId['user_id']));
                     $accountModel->sendEmail($_POST["mail"], $_POST["passe"]);
                 }
             }
