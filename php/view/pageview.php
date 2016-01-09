@@ -161,7 +161,7 @@ include_once '../model/db.php';
 		public function showFooter() {
 			?>
 			<footer>
-				<p>Copyright &copy 2016 Licence Professionnelle Systèmes Informatiques et Logiciels et Développement et Administration Internet et Intranet. Tous droits réservés</p>
+				<p>Licence Professionnelle Systèmes Informatiques et Logiciels et Développement et Administration Internet et Intranet.</p>
 			</footer>
 			<?php
 		}
