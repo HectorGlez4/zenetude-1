@@ -16,9 +16,7 @@
         echo "<script>alert('Une erreur s\'est produite. Veuillez réessayer ultérieurement');</script>";
     }
 
-
     if (isset($_GET['noniscr'])){
-
         echo "<script>alert('Veuillez vous inscrire avant de vous connecter !');</script>";
     }
 
