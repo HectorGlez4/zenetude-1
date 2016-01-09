@@ -36,15 +36,15 @@ function addDataFacebook($email, $picture){
         $trainingResult = $accountModel->getTrainingInformationsForUser('description', $_SESSION['infoUser']['user_id']);
         $_SESSION['infoTraining'] = $trainingResult;
 
-        $co->query("UPDATE Student SET student_avatar = '$picture' WHERE `student_id` = $idstu");
+        //$co->query("UPDATE Student SET student_avatar = '$picture' WHERE `student_id` = $idstu");
 
 
-		print_r($co->errorInfo());
+		//print_r($co->errorInfo());
 		header('Location: index.php');
 
 	}else{
 		session_unset();
-        header('Location: index.php?noninscr=true');
+        header('Location: index.php?incrip=true');
 
     }
 }
@@ -74,14 +74,14 @@ function addDataGoogle($email, $picture){
         $trainingResult = $accountModel->getTrainingInformationsForUser('description', $_SESSION['infoUser']['user_id']);
         $_SESSION['infoTraining'] = $trainingResult;
 
-        $co->query("UPDATE Student SET student_avatar = '$picture' WHERE `student_id` = $idstu");
+        //$co->query("UPDATE Student SET student_avatar = '$picture' WHERE `student_id` = $idstu");
 		
-		print_r($co->errorInfo());
+		//print_r($co->errorInfo());
 		header('Location: index.php');
 		
 	}else{
 		session_unset();
-        header('Location: index.php?noninscr=true');
+        header('Location: index.php?incrip=true');
 
 	}
 	
@@ -110,17 +110,17 @@ function addDataTwitter($email, $picture){
 		$_SESSION['image'] = $picture;
 
 		$trainingResult = $accountModel->getTrainingInformationsForUser('description', $_SESSION['infoUser']['user_id']);
-         $_SESSION['infoTraining'] = $trainingResult;
+		$_SESSION['infoTraining'] = $trainingResult;
 
-        $co->query("UPDATE Student SET `student_avatar` = '$picture' WHERE `student_id` = $idstu");
+        //$co->query("UPDATE Student SET `student_avatar` = '$picture' WHERE `student_id` = $idstu");
 
-		print_r($co->errorInfo());
+		//print_r($co->errorInfo());
 		//header('Location: index.php');
 		echo '<script>document.location.href="index.php"</script>';
 
 	}else{
 		session_unset();
-        header('Location: index.php?noninscr=true');
+        header('Location: index.php?incrip=true');
 
     }
 
