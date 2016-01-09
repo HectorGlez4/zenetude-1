@@ -319,7 +319,6 @@
                 $student_comment=$_POST['student_comment'];
                 $student_group=$_POST['student_group'];
                 $training_description=$_POST['training_description'];
-                $student_educationallevel=$_POST['student_educationallevel'];
                 $student_grantholder=$_POST['student_grantholder'];
 
                 $request = $db->prepare('SELECT training_id FROM Training WHERE description = "'.$training_description.'"');
@@ -349,7 +348,6 @@
                     htmlspecialchars($student_group),
                     htmlspecialchars($student_birthcity),
                     htmlspecialchars($training_id),
-                    htmlspecialchars($student_educationallevel),
                     htmlspecialchars($student_grantholder)
                 );
             }
@@ -386,8 +384,7 @@
                     student_group = '$values[17]',
                     student_birthcity = '$values[18]',
                     training_id = '$values[19]',
-                    student_educationallevel = '$values[20]',
-                    student_grantholder = '$values[21]'
+                    student_grantholder = '$values[20]'
                     WHERE user_id='$idUser'");
                 }
             }
@@ -416,8 +413,8 @@
                 $_SESSION['infoStudent']['student_group'] = $values[17];
                 $_SESSION['infoStudent']['student_birthcity'] = $values[18];
                 $_SESSION['infoStudent']['training_id'] = $values[19];
-                $_SESSION['infoStudent']['student_educationallevel'] = $values[20];
-                $_SESSION['infoStudent']['student_grantholder'] = $values[21];
+                $_SESSION['infoStudent']['student_grantholder'] = $values[20];
+                $_SESSION['infoTraining']['description'] = $training_description;
             }
             $_SESSION['infoUser']['user_civility'] = $values[0];
 
