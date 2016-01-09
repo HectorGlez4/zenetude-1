@@ -414,6 +414,7 @@
                 $_SESSION['infoStudent']['student_birthcity'] = $values[18];
                 $_SESSION['infoStudent']['training_id'] = $values[19];
                 $_SESSION['infoStudent']['student_grantholder'] = $values[20];
+                $_SESSION['infoTraining']['description'] = $training_description;
             }
             $_SESSION['infoUser']['user_civility'] = $values[0];
 
