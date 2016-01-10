@@ -1138,10 +1138,14 @@ include_once '../model/db.php';
 		 * Show the error page.
 		 */
 		public function showErrorPage() {
-			echo '<div class="center-align">
-						<h3>Cette page n\'existe pas !</h3>
-						<p>Redirection en cours vers la page d\'accueil</span></p>
-					</div>';
+
+			echo '<div class="col s12 m12">
+					<div class="card-panel teal center-align" id="errorpage">
+							<h3>Cette page n\'existe pas !</h3>
+							<p>Redirection en cours vers la page d\'accueil</span></p>
+							<img src="../../img/loadingsearch.gif">
+					</div>
+			</div>';
 		}
     }
 

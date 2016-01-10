@@ -25,12 +25,15 @@ $pageView = new PageView();
 ?>
 <!DOCTYPE html>
 <html>
+<style type="text/css">
+    body{overflow:hidden;}
+</style>
 <body>
 
 <?php
 $pageView -> showHead();
 $pageController -> controlHeader(); ?>
-<META HTTP-EQUIV="Refresh" CONTENT="5; URL=index.php">
+<META HTTP-EQUIV="Refresh" CONTENT="3; URL=index.php">
 <?php
 $pageController -> controlDynamicMenu();
 ?>
@@ -51,7 +54,6 @@ $pageController -> controlDynamicMenu();
 <!-- FIN CONTAINER -->
 
 <?php
-$pageView->showFooter();
 $pageView->showjavaLinks();
 ?>
 
