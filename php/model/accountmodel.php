@@ -138,7 +138,6 @@
          * Gets all the information of the student who is currently connected.
          * @return request's result
         **/
-
         public function getInfoStudent(){
             $db = connect();
             $request = $db->prepare('SELECT * FROM Student WHERE user_id = '.$_SESSION['infoUser']['user_id']);
@@ -151,7 +150,6 @@
          * Shows the description and the id of the training.
          * @return request's result
         **/
-
         public function getDescritpionTraining(){
             $db = connect();
             $request = $db->prepare('SELECT description, training_id FROM Training');
@@ -163,7 +161,6 @@
          * Shows all the information of the user who is currently connected.
          * @return request's result
         **/
-
         public function getAllInfoUser(){
             $db = connect();
             $request = $db->prepare('SELECT * FROM User WHERE user_id = '.$_SESSION['infoUser']['user_id']);
@@ -310,7 +307,6 @@
          * if it's a student he can modify all the information but if it's a training manager he can only modify the user_civility
          * @return request's result
          */
-
         public function uploadInfoUser(){
             $accountView = new AccountView();
             $db = connect();
