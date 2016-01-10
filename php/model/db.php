@@ -10,7 +10,7 @@ function connect()
 {
 	try{
 
-		$db = new PDO('mysql:host=mysql.hostinger.fr;dbname=u384123345_zen', "u384123345_zen13", "q}2[u9LE", array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
+		$db = new PDO('mysql:host=mysql-maquetteprojet.alwaysdata.net;dbname=maquetteprojet_zenetude', "114038_equipe1", "q}2[u9LE", array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
 		return $db;
 
 	}
