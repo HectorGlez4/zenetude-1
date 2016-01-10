@@ -438,3 +438,10 @@ input, select{
 .day.today.event>div{
 	color: white !important; 
 }
+
+/********************/
+/** PAGE ERREUR **/
+/********************/
+#errorpage p {
+	text-align: center;
+}
