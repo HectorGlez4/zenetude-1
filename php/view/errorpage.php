@@ -22,9 +22,9 @@
 
     $pageController = new PageController();
     $pageView = new PageView();
-    ?>
-    <!DOCTYPE html>
-    <html>
+?>
+<!DOCTYPE html>
+<html>
     <style type="text/css">
         body{overflow:hidden;}
     </style>
@@ -34,22 +34,22 @@
         $pageView -> showHead();
         $pageController -> controlHeader();
     ?>
-    <META HTTP-EQUIV="Refresh" CONTENT="3; URL=index.php">
+        <META HTTP-EQUIV="Refresh" CONTENT="3; URL=index.php">
     <?php
         $pageController -> controlDynamicMenu();
     ?>
 
-    <div id="filtre"></div>
+        <div id="filtre"></div>
 
-    <div class="container">
-        <!-- Page Content goes here -->
-        <div class="row row1">
-            <?php
-                $pageController -> controlShowErrorPage();
-            ?>
+        <div class="container">
+            <!-- Page Content goes here -->
+            <div class="row row1">
+                <?php
+                    $pageController -> controlShowErrorPage();
+                ?>
+            </div>
         </div>
-    </div>
-    <!-- FIN CONTAINER -->
+        <!-- FIN CONTAINER -->
 
     <?php
         $pageView->showjavaLinks();
