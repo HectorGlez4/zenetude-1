@@ -229,9 +229,14 @@ textarea {
 footer{
 	clear:both;
 	height:60px;
-	line-height: 60px;
 	background-color: #7BBA42;
 	box-shadow: 0px -5px 5px 0px rgba(0, 0, 0, 0.16), 0px -5px 10px 0px rgba(0, 0, 0, 0.12);
+	width: 100%;
+	bottom: 0;
+}
+
+footer>p{
+	padding-top: 20px;
 }
 
 /*1029 px pour le calendrier*/
