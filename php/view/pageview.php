@@ -233,7 +233,7 @@ include_once '../model/db.php';
 	 		 	<div class="nav-wrapper">
 				    <a href="./index.php" class="brand-logo"><img class="logo-svg" src="../../img/logo.svg" alt="logo du site"></a>
 				    <a href="./index.php" class="brand-logo-responsive"><img class="logo-svg" src="../../img/logo2.svg" alt="logo du site"></a>
-				    <img class="name-svg"  src="../../img/name.png" alt="Zenetude, titre du site">
+				    <img class="name-svg"  src="../../img/name.svg" alt="Zenetude, titre du site">
 		  		</div>
 			</nav>
 			<?php
@@ -244,7 +244,7 @@ include_once '../model/db.php';
 	 		 	<div class="nav-wrapper">
 				    <a href="./index.php" class="brand-logo"><img class="logo-svg" src="../../img/logo.svg" alt="logo du site"></a>
 				    <a href="./index.php" class="brand-logo-responsive"><img class="logo-svg" src="../../img/logo2.svg" alt="logo du site"></a>
-				    <img class="name-svg"  src="../../img/name.png" alt="Zenetude, titre du site">
+				    <img class="name-svg"  src="../../img/name.svg" alt="Zenetude, titre du site">
 				    <div id="hamburger2" class="hamburglar is-closed">
 
 					    <div class="burger-icon">
@@ -352,7 +352,7 @@ include_once '../model/db.php';
 			<nav id="scroll-nav">
 		  		<div class="nav-wrapper">
 		    		<a href="index.php" class="brand-logo"><img src="../../img/logo.svg" alt="logo du site"></a>
-		    		<img class="name-svg" src="../../img/name.png" alt="Zenetude, titre du site">
+		    		<img class="name-svg" src="../../img/name.svg" alt="Zenetude, titre du site">
 		 	 	</div>
 			</nav>
 		<?php
@@ -415,7 +415,7 @@ include_once '../model/db.php';
 			<nav id="scroll-nav">
 		  		<div class="nav-wrapper">
 		    		<a href="index.php" class="brand-logo"><img src="../../img/logo.svg" alt="logo du site"></a>
-		    		<img src="../../img/name.png" alt="Zenetude, titre du site">
+		    		<img src="../../img/name.svg" alt="Zenetude, titre du site">
 		    		<div id="hamburger" class="hamburglar is-closed">
 		    			<div class="burger-icon">
 					      <div class="burger-container">

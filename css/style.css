@@ -415,3 +415,20 @@ input, select{
 .btnbot {
 	margin-top: 30px;
 }
+
+.picker__footer>button{
+	width: 33%;
+	font-size: 0.8em;
+}
+
+.picker__weekday-display{
+	background-color: #385E2D;
+}
+
+.cal1 .clndr .clndr-table tr .day.today.event{
+	background-color: #7BBA42 !important;
+}
+
+.day.today.event>div{
+	color: white !important; 
+}
