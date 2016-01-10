@@ -89,6 +89,14 @@
 			$pageView -> showAdministration($allUser/*, $allInfoUserSelect*/);
 		}
 
+		/**
+		 * Show the error page.
+		 */
+		public function controlShowErrorPage(){
+			$pageView = new PageView();
+			$pageView -> showErrorPage();
+		}
+
         /**
          * Tests if the visitor is connected and if he's a training manager and return the documents. Else, return to the index page.
          **/
