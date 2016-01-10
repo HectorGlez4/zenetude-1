@@ -1,0 +1,46 @@
+table {
+	vertical-align: top;
+	font-size: 16px;
+}
+
+tr {
+	vertical-align: top;
+}
+
+td {
+	vertical-align: bottom; 
+	border:1px solid;
+	height: 25;
+}
+
+h4, h5 {
+	margin:0px;
+}
+
+#fleft {
+	float:left;
+}
+
+#fright {
+	float:right;
+}
+
+.left {
+	text-align: left;
+}
+
+.center {
+	text-align: center;
+}
+
+.centre {
+	margin:0px auto;
+}
+
+.noneborder td {
+	border:0px;
+}
+
+.BOLD {
+	font-weight: bold;
+}

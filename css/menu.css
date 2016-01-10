@@ -554,3 +554,29 @@
     left: 36px;
   }
 }
+
+/***************/
+/** SIDE MENU **/
+/***************/
+#menu{
+  height: 100%;
+  width: 300px;
+  padding: 0;
+  padding-top: 5%;
+  background-color: #fafafa;
+  position: fixed;
+  top: 200px;
+  right: -300px;
+  z-index: 19;
+}
+
+#menu ul li{
+  display: block;
+  width: 300px;
+}
+
+#menu img{
+  height: 100px;
+  width: 100px;
+  border: solid 5px #77ba42;
+}

@@ -1,3 +1,28 @@
+td {
+	vertical-align: bottom; 
+	border:1px solid;
+	height: 25;
+}
+
+table {
+	font-size: 16px;
+}
+
+h2 h3 {
+	margin:0 auto;
+}
+
+h5 {
+	margin:0 auto 20 auto;
+}
+
+p {
+	font-size: 10px;  
+    margin-top: 5px;
+}
+
+
+
 #formation {
     border-right : 1px solid;
     border-bottom : 1px solid;
@@ -7,7 +32,6 @@
 .center-block {
     text-align: center;
 }
-
 
 .profil li{
 text-decoration: none;   
@@ -20,4 +44,8 @@ padding-top: 3%;
 .trombi img {
 width: 80%;
 height: 68%;
+}
+
+.lienblock {
+	display: block;
 }
