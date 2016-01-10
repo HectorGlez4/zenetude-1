@@ -24,27 +24,27 @@ function addDataFacebook($email, $picture){
 		$accountModel = new AccountModel();
 		//echo "<script>alert('');</script>";
 		$_SESSION['infoStudent'] = $res;
+        $_SESSION['infoStudent']['student_avatar'] = $picture;
 	    $id = $res['user_id'];
 		$idstu = $res['student_id'];
 		$pourlasess = $co->query("SELECT * FROM User WHERE user_id = $id");
 		$lesdonnees = $pourlasess->fetch();
 
 		$_SESSION['infoUser'] = $lesdonnees;
-		$_SESSION['image'] = $picture;
-
 
 						
         $trainingResult = $accountModel->getTrainingInformationsForUser('description', $_SESSION['infoUser']['user_id']);
         $_SESSION['infoTraining'] = $trainingResult;
 
-        $co->query("UPDATE Student SET student_avatar = '$picture' WHERE `student_id` = $idstu");
+        //$co->query("UPDATE Student SET student_avatar = '$picture' WHERE `student_id` = $idstu");
 
-		print_r($co->errorInfo());
+
+		//print_r($co->errorInfo());
 		header('Location: index.php');
 
 	}else{
-        $accountview = new AccountView();
-        $accountview->showMessage('Veuillez vous inscrire avant de vous connecter.', '', 'index.php');
+		session_unset();
+        header('Location: index.php?incrip=true');
 
     }
 }
@@ -59,9 +59,10 @@ function addDataGoogle($email, $picture){
     $data = $co->query("SELECT * FROM Student WHERE student_instituteemail = '$email' OR student_personalemail = '$email'");
     $res = $data->fetch();
 
-    if (count($res) != 0){
+    if ($res){
 		$accountModel = new AccountModel();
 		$_SESSION['infoStudent'] = $res;
+        $_SESSION['infoStudent']['student_avatar'] = $picture;
 	    $id = $res['user_id'];
 		$idstu = $res['student_id'];
 		$pourlasess = $co->query("SELECT * FROM User WHERE user_id = $id");
@@ -73,14 +74,14 @@ function addDataGoogle($email, $picture){
         $trainingResult = $accountModel->getTrainingInformationsForUser('description', $_SESSION['infoUser']['user_id']);
         $_SESSION['infoTraining'] = $trainingResult;
 
-        $co->query("UPDATE Student SET student_avatar = '$picture' WHERE `student_id` = $idstu");
+        //$co->query("UPDATE Student SET student_avatar = '$picture' WHERE `student_id` = $idstu");
 		
-		print_r($co->errorInfo());
+		//print_r($co->errorInfo());
 		header('Location: index.php');
 		
 	}else{
-		$accountview = new AccountView();
-        $accountview->showMessage('Veuillez vous inscrire avant de vous connecter.', '', 'index.php');
+		session_unset();
+        header('Location: index.php?incrip=true');
 
 	}
 	
@@ -99,6 +100,7 @@ function addDataTwitter($email, $picture){
     if (count($res) != 0){
 		$accountModel = new AccountModel();
 		$_SESSION['infoStudent'] = $res;
+        $_SESSION['infoStudent']['student_avatar'] = $picture;
 	    $id = $res['user_id'];
 		$idstu = $res['student_id'];
 		$pourlasess = $co->query("SELECT * FROM User WHERE user_id = $id");
@@ -108,17 +110,17 @@ function addDataTwitter($email, $picture){
 		$_SESSION['image'] = $picture;
 
 		$trainingResult = $accountModel->getTrainingInformationsForUser('description', $_SESSION['infoUser']['user_id']);
-         $_SESSION['infoTraining'] = $trainingResult;
+		$_SESSION['infoTraining'] = $trainingResult;
 
-        $co->query("UPDATE Student SET `student_avatar` = '$picture' WHERE `student_id` = $idstu");
+        //$co->query("UPDATE Student SET `student_avatar` = '$picture' WHERE `student_id` = $idstu");
 
-		print_r($co->errorInfo());
+		//print_r($co->errorInfo());
 		//header('Location: index.php');
 		echo '<script>document.location.href="index.php"</script>';
 
 	}else{
-        $accountview = new AccountView();
-        $accountview->showMessage('Veuillez vous inscrire avant de vous connecter.', '', 'index.php');
+		session_unset();
+        header('Location: index.php?incrip=true');
 
     }
 

@@ -2,9 +2,9 @@
 
 	class AccountView {
         /**
-         * Show messages.
+         * Shows messages.
          * @param string $msg The message wanted.
-         * @param string $send
+         * @param string $send For ajax condition. Test if the function php worked.
          * @param string $redirection The link to an other page.
          */
 		public function showMessage($msg, $send = "", $redirection ="") {

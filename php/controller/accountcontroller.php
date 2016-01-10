@@ -3,7 +3,7 @@
 
 
 		/**
-			* Test if the mail address given by the user exists in the database.
+			* Tests if the mail address given by the user exists in the database.
 		**/
 		public function	controlRecoverPassword() {
 			$accountModel = new AccountModel();
@@ -17,6 +17,9 @@
 				$accountView -> showMessage("Votre adresse e-mail est incorrecte.");
 		}
 
+        /**
+         * Validates if there aren't any errors at the image, the rombinoscope or the password.
+         **/
         public function controlGestion(){
             $pageController = new PageController();
             $erreur = $pageController -> uploadPhoto();
@@ -34,7 +37,7 @@
 
 
 		/**
-			* Test if the mail address and the password given by the user exist in the database. 
+			* Tests if the mail address and the password given by the user exist in the database.
 		**/
         public function controlConnection() {
 			$accountView = new AccountView();
@@ -44,7 +47,7 @@
                 $_POST['pass'] = htmlspecialchars(sha1($_POST['pass']));
                 if ($userResult = $accountModel -> getUserByPassword($_POST['mail'],  $_POST['pass'])) {
                     $_SESSION['infoUser'] = $userResult;
-
+                    //print_r($userResult);
                     if ($_SESSION['infoUser']['user_type'] == 'RF') {
                         $rfResult = $accountModel->getDataTrainingManager('*', $_SESSION['infoUser']['user_id']);
                         $_SESSION['infoRF'] = $rfResult;
@@ -64,7 +67,7 @@
 		
 
 		/**
-			* Test if informations given by the user before create a new user in the database. 
+			* Tests if the information given by the user before creating a new user in the database is correct.
 		**/
         public function controlInscription() {
             $accountView = new AccountView();
@@ -87,9 +90,16 @@
                 {
                     $accountView->showMessage("Adresse email existe déjà.");
                 }
+                else if (preg_match('#[ÁÂÄàáâä@ÈÉÊËèéêë€ÌÍÎÏìíîïÒÓÔÖòóôöÙÚÛÜùúûüµŒœ]#', $_POST["firstname"]) != 0) {
+                    $accountView->showMessage("Les caractères spéciaux sont interdits");
+                }
+                else if (preg_match('#[ÁÂÄàáâä@ÈÉÊËèéêë€ÌÍÎÏìíîïÒÓÔÖòóôöÙÚÛÜùúûüµŒœ]#', $_POST["lastname"]) != 0) {
+                    $accountView->showMessage("Les caractères spéciaux sont interdits");
+                }
                 else{
                     //$_POST["passe"] = sha1($_POST["passe"]);
-                    $accountModel->addUser($_POST["mail"], $_POST["firstname"], $_POST["lastname"], sha1($_POST["passe"]));
+                    $userId = $accountModel->addUser($_POST["mail"], $_POST["firstname"], $_POST["lastname"], sha1($_POST["passe"]));
+                    $_SESSION['infoUser'] = $accountModel->getUserById(intval($userId['user_id']));
                     $accountModel->sendEmail($_POST["mail"], $_POST["passe"]);
                 }
             }

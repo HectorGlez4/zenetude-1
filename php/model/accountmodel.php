@@ -2,7 +2,7 @@
 	class AccountModel {
 
         /**
-        * Get training's information using user id
+        * Gets the training information using the attribute userId
         * @param $param string contains the attribute needed
         * @param $userId int contains the user id
         * @return request's result
@@ -19,7 +19,7 @@
         }
 
 		/**
-		* Get user's informations about an user.
+		* Makes a request to get the user information.
         * @param $param string contains the attribute needed
         * @param $mail string contains the user mail adress
         * @return request's result
@@ -32,7 +32,7 @@
         }
 
 		/**
-        * Get student's informations (an attribute) about a student selected by its id.
+        * Gets the information of a student selected by his/her id.
         * @param $param string contains the attribute needed
         * @param $userId int contains the user id
         * @return request's result
@@ -45,7 +45,7 @@
 		}
 
 		/**
-         * Get training manager's informations about an training manager selected by its id.
+         * Gets the information of a training manager selected by its id.
          * @param $param string contains the attribute needed
          * @param $userId int contains the user id
          * @return request's result
@@ -58,8 +58,8 @@
 		}		
 
 		/**
-         * Get all informations of an user selected by its mail and its password.
-         * This function is used for test connection for now if a password exits for a mail in the datebase.
+         * Gets all the information of a user selected by his mail and password.
+         * This function is used to test the connection, if a password exists for a mail in the database.
          * @param $userMail string contains the user mail adress
          * @param $userPassword string contains the user's cripted password
          * @return request's result
@@ -67,12 +67,30 @@
         public function getUserByPassword($userMail, $userPassword) {
             $db = connect();
             $request = $db->query('SELECT * FROM User WHERE user_instituteemail = "'.$userMail.'" AND user_password = "'.$userPassword.'"');
-            $result = $request->fetch();
+            $result = $request->fetch(PDO::FETCH_ASSOC);
             return $result;
         }
 
         /**
-         * Get the user's cripted password
+         * Gets the user_id, user_name, user_firstname and user_instituteemail of a specified user using his user_id
+         * @param int $userId contains the user id
+         * @return array contains user's principal informations
+         */
+        public function getUserById($userId = null){
+            if($userId == null)
+                return false;
+
+            $db = connect();
+            $request = $db->query('SELECT user_id, user_name, user_firstname, user_instituteemail
+                                   FROM User
+                                   WHERE user_id = "'.$userId.'"');
+            $result = $request->fetch(PDO::FETCH_ASSOC);
+
+            return $result;
+        }
+
+        /**
+         * Gets the user's cripted password
          * @param $userId int contains the user id
          * @return request's result
          **/
@@ -85,7 +103,7 @@
         }
 
         /**
-         * Get the user email to check if it's already on the database.
+         * Gets the user email to check if it's already in the database.
          * @param $userMail string contains the user mail adress
          * @return request's result
          **/
@@ -97,7 +115,7 @@
         }
         
         /**
-         * Return true if the user is a training manager.
+         * Returns true if the user is a training manager.
          * @param $id_user int contains the user id
          * @return boolean
         **/
@@ -115,7 +133,11 @@
             else
                 return false;
         }
-
+        
+        /**
+         * Gets all the information of the student who is currently connected.
+         * @return request's result
+        **/
         public function getInfoStudent(){
             $db = connect();
             $request = $db->prepare('SELECT * FROM Student WHERE user_id = '.$_SESSION['infoUser']['user_id']);
@@ -123,6 +145,11 @@
             return $result = $request->fetch();
         }
 
+
+        /**
+         * Shows the description and the id of the training.
+         * @return request's result
+        **/
         public function getDescritpionTraining(){
             $db = connect();
             $request = $db->prepare('SELECT description, training_id FROM Training');
@@ -130,6 +157,10 @@
             return $result = $request->fetchAll();
         }
 
+          /**
+         * Shows all the information of the user who is currently connected.
+         * @return request's result
+        **/
         public function getAllInfoUser(){
             $db = connect();
             $request = $db->prepare('SELECT * FROM User WHERE user_id = '.$_SESSION['infoUser']['user_id']);
@@ -138,7 +169,7 @@
         }
 
 		/**
-         * Generate a new password an update it in the database. Then, a mail is automaticaly send to the user.
+         * Generates a new password and updates it in the database. Then, a mail is automaticaly sent to the user.
          * @param $userMail string contains the user mail adress
 		**/
 		public function recoverPassword($userMail) {
@@ -158,7 +189,7 @@
 				<h1>Réinitialisation du mot de passe</h1>
 				<hr />
 				<p>Bonjour, votre mot de passe a été réinitialisé.</p>
-                <p>Votre nouveau mot de passe est : <a href='http://zenetude.esy.es/php/view/'>$string</a></p>
+                <p>Votre nouveau mot de passe est : <a href='http://zenetude.esy.es'>$string</a></p>
  				<hr />
 				<p>Ce message a été généré automatiquement. Merci de ne pas y répondre.</p>
 			";
@@ -176,33 +207,37 @@
             //$mailer->Subject ="Subject: =?UTF-8?B?".base64_encode("Réinitialisation du mot de passe | Zenetude")."?=";
             $mailer->Body = $body;
             if(!$mailer->Send())
-                $accountView->showMessage("erreur mot de passe !");
+                $accountView->showMessage("Erreur mot de passe !");
             else
                 $accountView->showMessage("Votre mot de passe a été réinitialisé. Un message contenant le nouveau mot de passe vous à été envoyé.","ok","index.php");
 		}
 
 		/**
-         * Add a new user to the database.
+         * Adds a new user to the database.
          * @param $userMail string contains the user's id
          * @param $userfirstname string contains the user first name
          * @param $userlastname string contains the user last name
          * @param $userPassword string contains the user's cripted password
+         * @return int contains the user id of the new user
 		**/
         public function addUser($userMail, $userfirstname, $userlastname, $userPassword) {
             $db = connect();
             $usercorrectfirstname = str_replace(" ", "-", $userfirstname);
             $usercorrectlastname = str_replace(" ", "-", $userlastname);
-            $request = $db->query('INSERT INTO User (user_password, user_firstname, user_name, user_instituteemail) VALUES ("'.$userPassword.'", "'.$usercorrectfirstname.'", "'.$usercorrectlastname.'", "'.$userMail.'")');
-            $request0 = $db->query("SELECT user_id FROM User WHERE user_instituteemail = '$userMail'");
-            $result0 = $request0->fetch();
-            $id = $result0[0];
-            $request2 = $db->query('INSERT INTO Student (user_id, student_instituteemail, student_avatar, student_trombi) VALUES ("'.$id.'", "'.$userMail.'", "../../img/avatar.png", "../../img/avatar.png")');
+            $db->query('INSERT INTO User (user_password, user_firstname, user_name, user_instituteemail)
+                        VALUES ("'.$userPassword.'", "'.$usercorrectfirstname.'", "'.$usercorrectlastname.'", "'.$userMail.'")');
+            $request0 = $db->query("SELECT user_id
+                                    FROM User
+                                    WHERE user_instituteemail = '$userMail'");
+            $db->query('INSERT INTO Student (user_id, student_instituteemail, student_avatar, student_trombi)
+                        VALUES ("'.$id.'", "'.$userMail.'", "../../img/avatar.png", "../../img/avatar.png")');
 
+            return $request0->fetch(PDO::FETCH_ASSOC);
         }
 
         /**
-         * Send an e-mail to the user's mail ardess
-         * @param $userMail string contains the user mail adress
+         * Sends an e-mail to the user mail address
+         * @param $userMail string containing the user mail address
          */
         public function sendEmail($userMail){
             $accountView = new AccountView();
@@ -210,7 +245,7 @@
                <p>Bienvenue !! vous êtes inscrit sur la page Zenetude.</p>
                <p> Votre identifiant : ".$_POST['mail']."</p>
                <p>Votre mot de passe : ".$_POST['passe']."</p>
-               <p>Accédez au site : <a href='http://zenetude.esy.es/php/view/'>Zenetude</a></p>
+               <p>Accédez au site : <a href='http://zenetude.esy.es'>Zenetude</a></p>
                <hr/>
                <p>Ce message a été généré automatiquement. Merci de ne pas y répondre.</p>
            ";
@@ -228,13 +263,13 @@
             //$mailer->Subject =/*"Subject: =?UTF-8?B?".*/base64_encode("Inscription au site Zenetude");
             $mailer->Body = $body;
             if(!$mailer->Send())
-                $accountView->showMessage("Erreur d'envoie du mail !");
+                $accountView->showMessage("Erreur d'envoie du mail de récapitulation ! Mais l'inscription a réussie.");
             else
                 $accountView->showMessage("Inscription terminée.","ok","index.php");
         }
 
         /**
-         * Check if the user is an administrator using session data $_SESSION['infoUser']['user_id']
+         * Checks if the user is an administrator using session data $_SESSION['infoUser']['user_id']
          * @return user's admin_id
          */
  		public function isAdministrator(){
@@ -246,7 +281,7 @@
  		}
 
         /**
-         * Get user_id, user_name, user_firstname, user_instituteemail of all users
+         * Gets the user_id, user_name, user_firstname, user_instituteemail of all users
          * @return request's result
          */
         public function recupAllUser(){
@@ -257,7 +292,7 @@
         }
 
         /**
-         * Get user_id, user_name, user_firstname, user_instituteemail, user_type of the user where id is in $_POST['register']
+         * Gets the user_id, user_name, user_firstname, user_instituteemail, user_type of the user where id is in $_POST['register']
          * @return request's result
          */
         public function recupAllInfoUserSelect(){
@@ -266,8 +301,12 @@
 
             return $request;
         }
-
-
+        
+        /**
+         * This function verifies if the user is a student or a training manager in order to modify their information
+         * if it's a student he can modify all the information but if it's a training manager he can only modify the user_civility
+         * @return request's result
+         */
         public function uploadInfoUser(){
             $accountView = new AccountView();
             $db = connect();
@@ -276,10 +315,8 @@
             else
                 $rf = false;
             $user_id=$_POST['user_id'];
-            $user_name=$_POST['user_name'];
-            $user_firstname=$_POST['user_firstname'];
             $user_civility=$_POST['user_civility'];
-            if(!$rf){
+            if(!$rf) {
                 $student_personalemail=$_POST['student_personalemail'];
                 $student_phone=$_POST['student_phone'];
                 $student_mobile=$_POST['student_mobile'];
@@ -299,7 +336,6 @@
                 $student_comment=$_POST['student_comment'];
                 $student_group=$_POST['student_group'];
                 $training_description=$_POST['training_description'];
-                $student_educationallevel=$_POST['student_educationallevel'];
                 $student_grantholder=$_POST['student_grantholder'];
 
                 $request = $db->prepare('SELECT training_id FROM Training WHERE description = "'.$training_description.'"');
@@ -309,9 +345,7 @@
             }
 
             if(!$rf){
-                $values = array(htmlspecialchars($user_name),
-                    htmlspecialchars($user_firstname),
-                    htmlspecialchars($user_civility),
+                $values = array(htmlspecialchars($user_civility),
                     htmlspecialchars($student_personalemail),
                     htmlspecialchars($student_phone),
                     htmlspecialchars($student_mobile),
@@ -331,14 +365,11 @@
                     htmlspecialchars($student_group),
                     htmlspecialchars($student_birthcity),
                     htmlspecialchars($training_id),
-                    htmlspecialchars($student_educationallevel),
                     htmlspecialchars($student_grantholder)
                 );
             }
             else
-                $values = array($user_name,
-                    $user_firstname,
-                    $user_civility);
+                $values = array($user_civility);
 
             foreach ($values as $key => $value) {
                 if (empty($value)) {
@@ -349,73 +380,67 @@
             }
             $idUser = $_SESSION['infoUser']['user_id'];
             if(!$rf){
-                if ($_SESSION['infoTraining']['training_max_group'] >= $values[19] ) {
+                if ($_SESSION['infoTraining']['training_max_group'] >= $values[17]  || empty($values[17]) || $values[17] == NULL  ) {
                     $update = $db->query("UPDATE Student SET
-                    student_personalemail = '$values[3]',
-                    student_phone = '$values[4]',
-                    student_mobile = '$values[5]',
-                    student_address1 = '$values[6]',
-                    student_address2 = '$values[7]',
-                    student_zipcode = '$values[8]',
-                    student_city = '$values[9]',
-                    student_country = '$values[10]',
-                    student_nationality = '$values[11]',
-                    student_birthdate = '$values[12]',
-                    student_birtharea = '$values[13]',
-                    student_birthcountry = '$values[14]',
-                    student_status = '$values[15]',
-                    student_educationallevel = '$values[16]',
-                    student_origin = '$values[17]',
-                    student_comment = '$values[18]',
-                    student_group = '$values[19]',
-                    student_birthcity = '$values[20]',
-                    training_id = '$values[21]',
-                    student_educationallevel = '$values[22]',
-                    student_grantholder = '$values[23]'
+                    student_personalemail = '$values[1]',
+                    student_phone = '$values[2]',
+                    student_mobile = '$values[3]',
+                    student_address1 = '$values[4]',
+                    student_address2 = '$values[5]',
+                    student_zipcode = '$values[6]',
+                    student_city = '$values[7]',
+                    student_country = '$values[8]',
+                    student_nationality = '$values[9]',
+                    student_birthdate = '$values[10]',
+                    student_birtharea = '$values[11]',
+                    student_birthcountry = '$values[12]',
+                    student_status = '$values[13]',
+                    student_educationallevel = '$values[14]',
+                    student_origin = '$values[15]',
+                    student_comment = '$values[16]',
+                    student_group = '$values[17]',
+                    student_birthcity = '$values[18]',
+                    training_id = '$values[19]',
+                    student_grantholder = '$values[20]'
                     WHERE user_id='$idUser'");
                 }
             }
 
             $update2 = $db->query("UPDATE User SET
-            user_name = '$values[0]',
-            user_firstname = '$values[1]',
-            user_civility = '$values[2]'
+            user_civility = '$values[0]'
             WHERE user_id='$idUser'");
 
             if(!$rf){
-                $_SESSION['infoStudent']['student_personalemail'] = $values[3];
-                $_SESSION['infoStudent']['student_phone'] = $values[4];
-                $_SESSION['infoStudent']['student_mobile'] = $values[5];
-                $_SESSION['infoStudent']['student_address1'] = $values[6];
-                $_SESSION['infoStudent']['student_address2'] = $values[7];
-                $_SESSION['infoStudent']['student_zipcode'] = $values[8];
-                $_SESSION['infoStudent']['student_city'] = $values[9];
-                $_SESSION['infoStudent']['student_country'] = $values[10];
-                $_SESSION['infoStudent']['student_nationality'] = $values[11];
-                $_SESSION['infoStudent']['student_birthdate'] = $values[12];
-                $_SESSION['infoStudent']['student_birtharea'] = $values[13];
-                $_SESSION['infoStudent']['student_birthcountry'] = $values[14];
-                $_SESSION['infoStudent']['student_status'] = $values[15];
-                $_SESSION['infoStudent']['student_educationallevel'] = $values[16];
-                $_SESSION['infoStudent']['student_origin'] = $values[17];
-                $_SESSION['infoStudent']['student_comment'] = $values[18];
-                $_SESSION['infoStudent']['student_group'] = $values[19];
-                $_SESSION['infoStudent']['student_birthcity'] = $values[20];
-                $_SESSION['infoStudent']['training_id'] = $values[21];
-                $_SESSION['infoStudent']['student_educationallevel'] = $values[22];
-                $_SESSION['infoStudent']['student_grantholder'] = $values[23];
+                $_SESSION['infoStudent']['student_personalemail'] = $values[1];
+                $_SESSION['infoStudent']['student_phone'] = $values[2];
+                $_SESSION['infoStudent']['student_mobile'] = $values[3];
+                $_SESSION['infoStudent']['student_address1'] = $values[4];
+                $_SESSION['infoStudent']['student_address2'] = $values[5];
+                $_SESSION['infoStudent']['student_zipcode'] = $values[6];
+                $_SESSION['infoStudent']['student_city'] = $values[7];
+                $_SESSION['infoStudent']['student_country'] = $values[8];
+                $_SESSION['infoStudent']['student_nationality'] = $values[9];
+                $_SESSION['infoStudent']['student_birthdate'] = $values[10];
+                $_SESSION['infoStudent']['student_birtharea'] = $values[11];
+                $_SESSION['infoStudent']['student_birthcountry'] = $values[12];
+                $_SESSION['infoStudent']['student_status'] = $values[13];
+                $_SESSION['infoStudent']['student_educationallevel'] = $values[14];
+                $_SESSION['infoStudent']['student_origin'] = $values[15];
+                $_SESSION['infoStudent']['student_comment'] = $values[16];
+                $_SESSION['infoStudent']['student_group'] = $values[17];
+                $_SESSION['infoStudent']['student_birthcity'] = $values[18];
+                $_SESSION['infoStudent']['training_id'] = $values[19];
+                $_SESSION['infoStudent']['student_grantholder'] = $values[20];
+                $_SESSION['infoTraining']['description'] = $training_description;
             }
-            $_SESSION['infoUser']['user_name'] = $values[0];
-            $_SESSION['infoUser']['user_firstname'] = $values[1];
-            $_SESSION['infoUser']['user_civility'] = $values[2];
-
+            $_SESSION['infoUser']['user_civility'] = $values[0];
 
             //$accountView->showMessage(null, "ok", "profil.php");
             header('Location: profil.php');
         }
 
         /**
-         * Count the number of training of the training manager where there is at least one student
+         * Counts the number of trainings of the training manager where there is at least one student
          * @return request's result
          */
  		public function nbDocuments(){
@@ -427,7 +452,7 @@
  		}
 
         /**
-         * Get user's name, firstname and instituteemail using $_SESSION['infoUser']['user_id']
+         * Gets the user's name, firstname and instituteemail using $_SESSION['infoUser']['user_id']
          * @return request's result
          */
         public function infoMyTrainingManager(){
@@ -444,8 +469,8 @@
         }
 
         /**
-         * Update student avatar path in DB
-         * @param $fichier string contains picture's path
+         * Updates the student avatar path in the DB
+         * @param $fichier string contains the picture's path
          * @param $userId int contains the user id
          * @return request's result
          */
@@ -459,8 +484,8 @@
         }
 
         /**
-         * Update the student's picture's path of the trombinoscope in DB
-         * @param $fichier string contains picture's path
+         * Updates the student's picture's path of the trombinoscope in DB
+         * @param $fichier string contains the picture's path
          * @param $userId int contains the user id
          * @return request's result
          */
@@ -474,7 +499,7 @@
         }
 
         /**
-         * Update the user's cripted password
+         * Updates the user's cripted password
          * @param $password string contains the cripted password
          * @param $userId int contains the user id
          * @return mixed

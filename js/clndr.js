@@ -19,6 +19,7 @@
  * Licensed under the MIT license
  */
 
+
 ;(function ( $, window, document, undefined ) {
 
   // This is the default calendar template. This can be overridden.

@@ -16,6 +16,10 @@
         echo "<script>alert('Une erreur s\'est produite. Veuillez réessayer ultérieurement');</script>";
     }
 
+    if (isset($_GET['incrip'])){
+        echo "<script>alert('Veuillez vous inscrire avant de vous connecter avec les réseaux sociaux !');</script>";
+    }
+
 
 	include_once('./pageview.php');
 	include_once('../controller/pagecontroller.php');

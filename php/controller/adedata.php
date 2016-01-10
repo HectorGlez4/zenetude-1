@@ -79,7 +79,7 @@
                                 <div style="width: 640px; font-family: Arial, Helvetica, sans-serif; font-size: 20px;">
                                   <h1>Rappel enseignement</h1>
                                   <div align="center">
-                                    <p>Bonjour ' . $first_name . ' ' . $last_name . ' ! 
+                                    <p>Bonjour ' . ucfirst($first_name) . ' ' . strtoupper($last_name) . ' ! 
                                     N\'oubliez pas que vous avez cours le ' . $d->format('d/m/Y') . ' de ' . $hour_start . ':' . $min_start . ' à ' . $hour_end . ':' . $min_end . '
                                     en ' . $room . ' pour la matière ' . $subject . '.</p>
                                   </div>
@@ -90,18 +90,21 @@
                 //Create a new PHPMailer instance
                 $mail = new PHPMailer;
                 //Set who the message is to be sent from
-                $mail->setFrom('Zenetude', '');
+                $mail->From = "noreply@zenetude.esy.es";
+                $mail->FromName = "Noreply - Zenetude";
                 //Set an alternative reply-to address
                 /*$mail->addReplyTo('replyto@example.com', 'First Last');*/
                 //Connect to database
-                $results->recupEmailRf($first_name, $last_name);
+                $db = connect();
+                $request = $db -> query('SELECT user_instituteemail FROM User WHERE LOWER(user_firstname) = "'. $first_name . '" AND LOWER(user_name) = "' . $last_name . '"');
+                $results = $request -> fetchAll();
                 foreach ($results as $result) {
                     //Save mail receive
                     $mailbd = $result[0];
                     //Set who the message is to be sent to
                     $mail->addAddress($mailbd, $first_name . ' ' . $last_name);
                     //Set the subject line
-                    $mail->Subject = 'PHPMailer mail() test';
+                    $mail->Subject = 'Rappel enseignement';
                     $mail->isHTML(true);
                     //Read an HTML message body from an external file, convert referenced images to embedded,
                     //convert HTML into a basic plain-text alternative body
