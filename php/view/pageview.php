@@ -197,6 +197,8 @@ include_once '../model/db.php';
 			<head>
 		    	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 
+				<link rel="icon" type="image/ico" href="../../img/favicon.ico" />
+
 				<!--Import Roboto Font-->
 		    	<link href='https://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
 				<!--Import Google Icon Font-->
