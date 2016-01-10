@@ -29,7 +29,9 @@ $pageView = new PageView();
 
 <?php
 $pageView -> showHead();
-$pageController -> controlHeader();
+$pageController -> controlHeader(); ?>
+<META HTTP-EQUIV="Refresh" CONTENT="5; URL=index.php">
+<?php
 $pageController -> controlDynamicMenu();
 ?>
 

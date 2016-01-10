@@ -1138,7 +1138,7 @@ include_once '../model/db.php';
 		public function showErrorPage() {
 			echo '<div class="center-align">
 						<h3>Cette page n\'existe pas !</h3>
-						<p>Revenir à la <span onclick="document.location.href=\'../view/index.php\'">page d\'accueil</span></p>
+						<p>Redirection en cours vers la page d\'accueil</span></p>
 					</div>';
 		}
     }
