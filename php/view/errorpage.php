@@ -25,6 +25,9 @@ $pageView = new PageView();
 ?>
 <!DOCTYPE html>
 <html>
+<style type="text/css">
+    body{overflow:hidden;}
+</style>
 <body>
 
 <?php
@@ -51,7 +54,6 @@ $pageController -> controlDynamicMenu();
 <!-- FIN CONTAINER -->
 
 <?php
-$pageView->showFooter();
 $pageView->showjavaLinks();
 ?>
 
