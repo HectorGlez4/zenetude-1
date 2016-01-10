@@ -306,7 +306,8 @@
         }
         
         /**
-         * This function 
+         * This function verifies if the user is a student or a training manager in order to modify their information
+         * if it's a student he can modify all the information but if it's a training manager he can only modify the user_civility
          * @return request's result
          */
 
