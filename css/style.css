@@ -415,3 +415,12 @@ input, select{
 .btnbot {
 	margin-top: 30px;
 }
+
+.picker__footer>button{
+	width: 33%;
+	font-size: 0.8em;
+}
+
+.picker__weekday-display{
+	background-color: #385E2D;
+}
