@@ -2,7 +2,7 @@
 	class AccountModel {
 
         /**
-        * Get training's information using user id
+        * Gets the training information using the attribute userId
         * @param $param string contains the attribute needed
         * @param $userId int contains the user id
         * @return request's result
@@ -19,7 +19,7 @@
         }
 
 		/**
-		* Get user's informations about an user.
+		* Makes a request to get the user information.
         * @param $param string contains the attribute needed
         * @param $mail string contains the user mail adress
         * @return request's result
@@ -32,7 +32,7 @@
         }
 
 		/**
-        * Get student's informations (an attribute) about a student selected by its id.
+        * Gets the information of a student selected by his/her id.
         * @param $param string contains the attribute needed
         * @param $userId int contains the user id
         * @return request's result
@@ -45,7 +45,7 @@
 		}
 
 		/**
-         * Get training manager's informations about an training manager selected by its id.
+         * Gets the information of a training manager selected by its id.
          * @param $param string contains the attribute needed
          * @param $userId int contains the user id
          * @return request's result
@@ -58,8 +58,8 @@
 		}		
 
 		/**
-         * Get all informations of an user selected by its mail and its password.
-         * This function is used for test connection for now if a password exits for a mail in the datebase.
+         * Gets all the information of a user selected by his mail and password.
+         * This function is used to test the connection, if a password exists for a mail in the database.
          * @param $userMail string contains the user mail adress
          * @param $userPassword string contains the user's cripted password
          * @return request's result
@@ -72,7 +72,7 @@
         }
 
         /**
-         * Get user_id, user_name, user_firstname and user_instituteemail of the wanted user using his user_id
+         * Gets the user_id, user_name, user_firstname and user_instituteemail of a specified user using his user_id
          * @param int $userId contains the user id
          * @return array contains user's principal informations
          */
@@ -90,7 +90,7 @@
         }
 
         /**
-         * Get the user's cripted password
+         * Gets the user's cripted password
          * @param $userId int contains the user id
          * @return request's result
          **/
@@ -103,7 +103,7 @@
         }
 
         /**
-         * Get the user email to check if it's already on the database.
+         * Gets the user email to check if it's already in the database.
          * @param $userMail string contains the user mail adress
          * @return request's result
          **/
@@ -115,7 +115,7 @@
         }
         
         /**
-         * Return true if the user is a training manager.
+         * Returns true if the user is a training manager.
          * @param $id_user int contains the user id
          * @return boolean
         **/
@@ -133,7 +133,11 @@
             else
                 return false;
         }
-
+        
+        /**
+         * Gets all the information of the student who is currently connected.
+         * @return request's result
+        **/
         public function getInfoStudent(){
             $db = connect();
             $request = $db->prepare('SELECT * FROM Student WHERE user_id = '.$_SESSION['infoUser']['user_id']);
@@ -141,6 +145,11 @@
             return $result = $request->fetch();
         }
 
+
+        /**
+         * Shows the description and the id of the training.
+         * @return request's result
+        **/
         public function getDescritpionTraining(){
             $db = connect();
             $request = $db->prepare('SELECT description, training_id FROM Training');
@@ -148,6 +157,10 @@
             return $result = $request->fetchAll();
         }
 
+          /**
+         * Shows all the information of the user who is currently connected.
+         * @return request's result
+        **/
         public function getAllInfoUser(){
             $db = connect();
             $request = $db->prepare('SELECT * FROM User WHERE user_id = '.$_SESSION['infoUser']['user_id']);
@@ -156,7 +169,7 @@
         }
 
 		/**
-         * Generate a new password an update it in the database. Then, a mail is automaticaly send to the user.
+         * Generates a new password and updates it in the database. Then, a mail is automaticaly sent to the user.
          * @param $userMail string contains the user mail adress
 		**/
 		public function recoverPassword($userMail) {
@@ -200,7 +213,7 @@
 		}
 
 		/**
-         * Add a new user to the database.
+         * Adds a new user to the database.
          * @param $userMail string contains the user's id
          * @param $userfirstname string contains the user first name
          * @param $userlastname string contains the user last name
@@ -223,8 +236,8 @@
         }
 
         /**
-         * Send an e-mail to the user's mail ardess
-         * @param $userMail string contains the user mail adress
+         * Sends an e-mail to the user mail address
+         * @param $userMail string containing the user mail address
          */
         public function sendEmail($userMail){
             $accountView = new AccountView();
@@ -256,7 +269,7 @@
         }
 
         /**
-         * Check if the user is an administrator using session data $_SESSION['infoUser']['user_id']
+         * Checks if the user is an administrator using session data $_SESSION['infoUser']['user_id']
          * @return user's admin_id
          */
  		public function isAdministrator(){
@@ -268,7 +281,7 @@
  		}
 
         /**
-         * Get user_id, user_name, user_firstname, user_instituteemail of all users
+         * Gets the user_id, user_name, user_firstname, user_instituteemail of all users
          * @return request's result
          */
         public function recupAllUser(){
@@ -279,7 +292,7 @@
         }
 
         /**
-         * Get user_id, user_name, user_firstname, user_instituteemail, user_type of the user where id is in $_POST['register']
+         * Gets the user_id, user_name, user_firstname, user_instituteemail, user_type of the user where id is in $_POST['register']
          * @return request's result
          */
         public function recupAllInfoUserSelect(){
@@ -288,8 +301,12 @@
 
             return $request;
         }
-
-
+        
+        /**
+         * This function verifies if the user is a student or a training manager in order to modify their information
+         * if it's a student he can modify all the information but if it's a training manager he can only modify the user_civility
+         * @return request's result
+         */
         public function uploadInfoUser(){
             $accountView = new AccountView();
             $db = connect();
@@ -423,7 +440,7 @@
         }
 
         /**
-         * Count the number of training of the training manager where there is at least one student
+         * Counts the number of trainings of the training manager where there is at least one student
          * @return request's result
          */
  		public function nbDocuments(){
@@ -435,7 +452,7 @@
  		}
 
         /**
-         * Get user's name, firstname and instituteemail using $_SESSION['infoUser']['user_id']
+         * Gets the user's name, firstname and instituteemail using $_SESSION['infoUser']['user_id']
          * @return request's result
          */
         public function infoMyTrainingManager(){
@@ -452,8 +469,8 @@
         }
 
         /**
-         * Update student avatar path in DB
-         * @param $fichier string contains picture's path
+         * Updates the student avatar path in the DB
+         * @param $fichier string contains the picture's path
          * @param $userId int contains the user id
          * @return request's result
          */
@@ -467,8 +484,8 @@
         }
 
         /**
-         * Update the student's picture's path of the trombinoscope in DB
-         * @param $fichier string contains picture's path
+         * Updates the student's picture's path of the trombinoscope in DB
+         * @param $fichier string contains the picture's path
          * @param $userId int contains the user id
          * @return request's result
          */
@@ -482,7 +499,7 @@
         }
 
         /**
-         * Update the user's cripted password
+         * Updates the user's cripted password
          * @param $password string contains the cripted password
          * @param $userId int contains the user id
          * @return mixed

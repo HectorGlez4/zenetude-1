@@ -14,19 +14,19 @@
   <div class="navbar-fixed">
     <nav class="white" role="navigation">
       <div class="nav-wrapper container">
-        <a id="logo-container" href="#" class="brand-logo">
+        <a class="js-scrollTo" id="logo-container" href="#index-banner" class="brand-logo">
           <img id="logo" src="img/logo.png" alt="logo"/>
         </a>
         <ul class="right hide-on-med-and-down">
-          <li><a href="#zenetude">Zenetude</a></li>
-          <li><a href="#qui">Qui sommes-nous ?</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a class="js-scrollTo" href="#zenetude">Zenetude</a></li>
+          <li><a class="js-scrollTo" href="#qui">Qui sommes-nous ?</a></li>
+          <li><a class="js-scrollTo" href="#contact">Contact</a></li>
         </ul>
 
         <ul id="nav-mobile" class="side-nav">
-          <li><a href="#zenetude">Zenetude</a></li>
-          <li><a href="#qui">Qui sommes-nous ?</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a class="js-scrollTo" href="#zenetude">Zenetude</a></li>
+          <li><a class="js-scrollTo" href="#qui">Qui sommes-nous ?</a></li>
+          <li><a class="js-scrollTo" href="#contact">Contact</a></li>
         </ul>
         <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
       </div>
@@ -229,6 +229,16 @@
   <script src="js/jquery-1.11.2.min.js"></script>
   <script src="js/materialize.js"></script>
   <script src="js/init.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('.js-scrollTo').on('click', function() { // Au clic sur un élément
+        var page = $(this).attr('href'); // Page cible
+        var speed = 750; // Durée de l'animation (en ms)
+        $('html, body').animate( { scrollTop: $(page).offset().top }, speed ); // Go
+        return false;
+      });
+    });
+  </script>
 
   </body>
 </html>
