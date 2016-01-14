@@ -100,6 +100,10 @@
                     //$_POST["passe"] = sha1($_POST["passe"]);
                     $userId = $accountModel->addUser($_POST["mail"], $_POST["firstname"], $_POST["lastname"], sha1($_POST["passe"]));
                     $_SESSION['infoUser'] = $accountModel->getUserById(intval($userId['user_id']));
+                    $studentResult = $accountModel->getDataStudent('*', $_SESSION['infoUser']['user_id']);
+                    $_SESSION['infoStudent'] = $studentResult;
+                    $trainingResult = $accountModel->getTrainingInformationsForUser('*', $_SESSION['infoUser']['user_id']);
+                    $_SESSION['infoTraining'] = $trainingResult;
                     $accountModel->sendEmail($_POST["mail"], $_POST["passe"]);
                 }
             }

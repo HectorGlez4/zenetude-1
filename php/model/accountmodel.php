@@ -229,10 +229,11 @@
             $request0 = $db->query("SELECT user_id
                                     FROM User
                                     WHERE user_instituteemail = '$userMail'");
+            $result = $request0->fetch(PDO::FETCH_ASSOC);
             $db->query('INSERT INTO Student (user_id, student_instituteemail, student_avatar, student_trombi)
-                        VALUES ("'.$id.'", "'.$userMail.'", "../../img/avatar.png", "../../img/avatar.png")');
+                        VALUES ("'.$result['user_id'].'", "'.$userMail.'", "../../img/avatar.png", "../../img/avatar.png")');
 
-            return $request0->fetch(PDO::FETCH_ASSOC);
+            return $result;
         }
 
         /**
