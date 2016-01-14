@@ -26,7 +26,7 @@
     <body>
         
         <?php
-            $pageView -> showHead();
+            $pageView -> showHead("Documents pédagogique");
             $pageController -> controlHeader();
             $pageController -> controlDynamicMenu();
         ?>

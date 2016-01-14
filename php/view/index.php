@@ -32,7 +32,7 @@
     <body>
 		
 		<?php
-			$pageView -> showHead();
+			$pageView -> showHead("Accueil");
 		 	$pageController -> controlHeader();
 		    $pageController -> controlDynamicMenu();
 	    ?>

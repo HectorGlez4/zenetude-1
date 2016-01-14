@@ -14,7 +14,7 @@
     <body>
         
         <?php
-            $pageView -> showHead();
+            $pageView -> showHead("Récupération du mot de passe");
             $pageController -> controlHeader();
             $pageController -> controlDynamicMenu();
             $pageView -> showRecuperation();

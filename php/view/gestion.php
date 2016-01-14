@@ -22,7 +22,7 @@
     <body>
 
         <?php
-            $pageView -> showHead();
+            $pageView -> showHead("Gestion du compte");
             $pageController -> controlHeader();
             $pageController -> controlDynamicMenu();
         ?>

@@ -21,7 +21,7 @@
         
         <?php
             $pageController -> controlConnexion();
-            $pageView -> showHead();
+            $pageView -> showHead("Profil");
             $pageController -> controlHeader();
             $pageController -> controlDynamicMenu();
             

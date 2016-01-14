@@ -22,7 +22,7 @@
         <?php
             $pageController -> controlConnexion();
             $pageController -> controlContact();
-            $pageView -> showHead();
+            $pageView -> showHead("Contacter son responsable de formation");
             $pageController -> controlHeader();
             $pageController -> controlDynamicMenu();
         ?>
