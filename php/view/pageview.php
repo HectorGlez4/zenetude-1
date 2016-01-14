@@ -22,7 +22,7 @@ include_once '../model/db.php';
 			          	<div class="row">
 			       	 		<div class="input-field col s12">
 			              		<input id="mail" type="email" class="validate" name="mail" required="required">
-			             	 	<label for="mail">Adresse email <em>*</em></label>
+			             	 	<label for="mail">Adresse email universitaire <em>*</em></label>
 			            	</div>
 			          	</div><!-- fin email -->
 
