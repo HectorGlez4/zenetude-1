@@ -19,7 +19,7 @@
         <?php
             $pageController -> controlConnexion();
             $pageController -> controlAdministration();
-            $pageView -> showHead();
+            $pageView -> showHead("Administration");
             $pageController -> controlHeader();
             $pageController -> controlDynamicMenu();
         ?>

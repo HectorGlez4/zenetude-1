@@ -20,7 +20,7 @@
     <body>
     
     <?php
-      $pageView -> showHead();
+      $pageView -> showHead("Inscription");
       $pageController -> controlHeader();
       $pageController -> controlDynamicMenu();
       ?>

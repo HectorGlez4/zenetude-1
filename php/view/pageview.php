@@ -191,11 +191,13 @@ include_once '../model/db.php';
 
 		/**
         * Includes the head needed by pages
+		* @param string $title title of page
 		**/
-		public function showHead() {
+		public function showHead($title) {
 			?>
 			<head>
 		    	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+				<title><?php echo $title;?></title>
 
 				<link rel="icon" type="image/ico" href="../../img/favicon.ico" />
 

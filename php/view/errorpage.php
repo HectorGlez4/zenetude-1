@@ -31,7 +31,7 @@
     <body>
 
     <?php
-        $pageView -> showHead();
+        $pageView -> showHead("Page d'erreur");
         $pageController -> controlHeader();
     ?>
         <META HTTP-EQUIV="Refresh" CONTENT="3; URL=index.php">
