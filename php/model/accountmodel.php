@@ -230,7 +230,7 @@
                                     FROM User
                                     WHERE user_instituteemail = '$userMail'");
             $db->query('INSERT INTO Student (user_id, student_instituteemail, student_avatar, student_trombi)
-                        VALUES ("'.$id.'", "'.$userMail.'", "../../img/avatar.png", "../../img/avatar.png")');
+                        VALUES ("'.$request0.'", "'.$userMail.'", "../../img/avatar.png", "../../img/avatar.png")');
 
             return $request0->fetch(PDO::FETCH_ASSOC);
         }
