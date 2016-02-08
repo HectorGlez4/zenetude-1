@@ -287,7 +287,7 @@
          */
         public function recupAllUser(){
             $db = connect();
-            $request = $db->query("SELECT user_id, user_name, user_firstname, user_instituteemail FROM User WHERE user_id != 1");
+            $request = $db->query("SELECT user_id, user_name, user_firstname, user_instituteemail FROM User WHERE user_id != 1 ORDER BY user_instituteemail");
 
             return $request; 
         }
