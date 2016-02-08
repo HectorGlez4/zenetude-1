@@ -1001,6 +1001,10 @@ include_once '../model/db.php';
 		    		$istraining2 = $istraining -> fetch();
 		    		if(0 == $istraining2['training_id']){
 		    			$supprime_membre_rf = $db->query("DELETE FROM Training_manager WHERE user_id = ".$_GET['supmembre']."");
+						$is_rf = $db->query("SELECT admin_id FROM Administrator WHERE user_id = ".$_GET['supmembre']."");
+						if(!empty($is_rf)){
+							$db->query("DELETE FROM Administrator WHERE user_id = ".$_GET['supmembre']."");
+						}
 		    			if ($supprime_membre_rf){
 		    				$supprime_membre = $db->query(" DELETE FROM User WHERE user_id = ".$_GET['supmembre']."");
 		    			}
