@@ -853,7 +853,7 @@ include_once '../model/db.php';
 						<div class='col s12'>
 							<label for='register'>Sélection du membre : </label>
 								<select id='register' name='register' size=1 onchange='javascript:submit(this)' >
-									<option value = 'default' selected>Sélectionner l'utilisateur</option>";
+									<option value = 'default' selected disabled='disabled'>Sélectionner l'utilisateur</option>";
 				while ($result=$register -> fetch()) {
 					echo '<option value="'.$result['user_id'].'" ';
         			if(isset($_POST["register"]) && $_POST["register"]==$result['user_id']){echo "selected='selected'";}
