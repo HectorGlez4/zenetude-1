@@ -230,7 +230,10 @@
 				else {
 			 		//$accountView->showMessage("on passe par la", "ok", "gestion.php");
 		            $fichier='../../img/avatar/'.$_SESSION['infoStudent']['student_id'].".$extension_upload";
-		            unlink($_SESSION['infoUserStudent']['student_avatar']);
+		            if($_SESSION['infoStudent']['student_avatar'] != "../../img/avatar.png"){
+						unlink($_SESSION['infoStudent']['student_avatar']);
+					}
+					var_dump($_SESSION['infoStudent']['student_avatar']);
 		            $session = $_SESSION['infoUser']['user_id'];
 		            $resultat = move_uploaded_file($_FILES['student_avatar']['tmp_name'],$fichier);
 		            if ($resultat) {
@@ -276,8 +279,11 @@
 				}
 
 				else {
-		            $fichier='../../img/trombi/'.$_SESSION['infoStudent']['student_id'].".$extension_upload";
-		            unlink($_SESSION['infoStudent']['student_trombi']);
+					$fichier = '../../img/trombi/' . $_SESSION['infoStudent']['student_id'] . ".$extension_upload";
+					if($_SESSION['infoStudent']['student_trombi'] != "../../img/avatar.png"){
+						unlink($_SESSION['infoStudent']['student_trombi']);
+					}
+					var_dump($_SESSION['infoStudent']['student_trombi']);
 		            $session = $_SESSION['infoUser']['user_id'];
 		            $resultat = move_uploaded_file($_FILES['student_trombi']['tmp_name'],$fichier);
 		            if ($resultat) {

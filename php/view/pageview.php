@@ -124,14 +124,17 @@ include_once '../model/db.php';
 	      	<div class="col s12 m8">
 	        	<div class="card-panel teal" id="bloc1">
 	        		<div class="card-header"> <h2>Accueil</h2></div>
-	          		<p>I am a very simple card. I am good at containing small bits of information.
-	          		   I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.I am a very simple card. I am good at containing small bits of information.<br/><br/>
+	          		<p>Bienvenue !<br/><br/>
+						Zenetude est un LMS (Learning Management System) qui vous accompagnera dans votre processus d'apprentissage car il permet à votre responsable de formation de vous diffuser des informations aux élèves.
+						<br/><br/>
+						I am a very simple card. I am good at containing small bits of information.
+						I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.I am a very simple card. I am good at containing small bits of information.<br><br>
 
-	          		   I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.I am a very simple card. I am good at containing small bits of information.<br/><br/>
+						I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.I am a very simple card. I am good at containing small bits of information.<br><br>
 
-	          		   I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.I am a very simple card. I am good at containing small bits of information.
-	          		</p>
-	        	</div>
+						I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.I am a very simple card. I am good at containing small bits of information.
+
+				</div>
 	      	</div>
     
 			<?php
@@ -825,7 +828,7 @@ include_once '../model/db.php';
 					    	if(isset($userInfos['infoUser']['user_instituteemail']) && $userInfos['infoUser']['user_instituteemail'] != "")
 					    		echo '<li class="infos">Email académique : '.$userInfos['infoUser']['user_instituteemail'].'</li>';
 					    	if(isset($userInfos['infoUser']['user_type']) && $userInfos['infoUser']['user_instituteemail'] != "")
-			          			echo '<li class="infos">Type : '.$userInfos['infoUser']['user_type'].'</li>';
+			          			echo '<li class="infos">Type : Responsable de formation</li>';
 			          		if(isset($userInfos['infoUser']['user_civility']) && $userInfos['infoUser']['user_civility'] != "")
 			          			echo '<li class="infos">Civilité : '.$userInfos['infoUser']['user_civility'].'</li>';
 			          		echo '<li class="infos"><a class="right-align" href="gestion.php">Gérer mon compte</a></li>';
@@ -923,6 +926,7 @@ include_once '../model/db.php';
 				<a class="btn supp" href="admin.php?supmembre=<?= $id_register.'&amp;statutmember='.$statut_register;?>">Supprimer</a>
 
 		    </form>
+					<br />
 				<?php
  				}
 			}else{
@@ -959,7 +963,8 @@ include_once '../model/db.php';
 						</div>
 					</div>
 					<button class='btn' type='submit' name='Ajouter'>Ajouter</button>
-				</form>";
+				</form>
+				<br />";
 			}
 			if (isset($_POST['Ajouter'])) {
 				/*if((isset($_POST['addTraining'])) && (isset($_POST['list_training_managers'])) && (isset($_POST['list_departments'])) && (isset($_POST['training_max_group']))){*/
@@ -1134,7 +1139,7 @@ include_once '../model/db.php';
                         echo '<div class="ok">Profil du membre modifié avec succès. Redirection en cours...</div><script type="text/javascript"> window.setTimeout("location=(\'admin.php\');",3000) </script>';
 
                     }else{
-                        echo '<div class="ok">Profil du membre modifié à l\'exception du type. Redirection en cours...</div><script type="text/javascript"> window.setTimeout("location=(\'admin.php\');",3000) </script>';
+                        echo '<div class="ok">Profil du membre modifié à l\'exception du statut. Redirection en cours...</div><script type="text/javascript"> window.setTimeout("location=(\'admin.php\');",3000) </script>';
                     }
                 }
             }

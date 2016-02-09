@@ -209,7 +209,7 @@
             if(!$mailer->Send())
                 $accountView->showMessage("Erreur mot de passe !");
             else
-                $accountView->showMessage("Votre mot de passe a été réinitialisé. Un message contenant le nouveau mot de passe vous à été envoyé.","ok","index.php");
+                $accountView->showMessage("Votre mot de passe a été réinitialisé. Un message contenant le nouveau mot de passe vous a été envoyé.","ok","index.php");
 		}
 
 		/**
@@ -245,7 +245,6 @@
             $body = "
                <p>Bienvenue !! vous êtes inscrit sur la page Zenetude.</p>
                <p> Votre identifiant : ".$_POST['mail']."</p>
-               <p>Votre mot de passe : ".$_POST['passe']."</p>
                <p>Accédez au site : <a href='http://zenetude.esy.es'>Zenetude</a></p>
                <hr/>
                <p>Ce message a été généré automatiquement. Merci de ne pas y répondre.</p>

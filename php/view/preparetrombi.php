@@ -35,7 +35,7 @@ $ns = count($students);
                     <img src="<?php if(isset($students[$iX]["student_trombi"]) && file_exists($students[$iX]["student_trombi"]))
                                     {
                                         echo $students[$iX]["student_trombi"];
-                                    } else echo "../../img/avatar/avatar.png" ?>" alt="trombi"  style="height:140px;">
+                                    } else echo "../../img/avatar/avatar.png" ?>" alt="trombi"  style="height:140px; width: ;">
                     <p><?php echo $students[$iX]["user_name"]."<br/>".$students[$iX ]["user_firstname"]; ?></p>
                 </td>
 
