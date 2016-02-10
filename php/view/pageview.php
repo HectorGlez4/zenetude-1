@@ -374,7 +374,7 @@ include_once '../model/db.php';
 							$pic = $_SESSION['image'];
 						}
 						else*/ if($rf){
-							$pic = "../../img/avatar/avatar.png";
+							$pic = "../../img/avatar.png";
 						}
 						else{
 							$pic = $userInfos['infoStudent']['student_avatar'];
