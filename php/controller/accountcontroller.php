@@ -71,6 +71,10 @@
 		**/
         public function controlInscription() {
             $accountView = new AccountView();
+            if(empty($_POST['lastname']) || empty($_POST['firstname'])){
+                $accountView->showMessage("Veuillez renseigner tous les champs.");
+                exit;
+            }
             if(!empty($_POST['mail']))
             {
                 $accountModel = new AccountModel();

@@ -51,7 +51,7 @@
         	<div class="row">
 		      <div class="col s12 m8">
 		        <div class="card-panel teal" id="bloc2">
-		        	<div class="card-title"> <h3>Title</h3></div>
+		        	<div class="card-title"> <h3>Titre</h3></div>
 		          <p>I am a very simple card. I am good at containing small bits of information.
 		          I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.I am a very simple card. I am good at containing small bits of information.
 		          I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.I am a very simple card. I am good at containing small bits of information.
