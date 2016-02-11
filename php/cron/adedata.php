@@ -1,5 +1,4 @@
 <?php
-//    echo '<script>document.location.href="../view/index.php"</script>';
     error_reporting(E_ALL);
     require '../../vendor/autoload.php';
     require '../../vendor/PHPMailer/PHPMailerAutoload.php';
@@ -10,7 +9,7 @@
     //Function take back data from agenda ADE
     $ch = curl_init();
     //Number of day the data come from
-    $nbDays = 3;
+    $nbDays = 12;
     //ADE Agenda's id (6445 = lp sil da2i)
 
     //tableau contenant les id des professeurs
@@ -47,7 +46,7 @@
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         $data = curl_exec($ch);
         curl_close($ch);
-        echo $data;
+        //echo $data;
 
         //si ça ne match pas, c'est que le professeur n'as pas de cours
         if (preg_match("/BEGIN:VEVENT/i", $data)) {
