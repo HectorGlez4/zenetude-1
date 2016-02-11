@@ -10,7 +10,7 @@
     //Function take back data from agenda ADE
     $ch = curl_init();
     //Number of day the data come from
-    $nbDays = 3;
+    $nbDays = 14;
     //ADE Agenda's id (6445 = lp sil da2i)
 
     //tableau contenant les id des professeurs
@@ -47,7 +47,7 @@
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         $data = curl_exec($ch);
         curl_close($ch);
-        //echo $data;
+        echo $data;
 
         //si ça ne match pas, c'est que le professeur n'as pas de cours
         if (preg_match("/BEGIN:VEVENT/i", $data)) {
@@ -82,28 +82,15 @@
 
                     // Teacher's first name and last name
                     ++$i;
+
+                    
                     $full_description = $lines[$i];
                     $first_last_name = explode('\n', $full_description);
 
-
-                    //on récupère toute les données séparées par un espace
-                    $test = explode(" ", $first_last_name[2]);
-
-                    //on récupère toute les données séparées par un espace et on les mets en majuscule
-                    $test2 = explode(" ", strtoupper($first_last_name[2]));
-
-                    //si ça match, alors c'est le mot récupéré dans $test est un nom de famille (car toujours en majuscule
-                    if ($test[0] === $test2[0]) {
-                        //Decode of the utf-8 encode
-                        $parameter = utf8_decode($first_last_name[2]);
-                        //Test of existing name
-                        $first_carac = substr($first_last_name[2], 0, 1);
-                    } else { // sinon c'est que c'est groupe ou autre, le nom ce trouve alors dans la case suivante du tableau
-                        //Decode of the utf-8 encode
-                        $parameter = utf8_decode($first_last_name[3]);
-                        //Test of existing name
-                        $first_carac = substr($first_last_name[3], 0, 1);
-                    }
+                    var_dump($first_last_name);
+                    $parameter = utf8_decode($first_last_name[sizeof($first_last_name)-2]);
+                    //Test of existing name
+                    $first_carac = substr($first_last_name[sizeof($first_last_name)-2], 0, 1);
 
                     // If name doesn't exist, print nothing
                     if ($first_carac == "(") {
@@ -125,15 +112,16 @@
                             }
                         }
 
+                        var_dump($first_name, $last_name);
+
+                        //echo ($room . "\n");
                         //si la salle n'est pas spécifié on ne met pas " en ... " dans le mail
                         $room = (!empty($room)) ? ' en ' . $room : $room;
 
                         //si ça match, alors le cours trouvé appartient au même professeur que le cours précédent, on l'ajout alors dans le même content que le précedent
                         if ($save_first_name == $first_name && $save_last_name == $last_name) {
                             $content .= '<p>De ' . $hour_start . ':' . $min_start . ' à ' . $hour_end . ':' . $min_end . $room . ' pour la matière ' . $subject . '.</p>';
-
                         } else { // sinon on crée un nouveau content pour le proffesseur suivant
-                            $send_mail = false;
                             $content = '<html>
                             <head>
                               <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
