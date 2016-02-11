@@ -10,7 +10,7 @@
     //Function take back data from agenda ADE
     $ch = curl_init();
     //Number of day the data come from
-    $nbDays = 14;
+    $nbDays = 3;
     //ADE Agenda's id (6445 = lp sil da2i)
 
     //tableau contenant les id des professeurs
@@ -82,12 +82,9 @@
 
                     // Teacher's first name and last name
                     ++$i;
-
-                    
                     $full_description = $lines[$i];
                     $first_last_name = explode('\n', $full_description);
 
-                    var_dump($first_last_name);
                     $parameter = utf8_decode($first_last_name[sizeof($first_last_name)-2]);
                     //Test of existing name
                     $first_carac = substr($first_last_name[sizeof($first_last_name)-2], 0, 1);
@@ -111,8 +108,6 @@
                                 $first_name .= strtolower($v2) . " ";
                             }
                         }
-
-                        var_dump($first_name, $last_name);
 
                         //echo ($room . "\n");
                         //si la salle n'est pas spécifié on ne met pas " en ... " dans le mail
